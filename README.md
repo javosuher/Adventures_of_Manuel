@@ -1,4 +1,4 @@
-Adventures-of-Manuel
+Adventures of Manuel
 ====================
 
 A videogame made under libGDX
