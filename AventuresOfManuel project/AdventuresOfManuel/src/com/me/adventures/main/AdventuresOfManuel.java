@@ -1,6 +1,7 @@
-package com.me.adventures;
+package com.me.adventures.main;
 
 import com.badlogic.gdx.Game;
+import com.me.adventures.screens.MainScreen;
 
 public class AdventuresOfManuel extends Game {
 	
