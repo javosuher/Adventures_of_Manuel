@@ -9,23 +9,22 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.me.adventures.main.Constant;
 
-public class Manuel {
-	// Constantes
-	private static final float SPEED = 100;
-    private static final int ANCHURA = 58;
-    private static final int ALTURA = 58;
-    private static final int ABAJO = 0;
-    private static final int IZQUIERDA = 1;
-    private static final int DERECHA = 2;
-    private static final int ARRIBA = 3;
-    private static final int SPRITE_QUIETO = 2;
-	
+public class Manuel extends PersonajeDelJuego {
+	//Constantes locales
+	private static final int ABAJO = 0;
+	private static final int IZQUIERDA = 1;
+	private static final int DERECHA = 2;
+	private static final int ARRIBA = 3;
+	private static final int SPRITE_QUIETO = 2;
+    
 	// Atributos básicos
 	private Vector2 posicion;
 	private Rectangle bordes;
 	private float stateTime;
 	private int direccion;
+	private Colision colisiones;
 	
 	//Atributos para pintar a Manuel
 	private Texture TexturaManuel;
@@ -35,13 +34,13 @@ public class Manuel {
 	
 	public Manuel(Vector2 posicion) {
 		this.posicion = posicion;
-		bordes = new Rectangle(posicion.x, posicion.y, ANCHURA, ALTURA);
+		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		stateTime = 0f;
 		direccion = ABAJO;
 		
 		TexturaManuel = new Texture("Manolito/TablaSpritesManolitoTransparencia.png");
 		TexturaManuel.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		manuelMatrizFrames = TextureRegion.split(TexturaManuel, ANCHURA, ALTURA);
+		manuelMatrizFrames = TextureRegion.split(TexturaManuel, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		
 		// Asignamos las animaciones de las direcciones de Manuel
 		manuelAnimationAbajo = new Animation(0.05f, manuelMatrizFrames[ABAJO]);
@@ -50,35 +49,37 @@ public class Manuel {
 		manuelAnimationArriba = new Animation(0.05f, manuelMatrizFrames[ARRIBA]);
 	}
 	
+	@Override
 	public void draw(SpriteBatch batch) {
-		batch.draw(frameActual, posicion.x, posicion.y, ANCHURA, ALTURA);
+		batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
 	}
-
+	
+	@Override
 	public void update() {
 		// Determina movimiento de Manuel
 		boolean soloUnaTeclaPresionada = true;
 		boolean manuelSeQuedaQuieto = false;
-		if(Gdx.input.isKeyPressed(Keys.RIGHT) && soloUnaTeclaPresionada) {
+		if(Gdx.input.isKeyPressed(Keys.RIGHT) && soloUnaTeclaPresionada && !colisiones.colisionDerechaObjeto(this)) {
 			soloUnaTeclaPresionada = false;
-			posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * SPEED;
+			posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = DERECHA;
 		}
-		else if(Gdx.input.isKeyPressed(Keys.LEFT) && soloUnaTeclaPresionada) {
+		else if(Gdx.input.isKeyPressed(Keys.LEFT) && soloUnaTeclaPresionada && !colisiones.colisionIzquierdaObjeto(this)) {
 			soloUnaTeclaPresionada = false;
-			posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * SPEED;
+			posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = IZQUIERDA;
 		}
-		else if(Gdx.input.isKeyPressed(Keys.UP) && soloUnaTeclaPresionada) {
+		else if(Gdx.input.isKeyPressed(Keys.UP) && soloUnaTeclaPresionada && !colisiones.colisionArribaObjeto(this)) {
 			soloUnaTeclaPresionada = false;
-			posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * SPEED;
+			posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = ARRIBA;
 		}
-		else if(Gdx.input.isKeyPressed(Keys.DOWN) && soloUnaTeclaPresionada) {
+		else if(Gdx.input.isKeyPressed(Keys.DOWN) && soloUnaTeclaPresionada && !colisiones.colisionAbajoObjeto(this)) {
 			soloUnaTeclaPresionada = false;
-			posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * SPEED;
+			posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = ABAJO;
 		}
@@ -117,7 +118,13 @@ public class Manuel {
 	}
 	
 	// Getters and Setters ------------------------------------------------------------------------
-
+	
+	@Override
+	public void setColision(Colision colisiones) {
+		this.colisiones = colisiones;
+	}
+	
+	@Override
 	public Vector2 getPosicion() {
 		return posicion;
 	}
@@ -125,7 +132,8 @@ public class Manuel {
 	public void setPosicion(Vector2 posicion) {
 		this.posicion = posicion;
 	}
-	
+
+	@Override
 	public Rectangle getBordes() {
 		return bordes;
 	}

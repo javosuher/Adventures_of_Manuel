@@ -10,7 +10,7 @@ public class Main {
 		cfg.title = "Adventures Of Manuel";
 		cfg.useGL20 = true;
 		cfg.width = 1024;
-		cfg.height = 600;
+		cfg.height = 754;
 		
 		new LwjglApplication(new AdventuresOfManuel(), cfg);
 	}

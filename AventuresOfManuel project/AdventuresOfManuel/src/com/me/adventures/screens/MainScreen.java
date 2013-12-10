@@ -12,16 +12,16 @@ import com.me.adventures.main.AdventuresOfManuel;
 
 public class MainScreen implements Screen {
 	private AdventuresOfManuel adventurasDeManuel;
-	private Texture TexturaFondo;
+	private Texture TexturaNivel1;
 	private SpriteBatch batch;
 	private Manuel manuel;
 	
 
 	public MainScreen(AdventuresOfManuel adventuras_del_manuel) {
 		this.adventurasDeManuel = adventuras_del_manuel;
-		TexturaFondo = new Texture("data/TexturaFondo.png");
-		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		manuel = new Manuel(new Vector2(10,10));
+		TexturaNivel1 = new Texture("Miscelаnea/uno.png");
+		TexturaNivel1.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		manuel = new Manuel(new Vector2(512,10));
 		batch = new SpriteBatch();
 	}
 
@@ -35,7 +35,7 @@ public class MainScreen implements Screen {
 		
 		// Pintamos la pantalla
 		batch.begin();
-		batch.draw(TexturaFondo, 0, 0, TexturaFondo.getWidth(), TexturaFondo.getHeight());
+		batch.draw(TexturaNivel1, 10, 660, TexturaNivel1.getWidth(), TexturaNivel1.getHeight());
 		manuel.draw(batch);
 		batch.end();
 	}
