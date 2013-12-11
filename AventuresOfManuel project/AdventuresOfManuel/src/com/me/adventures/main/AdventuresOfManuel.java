@@ -7,7 +7,7 @@ public class AdventuresOfManuel extends Game {
 	
 	@Override
 	public void create() {		
-		setScreen(new Level1Screen(this));
+		setScreen(new Nivel1(this));
 	}
 
 	@Override

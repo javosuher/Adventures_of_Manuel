@@ -61,25 +61,25 @@ public class Manuel extends PersonajeDelJuego {
 		boolean manuelSeQuedaQuieto = false;
 		if(Gdx.input.isKeyPressed(Keys.RIGHT) && soloUnaTeclaPresionada && !colisiones.colisionDerechaObjeto(this)) {
 			soloUnaTeclaPresionada = false;
-			posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+			posicion.x = posicion.x + /*Gdx.graphics.getDeltaTime() */ Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = DERECHA;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.LEFT) && soloUnaTeclaPresionada && !colisiones.colisionIzquierdaObjeto(this)) {
 			soloUnaTeclaPresionada = false;
-			posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+			posicion.x = posicion.x - /*Gdx.graphics.getDeltaTime() */ Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = IZQUIERDA;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.UP) && soloUnaTeclaPresionada && !colisiones.colisionArribaObjeto(this)) {
 			soloUnaTeclaPresionada = false;
-			posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+			posicion.y = posicion.y + /*Gdx.graphics.getDeltaTime() */ Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = ARRIBA;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.DOWN) && soloUnaTeclaPresionada && !colisiones.colisionAbajoObjeto(this)) {
 			soloUnaTeclaPresionada = false;
-			posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+			posicion.y = posicion.y - /*Gdx.graphics.getDeltaTime() */ Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = ABAJO;
 		}

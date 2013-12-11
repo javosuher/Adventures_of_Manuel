@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -13,7 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.characters.*;
 import com.me.adventures.main.AdventuresOfManuel;
 
-public class Level1Screen implements Screen {
+public class Nivel1 extends Nivel {
 	private AdventuresOfManuel adventurasDeManuel;
 	private Texture TexturaFondo;
 	private SpriteBatch batch;
@@ -22,14 +21,14 @@ public class Level1Screen implements Screen {
 	private List<PersonajeDelJuego> personajes;
 	private Colision colisiones;	
 
-	public Level1Screen(AdventuresOfManuel adventuras_del_manuel) {
+	public Nivel1(AdventuresOfManuel adventuras_del_manuel) {
 		this.adventurasDeManuel = adventuras_del_manuel;
 		TexturaFondo = new Texture("Miscelаnea/Nivel.png");
 		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		manuel = new Manuel(new Vector2(193, 464));
 		
-		rellenarObjetosNivel();
-		rellenarPersonajesNivel();
+		objetosDelNivel();
+		personajesDelNivel();
 		colisiones = new Colision(manuel, personajes, objetos);
 		
 		manuel.setColision(colisiones);
@@ -37,7 +36,8 @@ public class Level1Screen implements Screen {
 		batch = new SpriteBatch();
 	}
 	
-	private void rellenarObjetosNivel() {
+	@Override
+	protected void objetosDelNivel() {
 		objetos = new ArrayList<ObjetoDelJuego>();
 		
 		//Se introducen las paredes del nivel
@@ -46,6 +46,7 @@ public class Level1Screen implements Screen {
 		objetos.add(new Pared(new Vector2(0, 696), 1024, 58));
 		objetos.add(new Pared(new Vector2(831, 0), 58, 754));
 		
+		//Se introducen los demas objetos por fila
 		objetos.add(new Roca(new Vector2(193, 638)));
 		objetos.add(new Roca(new Vector2(251, 638)));
 		objetos.add(new Roca(new Vector2(309, 638)));
@@ -127,7 +128,8 @@ public class Level1Screen implements Screen {
 		
 	}
 	
-	private void rellenarPersonajesNivel() {
+	@Override
+	protected void personajesDelNivel() {
 		personajes = new ArrayList<PersonajeDelJuego>();
 	}
 
