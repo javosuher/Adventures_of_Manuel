@@ -17,9 +17,11 @@ public class Nivel1 extends Nivel {
 	private Texture TexturaFondo;
 	private SpriteBatch batch;
 	private Manuel manuel;
+	private Cofre cofre;
+	private List<Corazon> corazones;
 	private List<ObjetoDelJuego> objetos;
 	private List<PersonajeDelJuego> personajes;
-	private Colision colisiones;	
+	private Colision colisiones;
 
 	public Nivel1(AdventuresOfManuel adventuras_del_manuel) {
 		this.adventurasDeManuel = adventuras_del_manuel;
@@ -29,7 +31,7 @@ public class Nivel1 extends Nivel {
 		
 		objetosDelNivel();
 		personajesDelNivel();
-		colisiones = new Colision(manuel, personajes, objetos);
+		colisiones = new Colision(manuel, personajes, objetos, corazones, cofre);
 		
 		manuel.setColision(colisiones);
 		
@@ -39,7 +41,7 @@ public class Nivel1 extends Nivel {
 	@Override
 	protected void objetosDelNivel() {
 		objetos = new ArrayList<ObjetoDelJuego>();
-		
+
 		//Se introducen las paredes del nivel
 		objetos.add(new Pared(new Vector2(0, 0), 1024, 58));
 		objetos.add(new Pared(new Vector2(135, 0), 58, 754));
@@ -62,6 +64,7 @@ public class Nivel1 extends Nivel {
 		objetos.add(new Arbol(new Vector2(251, 580)));
 		objetos.add(new Arbol(new Vector2(309, 580)));
 		objetos.add(new Roca(new Vector2(367, 580)));
+		corazones.add(new Corazon(new Vector2(425,580)));
 		objetos.add(new Roca(new Vector2(599, 580)));
 		objetos.add(new Roca(new Vector2(657, 580)));
 		objetos.add(new Arbol(new Vector2(715, 580)));
@@ -91,6 +94,7 @@ public class Nivel1 extends Nivel {
 		objetos.add(new Roca(new Vector2(599, 406)));
 		objetos.add(new Roca(new Vector2(657, 406)));
 		objetos.add(new Arbol(new Vector2(715, 406)));
+		corazones.add(new Corazon(new Vector2(773,406)));
 		
 		objetos.add(new Roca(new Vector2(657, 348)));
 		
@@ -116,6 +120,7 @@ public class Nivel1 extends Nivel {
 		objetos.add(new Arbol(new Vector2(251, 116)));
 		objetos.add(new Arbol(new Vector2(309, 116)));
 		objetos.add(new Roca(new Vector2(367, 116)));
+		cofre = new Cofre(new Vector2(425,116));
 		objetos.add(new Arbol(new Vector2(657, 116)));
 		objetos.add(new Arbol(new Vector2(715, 116)));
 		
@@ -145,6 +150,10 @@ public class Nivel1 extends Nivel {
 		batch.begin();
 		batch.draw(TexturaFondo, 135, 0, TexturaFondo.getWidth(), TexturaFondo.getHeight());
 		manuel.draw(batch);
+		cofre.draw(batch);
+		for(Corazon c : corazones){
+			c.draw(batch);
+		}
 		for(ObjetoDelJuego objeto : objetos) {
 			objeto.draw(batch);
 		}
