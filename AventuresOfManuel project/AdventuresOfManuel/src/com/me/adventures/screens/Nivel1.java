@@ -25,7 +25,7 @@ public class Nivel1 extends Nivel {
 
 	public Nivel1(AdventuresOfManuel adventuras_del_manuel) {
 		this.adventurasDeManuel = adventuras_del_manuel;
-		TexturaFondo = new Texture("Miscelаnea/Nivel.png");
+		TexturaFondo = new Texture("Miscelanea/Nivel.png");
 		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		manuel = new Manuel(new Vector2(193, 464));
 		
@@ -41,6 +41,7 @@ public class Nivel1 extends Nivel {
 	@Override
 	protected void objetosDelNivel() {
 		objetos = new ArrayList<ObjetoDelJuego>();
+		corazones = new ArrayList<Corazon>();
 
 		//Se introducen las paredes del nivel
 		objetos.add(new Pared(new Vector2(0, 0), 1024, 58));

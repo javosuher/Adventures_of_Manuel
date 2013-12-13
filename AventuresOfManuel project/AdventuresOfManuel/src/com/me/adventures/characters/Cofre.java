@@ -28,18 +28,11 @@ public class Cofre extends ObjetoDelJuego{
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
 		TexturaCofre = new Texture("Miscelanea/Cofre.png");
 		TexturaCofre.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		
-		cofreMatrizFrames = TextureRegion.split(TexturaCofre, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
-		
-		// Asignamos las animaciones de las direcciones de Manuel
-		cofreAnimationCerrado = new Animation(0.05f, cofreMatrizFrames[CERRADO]);
-		cofreAnimationAbierto = new Animation(0.05f, cofreMatrizFrames[ABIERTO]);
-		cofreAnimationVacio = new Animation(0.05f, cofreMatrizFrames[VACIO]);
 	}
 	
 	@Override
 	public void draw(SpriteBatch batch) {
-		batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
+		batch.draw(TexturaCofre, posicion.x, posicion.y, bordes.height, bordes.width);
 	}
 	
 	@Override

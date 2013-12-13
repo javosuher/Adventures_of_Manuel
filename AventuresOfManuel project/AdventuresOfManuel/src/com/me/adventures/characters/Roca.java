@@ -15,7 +15,7 @@ public class Roca extends ObjetoDelJuego {
 	public Roca(Vector2 posicion) {
 		this.posicion = posicion;
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
-		TexturaRoca = new Texture("Miscelаnea/Roca.png");
+		TexturaRoca = new Texture("Miscelanea/Roca.png");
 		TexturaRoca.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 	}
 	
