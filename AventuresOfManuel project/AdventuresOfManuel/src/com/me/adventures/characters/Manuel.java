@@ -85,7 +85,7 @@ public class Manuel extends PersonajeDelJuego {
 		}
 		else
 			manuelSeQuedaQuieto = true;
-		
+	
 		colisiones.colisionCorazon(this);
 		
 		// Actualizar bordes

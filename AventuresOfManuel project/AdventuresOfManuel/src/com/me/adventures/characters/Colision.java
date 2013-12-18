@@ -66,6 +66,7 @@ public class Colision {
 					c.setEstado();
 					//aumentar la variable que contabiliza los corazones
 					//si ha llegado al máximo abrir cofre
+					
 				}
 			}
 		}
