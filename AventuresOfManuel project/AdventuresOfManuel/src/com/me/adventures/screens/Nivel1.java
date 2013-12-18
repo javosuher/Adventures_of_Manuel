@@ -22,6 +22,7 @@ public class Nivel1 extends Nivel {
 	private List<ObjetoDelJuego> objetos;
 	private List<PersonajeDelJuego> personajes;
 	private Colision colisiones;
+	private Salida salida;
 
 	public Nivel1(AdventuresOfManuel adventuras_del_manuel) {
 		this.adventurasDeManuel = adventuras_del_manuel;
@@ -31,7 +32,7 @@ public class Nivel1 extends Nivel {
 		
 		objetosDelNivel();
 		personajesDelNivel();
-		colisiones = new Colision(manuel, personajes, objetos, corazones, cofre);
+		colisiones = new Colision(manuel, personajes, objetos, corazones, cofre, salida);
 		
 		manuel.setColision(colisiones);
 		
@@ -46,8 +47,12 @@ public class Nivel1 extends Nivel {
 		//Se introducen las paredes del nivel
 		objetos.add(new Pared(new Vector2(0, 0), 1024, 58));
 		objetos.add(new Pared(new Vector2(135, 0), 58, 754));
-		objetos.add(new Pared(new Vector2(0, 696), 1024, 58));
+		//objetos.add(new Pared(new Vector2(0, 696), 1024, 58));
+		objetos.add(new Pared(new Vector2(0, 696), 425, 58));
+		objetos.add(new Pared(new Vector2(541, 696), 425, 58));
+		
 		objetos.add(new Pared(new Vector2(831, 0), 58, 754));
+		salida = new Salida(new Vector2(483,696), "PUERTA");
 		
 		//Se introducen los demas objetos por fila
 		objetos.add(new Roca(new Vector2(193, 638)));
@@ -150,6 +155,7 @@ public class Nivel1 extends Nivel {
 		// Pintamos la pantalla
 		batch.begin();
 		batch.draw(TexturaFondo, 135, 0, TexturaFondo.getWidth(), TexturaFondo.getHeight());
+		salida.draw(batch);
 		for(Corazon c : corazones){
 			c.draw(batch);
 		}
