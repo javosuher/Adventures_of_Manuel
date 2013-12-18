@@ -19,7 +19,7 @@ public class MainScreen implements Screen {
 
 	public MainScreen(AdventuresOfManuel adventuras_del_manuel) {
 		this.adventurasDeManuel = adventuras_del_manuel;
-		TexturaNivel1 = new Texture("Miscelаnea/uno.png");
+		TexturaNivel1 = new Texture("Miscelanea/uno.png");
 		TexturaNivel1.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		manuel = new Manuel(new Vector2(512,10));
 		batch = new SpriteBatch();

@@ -13,26 +13,32 @@ public class Cofre extends ObjetoDelJuego{
 	private static final int CERRADO = 0;
 	private static final int ABIERTO = 1;
 	private static final int VACIO = 2;
-	private int estado = 0;
+	private int corazonesNecesarios;
 	
 	private Vector2 posicion;
 	private Rectangle bordes;
 	private Texture TexturaCofre;
 
-	private TextureRegion [][] cofreMatrizFrames;
+	private TextureRegion [] cofreVectorFrames;
 	private TextureRegion frameActual;
-	private Animation cofreAnimationAbierto, cofreAnimationCerrado, cofreAnimationVacio;
 	
-	public Cofre(Vector2 posicion){
+	public Cofre(Vector2 posicion, int corazonesNecesarios){
+		this.corazonesNecesarios = corazonesNecesarios;
 		this.posicion = posicion;
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
 		TexturaCofre = new Texture("Miscelanea/Cofre.png");
 		TexturaCofre.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+		cofreVectorFrames = new TextureRegion[3];
+		cofreVectorFrames[0] = new TextureRegion(TexturaCofre, 0, 0, Constant.ANCHURA_OBJETO, Constant.ANCHURA_OBJETO);
+		cofreVectorFrames[1] = new TextureRegion(TexturaCofre, Constant.ANCHURA_OBJETO, 0, Constant.ANCHURA_OBJETO, Constant.ANCHURA_OBJETO);
+		cofreVectorFrames[2] = new TextureRegion(TexturaCofre, Constant.ANCHURA_OBJETO * 2, 0, Constant.ANCHURA_OBJETO, Constant.ANCHURA_OBJETO);
+		frameActual = cofreVectorFrames[CERRADO];
 	}
 	
 	@Override
 	public void draw(SpriteBatch batch) {
-		batch.draw(TexturaCofre, posicion.x, posicion.y, bordes.height, bordes.width);
+		batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
 	}
 	
 	@Override
@@ -41,6 +47,18 @@ public class Cofre extends ObjetoDelJuego{
 	}
 	
 	// Getters and Setters ------------------------------------------------------------------------
+	
+	public int getCorazonesNecesarios(){
+		return corazonesNecesarios;
+	}
+	
+	public void abrirCofre(){
+		frameActual = cofreVectorFrames[ABIERTO];
+	}
+	
+	public void cogerGema(){
+		frameActual = cofreVectorFrames[VACIO];
+	}
 	
 	@Override
 	public Vector2 getPosicion() {
@@ -58,9 +76,5 @@ public class Cofre extends ObjetoDelJuego{
 
 	public void setBordes(Rectangle bordes) {
 		this.bordes = bordes;
-	}
-	
-	public int getEstado(){
-		return estado;
 	}
 }

@@ -121,7 +121,7 @@ public class Nivel1 extends Nivel {
 		objetos.add(new Arbol(new Vector2(251, 116)));
 		objetos.add(new Arbol(new Vector2(309, 116)));
 		objetos.add(new Roca(new Vector2(367, 116)));
-		cofre = new Cofre(new Vector2(425,116));
+		cofre = new Cofre(new Vector2(425,116), 2);
 		objetos.add(new Arbol(new Vector2(657, 116)));
 		objetos.add(new Arbol(new Vector2(715, 116)));
 		
@@ -153,8 +153,8 @@ public class Nivel1 extends Nivel {
 		for(Corazon c : corazones){
 			c.draw(batch);
 		}
-		manuel.draw(batch);
 		cofre.draw(batch);
+		manuel.draw(batch);
 		for(ObjetoDelJuego objeto : objetos) {
 			objeto.draw(batch);
 		}

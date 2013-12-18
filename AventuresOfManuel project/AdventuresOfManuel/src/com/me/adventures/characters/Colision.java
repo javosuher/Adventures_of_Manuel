@@ -11,7 +11,7 @@ public class Colision {
 	private List<PersonajeDelJuego> personajes;
 	private List<ObjetoDelJuego> objetos;
 	private List<Corazon> corazones;
-	private Cofre cofre;	
+	private Cofre cofre;
 	
 	public Colision(Manuel manuel, List<PersonajeDelJuego> personajes, List<ObjetoDelJuego> objetos, List<Corazon> corazones, Cofre cofre) {
 		this.manuel = manuel;
@@ -56,25 +56,33 @@ public class Colision {
 		return colisionObjeto(auxiliar);
 	}
 	
-	public void colisionCorazon(PersonajeDelJuego personaje) {
-		boolean ningunaColision = false;
-		for(int i = 0; i < corazones.size() && !ningunaColision; i++){
+	public boolean colisionCorazon(PersonajeDelJuego personaje) {
+		boolean colisiones = false;
+		for(int i = 0; i < corazones.size() && !colisiones; i++){
 			Corazon c = corazones.get(i);
 			if(c.getEstado() == true){ //el corazón no se ha cogido
-				ningunaColision = comprobarCoordenada(c, personaje);
-				if(ningunaColision == true){
+				colisiones = comprobarCoordenada(c, personaje);
+				if(colisiones == true){
 					c.setEstado();
-					//aumentar la variable que contabiliza los corazones
-					//si ha llegado al máximo abrir cofre
-					
+					manuel.setCorazonesObtenidos(manuel.getCorazonesObtenidos() + 1);
+					if(cofre.getCorazonesNecesarios() == manuel.getCorazonesObtenidos())
+						cofre.abrirCofre();
 				}
 			}
 		}
+		return colisiones;
 	}
 	
-	private boolean comprobarCoordenada(Corazon c, PersonajeDelJuego personaje){
-		if(personaje.getBordes().x == c.getBordes().x && personaje.getBordes().y == c.getBordes().y)
+	private boolean comprobarCoordenada(ObjetoDelJuego objeto, PersonajeDelJuego personaje){
+		if(personaje.getBordes().x == objeto.getBordes().x && personaje.getBordes().y == objeto.getBordes().y)
 			return true;
 		return false;
+	}
+	
+	public void colisionCofre(PersonajeDelJuego personaje){
+		if(cofre.getCorazonesNecesarios() == manuel.getCorazonesObtenidos() && comprobarCoordenada(cofre, personaje) == true){
+			cofre.cogerGema();
+			//Abrir la puerta o escalera
+		}
 	}
 }

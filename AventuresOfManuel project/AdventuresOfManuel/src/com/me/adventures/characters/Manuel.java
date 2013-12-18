@@ -25,7 +25,8 @@ public class Manuel extends PersonajeDelJuego {
 	private float stateTime;
 	private int direccion;
 	private Colision colisiones;
-	
+	private int corazonesObtenidos;
+
 	//Atributos para pintar a Manuel
 	private Texture TexturaManuel;
 	private TextureRegion [][] manuelMatrizFrames;
@@ -33,6 +34,7 @@ public class Manuel extends PersonajeDelJuego {
 	private Animation manuelAnimationAbajo, manuelAnimationIzquierda, manuelAnimationDerecha, manuelAnimationArriba;
 	
 	public Manuel(Vector2 posicion) {
+		this.corazonesObtenidos = 0;
 		this.posicion = posicion;
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		stateTime = 0f;
@@ -85,8 +87,9 @@ public class Manuel extends PersonajeDelJuego {
 		}
 		else
 			manuelSeQuedaQuieto = true;
-	
+		
 		colisiones.colisionCorazon(this);
+		colisiones.colisionCofre(this);
 		
 		// Actualizar bordes
 		bordes.x = posicion.x;
@@ -120,8 +123,14 @@ public class Manuel extends PersonajeDelJuego {
 	}
 	
 	// Getters and Setters ------------------------------------------------------------------------
+	public int getCorazonesObtenidos() {
+		return corazonesObtenidos;
+	}
 	
-	@Override
+	public void setCorazonesObtenidos(int corazonesObtenidos){
+		this.corazonesObtenidos = corazonesObtenidos;
+	}
+	
 	public void setColision(Colision colisiones) {
 		this.colisiones = colisiones;
 	}
