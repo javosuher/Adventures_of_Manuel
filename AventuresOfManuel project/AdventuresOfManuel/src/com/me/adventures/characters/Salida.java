@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Salida extends ObjetoDelJuego{
 	private int estado;
+	private int tipo;
 	
 	private Vector2 posicion;
 	private Rectangle bordes;
@@ -17,10 +18,11 @@ public class Salida extends ObjetoDelJuego{
 	private TextureRegion frameActual;
 	
 	public Salida(Vector2 posicion, int tipo){
+		this.tipo = tipo;
 		estado = 0;
 		this.posicion = posicion;
 		bordes = new Rectangle(posicion.x, posicion.y, 58, 174);
-		if(tipo == 0)
+		if(this.tipo == 0)
 			TexturaSalida = new Texture("Miscelanea/TablaPuerta.png");
 		else
 			TexturaSalida = new Texture("Miscelanea/TablaPuerta.png"); //--------- CAMBIAR A ESCALERA
@@ -69,5 +71,12 @@ public class Salida extends ObjetoDelJuego{
 
 	public void setBordes(Rectangle bordes) {
 		this.bordes = bordes;
+	}
+
+	public String getTipo() {
+		if(tipo == 0)
+			return "PUERTA";
+		else
+			return "ESCALERA";
 	}
 }

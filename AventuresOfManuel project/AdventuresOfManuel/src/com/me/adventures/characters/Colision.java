@@ -2,6 +2,8 @@ package com.me.adventures.characters;
 
 import java.util.List;
 
+import javax.swing.text.Position;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.me.adventures.main.Constant;
@@ -38,24 +40,42 @@ public class Colision {
 	}
 	
 	public boolean colisionDerechaObjeto(PersonajeDelJuego personaje) {
+		if(salida.salidaAbierta() == true && comprobarSalida())
+			return false;
 		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
 		auxiliar.x = auxiliar.x + (Gdx.graphics.getDeltaTime() * Constant.SPEED);
 		return colisionObjeto(auxiliar);
 	}
 	public boolean colisionIzquierdaObjeto(PersonajeDelJuego personaje) {
+		if(salida.salidaAbierta() == true && comprobarSalida())
+			return false;
 		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
 		auxiliar.x = auxiliar.x - (Gdx.graphics.getDeltaTime() * Constant.SPEED);
 		return colisionObjeto(auxiliar);
 	}
 	public boolean colisionArribaObjeto(PersonajeDelJuego personaje) {
+		if(salida.salidaAbierta() == true && comprobarSalida())
+			return false;
 		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
 		auxiliar.y = auxiliar.y + (Gdx.graphics.getDeltaTime() * Constant.SPEED);
 		return colisionObjeto(auxiliar);
 	}
 	public boolean colisionAbajoObjeto(PersonajeDelJuego personaje) {
+		if(salida.salidaAbierta() == true && comprobarSalida())
+			return false;
 		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
 		auxiliar.y = auxiliar.y - (Gdx.graphics.getDeltaTime() * Constant.SPEED);
 		return colisionObjeto(auxiliar);
+	}
+	
+	private boolean comprobarSalida(){
+		if(salida.getTipo() == "PUERTA"){
+			if((salida.getBordes().x + 58)  == manuel.getBordes().x && salida.getBordes().y == (manuel.getBordes().y + Constant.ALTURA_PERSONAJE))
+				return true;
+			else
+				return false;
+		}
+		return comprobarCoordenada(salida, manuel);
 	}
 	
 	public boolean colisionCorazon(PersonajeDelJuego personaje) {
