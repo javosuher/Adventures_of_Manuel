@@ -56,40 +56,23 @@ public class Colision {
 		return colisionObjeto(auxiliar);
 	}
 	
-	public void colisionDerechaCorazon(PersonajeDelJuego personaje) {
-		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
-		auxiliar.x = auxiliar.x + (Gdx.graphics.getDeltaTime() * Constant.SPEED);
-		colisionCorazon(auxiliar);
-	}
-	public void colisionIzquierdaCorazon(PersonajeDelJuego personaje) {
-		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
-		auxiliar.x = auxiliar.x - (Gdx.graphics.getDeltaTime() * Constant.SPEED);
-		colisionCorazon(auxiliar);
-	}
-	public void colisionArribaCorazon(PersonajeDelJuego personaje) {
-		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
-		auxiliar.y = auxiliar.y + (Gdx.graphics.getDeltaTime() * Constant.SPEED);
-		colisionCorazon(auxiliar);
-	}
-	public void colisionAbajoCorazon(PersonajeDelJuego personaje) {
-		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
-		auxiliar.y = auxiliar.y - (Gdx.graphics.getDeltaTime() * Constant.SPEED);
-		colisionCorazon(auxiliar);
-	}
-	
-	public void colisionCorazon(Rectangle auxiliar) {
-		boolean ningunaColision = true;
-		for(int i = 0; i < corazones.size() && ningunaColision; i++) {
-			if(colisionaC(auxiliar, corazones.get(i).getBordes())){
-				if(corazones.get(i).getEstado() == true)
-					corazones.get(i).setEstado();
-				ningunaColision = false;
+	public void colisionCorazon(PersonajeDelJuego personaje) {
+		boolean ningunaColision = false;
+		for(int i = 0; i < corazones.size() && !ningunaColision; i++){
+			Corazon c = corazones.get(i);
+			if(c.getEstado() == true){ //el corazón no se ha cogido
+				ningunaColision = comprobarCoordenada(c, personaje);
+				if(ningunaColision == true){
+					c.setEstado();
+					//aumentar la variable que contabiliza los corazones
+				}
 			}
 		}
 	}
 	
-	public boolean colisionaC (Rectangle a, Rectangle b){
-		return a.contains(b);
-		//mirar la api
+	private boolean comprobarCoordenada(Corazon c, PersonajeDelJuego personaje){
+		if(personaje.getBordes().x == c.getBordes().x && personaje.getBordes().y == c.getBordes().y)
+			return true;
+		return false;
 	}
 }
