@@ -150,11 +150,11 @@ public class Nivel1 extends Nivel {
 		// Pintamos la pantalla
 		batch.begin();
 		batch.draw(TexturaFondo, 135, 0, TexturaFondo.getWidth(), TexturaFondo.getHeight());
-		manuel.draw(batch);
-		cofre.draw(batch);
 		for(Corazon c : corazones){
 			c.draw(batch);
 		}
+		manuel.draw(batch);
+		cofre.draw(batch);
 		for(ObjetoDelJuego objeto : objetos) {
 			objeto.draw(batch);
 		}
