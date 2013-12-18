@@ -12,13 +12,15 @@ public class Colision {
 	private List<ObjetoDelJuego> objetos;
 	private List<Corazon> corazones;
 	private Cofre cofre;
+	private Salida salida;
 	
-	public Colision(Manuel manuel, List<PersonajeDelJuego> personajes, List<ObjetoDelJuego> objetos, List<Corazon> corazones, Cofre cofre) {
+	public Colision(Manuel manuel, List<PersonajeDelJuego> personajes, List<ObjetoDelJuego> objetos, List<Corazon> corazones, Cofre cofre, Salida salida) {
 		this.manuel = manuel;
 		this.personajes = personajes;
 		this.objetos = objetos;
 		this.corazones = corazones;
 		this.cofre = cofre;
+		this.salida = salida;
 	}
 	
 	private boolean colisiona(Rectangle a, Rectangle b) {
@@ -82,7 +84,7 @@ public class Colision {
 	public void colisionCofre(PersonajeDelJuego personaje){
 		if(cofre.getCorazonesNecesarios() == manuel.getCorazonesObtenidos() && comprobarCoordenada(cofre, personaje) == true){
 			cofre.cogerGema();
-			//Abrir la puerta o escalera
+			salida.abrirSalida();
 		}
 	}
 }

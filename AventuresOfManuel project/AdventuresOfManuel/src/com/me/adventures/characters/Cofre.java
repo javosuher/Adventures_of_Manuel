@@ -30,9 +30,9 @@ public class Cofre extends ObjetoDelJuego{
 		TexturaCofre.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		cofreVectorFrames = new TextureRegion[3];
-		cofreVectorFrames[0] = new TextureRegion(TexturaCofre, 0, 0, Constant.ANCHURA_OBJETO, Constant.ANCHURA_OBJETO);
-		cofreVectorFrames[1] = new TextureRegion(TexturaCofre, Constant.ANCHURA_OBJETO, 0, Constant.ANCHURA_OBJETO, Constant.ANCHURA_OBJETO);
-		cofreVectorFrames[2] = new TextureRegion(TexturaCofre, Constant.ANCHURA_OBJETO * 2, 0, Constant.ANCHURA_OBJETO, Constant.ANCHURA_OBJETO);
+		cofreVectorFrames[0] = new TextureRegion(TexturaCofre, 0, 0, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
+		cofreVectorFrames[1] = new TextureRegion(TexturaCofre, Constant.ANCHURA_OBJETO, 0, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
+		cofreVectorFrames[2] = new TextureRegion(TexturaCofre, Constant.ANCHURA_OBJETO * 2, 0, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
 		frameActual = cofreVectorFrames[CERRADO];
 	}
 	
