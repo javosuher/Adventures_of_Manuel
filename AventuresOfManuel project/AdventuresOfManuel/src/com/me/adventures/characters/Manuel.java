@@ -1,5 +1,8 @@
 package com.me.adventures.characters;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
@@ -26,6 +29,7 @@ public class Manuel extends PersonajeDelJuego {
 	private int direccion;
 	private Colision colisiones;
 	private int corazonesObtenidos;
+	//private List<Proyectil> proyectiles;
 
 	//Atributos para pintar a Manuel
 	private Texture TexturaManuel;
@@ -35,6 +39,7 @@ public class Manuel extends PersonajeDelJuego {
 	
 	public Manuel(Vector2 posicion) {
 		this.corazonesObtenidos = 0;
+		//proyectiles = new ArrayList<Proyectil>();
 		this.posicion = posicion;
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		stateTime = 0f;
@@ -61,25 +66,25 @@ public class Manuel extends PersonajeDelJuego {
 		// Determina movimiento de Manuel
 		boolean soloUnaTeclaPresionada = true;
 		boolean manuelSeQuedaQuieto = false;
-		if(Gdx.input.isKeyPressed(Keys.RIGHT) && soloUnaTeclaPresionada && !colisiones.colisionDerechaObjeto(this)) {
+		if(Gdx.input.isKeyPressed(Keys.RIGHT) && soloUnaTeclaPresionada && !colisiones.colisionDerechaObjeto(this) && !colisiones.colisionDerechaEnemigo(this)) {
 			soloUnaTeclaPresionada = false;
 			posicion.x = posicion.x + /*Gdx.graphics.getDeltaTime() */ Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = DERECHA;
 		}
-		else if(Gdx.input.isKeyPressed(Keys.LEFT) && soloUnaTeclaPresionada && !colisiones.colisionIzquierdaObjeto(this)) {
+		else if(Gdx.input.isKeyPressed(Keys.LEFT) && soloUnaTeclaPresionada && !colisiones.colisionIzquierdaObjeto(this) && !colisiones.colisionIzquierdaEnemigo(this)) {
 			soloUnaTeclaPresionada = false;
 			posicion.x = posicion.x - /*Gdx.graphics.getDeltaTime() */ Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = IZQUIERDA;
 		}
-		else if(Gdx.input.isKeyPressed(Keys.UP) && soloUnaTeclaPresionada && !colisiones.colisionArribaObjeto(this)) {
+		else if(Gdx.input.isKeyPressed(Keys.UP) && soloUnaTeclaPresionada && !colisiones.colisionArribaObjeto(this) && !colisiones.colisionArribaEnemigo(this)) {
 			soloUnaTeclaPresionada = false;
 			posicion.y = posicion.y + /*Gdx.graphics.getDeltaTime() */ Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = ARRIBA;
 		}
-		else if(Gdx.input.isKeyPressed(Keys.DOWN) && soloUnaTeclaPresionada && !colisiones.colisionAbajoObjeto(this)) {
+		else if(Gdx.input.isKeyPressed(Keys.DOWN) && soloUnaTeclaPresionada && !colisiones.colisionAbajoObjeto(this) && !colisiones.colisionAbajoEnemigo(this)) {
 			soloUnaTeclaPresionada = false;
 			posicion.y = posicion.y - /*Gdx.graphics.getDeltaTime() */ Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
@@ -87,6 +92,11 @@ public class Manuel extends PersonajeDelJuego {
 		}
 		else
 			manuelSeQuedaQuieto = true;
+		
+		if(Gdx.input.isKeyPressed(Keys.SPACE) && soloUnaTeclaPresionada){
+			soloUnaTeclaPresionada = false;
+			disparo();
+		}
 		
 		colisiones.colisionCorazon(this);
 		colisiones.colisionCofre(this);
@@ -122,13 +132,30 @@ public class Manuel extends PersonajeDelJuego {
 		}
 	}
 	
+	private void disparo(){
+		/*if(!proyectiles.isEmpty()){
+			proyectiles.get(0).draw(batch);
+			proyectiles.remove(0);
+		}*/
+	}
+	
 	// Getters and Setters ------------------------------------------------------------------------
 	public int getCorazonesObtenidos() {
 		return corazonesObtenidos;
 	}
 	
-	public void setCorazonesObtenidos(int corazonesObtenidos){
-		this.corazonesObtenidos = corazonesObtenidos;
+	public void obtenerCorazon(){
+		corazonesObtenidos++;
+		/*Vector2 inicio;
+		if(direccion == ARRIBA)
+			inicio = new Vector2(posicion.x, posicion.y + Constant.ANCHURA_PERSONAJE); 
+		else if(direccion == ABAJO)
+			inicio = new Vector2(posicion.x, posicion.y - Constant.ANCHURA_PERSONAJE); 
+		else if(direccion == DERECHA)
+			inicio = new Vector2(posicion.x + Constant.ANCHURA_PERSONAJE, posicion.y); 
+		else //if(direccion == IZQUIERDA)
+			inicio = new Vector2(posicion.x - Constant.ANCHURA_PERSONAJE, posicion.y); 
+		proyectiles.add(new Proyectil(inicio, direccion));*/
 	}
 	
 	public void setColision(Colision colisiones) {

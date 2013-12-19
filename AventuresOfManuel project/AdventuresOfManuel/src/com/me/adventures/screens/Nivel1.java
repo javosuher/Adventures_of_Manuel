@@ -47,12 +47,10 @@ public class Nivel1 extends Nivel {
 		//Se introducen las paredes del nivel
 		objetos.add(new Pared(new Vector2(0, 0), 1024, 58));
 		objetos.add(new Pared(new Vector2(135, 0), 58, 754));
-		//objetos.add(new Pared(new Vector2(0, 696), 1024, 58));
 		objetos.add(new Pared(new Vector2(0, 696), 425, 58));
-		objetos.add(new Pared(new Vector2(541, 696), 425, 58));
-		
-		objetos.add(new Pared(new Vector2(831, 0), 58, 754));
 		salida = new Salida(new Vector2(483,696), "PUERTA");
+		objetos.add(new Pared(new Vector2(541, 696), 425, 58));
+		objetos.add(new Pared(new Vector2(831, 0), 58, 754));
 		
 		//Se introducen los demas objetos por fila
 		objetos.add(new Roca(new Vector2(193, 638)));
@@ -142,6 +140,11 @@ public class Nivel1 extends Nivel {
 	@Override
 	protected void personajesDelNivel() {
 		personajes = new ArrayList<PersonajeDelJuego>();
+
+		personajes.add(new Serpiente(new Vector2(541,348), manuel));
+		for(PersonajeDelJuego p : personajes){
+			p.setColision(colisiones);
+		}
 	}
 
 	@Override
@@ -156,11 +159,14 @@ public class Nivel1 extends Nivel {
 		batch.begin();
 		batch.draw(TexturaFondo, 135, 0, TexturaFondo.getWidth(), TexturaFondo.getHeight());
 		salida.draw(batch);
-		for(Corazon c : corazones){
-			c.draw(batch);
+		for(Corazon corazon : corazones){
+			corazon.draw(batch);
 		}
 		cofre.draw(batch);
 		manuel.draw(batch);
+		for(PersonajeDelJuego personaje : personajes){
+			personaje.draw(batch);
+		}
 		for(ObjetoDelJuego objeto : objetos) {
 			objeto.draw(batch);
 		}

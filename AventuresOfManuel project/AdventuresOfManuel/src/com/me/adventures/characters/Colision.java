@@ -86,7 +86,7 @@ public class Colision {
 				colisiones = comprobarCoordenada(c, personaje);
 				if(colisiones == true){
 					c.setEstado();
-					manuel.setCorazonesObtenidos(manuel.getCorazonesObtenidos() + 1);
+					manuel.obtenerCorazon();
 					if(cofre.getCorazonesNecesarios() == manuel.getCorazonesObtenidos())
 						cofre.abrirCofre();
 				}
@@ -107,4 +107,37 @@ public class Colision {
 			salida.abrirSalida();
 		}
 	}
+	//-----------------------------
+	private boolean colisionEnemigo(Rectangle auxiliar) {
+		boolean ningunaColision = true;
+		for(int i = 0; i < personajes.size() && ningunaColision; i++) {
+			if(colisiona(auxiliar, personajes.get(i).getBordes())){
+				ningunaColision = false;
+			}
+			personajes.get(i).update();
+		}
+		return !ningunaColision;
+	}
+	
+	public boolean colisionDerechaEnemigo(PersonajeDelJuego personaje) {
+		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
+		auxiliar.x = auxiliar.x + (Gdx.graphics.getDeltaTime() * Constant.SPEED);
+		return colisionEnemigo(auxiliar);
+	}
+	public boolean colisionIzquierdaEnemigo(PersonajeDelJuego personaje) {
+		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
+		auxiliar.x = auxiliar.x - (Gdx.graphics.getDeltaTime() * Constant.SPEED);
+		return colisionEnemigo(auxiliar);
+	}
+	public boolean colisionArribaEnemigo(PersonajeDelJuego personaje) {
+		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
+		auxiliar.y = auxiliar.y + (Gdx.graphics.getDeltaTime() * Constant.SPEED);
+		return colisionEnemigo(auxiliar);
+	}
+	public boolean colisionAbajoEnemigo(PersonajeDelJuego personaje) {
+		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
+		auxiliar.y = auxiliar.y - (Gdx.graphics.getDeltaTime() * Constant.SPEED);
+		return colisionEnemigo(auxiliar);
+	}
+	//----------------------------
 }
