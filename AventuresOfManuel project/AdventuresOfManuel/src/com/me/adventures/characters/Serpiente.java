@@ -33,7 +33,6 @@ public class Serpiente extends PersonajeDelJuego {
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		
 		TexturaSerpiente = new Texture("Enemigos/TablaSerpiente.png");
-		TexturaSerpiente.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
 		serpienteMatrizFrames = new TextureRegion[2][2];
 		serpienteMatrizFrames[0][0] = new TextureRegion(TexturaSerpiente, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);

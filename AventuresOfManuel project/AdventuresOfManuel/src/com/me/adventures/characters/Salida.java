@@ -1,7 +1,6 @@
 package com.me.adventures.characters;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -26,7 +25,6 @@ public class Salida extends ObjetoDelJuego{
 			TexturaSalida = new Texture("Miscelanea/TablaPuerta.png");
 		else
 			TexturaSalida = new Texture("Miscelanea/TablaPuerta.png"); //--------- CAMBIAR A ESCALERA
-		TexturaSalida.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		frameActual = new TextureRegion(TexturaSalida, 0, 0, 174, 58);
 	}

@@ -23,7 +23,6 @@ class Proyectil extends ObjetoDelJuego{
 		this.posicion = posicion;
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
 		TexturaProyectil = new Texture("Miscelanea/Proyectil.png");
-		TexturaProyectil.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 	}
 	
 	@Override

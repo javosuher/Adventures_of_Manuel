@@ -27,7 +27,6 @@ public class Cofre extends ObjetoDelJuego{
 		this.posicion = posicion;
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
 		TexturaCofre = new Texture("Miscelanea/Cofre.png");
-		TexturaCofre.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		cofreVectorFrames = new TextureRegion[3];
 		cofreVectorFrames[0] = new TextureRegion(TexturaCofre, 0, 0, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);

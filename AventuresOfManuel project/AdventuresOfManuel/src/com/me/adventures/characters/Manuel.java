@@ -46,7 +46,6 @@ public class Manuel extends PersonajeDelJuego {
 		direccion = ABAJO;
 		
 		TexturaManuel = new Texture("Manolito/TablaSpritesManolitoTransparencia.png");
-		TexturaManuel.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		manuelMatrizFrames = TextureRegion.split(TexturaManuel, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		
 		// Asignamos las animaciones de las direcciones de Manuel
@@ -68,25 +67,25 @@ public class Manuel extends PersonajeDelJuego {
 		boolean manuelSeQuedaQuieto = false;
 		if(Gdx.input.isKeyPressed(Keys.RIGHT) && soloUnaTeclaPresionada && !colisiones.colisionDerechaObjeto(this) && !colisiones.colisionDerechaEnemigo(this)) {
 			soloUnaTeclaPresionada = false;
-			posicion.x = posicion.x + /*Gdx.graphics.getDeltaTime() */ Constant.SPEED;
+			posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = DERECHA;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.LEFT) && soloUnaTeclaPresionada && !colisiones.colisionIzquierdaObjeto(this) && !colisiones.colisionIzquierdaEnemigo(this)) {
 			soloUnaTeclaPresionada = false;
-			posicion.x = posicion.x - /*Gdx.graphics.getDeltaTime() */ Constant.SPEED;
+			posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = IZQUIERDA;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.UP) && soloUnaTeclaPresionada && !colisiones.colisionArribaObjeto(this) && !colisiones.colisionArribaEnemigo(this)) {
 			soloUnaTeclaPresionada = false;
-			posicion.y = posicion.y + /*Gdx.graphics.getDeltaTime() */ Constant.SPEED;
+			posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = ARRIBA;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.DOWN) && soloUnaTeclaPresionada && !colisiones.colisionAbajoObjeto(this) && !colisiones.colisionAbajoEnemigo(this)) {
 			soloUnaTeclaPresionada = false;
-			posicion.y = posicion.y - /*Gdx.graphics.getDeltaTime() */ Constant.SPEED;
+			posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = ABAJO;
 		}
@@ -107,26 +106,46 @@ public class Manuel extends PersonajeDelJuego {
 		
 		//Direccion frame Manuel
 		if(direccion == ABAJO) {
-			if(manuelSeQuedaQuieto)
+			if(manuelSeQuedaQuieto) {
+				int nuevaPosicion = (int) posicion.y;
+				while(nuevaPosicion % 29 != 0)
+					nuevaPosicion--;
+				posicion.y = nuevaPosicion;
 				frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
+			}
 			else 
 				frameActual = manuelAnimationAbajo.getKeyFrame(stateTime, true);
 		}
 		else if(direccion == IZQUIERDA) {
-			if(manuelSeQuedaQuieto)
+			if(manuelSeQuedaQuieto) {
+				int nuevaPosicion = (int) posicion.x;
+				while(nuevaPosicion % 29 != 19)
+					nuevaPosicion--;
+				posicion.x = nuevaPosicion;
 				frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
+			}
 			else 
 				frameActual = manuelAnimationIzquierda.getKeyFrame(stateTime, true);
 		}
 		else if(direccion == DERECHA) {
-			if(manuelSeQuedaQuieto)
+			if(manuelSeQuedaQuieto) {
+				int nuevaPosicion = (int) posicion.x;
+				while(nuevaPosicion % 29 != 19)
+					nuevaPosicion++;
+				posicion.x = nuevaPosicion;
 				frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
+			}
 			else 
 				frameActual = manuelAnimationDerecha.getKeyFrame(stateTime, true);
 		}
 		else if(direccion == ARRIBA) {
-			if(manuelSeQuedaQuieto)
+			if(manuelSeQuedaQuieto) {
+				int nuevaPosicion = (int) posicion.y;
+				while(nuevaPosicion % 29 != 0)
+					nuevaPosicion++;
+				posicion.y = nuevaPosicion;
 				frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
+			}
 			else 
 				frameActual = manuelAnimationArriba.getKeyFrame(stateTime, true);
 		}
