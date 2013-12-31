@@ -6,7 +6,6 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -65,25 +64,30 @@ public class Manuel extends PersonajeDelJuego {
 		// Determina movimiento de Manuel
 		boolean soloUnaTeclaPresionada = true;
 		boolean manuelSeQuedaQuieto = false;
-		if(Gdx.input.isKeyPressed(Keys.RIGHT) && soloUnaTeclaPresionada && !colisiones.colisionDerechaObjeto(this) && !colisiones.colisionDerechaEnemigo(this)) {
+		boolean colisionDerecha = colisiones.colisionDerechaObjeto(this) || colisiones.colisionDerechaEnemigo(this);
+		boolean colisionIzquierda = colisiones.colisionIzquierdaObjeto(this) || colisiones.colisionIzquierdaEnemigo(this);
+		boolean colisionArriba = colisiones.colisionArribaObjeto(this) || colisiones.colisionArribaEnemigo(this);
+		boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this);
+		
+		if(Gdx.input.isKeyPressed(Keys.RIGHT) && soloUnaTeclaPresionada && !colisionDerecha) {
 			soloUnaTeclaPresionada = false;
 			posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = DERECHA;
 		}
-		else if(Gdx.input.isKeyPressed(Keys.LEFT) && soloUnaTeclaPresionada && !colisiones.colisionIzquierdaObjeto(this) && !colisiones.colisionIzquierdaEnemigo(this)) {
+		else if(Gdx.input.isKeyPressed(Keys.LEFT) && soloUnaTeclaPresionada && !colisionIzquierda) {
 			soloUnaTeclaPresionada = false;
 			posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = IZQUIERDA;
 		}
-		else if(Gdx.input.isKeyPressed(Keys.UP) && soloUnaTeclaPresionada && !colisiones.colisionArribaObjeto(this) && !colisiones.colisionArribaEnemigo(this)) {
+		else if(Gdx.input.isKeyPressed(Keys.UP) && soloUnaTeclaPresionada && !colisionArriba) {
 			soloUnaTeclaPresionada = false;
 			posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = ARRIBA;
 		}
-		else if(Gdx.input.isKeyPressed(Keys.DOWN) && soloUnaTeclaPresionada && !colisiones.colisionAbajoObjeto(this) && !colisiones.colisionAbajoEnemigo(this)) {
+		else if(Gdx.input.isKeyPressed(Keys.DOWN) && soloUnaTeclaPresionada && !colisionAbajo) {
 			soloUnaTeclaPresionada = false;
 			posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
@@ -108,7 +112,7 @@ public class Manuel extends PersonajeDelJuego {
 		if(direccion == ABAJO) {
 			if(manuelSeQuedaQuieto) {
 				int nuevaPosicion = (int) posicion.y;
-				while(nuevaPosicion % 29 != 0)
+				while(nuevaPosicion % 29 != 0) // Ajusta la posición
 					nuevaPosicion--;
 				posicion.y = nuevaPosicion;
 				frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
@@ -119,7 +123,7 @@ public class Manuel extends PersonajeDelJuego {
 		else if(direccion == IZQUIERDA) {
 			if(manuelSeQuedaQuieto) {
 				int nuevaPosicion = (int) posicion.x;
-				while(nuevaPosicion % 29 != 19)
+				while(nuevaPosicion % 29 != 19) // Ajusta la posición
 					nuevaPosicion--;
 				posicion.x = nuevaPosicion;
 				frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
@@ -130,7 +134,7 @@ public class Manuel extends PersonajeDelJuego {
 		else if(direccion == DERECHA) {
 			if(manuelSeQuedaQuieto) {
 				int nuevaPosicion = (int) posicion.x;
-				while(nuevaPosicion % 29 != 19)
+				while(nuevaPosicion % 29 != 19) // Ajusta la posición
 					nuevaPosicion++;
 				posicion.x = nuevaPosicion;
 				frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
@@ -141,13 +145,30 @@ public class Manuel extends PersonajeDelJuego {
 		else if(direccion == ARRIBA) {
 			if(manuelSeQuedaQuieto) {
 				int nuevaPosicion = (int) posicion.y;
-				while(nuevaPosicion % 29 != 0)
+				while(nuevaPosicion % 29 != 0) // Ajusta la posición
 					nuevaPosicion++;
 				posicion.y = nuevaPosicion;
 				frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
 			}
 			else 
 				frameActual = manuelAnimationArriba.getKeyFrame(stateTime, true);
+		}
+		
+		if(colisionDerecha || colisionIzquierda || colisionArriba || colisionAbajo) {
+			detectaColisionInminente();
+		}
+	}
+	
+	private void detectaColisionInminente() {
+		if(colisiones.colisionObjetoEnemigo(this)) {
+			if(direccion == DERECHA)
+				posicion.x -= 29;
+			if(direccion == IZQUIERDA)
+				posicion.x += 29;
+			if(direccion == ARRIBA)
+				posicion.y -= 29;
+			if(direccion == ABAJO)
+				posicion.y += 29;
 		}
 	}
 	

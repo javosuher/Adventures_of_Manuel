@@ -82,7 +82,7 @@ public class Colision {
 		boolean colisiones = false;
 		for(int i = 0; i < corazones.size() && !colisiones; i++){
 			Corazon c = corazones.get(i);
-			if(c.getEstado() == true){ //el corazón no se ha cogido
+			if(c.getEstado() == true){ //el corazï¿½n no se ha cogido
 				colisiones = comprobarCoordenada(c, personaje);
 				if(colisiones == true){
 					c.setEstado();
@@ -140,4 +140,8 @@ public class Colision {
 		return colisionEnemigo(auxiliar);
 	}
 	//----------------------------
+	
+	public boolean colisionObjetoEnemigo(PersonajeDelJuego personaje) {
+		return colisionObjeto(personaje.getBordes()) || colisionEnemigo(personaje.getBordes());
+	}
 }
