@@ -80,6 +80,10 @@ public class Serpiente extends PersonajeDelJuego {
 		  		direccion = DERECHA;
 		  		frameActual = serpienteMatrizFrames[direccion][0];   
 		  	}
+		if(tiempoEnBola == 0) {
+			esBola = false;
+			tiempoEnBola = Constant.TIEMPO_BOLA;
+		}
 	}
 	
 	@Override
