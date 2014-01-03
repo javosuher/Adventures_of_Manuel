@@ -164,9 +164,12 @@ public class Nivel1 extends Nivel {
 		}
 		cofre.draw(batch);
 		manuel.draw(batch);
-		for(PersonajeDelJuego personaje : personajes){
-			personaje.draw(batch);
+		if(salida.salidaAbierta() == false){
+			for(PersonajeDelJuego personaje : personajes){
+				personaje.draw(batch);
+			}
 		}
+		
 		for(ObjetoDelJuego objeto : objetos) {
 			objeto.draw(batch);
 		}
