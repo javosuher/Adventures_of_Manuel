@@ -24,9 +24,11 @@ public class Serpiente extends PersonajeDelJuego {
 	private boolean ataqueActivado;
 
 	//Atributos para pintar
-	private Texture TexturaSerpiente;
+	private Texture TexturaSerpiente, TexturaBola;
 	private TextureRegion [][] serpienteMatrizFrames;
 	private TextureRegion frameActual;
+	private boolean esBola;
+	private int tiempoEnBola;
 	
 	public Serpiente(Vector2 posicion, Manuel manuel) {
 		this.ataqueActivado = false;
@@ -35,6 +37,7 @@ public class Serpiente extends PersonajeDelJuego {
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		
 		TexturaSerpiente = new Texture("Enemigos/TablaSerpiente.png");
+		TexturaBola = new Texture("Miscelanea/huevo.png");
 
 		serpienteMatrizFrames = new TextureRegion[2][2];
 		serpienteMatrizFrames[0][0] = new TextureRegion(TexturaSerpiente, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
@@ -43,6 +46,9 @@ public class Serpiente extends PersonajeDelJuego {
 		serpienteMatrizFrames[1][1] = new TextureRegion(TexturaSerpiente, 58, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		frameActual = serpienteMatrizFrames[IZQUIERDA][1];
 		direccion = IZQUIERDA;
+		
+		esBola = false;
+		tiempoEnBola = Constant.TIEMPO_BOLA;
 	}
 	
 	public void activarAtaque() {
@@ -52,12 +58,18 @@ public class Serpiente extends PersonajeDelJuego {
 	
 	@Override
 	public void draw(SpriteBatch batch) {
-		batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
+		if(esBola)
+			batch.draw(TexturaBola, posicion.x, posicion.y, bordes.height, bordes.width);
+		else
+			batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
 	}
 	
 	@Override
 	public void update() {
-		if(ataqueActivado == false){
+		if(esBola) {
+			tiempoEnBola--;
+		}
+		else if(ataqueActivado == false) {
 			if(manuel.getBordes().x == posicion.x)
 				if(direccion == IZQUIERDA)
 					frameActual = serpienteMatrizFrames[direccion][0];
@@ -74,7 +86,18 @@ public class Serpiente extends PersonajeDelJuego {
 		}
 	}
 	
+	@Override
+	public void convertirEnBola() {
+		esBola = true;
+	}
+	
+	
 	// Getters and Setters ------------------------------------------------------------------------
+	
+	@Override
+	public boolean estaEnBola() {
+		return esBola;
+	}
 	
 	@Override
 	public Vector2 getPosicion() {

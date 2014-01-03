@@ -1,7 +1,6 @@
 package com.me.adventures.characters;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -19,13 +18,33 @@ class Proyectil extends ObjetoDelJuego{
 	private int direccion;
 	
 	public Proyectil() {
-		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
-		TexturaProyectil = new Texture("Miscelanea/Proyectil.png");
+		bordes = new Rectangle(0, 0, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
+		TexturaProyectil = new Texture("Miscelanea/Roca.png");
+		posicion = new Vector2();
 	}
 	
 	public void inicializaPosicion(Vector2 posicion, int direccion){
 		this.direccion = direccion;
-		this.posicion = posicion;
+		if(direccion == ABAJO) {
+			this.posicion.x = posicion.x;
+			this.posicion.y = posicion.y - 58;
+		}
+		if(direccion == ARRIBA) {
+			this.posicion.x = posicion.x;
+			this.posicion.y = posicion.y + 58;
+		}
+		if(direccion == DERECHA) {
+			this.posicion.x = posicion.x + 58;
+			this.posicion.y = posicion.y;
+		}
+		if(direccion == IZQUIERDA) {
+			this.posicion.x = posicion.x - 58;
+			this.posicion.y = posicion.y;
+		}
+		
+		// Actualizar bordes
+		bordes.x = posicion.x;
+		bordes.y = posicion.y;
 	}
 	
 	@Override
@@ -33,8 +52,9 @@ class Proyectil extends ObjetoDelJuego{
 		batch.draw(TexturaProyectil, posicion.x, posicion.y, bordes.height, bordes.width);
 	}
 	
-	public void updateProyectil(int direccion) {
-		if(direccion == ABAJO)
+	@Override
+	public void update() {
+		if(direccion == ABAJO) 
 			posicion.y -= Constant.BOLA_SPEED;
 		if(direccion == ARRIBA)
 			posicion.y += Constant.BOLA_SPEED;
@@ -42,12 +62,10 @@ class Proyectil extends ObjetoDelJuego{
 			posicion.x += Constant.BOLA_SPEED;
 		if(direccion == IZQUIERDA)
 			posicion.x -= Constant.BOLA_SPEED;
-	}
-	
-	@Override
-	public void update() {
 		
-			
+		// Actualizar bordes
+		bordes.x = posicion.x;
+		bordes.y = posicion.y;
 	}
 	
 	// Getters and Setters ------------------------------------------------------------------------

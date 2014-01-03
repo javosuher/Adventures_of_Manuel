@@ -145,4 +145,19 @@ public class Colision {
 	public boolean colisionObjetoEnemigo(PersonajeDelJuego personaje) {
 		return colisionObjeto(personaje.getBordes()) || colisionEnemigo(personaje.getBordes());
 	}
+	
+	public boolean colisionDisparoObjeto(Proyectil disparo) {
+		return colisionObjeto(disparo.getBordes());
+	}
+	public boolean colisionDisparoEnemigo(Proyectil disparo) {
+		boolean ningunaColision = true;
+		for(int i = 0; i < personajes.size() && ningunaColision; i++) {
+			if(colisiona(disparo.getBordes(), personajes.get(i).getBordes())) {
+				personajes.get(i).convertirEnBola();
+				ningunaColision = false;
+			}
+			personajes.get(i).update();
+		}
+		return !ningunaColision;
+	}
 }

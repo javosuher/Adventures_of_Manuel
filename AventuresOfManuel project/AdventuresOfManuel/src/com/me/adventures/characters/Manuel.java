@@ -29,6 +29,7 @@ public class Manuel extends PersonajeDelJuego {
 	private Colision colisiones;
 	private int corazonesObtenidos;
 	private List<Proyectil> proyectiles;
+	private boolean disparando;
 
 	//Atributos para pintar a Manuel
 	private Texture TexturaManuel;
@@ -52,11 +53,16 @@ public class Manuel extends PersonajeDelJuego {
 		manuelAnimationIzquierda = new Animation(0.05f, manuelMatrizFrames[IZQUIERDA]);
 		manuelAnimationDerecha= new Animation(0.05f, manuelMatrizFrames[DERECHA]);
 		manuelAnimationArriba = new Animation(0.05f, manuelMatrizFrames[ARRIBA]);
+		
+		disparando = false;
+		proyectiles = new ArrayList<Proyectil>();
 	}
 	
 	@Override
 	public void draw(SpriteBatch batch) {
 		batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
+		if(disparando)
+			proyectiles.get(0).draw(batch);
 	}
 	
 	@Override
@@ -95,11 +101,6 @@ public class Manuel extends PersonajeDelJuego {
 		}
 		else
 			manuelSeQuedaQuieto = true;
-		
-		if(Gdx.input.isKeyPressed(Keys.SPACE) && soloUnaTeclaPresionada){
-			soloUnaTeclaPresionada = false;
-			disparo();
-		}
 		
 		colisiones.colisionCorazon(this);
 		colisiones.colisionCofre(this);
@@ -154,6 +155,16 @@ public class Manuel extends PersonajeDelJuego {
 			detectaColisionInminente();
 		}
 		
+		activarAtaque();
+		if(disparando) {
+			if(colisiones.colisionDisparoEnemigo(proyectiles.get(0)))
+				eliminandoDisparo();
+			else if(colisiones.colisionDisparoObjeto(proyectiles.get(0)))
+				eliminandoDisparo();
+			else
+				proyectiles.get(0).update();
+		}
+		
 		// Actualizar bordes
 		bordes.x = posicion.x;
 		bordes.y = posicion.y;
@@ -172,16 +183,31 @@ public class Manuel extends PersonajeDelJuego {
 		}
 	}
 	
-	private void disparo(){
-		if(!proyectiles.isEmpty()){
+	@Override
+	public void activarAtaque() {
+		if(!proyectiles.isEmpty() && !disparando && Gdx.input.isKeyPressed(Keys.SPACE)){
 			//tenemos que pasarle la posicion siguiente a donde este manolito, dependiendo de la direccion
 			proyectiles.get(0).inicializaPosicion(posicion, direccion);
-			proyectiles.get(0).draw(batch);
-			proyectiles.remove(0);
+			disparando = true;
 		}
+	}
+	private void eliminandoDisparo() {
+		disparando = false;
+		proyectiles.remove(0);
+	}
+	
+	@Override
+	public void convertirEnBola() {
+		// TODO Auto-generated method stub
 	}
 	
 	// Getters and Setters ------------------------------------------------------------------------
+	@Override
+	public boolean estaEnBola() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 	public int getCorazonesObtenidos() {
 		return corazonesObtenidos;
 	}
