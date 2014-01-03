@@ -65,17 +65,21 @@ public class Serpiente extends PersonajeDelJuego {
 	
 	@Override
 	public void update() {
-		if(manuel.getBordes().x == posicion.x)
+		if(esBola)
+			tiempoEnBola--;
+		else if(manuel.getBordes().x == posicion.x)
 			if(direccion == IZQUIERDA)
 				frameActual = serpienteMatrizFrames[direccion][0];
 			else
 				frameActual = serpienteMatrizFrames[direccion][1];
-			}
-			else if(manuel.getBordes().x > posicion.x){
-				direccion = DERECHA;
-				frameActual = serpienteMatrizFrames[direccion][0];			
-			}
-		}
+		  	else if(manuel.getBordes().x < posicion.x) {
+		  		direccion = IZQUIERDA;
+		  		frameActual = serpienteMatrizFrames[direccion][1];
+		  	}
+		  	else if(manuel.getBordes().x > posicion.x) {
+		  		direccion = DERECHA;
+		  		frameActual = serpienteMatrizFrames[direccion][0];   
+		  	}
 	}
 	
 	@Override
