@@ -47,9 +47,9 @@ public class Nivel1 extends Nivel {
 		//Se introducen las paredes del nivel
 		objetos.add(new Pared(new Vector2(0, 0), 1024, 58));
 		objetos.add(new Pared(new Vector2(135, 0), 58, 754));
-		objetos.add(new Pared(new Vector2(0, 696), 425, 58));
+		objetos.add(new Pared(new Vector2(0, 696), 483, 58));
 		salida = new Salida(new Vector2(483,696), "PUERTA");
-		objetos.add(new Pared(new Vector2(541, 696), 425, 58));
+		objetos.add(new Pared(new Vector2(483, 696), 483, 58));
 		objetos.add(new Pared(new Vector2(831, 0), 58, 754));
 		
 		//Se introducen los demas objetos por fila
