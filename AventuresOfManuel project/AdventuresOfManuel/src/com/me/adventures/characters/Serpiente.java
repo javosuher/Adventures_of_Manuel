@@ -21,6 +21,7 @@ public class Serpiente extends PersonajeDelJuego {
 	private Colision colisiones;
 	private Manuel manuel;
 	private int direccion;
+	private boolean ataqueActivado;
 
 	//Atributos para pintar
 	private Texture TexturaSerpiente;
@@ -28,6 +29,7 @@ public class Serpiente extends PersonajeDelJuego {
 	private TextureRegion frameActual;
 	
 	public Serpiente(Vector2 posicion, Manuel manuel) {
+		this.ataqueActivado = false;
 		this.manuel = manuel;
 		this.posicion = posicion;
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
@@ -43,6 +45,11 @@ public class Serpiente extends PersonajeDelJuego {
 		direccion = IZQUIERDA;
 	}
 	
+	public void activarAtaque() {
+		ataqueActivado = true;
+		
+	}
+	
 	@Override
 	public void draw(SpriteBatch batch) {
 		batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
@@ -50,18 +57,20 @@ public class Serpiente extends PersonajeDelJuego {
 	
 	@Override
 	public void update() {
-		if(manuel.getBordes().x == posicion.x)
-			if(direccion == IZQUIERDA)
-				frameActual = serpienteMatrizFrames[direccion][0];
-			else
+		if(ataqueActivado == false){
+			if(manuel.getBordes().x == posicion.x)
+				if(direccion == IZQUIERDA)
+					frameActual = serpienteMatrizFrames[direccion][0];
+				else
+					frameActual = serpienteMatrizFrames[direccion][1];
+			else if(manuel.getBordes().x < posicion.x){
+				direccion = IZQUIERDA;
 				frameActual = serpienteMatrizFrames[direccion][1];
-		else if(manuel.getBordes().x < posicion.x){
-			direccion = IZQUIERDA;
-			frameActual = serpienteMatrizFrames[direccion][1];
-		}
-		else if(manuel.getBordes().x > posicion.x){
-			direccion = DERECHA;
-			frameActual = serpienteMatrizFrames[direccion][0];			
+			}
+			else if(manuel.getBordes().x > posicion.x){
+				direccion = DERECHA;
+				frameActual = serpienteMatrizFrames[direccion][0];			
+			}
 		}
 	}
 	
