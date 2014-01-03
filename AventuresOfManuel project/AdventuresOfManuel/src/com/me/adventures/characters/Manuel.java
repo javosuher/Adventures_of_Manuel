@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -22,6 +23,7 @@ public class Manuel extends PersonajeDelJuego {
 	private static final int SPRITE_QUIETO = 2;
     
 	// Atributos básicos
+	private BitmapFont font;
 	private Vector2 posicion;
 	private Rectangle bordes;
 	private float stateTime;
@@ -38,6 +40,7 @@ public class Manuel extends PersonajeDelJuego {
 	private Animation manuelAnimationAbajo, manuelAnimationIzquierda, manuelAnimationDerecha, manuelAnimationArriba;
 	
 	public Manuel(Vector2 posicion) {
+		this.font = new BitmapFont(Gdx.files.internal("arial.fnt"), Gdx.files.internal("arial.png"), false);
 		this.corazonesObtenidos = 0;
 		//proyectiles = new ArrayList<Proyectil>();
 		this.posicion = posicion;
@@ -58,11 +61,25 @@ public class Manuel extends PersonajeDelJuego {
 		proyectiles = new ArrayList<Proyectil>();
 	}
 	
+	
 	@Override
 	public void draw(SpriteBatch batch) {
 		batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
 		if(disparando)
 			proyectiles.get(0).draw(batch);
+		batch.draw(new Texture("Miscelanea/Roca.png"), 930, 522);
+		if(proyectiles.isEmpty())
+			font.draw(batch, "0", 947, 500);
+		else if(proyectiles.size() == 1)
+			font.draw(batch, "1", 947, 500);
+		else if(proyectiles.size() == 2)
+			font.draw(batch, "2", 947, 500);
+		else if(proyectiles.size() == 3)
+			font.draw(batch, "3", 947, 500);
+		else if(proyectiles.size() == 4)
+			font.draw(batch, "4", 947, 500);
+		else if(proyectiles.size() == 5)
+			font.draw(batch, "5", 947, 500);
 	}
 	
 	@Override
