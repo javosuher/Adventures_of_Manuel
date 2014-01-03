@@ -104,10 +104,6 @@ public class Manuel extends PersonajeDelJuego {
 		colisiones.colisionCorazon(this);
 		colisiones.colisionCofre(this);
 		
-		// Actualizar bordes
-		bordes.x = posicion.x;
-		bordes.y = posicion.y;
-		
 		//Direccion frame Manuel
 		if(direccion == ABAJO) {
 			if(manuelSeQuedaQuieto) {
@@ -157,6 +153,10 @@ public class Manuel extends PersonajeDelJuego {
 		if(colisionDerecha || colisionIzquierda || colisionArriba || colisionAbajo) {
 			detectaColisionInminente();
 		}
+		
+		// Actualizar bordes
+		bordes.x = posicion.x;
+		bordes.y = posicion.y;
 	}
 	
 	private void detectaColisionInminente() {
