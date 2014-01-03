@@ -188,7 +188,11 @@ public class Manuel extends PersonajeDelJuego {
 	
 	public void obtenerCorazon(){
 		corazonesObtenidos++;
-		proyectiles.add(new Proyectil());
+	}
+	
+	public void obtenerProyectil(int proyectilesOtorgados){
+		for(int i = 0; i < proyectilesOtorgados; i++)
+			proyectiles.add(new Proyectil());
 	}
 	
 	public void setColision(Colision colisiones) {

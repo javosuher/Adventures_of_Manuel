@@ -87,6 +87,7 @@ public class Colision {
 				if(colisiones == true){
 					c.setEstado();
 					manuel.obtenerCorazon();
+					manuel.obtenerProyectil(c.getProyectilesOtorga());
 					if(cofre.getCorazonesNecesarios() == manuel.getCorazonesObtenidos())
 						cofre.abrirCofre();
 				}
