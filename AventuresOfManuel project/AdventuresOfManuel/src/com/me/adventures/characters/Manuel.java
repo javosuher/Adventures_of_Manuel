@@ -28,7 +28,7 @@ public class Manuel extends PersonajeDelJuego {
 	private int direccion;
 	private Colision colisiones;
 	private int corazonesObtenidos;
-	//private List<Proyectil> proyectiles;
+	private List<Proyectil> proyectiles;
 
 	//Atributos para pintar a Manuel
 	private Texture TexturaManuel;
@@ -173,10 +173,12 @@ public class Manuel extends PersonajeDelJuego {
 	}
 	
 	private void disparo(){
-		/*if(!proyectiles.isEmpty()){
+		if(!proyectiles.isEmpty()){
+			//tenemos que pasarle la posicion siguiente a donde este manolito, dependiendo de la direccion
+			proyectiles.get(0).inicializaPosicion(posicion, direccion);
 			proyectiles.get(0).draw(batch);
 			proyectiles.remove(0);
-		}*/
+		}
 	}
 	
 	// Getters and Setters ------------------------------------------------------------------------
@@ -186,16 +188,7 @@ public class Manuel extends PersonajeDelJuego {
 	
 	public void obtenerCorazon(){
 		corazonesObtenidos++;
-		/*Vector2 inicio;
-		if(direccion == ARRIBA)
-			inicio = new Vector2(posicion.x, posicion.y + Constant.ANCHURA_PERSONAJE); 
-		else if(direccion == ABAJO)
-			inicio = new Vector2(posicion.x, posicion.y - Constant.ANCHURA_PERSONAJE); 
-		else if(direccion == DERECHA)
-			inicio = new Vector2(posicion.x + Constant.ANCHURA_PERSONAJE, posicion.y); 
-		else //if(direccion == IZQUIERDA)
-			inicio = new Vector2(posicion.x - Constant.ANCHURA_PERSONAJE, posicion.y); 
-		proyectiles.add(new Proyectil(inicio, direccion));*/
+		proyectiles.add(new Proyectil());
 	}
 	
 	public void setColision(Colision colisiones) {

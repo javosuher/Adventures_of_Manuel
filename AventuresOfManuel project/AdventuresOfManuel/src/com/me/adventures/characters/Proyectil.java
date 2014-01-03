@@ -18,11 +18,14 @@ class Proyectil extends ObjetoDelJuego{
 	private Texture TexturaProyectil;
 	private int direccion;
 	
-	public Proyectil(Vector2 posicion, int direccion) {
-		this.direccion = direccion;
-		this.posicion = posicion;
+	public Proyectil() {
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
 		TexturaProyectil = new Texture("Miscelanea/Proyectil.png");
+	}
+	
+	public void inicializaPosicion(Vector2 posicion, int direccion){
+		this.direccion = direccion;
+		this.posicion = posicion;
 	}
 	
 	@Override
