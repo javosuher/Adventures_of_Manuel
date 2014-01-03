@@ -68,7 +68,7 @@ public class Nivel1 extends Nivel {
 		objetos.add(new Arbol(new Vector2(251, 580)));
 		objetos.add(new Arbol(new Vector2(309, 580)));
 		objetos.add(new Roca(new Vector2(367, 580)));
-		corazones.add(new Corazon(new Vector2(425,580)));
+		corazones.add(new Corazon(new Vector2(425,580), 0)); //no da proyectiles
 		objetos.add(new Roca(new Vector2(599, 580)));
 		objetos.add(new Roca(new Vector2(657, 580)));
 		objetos.add(new Arbol(new Vector2(715, 580)));
@@ -98,7 +98,7 @@ public class Nivel1 extends Nivel {
 		objetos.add(new Roca(new Vector2(599, 406)));
 		objetos.add(new Roca(new Vector2(657, 406)));
 		objetos.add(new Arbol(new Vector2(715, 406)));
-		corazones.add(new Corazon(new Vector2(773,406)));
+		corazones.add(new Corazon(new Vector2(773,406), 2)); //otorga 2 proyectiles
 		
 		objetos.add(new Roca(new Vector2(657, 348)));
 		
