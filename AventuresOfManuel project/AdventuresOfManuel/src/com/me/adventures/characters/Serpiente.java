@@ -46,8 +46,7 @@ public class Serpiente extends PersonajeDelJuego {
 	}
 	
 	public void activarAtaque() {
-		ataqueActivado = true;
-		
+		ataqueActivado = true; // este enemigo no ataca a manuel
 	}
 	
 	@Override
@@ -57,20 +56,18 @@ public class Serpiente extends PersonajeDelJuego {
 	
 	@Override
 	public void update() {
-		if(ataqueActivado == false){
-			if(manuel.getBordes().x == posicion.x)
-				if(direccion == IZQUIERDA)
-					frameActual = serpienteMatrizFrames[direccion][0];
-				else
-					frameActual = serpienteMatrizFrames[direccion][1];
-			else if(manuel.getBordes().x < posicion.x){
-				direccion = IZQUIERDA;
+		if(manuel.getBordes().x == posicion.x)
+			if(direccion == IZQUIERDA)
+				frameActual = serpienteMatrizFrames[direccion][0];
+			else
 				frameActual = serpienteMatrizFrames[direccion][1];
-			}
-			else if(manuel.getBordes().x > posicion.x){
-				direccion = DERECHA;
-				frameActual = serpienteMatrizFrames[direccion][0];			
-			}
+		else if(manuel.getBordes().x < posicion.x){
+			direccion = IZQUIERDA;
+			frameActual = serpienteMatrizFrames[direccion][1];
+		}
+		else if(manuel.getBordes().x > posicion.x){
+			direccion = DERECHA;
+			frameActual = serpienteMatrizFrames[direccion][0];			
 		}
 	}
 	
