@@ -13,9 +13,11 @@ public class Corazon extends ObjetoDelJuego
 	private Rectangle bordes;
 	private Texture TexturaCorazon;
 	private boolean mostrar = true;
+	private int proyectilesOtorga;
 	
-	public Corazon(Vector2 posicion)
+	public Corazon(Vector2 posicion, int proyectilesOtorga)
 	{
+		this.proyectilesOtorga = proyectilesOtorga;
 		this.posicion = posicion;
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
 		TexturaCorazon = new Texture("Miscelanea/Corazon.png");
@@ -32,6 +34,10 @@ public class Corazon extends ObjetoDelJuego
 	}
 	
 	// Getters and Setters ------------------------------------------------------------------------
+	
+	public int getProyectilesOtorga(){
+		return proyectilesOtorga;
+	}
 	
 	@Override
 	public Vector2 getPosicion() {
