@@ -32,9 +32,23 @@ class Proyectil extends ObjetoDelJuego{
 	public void draw(SpriteBatch batch) {
 		batch.draw(TexturaProyectil, posicion.x, posicion.y, bordes.height, bordes.width);
 	}
-
+	
+	public void updateProyectil(int direccion) {
+		if(direccion == ABAJO)
+			posicion.y -= Constant.BOLA_SPEED;
+		if(direccion == ARRIBA)
+			posicion.y += Constant.BOLA_SPEED;
+		if(direccion == DERECHA)
+			posicion.x += Constant.BOLA_SPEED;
+		if(direccion == IZQUIERDA)
+			posicion.x -= Constant.BOLA_SPEED;
+	}
+	
 	@Override
-	public void update() {}
+	public void update() {
+		
+			
+	}
 	
 	// Getters and Setters ------------------------------------------------------------------------
 	
