@@ -100,31 +100,27 @@ public class Serpiente extends PersonajeDelJuego {
 	}
 	
 	public void moverEnBola() {
-		boolean colisionHuevo = colisiones.colisionHuevo(this);
+		//boolean colisionHuevo = colisiones.colisionHuevo(this);
 		if(manuel.getDireccion() == manuel.ARRIBA && Gdx.input.isKeyPressed(Keys.UP)) {
-			System.out.println(colisionHuevo);
-			if(colisiones.colisionManuelConHuevo(this) && !colisionHuevo) {
+			if(colisiones.colisionManuelConHuevo(this) && !colisiones.colisionObjetoEnemigoArriba(this)) {
 				posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			}
 		}
 		if(manuel.getDireccion() == manuel.ABAJO && Gdx.input.isKeyPressed(Keys.DOWN)) {
-			System.out.println(colisionHuevo);
-			if(colisiones.colisionManuelConHuevo(this)&& !colisionHuevo) {
+			if(colisiones.colisionManuelConHuevo(this) && !colisiones.colisionObjetoEnemigoAbajo(this)) {
 				posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			}
 		}
 		if(manuel.getDireccion() == manuel.DERECHA && Gdx.input.isKeyPressed(Keys.RIGHT)) {
-			System.out.println(colisionHuevo);
-			if(colisiones.colisionManuelConHuevo(this) && !colisionHuevo) {
+			if(colisiones.colisionManuelConHuevo(this) && !colisiones.colisionObjetoEnemigoDerecha(this)) {
 				posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			}
 		}
 		if(manuel.getDireccion() == manuel.IZQUIERDA && Gdx.input.isKeyPressed(Keys.LEFT)) {
-			System.out.println(colisionHuevo);
-			if(colisiones.colisionManuelConHuevo(this) && !colisionHuevo) {
+			if(colisiones.colisionManuelConHuevo(this) && !colisiones.colisionObjetoEnemigoIzquierda(this)) {
 				posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			}

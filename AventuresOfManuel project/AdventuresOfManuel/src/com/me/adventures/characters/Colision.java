@@ -149,6 +149,29 @@ public class Colision {
 	public boolean colisionObjetoEnemigo(PersonajeDelJuego personaje) {
 		return colisionObjeto(personaje.getBordes()) || colisionEnemigo(personaje.getBordes());
 	}
+	private boolean colisionObjetoEnemigo(Rectangle auxiliar) {
+		return colisionObjeto(auxiliar) || colisionEnemigo(auxiliar);
+	}
+	public boolean colisionObjetoEnemigoArriba(PersonajeDelJuego personaje) {
+		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
+		auxiliar.y = auxiliar.y + (Gdx.graphics.getDeltaTime() * Constant.SPEED);
+		return colisionObjetoEnemigo(auxiliar);
+	}
+	public boolean colisionObjetoEnemigoAbajo(PersonajeDelJuego personaje) {
+		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
+		auxiliar.y = auxiliar.y - (Gdx.graphics.getDeltaTime() * Constant.SPEED);
+		return colisionObjetoEnemigo(auxiliar);
+	}
+	public boolean colisionObjetoEnemigoDerecha(PersonajeDelJuego personaje) {
+		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
+		auxiliar.x = auxiliar.x + (Gdx.graphics.getDeltaTime() * Constant.SPEED);
+		return colisionObjetoEnemigo(auxiliar);
+	}
+	public boolean colisionObjetoEnemigoIzquierda(PersonajeDelJuego personaje) {
+		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
+		auxiliar.x = auxiliar.x - (Gdx.graphics.getDeltaTime() * Constant.SPEED);
+		return colisionObjetoEnemigo(auxiliar);
+	}
 	
 	public boolean colisionDisparoObjeto(Proyectil disparo) {
 		return colisionObjeto(disparo.getBordes());
