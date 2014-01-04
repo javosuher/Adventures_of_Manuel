@@ -14,13 +14,15 @@ public class Colision {
 	private List<PersonajeDelJuego> personajes;
 	private List<ObjetoDelJuego> objetos;
 	private List<Corazon> corazones;
+	private List<PersonajeDelJuego> personajesMovibles;
 	private Cofre cofre;
 	private Salida salida;
 	
-	public Colision(Manuel manuel, List<PersonajeDelJuego> personajes, List<ObjetoDelJuego> objetos, List<Corazon> corazones, Cofre cofre, Salida salida) {
+	public Colision(Manuel manuel, List<PersonajeDelJuego> personajes, List<ObjetoDelJuego> objetos, List<PersonajeDelJuego> personajesMovibles, List<Corazon> corazones, Cofre cofre, Salida salida) {
 		this.manuel = manuel;
 		this.personajes = personajes;
 		this.objetos = objetos;
+		this.personajesMovibles = personajesMovibles;
 		this.corazones = corazones;
 		this.cofre = cofre;
 		this.salida = salida;
@@ -149,8 +151,9 @@ public class Colision {
 	public boolean colisionObjetoEnemigo(PersonajeDelJuego personaje) {
 		return colisionObjeto(personaje.getBordes()) || colisionEnemigo(personaje.getBordes());
 	}
+	
 	private boolean colisionObjetoEnemigo(Rectangle auxiliar) {
-		return colisionObjeto(auxiliar) || colisionEnemigo(auxiliar);
+		return colisionObjeto(auxiliar) /*|| colisionEnemigo(auxiliar)*/;
 	}
 	public boolean colisionObjetoEnemigoArriba(PersonajeDelJuego personaje) {
 		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);

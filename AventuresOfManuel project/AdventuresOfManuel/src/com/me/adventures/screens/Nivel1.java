@@ -21,6 +21,7 @@ public class Nivel1 extends Nivel {
 	private List<Corazon> corazones;
 	private List<ObjetoDelJuego> objetos;
 	private List<PersonajeDelJuego> personajes;
+	private List<PersonajeDelJuego> personajesMovibles;
 	private Colision colisiones;
 	private Salida salida;
 
@@ -32,7 +33,8 @@ public class Nivel1 extends Nivel {
 		
 		objetosDelNivel();
 		personajesDelNivel();
-		colisiones = new Colision(manuel, personajes, objetos, corazones, cofre, salida);
+		personajesMovibles = new ArrayList<PersonajeDelJuego>();
+		colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida);
 		
 		manuel.setColision(colisiones);
 		for(PersonajeDelJuego p : personajes){

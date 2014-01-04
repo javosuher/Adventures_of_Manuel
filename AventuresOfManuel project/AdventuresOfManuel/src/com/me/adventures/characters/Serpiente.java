@@ -92,6 +92,10 @@ public class Serpiente extends PersonajeDelJuego {
 		  		direccion = DERECHA;
 		  		frameActual = serpienteMatrizFrames[direccion][0];   
 		  	}
+		
+		// Actualizar bordes
+		bordes.x = posicion.x;
+		bordes.y = posicion.y;
 	}
 	
 	@Override
