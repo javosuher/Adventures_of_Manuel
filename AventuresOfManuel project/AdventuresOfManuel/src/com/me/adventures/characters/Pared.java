@@ -27,6 +27,5 @@ public class Pared extends ObjetoDelJuego {
 	@Override
 	public Rectangle getBordes() {
 		return bordes;
-	}
-	
+	}	
 }

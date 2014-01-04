@@ -16,11 +16,11 @@ import com.me.adventures.main.Constant;
 
 public class Manuel extends PersonajeDelJuego {
 	//Constantes locales
-	private static final int ABAJO = 0;
-	private static final int IZQUIERDA = 1;
-	private static final int DERECHA = 2;
-	private static final int ARRIBA = 3;
-	private static final int SPRITE_QUIETO = 2;
+	public static final int ABAJO = 0;
+	public static final int IZQUIERDA = 1;
+	public static final int DERECHA = 2;
+	public static final int ARRIBA = 3;
+	public static final int SPRITE_QUIETO = 2;
     
 	// Atributos básicos
 	private BitmapFont font;
@@ -68,7 +68,7 @@ public class Manuel extends PersonajeDelJuego {
 		if(disparando)
 			proyectiles.get(0).draw(batch);
 		
-		batch.draw(new Texture("Miscelanea/Roca.png"), 930, 522);
+		batch.draw(new TextureRegion(new Texture("Miscelanea/ProyectilManolito.png"), 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE), 930, 522);
 		String numeroProyectiles = Integer.toString(proyectiles.size()); // Mostrar numero de proyectiles
 		font.draw(batch, numeroProyectiles, 947, 500);
 	}
@@ -83,28 +83,36 @@ public class Manuel extends PersonajeDelJuego {
 		boolean colisionArriba = colisiones.colisionArribaObjeto(this) || colisiones.colisionArribaEnemigo(this);
 		boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this);
 		
-		if(Gdx.input.isKeyPressed(Keys.RIGHT) && soloUnaTeclaPresionada && !colisionDerecha) {
+		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+			if(soloUnaTeclaPresionada && !colisionDerecha) {
+				posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			}
 			soloUnaTeclaPresionada = false;
-			posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
-			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = DERECHA;
 		}
-		else if(Gdx.input.isKeyPressed(Keys.LEFT) && soloUnaTeclaPresionada && !colisionIzquierda) {
+		else if(Gdx.input.isKeyPressed(Keys.LEFT)) {
+			if(soloUnaTeclaPresionada && !colisionIzquierda) {
+				posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			}
 			soloUnaTeclaPresionada = false;
-			posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
-			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = IZQUIERDA;
 		}
-		else if(Gdx.input.isKeyPressed(Keys.UP) && soloUnaTeclaPresionada && !colisionArriba) {
+		else if(Gdx.input.isKeyPressed(Keys.UP)) {
+			if(soloUnaTeclaPresionada && !colisionArriba) {
+				posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			}
 			soloUnaTeclaPresionada = false;
-			posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
-			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = ARRIBA;
 		}
-		else if(Gdx.input.isKeyPressed(Keys.DOWN) && soloUnaTeclaPresionada && !colisionAbajo) {
+		else if(Gdx.input.isKeyPressed(Keys.DOWN)) {
+			if(soloUnaTeclaPresionada && !colisionAbajo) {
+				posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			}
 			soloUnaTeclaPresionada = false;
-			posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
-			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccion = ABAJO;
 		}
 		else
@@ -253,5 +261,16 @@ public class Manuel extends PersonajeDelJuego {
 	
 	public float getStateTime() {
 		return stateTime;
+	}
+	
+	public int getDireccion() {
+		return direccion;
+	}
+
+
+	@Override
+	public void moverEnBola() {
+		// TODO Auto-generated method stub
+		
 	}
 }

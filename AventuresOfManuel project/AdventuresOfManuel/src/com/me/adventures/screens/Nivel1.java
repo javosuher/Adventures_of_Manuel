@@ -35,6 +35,9 @@ public class Nivel1 extends Nivel {
 		colisiones = new Colision(manuel, personajes, objetos, corazones, cofre, salida);
 		
 		manuel.setColision(colisiones);
+		for(PersonajeDelJuego p : personajes){
+			p.setColision(colisiones);
+		}
 		
 		batch = new SpriteBatch();
 	}
@@ -140,11 +143,8 @@ public class Nivel1 extends Nivel {
 	@Override
 	protected void personajesDelNivel() {
 		personajes = new ArrayList<PersonajeDelJuego>();
-
+		
 		personajes.add(new Serpiente(new Vector2(541,348), manuel));
-		for(PersonajeDelJuego p : personajes){
-			p.setColision(colisiones);
-		}
 	}
 
 	@Override
@@ -154,6 +154,9 @@ public class Nivel1 extends Nivel {
 		
 		// Actualizamos personajes pantalla
 		manuel.update();
+		for(PersonajeDelJuego personaje : personajes){
+			personaje.update();
+		}
 		
 		// Pintamos la pantalla
 		batch.begin();

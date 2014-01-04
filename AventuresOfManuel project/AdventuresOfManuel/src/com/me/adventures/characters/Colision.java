@@ -6,6 +6,7 @@ import javax.swing.text.Position;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.Constant;
 
 public class Colision {
@@ -112,10 +113,13 @@ public class Colision {
 	private boolean colisionEnemigo(Rectangle auxiliar) {
 		boolean ningunaColision = true;
 		for(int i = 0; i < personajes.size() && ningunaColision; i++) {
-			if(colisiona(auxiliar, personajes.get(i).getBordes())){
-				ningunaColision = false;
+			if(colisiona(auxiliar, personajes.get(i).getBordes()) && auxiliar != personajes.get(i).getBordes()){
+				if(personajes.get(i).estaEnBola()) {
+					personajes.get(i).moverEnBola();
+				}
+				else
+					ningunaColision = false;
 			}
-			personajes.get(i).update();
 		}
 		return !ningunaColision;
 	}
@@ -159,5 +163,24 @@ public class Colision {
 			personajes.get(i).update();
 		}
 		return !ningunaColision;
+	}
+	
+	public boolean colisionHuevo(PersonajeDelJuego personaje) {
+		boolean ningunaColision = true;
+		for(int i = 0; i < personajes.size() && ningunaColision; i++) {
+			if(colisiona(personaje.getBordes(), personajes.get(i).getBordes())){
+				ningunaColision = false;
+			}
+		}
+		for(int i = 0; i < objetos.size() && ningunaColision; i++) {
+			if(colisiona(personaje.getBordes(), objetos.get(i).getBordes())){
+				ningunaColision = false;
+			}
+		}
+		
+		return !ningunaColision;
+	}
+	public boolean colisionManuelConHuevo(PersonajeDelJuego personaje) {
+		return colisiona(personaje.getBordes(), manuel.getBordes());
 	}
 }

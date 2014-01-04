@@ -13,7 +13,7 @@ import com.me.adventures.main.Constant;
 
 public class Serpiente extends PersonajeDelJuego {
 	private static final int IZQUIERDA = 0;
-	private static final int DERECHA = 1;
+    private static final int DERECHA = 1;
 	
 	private Vector2 posicion;
 	private Rectangle bordes;
@@ -26,7 +26,7 @@ public class Serpiente extends PersonajeDelJuego {
 	//Atributos para pintar
 	private Texture TexturaSerpiente, TexturaBola;
 	private TextureRegion [][] serpienteMatrizFrames;
-	private TextureRegion frameActual;
+	private TextureRegion frameActual, huevoNormal, huevoRompiendose, huevoFrameActual;
 	private boolean esBola;
 	private int tiempoEnBola;
 	
@@ -37,7 +37,7 @@ public class Serpiente extends PersonajeDelJuego {
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		
 		TexturaSerpiente = new Texture("Enemigos/TablaSerpiente.png");
-		TexturaBola = new Texture("Miscelanea/huevo.png");
+		TexturaBola = new Texture("Miscelanea/Huevo.png");
 
 		serpienteMatrizFrames = new TextureRegion[2][2];
 		serpienteMatrizFrames[0][0] = new TextureRegion(TexturaSerpiente, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
@@ -47,8 +47,12 @@ public class Serpiente extends PersonajeDelJuego {
 		frameActual = serpienteMatrizFrames[IZQUIERDA][1];
 		direccion = IZQUIERDA;
 		
+		huevoFrameActual = huevoNormal = new TextureRegion(TexturaBola, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		huevoRompiendose = new TextureRegion(TexturaBola, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		
 		esBola = false;
 		tiempoEnBola = Constant.TIEMPO_BOLA;
+		stateTime = 0f;
 	}
 	
 	public void activarAtaque() {
@@ -58,7 +62,7 @@ public class Serpiente extends PersonajeDelJuego {
 	@Override
 	public void draw(SpriteBatch batch) {
 		if(esBola)
-			batch.draw(TexturaBola, posicion.x, posicion.y, bordes.height, bordes.width);
+			batch.draw(huevoFrameActual, posicion.x, posicion.y, bordes.height, bordes.width);
 		else
 			batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
 	}
@@ -67,6 +71,14 @@ public class Serpiente extends PersonajeDelJuego {
 	public void update() {
 		if(esBola)
 			tiempoEnBola--;
+		if(tiempoEnBola < Constant.TIEMPO_BOLA_CAMBIO)
+			huevoFrameActual = huevoRompiendose;
+		if(tiempoEnBola == 0) {
+			esBola = false;
+			tiempoEnBola = Constant.TIEMPO_BOLA;
+			huevoFrameActual = huevoNormal;
+		}
+		
 		else if(manuel.getBordes().x == posicion.x)
 			if(direccion == IZQUIERDA)
 				frameActual = serpienteMatrizFrames[direccion][0];
@@ -80,10 +92,6 @@ public class Serpiente extends PersonajeDelJuego {
 		  		direccion = DERECHA;
 		  		frameActual = serpienteMatrizFrames[direccion][0];   
 		  	}
-		if(tiempoEnBola == 0) {
-			esBola = false;
-			tiempoEnBola = Constant.TIEMPO_BOLA;
-		}
 	}
 	
 	@Override
@@ -91,6 +99,42 @@ public class Serpiente extends PersonajeDelJuego {
 		esBola = true;
 	}
 	
+	public void moverEnBola() {
+		boolean colisionHuevo = colisiones.colisionHuevo(this);
+		if(manuel.getDireccion() == manuel.ARRIBA && Gdx.input.isKeyPressed(Keys.UP)) {
+			System.out.println(colisionHuevo);
+			if(colisiones.colisionManuelConHuevo(this) && !colisionHuevo) {
+				posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			}
+		}
+		if(manuel.getDireccion() == manuel.ABAJO && Gdx.input.isKeyPressed(Keys.DOWN)) {
+			System.out.println(colisionHuevo);
+			if(colisiones.colisionManuelConHuevo(this)&& !colisionHuevo) {
+				posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			}
+		}
+		if(manuel.getDireccion() == manuel.DERECHA && Gdx.input.isKeyPressed(Keys.RIGHT)) {
+			System.out.println(colisionHuevo);
+			if(colisiones.colisionManuelConHuevo(this) && !colisionHuevo) {
+				posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			}
+		}
+		if(manuel.getDireccion() == manuel.IZQUIERDA && Gdx.input.isKeyPressed(Keys.LEFT)) {
+			System.out.println(colisionHuevo);
+			if(colisiones.colisionManuelConHuevo(this) && !colisionHuevo) {
+				posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			}
+		}
+		
+		// Actualizar bordes
+		bordes.x = posicion.x;
+		bordes.y = posicion.y;
+		
+	}
 	
 	// Getters and Setters ------------------------------------------------------------------------
 	
