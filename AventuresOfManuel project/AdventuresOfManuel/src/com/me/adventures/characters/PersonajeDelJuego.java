@@ -6,4 +6,5 @@ public abstract class PersonajeDelJuego implements Entidad {
 	public abstract void convertirEnBola();
 	public abstract boolean estaEnBola();
 	public abstract void moverEnBola();
+	public abstract void desaparecer();
 }

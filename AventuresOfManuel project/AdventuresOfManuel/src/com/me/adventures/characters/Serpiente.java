@@ -16,6 +16,7 @@ public class Serpiente extends PersonajeDelJuego {
     private static final int DERECHA = 1;
 	
 	private Vector2 posicion;
+	private Vector2 posicionInicial;
 	private Rectangle bordes;
 	private float stateTime;
 	private Colision colisiones;
@@ -28,12 +29,15 @@ public class Serpiente extends PersonajeDelJuego {
 	private TextureRegion [][] serpienteMatrizFrames;
 	private TextureRegion frameActual, huevoNormal, huevoRompiendose, huevoFrameActual;
 	private boolean esBola;
+	private boolean estaDesaparecido;
 	private int tiempoEnBola;
+	private int tiempoDesaparecido;
 	
 	public Serpiente(Vector2 posicion, Manuel manuel) {
 		this.ataqueActivado = false;
 		this.manuel = manuel;
 		this.posicion = posicion;
+		this.posicionInicial = new Vector2(posicion.x, posicion.y);
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		
 		TexturaSerpiente = new Texture("Enemigos/TablaSerpiente.png");
@@ -51,7 +55,9 @@ public class Serpiente extends PersonajeDelJuego {
 		huevoRompiendose = new TextureRegion(TexturaBola, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		
 		esBola = false;
+		estaDesaparecido = false;
 		tiempoEnBola = Constant.TIEMPO_BOLA;
+		tiempoDesaparecido = Constant.TIEMPO_DESAPARECIDO;
 		stateTime = 0f;
 	}
 	
@@ -80,6 +86,14 @@ public class Serpiente extends PersonajeDelJuego {
 				colisiones.finHuevo(this);
 			}
 		}
+		if(estaDesaparecido) {
+			tiempoDesaparecido--;
+			if(tiempoDesaparecido == 0) {
+				estaDesaparecido = false;
+				tiempoDesaparecido = Constant.TIEMPO_DESAPARECIDO;
+				posicion = posicionInicial;
+			}
+		}	
 		
 		else if(manuel.getBordes().x == posicion.x)
 			if(direccion == IZQUIERDA)
@@ -98,6 +112,13 @@ public class Serpiente extends PersonajeDelJuego {
 		// Actualizar bordes
 		bordes.x = posicion.x;
 		bordes.y = posicion.y;
+	}
+	
+	public void desaparecer() {
+		posicion.x = posicion.y = -1000;
+		bordes.x = bordes.y = -1000;
+		estaDesaparecido = true;
+		esBola = false;
 	}
 	
 	@Override
@@ -162,8 +183,7 @@ public class Serpiente extends PersonajeDelJuego {
 		
 		// Actualizar bordes
 		bordes.x = posicion.x;
-		bordes.y = posicion.y;
-		
+		bordes.y = posicion.y;	
 	}
 	
 	// Getters and Setters ------------------------------------------------------------------------

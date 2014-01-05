@@ -280,6 +280,11 @@ public class Manuel extends PersonajeDelJuego {
 	@Override
 	public void moverEnBola() {
 		// TODO Auto-generated method stub
-		
+	}
+
+
+	@Override
+	public void desaparecer() {
+		// TODO Auto-generated method stub
 	}
 }

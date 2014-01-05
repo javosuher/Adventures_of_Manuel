@@ -189,6 +189,13 @@ public class Colision {
 				ningunaColision = false;
 			}
 		}
+		for(int i = 0; i < personajesMovibles.size() && ningunaColision; i++) {
+			if(colisiona(disparo.getBordes(), personajesMovibles.get(i).getBordes()) && personajesMovibles.get(i).estaEnBola()) {
+				personajesMovibles.get(i).desaparecer();
+				finHuevo(personajesMovibles.get(i));
+				ningunaColision = false;
+			}
+		}
 		return !ningunaColision;
 	}
 
