@@ -159,6 +159,10 @@ public class Nivel1 extends Nivel {
 		for(PersonajeDelJuego personaje : personajes){
 			personaje.update();
 		}
+		for(int i = 0; i < personajesMovibles.size(); i++){
+			personajesMovibles.get(i).moverEnBola();
+			personajesMovibles.get(i).update();
+		}
 		
 		// Pintamos la pantalla
 		batch.begin();
@@ -171,6 +175,11 @@ public class Nivel1 extends Nivel {
 		manuel.draw(batch);
 		if(salida.salidaAbierta() == false){
 			for(PersonajeDelJuego personaje : personajes){
+				personaje.draw(batch);
+			}
+		}
+		if(salida.salidaAbierta() == false){
+			for(PersonajeDelJuego personaje : personajesMovibles){
 				personaje.draw(batch);
 			}
 		}

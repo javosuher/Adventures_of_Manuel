@@ -32,6 +32,7 @@ public class Manuel extends PersonajeDelJuego {
 	private int corazonesObtenidos;
 	private List<Proyectil> proyectiles;
 	private boolean disparando;
+	boolean manuelSeQuedaQuieto;
 
 	//Atributos para pintar a Manuel
 	private Texture TexturaManuel;
@@ -77,11 +78,11 @@ public class Manuel extends PersonajeDelJuego {
 	public void update() {
 		// Determina movimiento de Manuel
 		boolean soloUnaTeclaPresionada = true;
-		boolean manuelSeQuedaQuieto = false;
-		boolean colisionDerecha = colisiones.colisionDerechaObjeto(this) || colisiones.colisionDerechaEnemigo(this);
-		boolean colisionIzquierda = colisiones.colisionIzquierdaObjeto(this) || colisiones.colisionIzquierdaEnemigo(this);
-		boolean colisionArriba = colisiones.colisionArribaObjeto(this) || colisiones.colisionArribaEnemigo(this);
-		boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this);
+		manuelSeQuedaQuieto = false;
+		boolean colisionDerecha = colisiones.colisionDerechaObjeto(this) || colisiones.colisionDerechaEnemigo(this) || colisiones.colisionMovibleDerecha(this);
+		boolean colisionIzquierda = colisiones.colisionIzquierdaObjeto(this) || colisiones.colisionIzquierdaEnemigo(this) || colisiones.colisionMovibleIzquierda(this);
+		boolean colisionArriba = colisiones.colisionArribaObjeto(this) || colisiones.colisionArribaEnemigo(this) || colisiones.colisionMovibleArriba(this);
+		boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this) || colisiones.colisionMovibleAbajo(this);
 		
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
 			if(soloUnaTeclaPresionada && !colisionDerecha) {
@@ -187,7 +188,7 @@ public class Manuel extends PersonajeDelJuego {
 	}
 	
 	private void detectaColisionInminente() {
-		if(colisiones.colisionObjetoEnemigo(this)) {
+		if(colisiones.colisionObjetoEnemigoMovible(this)) {
 			if(direccion == DERECHA)
 				posicion.x -= 29;
 			if(direccion == IZQUIERDA)
@@ -218,6 +219,10 @@ public class Manuel extends PersonajeDelJuego {
 	}
 	
 	// Getters and Setters ------------------------------------------------------------------------
+	
+	public boolean getManuelSeQuedaQuieto() {
+		return manuelSeQuedaQuieto;
+	}
 	@Override
 	public boolean estaEnBola() {
 		// TODO Auto-generated method stub
