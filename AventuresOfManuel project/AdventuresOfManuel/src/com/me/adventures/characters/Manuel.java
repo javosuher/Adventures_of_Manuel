@@ -33,6 +33,7 @@ public class Manuel extends PersonajeDelJuego {
 	private List<Proyectil> proyectiles;
 	private boolean disparando;
 	boolean manuelSeQuedaQuieto;
+	private int tiempoParaSiguienteProyectil; // Para que no se disparen dos a la vez
 
 	//Atributos para pintar a Manuel
 	private Texture TexturaManuel;
@@ -43,7 +44,6 @@ public class Manuel extends PersonajeDelJuego {
 	public Manuel(Vector2 posicion) {
 		this.font = new BitmapFont(Gdx.files.internal("arial.fnt"), Gdx.files.internal("arial.png"), false);
 		this.corazonesObtenidos = 0;
-		//proyectiles = new ArrayList<Proyectil>();
 		this.posicion = posicion;
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		stateTime = 0f;
@@ -60,6 +60,7 @@ public class Manuel extends PersonajeDelJuego {
 		
 		disparando = false;
 		proyectiles = new ArrayList<Proyectil>();
+		tiempoParaSiguienteProyectil = 0;
 	}
 	
 	
@@ -181,6 +182,8 @@ public class Manuel extends PersonajeDelJuego {
 			else
 				proyectiles.get(0).update();
 		}
+		if(tiempoParaSiguienteProyectil > 0) // Decrementa tiempo misil
+			tiempoParaSiguienteProyectil--;
 		
 		// Actualizar bordes
 		bordes.x = posicion.x;
@@ -202,7 +205,8 @@ public class Manuel extends PersonajeDelJuego {
 	
 	@Override
 	public void activarAtaque() {
-		if(!proyectiles.isEmpty() && !disparando && Gdx.input.isKeyPressed(Keys.SPACE)){
+		if(!proyectiles.isEmpty() && !disparando && Gdx.input.isKeyPressed(Keys.SPACE) && tiempoParaSiguienteProyectil == 0){
+			tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 			//tenemos que pasarle la posicion siguiente a donde este manolito, dependiendo de la direccion
 			proyectiles.get(0).inicializaPosicion(posicion, direccion);
 			disparando = true;

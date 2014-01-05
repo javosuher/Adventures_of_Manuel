@@ -6,6 +6,7 @@ public final class Constant {
 	public static final float BOLA_SPEED = 10;
 	public static final int TIEMPO_BOLA = 1000;
 	public static final int TIEMPO_BOLA_CAMBIO = 500;
+	public static final int TIEMPO_PROYECTIL = 50;
     public static final int ANCHURA_PERSONAJE = 58, ANCHURA_OBJETO = 58;
     public static final int ALTURA_PERSONAJE = 58, ALTURA_OBJETO = 58;
     public static final int ANCHURA_PANTALLA = 1024, ALTURA_PANTALLA = 754;
