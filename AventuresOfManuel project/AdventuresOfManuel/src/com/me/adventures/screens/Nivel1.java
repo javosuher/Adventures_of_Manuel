@@ -52,9 +52,10 @@ public class Nivel1 extends Nivel {
 		//Se introducen las paredes del nivel
 		objetos.add(new Pared(new Vector2(0, 0), 1024, 58));
 		objetos.add(new Pared(new Vector2(135, 0), 58, 754));
-		objetos.add(new Pared(new Vector2(0, 696), 483, 58));
+		objetos.add(new Pared(new Vector2(135, 696), 406, 58));
+		objetos.add(new Pared(new Vector2(541, 725), 58, 29));
 		salida = new Salida(new Vector2(483,696), "PUERTA");
-		objetos.add(new Pared(new Vector2(483, 696), 483, 58));
+		objetos.add(new Pared(new Vector2(599, 696), 290, 58));
 		objetos.add(new Pared(new Vector2(831, 0), 58, 754));
 		
 		//Se introducen los demas objetos por fila
@@ -68,7 +69,6 @@ public class Nivel1 extends Nivel {
 		objetos.add(new Roca(new Vector2(657, 638)));
 		objetos.add(new Arbol(new Vector2(715, 638)));
 		objetos.add(new Arbol(new Vector2(773, 638)));
-		
 		objetos.add(new Roca(new Vector2(193, 580)));
 		objetos.add(new Arbol(new Vector2(251, 580)));
 		objetos.add(new Arbol(new Vector2(309, 580)));
@@ -183,6 +183,9 @@ public class Nivel1 extends Nivel {
 				personaje.draw(batch);
 			}
 		}
+		else
+			if(manuel.getPosicion().x == salida.getPosicion().x + 58 && manuel.getPosicion().y == salida.getPosicion().y - 29)
+				adventurasDeManuel.haGanado();
 		
 		for(ObjetoDelJuego objeto : objetos) {
 			objeto.draw(batch);

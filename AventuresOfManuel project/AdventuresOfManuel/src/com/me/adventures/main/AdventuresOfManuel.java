@@ -1,13 +1,22 @@
 package com.me.adventures.main;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
-	
+	private Screen nivel;
+	private Screen ganar;
 	@Override
-	public void create() {		
-		setScreen(new Nivel1(this));
+	public void create() {
+		nivel = new Nivel1(this);
+		ganar = new Ganar(this);
+		setScreen(nivel);
+	}
+	
+	public void haGanado(){
+		nivel.dispose();
+		setScreen(ganar);
 	}
 
 	@Override
