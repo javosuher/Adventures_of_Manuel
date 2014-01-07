@@ -69,6 +69,7 @@ public class Nivel1 extends Nivel {
 		objetos.add(new Roca(new Vector2(657, 638)));
 		objetos.add(new Arbol(new Vector2(715, 638)));
 		objetos.add(new Arbol(new Vector2(773, 638)));
+		
 		objetos.add(new Roca(new Vector2(193, 580)));
 		objetos.add(new Arbol(new Vector2(251, 580)));
 		objetos.add(new Arbol(new Vector2(309, 580)));
