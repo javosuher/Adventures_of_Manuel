@@ -1,6 +1,6 @@
 package com.me.adventures.client;
 
-import com.me.adventures.AdventuresOfManuel;
+import com.me.adventures.main.AdventuresOfManuel;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
