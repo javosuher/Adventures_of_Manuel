@@ -34,6 +34,7 @@ public class Nivel1 extends Nivel {
 		
 		objetosDelNivel();
 		personajesDelNivel();
+		mapaDelNivel();
 		personajesMovibles = new ArrayList<PersonajeDelJuego>();
 		colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida);
 		
@@ -166,6 +167,7 @@ public class Nivel1 extends Nivel {
 		for(MapaDelJuego mapa: mapaNivel){
 			mapa.update();
 		}
+		
 		for(PersonajeDelJuego personaje : personajes){
 			personaje.update();
 		}
