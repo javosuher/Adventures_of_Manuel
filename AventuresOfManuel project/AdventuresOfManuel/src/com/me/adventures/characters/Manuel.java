@@ -224,9 +224,6 @@ public class Manuel extends PersonajeDelJuego {
 	
 	// Getters and Setters ------------------------------------------------------------------------
 	
-	public boolean getManuelSeQuedaQuieto() {
-		return manuelSeQuedaQuieto;
-	}
 	@Override
 	public boolean estaEnBola() {
 		// TODO Auto-generated method stub
