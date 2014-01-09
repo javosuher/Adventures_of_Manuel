@@ -1,16 +1,13 @@
 package com.me.adventures.screens;
 
-import java.util.ArrayList;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.characters.*;
 import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
 public class Nivel2 extends Nivel {
-	public Nivel2(AdventuresOfManuel adventures) {
-		super(adventures);
-		manuel = new Manuel(new Vector2(425,116));
-		iniciarColisiones();
+	public Nivel2(AdventuresOfManuel adventures, Vector2 posicionManuel) {
+		super(adventures, posicionManuel);
 	}
 	
 	@Override
@@ -106,7 +103,7 @@ public class Nivel2 extends Nivel {
 	
 	@Override
 	protected void personajesDelNivel() {
-		personajes.add(new Serpiente(new Vector2(367, 638), manuel));
-		personajes.add(new Serpiente(new Vector2(193, 174), manuel));
+		personajes.add(new Serpiente(new Vector2(367, 638), manuel));//dragon
+		personajes.add(new Serpiente(new Vector2(193, 174), manuel));//dragon
 	}
 }

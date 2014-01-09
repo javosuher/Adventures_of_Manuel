@@ -1,6 +1,5 @@
 package com.me.adventures.screens;
 
-import java.util.ArrayList;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.characters.*;
 import com.me.adventures.main.AdventuresOfManuel;

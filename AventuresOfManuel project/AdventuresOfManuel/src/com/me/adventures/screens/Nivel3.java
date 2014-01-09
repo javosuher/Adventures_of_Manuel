@@ -6,10 +6,8 @@ import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
 public class Nivel3 extends Nivel {
-	public Nivel3(AdventuresOfManuel adventures) {
-		super(adventures);
-		manuel = new Manuel(new Vector2(541, 174));
-		iniciarColisiones();
+	public Nivel3(AdventuresOfManuel adventures, Vector2 posicionManuel) {
+		super(adventures, posicionManuel);
 	}
 	
 	@Override
