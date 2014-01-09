@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.Constant;
 
-public abstract class PersonajeDelJuegoEnego implements Entidad {
+public abstract class PersonajeDelJuegoEnemigo implements Entidad {
 	private Vector2 posicion;
 	private Vector2 posicionInicial;
 	private Rectangle bordes;
