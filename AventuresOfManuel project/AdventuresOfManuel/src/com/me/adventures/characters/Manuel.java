@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.Constant;
 
@@ -24,11 +23,6 @@ public class Manuel extends PersonajeDelJuego {
     
 	// Atributos básicos
 	private BitmapFont font;
-	private Vector2 posicion;
-	private Rectangle bordes;
-	private float stateTime;
-	private int direccion;
-	private Colision colisiones;
 	private int corazonesObtenidos;
 	private List<Proyectil> proyectiles;
 	private boolean disparando;
@@ -36,21 +30,14 @@ public class Manuel extends PersonajeDelJuego {
 	private int tiempoParaSiguienteProyectil; // Para que no se disparen dos a la vez
 
 	//Atributos para pintar a Manuel
-	private Texture TexturaManuel;
 	private TextureRegion [][] manuelMatrizFrames;
-	private TextureRegion frameActual;
 	private Animation manuelAnimationAbajo, manuelAnimationIzquierda, manuelAnimationDerecha, manuelAnimationArriba;
 	
 	public Manuel(Vector2 posicion) {
-		this.font = new BitmapFont(Gdx.files.internal("arial.fnt"), Gdx.files.internal("arial.png"), false);
-		this.corazonesObtenidos = 0;
-		this.posicion = posicion;
-		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		stateTime = 0f;
-		direccion = ABAJO;
+		super(posicion);
 		
-		TexturaManuel = new Texture("Manolito/TablaSpritesManolitoTransparencia.png");
-		manuelMatrizFrames = TextureRegion.split(TexturaManuel, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		Textura = new Texture("Manolito/TablaSpritesManolitoTransparencia.png");
+		manuelMatrizFrames = TextureRegion.split(Textura, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		
 		// Asignamos las animaciones de las direcciones de Manuel
 		manuelAnimationAbajo = new Animation(0.05f, manuelMatrizFrames[ABAJO]);
@@ -59,6 +46,9 @@ public class Manuel extends PersonajeDelJuego {
 		manuelAnimationArriba = new Animation(0.05f, manuelMatrizFrames[ARRIBA]);
 		
 		disparando = false;
+		this.font = new BitmapFont(Gdx.files.internal("arial.fnt"), Gdx.files.internal("arial.png"), false);
+		this.corazonesObtenidos = 0;
+		direccion = ABAJO;
 		proyectiles = new ArrayList<Proyectil>();
 		tiempoParaSiguienteProyectil = 0;
 	}
@@ -217,19 +207,7 @@ public class Manuel extends PersonajeDelJuego {
 		proyectiles.remove(0);
 	}
 	
-	@Override
-	public void convertirEnBola() {
-		// TODO Auto-generated method stub
-	}
-	
 	// Getters and Setters ------------------------------------------------------------------------
-	
-	@Override
-	public boolean estaEnBola() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
 	public int getCorazonesObtenidos() {
 		return corazonesObtenidos;
 	}
@@ -241,47 +219,5 @@ public class Manuel extends PersonajeDelJuego {
 	public void obtenerProyectil(int proyectilesOtorgados){
 		for(int i = 0; i < proyectilesOtorgados; i++)
 			proyectiles.add(new Proyectil());
-	}
-	
-	public void setColision(Colision colisiones) {
-		this.colisiones = colisiones;
-	}
-	
-	@Override
-	public Vector2 getPosicion() {
-		return posicion;
-	}
-
-	public void setPosicion(Vector2 posicion) {
-		this.posicion = posicion;
-	}
-
-	@Override
-	public Rectangle getBordes() {
-		return bordes;
-	}
-
-	public void setBordes(Rectangle bordes) {
-		this.bordes = bordes;
-	}
-	
-	public float getStateTime() {
-		return stateTime;
-	}
-	
-	public int getDireccion() {
-		return direccion;
-	}
-
-
-	@Override
-	public void moverEnBola() {
-		// TODO Auto-generated method stub
-	}
-
-
-	@Override
-	public void desaparecer() {
-		// TODO Auto-generated method stub
 	}
 }

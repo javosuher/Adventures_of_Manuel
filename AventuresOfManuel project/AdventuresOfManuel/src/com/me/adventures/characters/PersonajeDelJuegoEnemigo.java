@@ -5,26 +5,36 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.Constant;
 
-public abstract class PersonajeDelJuegoEnemigo implements Entidad {
-	private Vector2 posicion;
-	private Vector2 posicionInicial;
-	private Rectangle bordes;
-	private float stateTime;
-	private Colision colisiones;
-	private int direccion;
-	private boolean ataqueActivado;
+public abstract class PersonajeDelJuegoEnemigo extends PersonajeDelJuego {
+	protected Vector2 posicionInicial;
+	protected boolean ataqueActivado;
+	protected Manuel manuel;
 
 	//Atributos para pintar
-	private Texture Textura, TexturaBola;
-	private TextureRegion frameActual, huevoNormal, huevoRompiendose, huevoFrameActual;
-	private boolean esBola;
-	private boolean estaDesaparecido;
-	private int tiempoEnBola;
-	private int tiempoDesaparecido;
+	protected Texture TexturaBola;
+	protected TextureRegion huevoNormal, huevoRompiendose, huevoFrameActual;
+	protected boolean esBola;
+	protected boolean estaDesaparecido;
+	protected int tiempoEnBola;
+	protected int tiempoDesaparecido;
+	
+	public PersonajeDelJuegoEnemigo(Vector2 posicion, Manuel manuel) {
+		super(posicion);
+		this.manuel = manuel;
+		this.posicionInicial = new Vector2(posicion.x, posicion.y);
+		esBola = false;
+		estaDesaparecido = false;
+		tiempoEnBola = Constant.TIEMPO_BOLA;
+		tiempoDesaparecido = Constant.TIEMPO_DESAPARECIDO;
+		
+		// Texturas bola
+		TexturaBola = new Texture("Miscelanea/Huevo.png");
+		huevoFrameActual = huevoNormal = new TextureRegion(TexturaBola, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		huevoRompiendose = new TextureRegion(TexturaBola, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+	}
 	
 	@Override
 	public void update() {
@@ -60,12 +70,6 @@ public abstract class PersonajeDelJuegoEnemigo implements Entidad {
 		else
 			batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
 	}
-	
-	public void setColision(Colision colisiones) {
-		this.colisiones = colisiones;
-	}
-	
-	public abstract void activarAtaque();
 	
 	public void convertirEnBola() {
 		esBola = true;
@@ -134,5 +138,11 @@ public abstract class PersonajeDelJuegoEnemigo implements Entidad {
 		bordes.x = posicion.x;
 		bordes.y = posicion.y;	
 	}
-	public abstract void desaparecer();
+	
+	public void desaparecer() {
+		posicion.x = posicion.y = -1000;
+		bordes.x = bordes.y = -1000;
+		estaDesaparecido = true;
+		esBola = false;
+	}
 }
