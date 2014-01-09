@@ -9,4 +9,5 @@ public abstract class Nivel extends AbstractScreen {
 	
 	protected abstract void objetosDelNivel();
 	protected abstract void personajesDelNivel();
+	protected abstract void mapaDelNivel();
 }
