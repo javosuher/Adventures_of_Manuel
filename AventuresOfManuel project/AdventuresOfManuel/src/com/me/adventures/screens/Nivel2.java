@@ -1,57 +1,20 @@
 package com.me.adventures.screens;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.characters.*;
 import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
 public class Nivel2 extends Nivel {
-	private AdventuresOfManuel adventurasDeManuel;
-	private Texture TexturaFondo;
-	private SpriteBatch batch;
-	private Manuel manuel;
-	private Cofre cofre;
-	private List<Corazon> corazones;
-	private List<ObjetoDelJuego> objetos;
-	private List<PersonajeDelJuego> personajes;
-	private List<PersonajeDelJuego> personajesMovibles;
-	private List<MapaDelJuego> mapaNivel;
-	private Colision colisiones;
-	private Salida salida;
-
-	public Nivel2(AdventuresOfManuel adventuras_del_manuel) {
-		super(adventuras_del_manuel);
-		this.adventurasDeManuel = adventuras_del_manuel;
-		TexturaFondo = new Texture("Miscelanea/Nivel.png");
-		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+	public Nivel2(AdventuresOfManuel adventures) {
+		super(adventures);
 		manuel = new Manuel(new Vector2(425,116));
-		
-		objetosDelNivel();
-		personajesDelNivel();
-		mapaDelNivel();
-		personajesMovibles = new ArrayList<PersonajeDelJuego>();
-		colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida);
-		
-		manuel.setColision(colisiones);
-		for(PersonajeDelJuego p : personajes){
-			p.setColision(colisiones);
-		}
-		
-		batch = new SpriteBatch();
+		iniciarColisiones();
 	}
 	
 	@Override
 	protected void mapaDelNivel() {
-		mapaNivel = new ArrayList<MapaDelJuego>();
-
 		mapaNivel.add(new Puente(new Vector2(715,464),Constant.PUENTE_VERTICAL));
 		mapaNivel.add(new Puente(new Vector2(425,464),Constant.PUENTE_VERTICAL));
 
@@ -61,9 +24,6 @@ public class Nivel2 extends Nivel {
 	
 	@Override
 	protected void objetosDelNivel() {
-		objetos = new ArrayList<ObjetoDelJuego>();
-		corazones = new ArrayList<Corazon>();
-
 		//Se introducen las paredes del nivel
 		objetos.add(new Pared(new Vector2(0, 0), 1024, 58));
 		objetos.add(new Pared(new Vector2(135, 0), 58, 754));
@@ -142,105 +102,11 @@ public class Nivel2 extends Nivel {
 		objetos.add(new Agua(new Vector2(657, 58)));
 		objetos.add(new Agua(new Vector2(715, 58)));
 		objetos.add(new Agua(new Vector2(773, 58)));
-		
-
 	}
 	
 	@Override
 	protected void personajesDelNivel() {
-		personajes = new ArrayList<PersonajeDelJuego>();
-
-		personajes.add(new Serpiente(new Vector2(367, 638), manuel));
-		personajes.add(new Serpiente(new Vector2(193, 174), manuel));
-	}
-
-	@Override
-	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-		
-		// Actualizamos personajes pantalla
-		manuel.update();
-		
-		for(ObjetoDelJuego objeto: objetos){
-			objeto.update();
-		}
-		
-		for(PersonajeDelJuego personaje : personajes){
-			personaje.update();
-		}
-		for(int i = 0; i < personajesMovibles.size(); i++){
-			personajesMovibles.get(i).moverEnBola();
-			personajesMovibles.get(i).update();
-		}
-		
-		// Pintamos la pantalla
-		batch.begin();
-		batch.draw(TexturaFondo, 135, 0, TexturaFondo.getWidth(), TexturaFondo.getHeight());
-		salida.draw(batch);
-		for(Corazon corazon : corazones){
-			corazon.draw(batch);
-		}
-		cofre.draw(batch);
-		
-		manuel.draw(batch);
-		if(salida.salidaAbierta() == false){
-			for(PersonajeDelJuego personaje : personajes){
-				personaje.draw(batch);
-			}
-		}
-		if(salida.salidaAbierta() == false){
-			for(PersonajeDelJuego personaje : personajesMovibles){
-				personaje.draw(batch);
-			}
-		}
-		else
-			if(manuel.getPosicion().x == salida.getPosicion().x + 58 && manuel.getPosicion().y == salida.getPosicion().y - 29)
-				adventurasDeManuel.haGanado();
-		
-		for(ObjetoDelJuego objeto : objetos) {
-			objeto.draw(batch);
-		}
-
-		for(MapaDelJuego mapa : mapaNivel){
-			mapa.draw(batch);
-		}
-		batch.end();
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		/*personajes.add(new Serpiente(new Vector2(367, 638), manuel));
+		personajes.add(new Serpiente(new Vector2(193, 174), manuel));*/
 	}
 }
