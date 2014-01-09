@@ -91,24 +91,24 @@ public class Nivel2 extends Nivel {
 		objetos.add(new Agua(new Vector2(251,464)));
 		objetos.add(new Agua(new Vector2(309,464)));
 		objetos.add(new Agua(new Vector2(367,464)));
-		objetos.add(new Agua(new Vector2(425,464)));//
+		objetos.add(new Agua(new Vector2(425,464)));
 		objetos.add(new Agua(new Vector2(483,464)));
 		objetos.add(new Agua(new Vector2(541,464)));
 		objetos.add(new Agua(new Vector2(599,464)));
 		objetos.add(new Agua(new Vector2(657,464)));
-		objetos.add(new Agua(new Vector2(715,464)));//
+		objetos.add(new Agua(new Vector2(715,464)));
 		objetos.add(new Agua(new Vector2(773,464)));
 		
 		objetos.add(new Agua(new Vector2(193,406)));
 		objetos.add(new Agua(new Vector2(251,406)));
 		objetos.add(new Agua(new Vector2(309,406)));
 		objetos.add(new Agua(new Vector2(367,406)));
-		objetos.add(new Agua(new Vector2(425,406)));//
+		objetos.add(new Agua(new Vector2(425,406)));
 		objetos.add(new Agua(new Vector2(483,406)));
 		objetos.add(new Agua(new Vector2(541,406)));
 		objetos.add(new Agua(new Vector2(599,406)));
 		objetos.add(new Agua(new Vector2(657,406)));
-		objetos.add(new Agua(new Vector2(715,406)));//
+		objetos.add(new Agua(new Vector2(715,406)));
 		objetos.add(new Agua(new Vector2(773,406)));
 		
 		cofre = new Cofre(new Vector2(193, 348), 4);
