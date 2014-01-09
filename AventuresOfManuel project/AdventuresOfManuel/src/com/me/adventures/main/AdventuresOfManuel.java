@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
@@ -18,8 +19,8 @@ public class AdventuresOfManuel extends Game {
 		
 		// Pantallas del juego
 		/*PRINCIPAL = new GameScreen(this);*/
-		NIVEL1 = new Nivel1(this);
-		NIVEL2 = new Nivel2(this);
+		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
+		//NIVEL2 = new Nivel2(this);
 		LOADING = new LoadingScreen(this);
 		
 		// Cargamos todos los elementos externos que usará el juego, como son las texturas y los sonidos.

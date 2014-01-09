@@ -12,7 +12,6 @@ public class Serpiente extends PersonajeDelJuegoEnemigo {
 	private boolean ataqueActivado;
 
 	//Atributos para pintar
-	private Texture Textura;
 	private TextureRegion [][] serpienteMatrizFrames;
 	
 	public Serpiente(Vector2 posicion, Manuel manuel) {

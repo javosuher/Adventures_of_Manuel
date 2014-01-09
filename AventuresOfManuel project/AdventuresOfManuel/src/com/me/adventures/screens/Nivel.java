@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.characters.Cofre;
 import com.me.adventures.characters.Colision;
 import com.me.adventures.characters.Corazon;
@@ -13,6 +14,7 @@ import com.me.adventures.characters.Manuel;
 import com.me.adventures.characters.MapaDelJuego;
 import com.me.adventures.characters.ObjetoDelJuego;
 import com.me.adventures.characters.PersonajeDelJuego;
+import com.me.adventures.characters.PersonajeDelJuegoEnemigo;
 import com.me.adventures.characters.Salida;
 import com.me.adventures.main.AdventuresOfManuel;
 
@@ -22,25 +24,27 @@ public abstract class Nivel extends AbstractScreen {
 	protected Cofre cofre;
 	protected List<Corazon> corazones;
 	protected List<ObjetoDelJuego> objetos;
-	protected List<PersonajeDelJuego> personajes;
-	protected List<PersonajeDelJuego> personajesMovibles;
+	protected List<PersonajeDelJuegoEnemigo> personajes;
+	protected List<PersonajeDelJuegoEnemigo> personajesMovibles;
 	protected List<MapaDelJuego> mapaNivel;
 	protected Colision colisiones;
 	protected Salida salida;
 	
-	public Nivel(AdventuresOfManuel adventures) {
+	public Nivel(AdventuresOfManuel adventures, Vector2 posicionManuel) {
 		super(adventures);
 		TexturaFondo = new Texture("Miscelanea/Nivel.png");
 		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		objetos = new ArrayList<ObjetoDelJuego>();
 		corazones = new ArrayList<Corazon>();
 		mapaNivel = new ArrayList<MapaDelJuego>();
-		personajes = new ArrayList<PersonajeDelJuego>();
+		personajes = new ArrayList<PersonajeDelJuegoEnemigo>();
 		
+		manuel = new Manuel(posicionManuel);
 		objetosDelNivel();
 		personajesDelNivel();
 		mapaDelNivel();
-		personajesMovibles = new ArrayList<PersonajeDelJuego>();
+		personajesMovibles = new ArrayList<PersonajeDelJuegoEnemigo>();
+		iniciarColisiones();
 	}
 	
 	protected abstract void objetosDelNivel();
