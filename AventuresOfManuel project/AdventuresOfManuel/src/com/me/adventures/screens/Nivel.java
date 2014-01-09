@@ -81,16 +81,19 @@ public abstract class Nivel extends AbstractScreen {
 		cofre.draw(batch);
 		
 		manuel.draw(batch);
-		if(salida.salidaAbierta() == false){
-			for(PersonajeDelJuego personaje : personajes){
-				personaje.draw(batch);
-			}
+		if(salida.salidaAbierta() == true){
+			personajes.clear();
+			personajesMovibles.clear();
 		}
-		if(salida.salidaAbierta() == false){
-			for(PersonajeDelJuego personaje : personajesMovibles){
-				personaje.draw(batch);
-			}
+		
+		for(PersonajeDelJuego personaje : personajes){
+			personaje.draw(batch);
 		}
+		
+		for(PersonajeDelJuego personaje : personajesMovibles){
+			personaje.draw(batch);
+		}
+	
 		/*else
 			if(manuel.getPosicion().x == salida.getPosicion().x + 58 && manuel.getPosicion().y == salida.getPosicion().y - 29)
 				adventures.haGanado();*/
