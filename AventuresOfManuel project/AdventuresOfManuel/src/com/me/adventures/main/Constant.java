@@ -13,6 +13,8 @@ public final class Constant {
     public static final int ALTURA_PERSONAJE = 58, ALTURA_OBJETO = 58;
     public static final int ANCHURA_PANTALLA = 1024, ALTURA_PANTALLA = 754;
     public static final int ANCHURA_ESCENARIO = 754, ALTURA_ESCENARIO = 754;
+    public static final int PUENTE_VERTICAL = 0;
+    public static final int PUENTE_HORIZONTAL = 1;
     		
 	public static Constant getConstant() {
 		return constantes;
