@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.characters.*;
 import com.me.adventures.main.AdventuresOfManuel;
+import com.me.adventures.main.Constant;
 
 public class Nivel2 extends Nivel {
 	private AdventuresOfManuel adventurasDeManuel;
@@ -50,11 +51,11 @@ public class Nivel2 extends Nivel {
 	protected void mapaDelNivel() {
 		mapaNivel = new ArrayList<MapaDelJuego>();
 
-		//Puente(715,464);
-		//Puente(425,464);
+		mapaNivel.add(new Puente(new Vector2(715,464),Constant.PUENTE_VERTICAL));
+		mapaNivel.add(new Puente(new Vector2(425,464),Constant.PUENTE_VERTICAL));
 
-		//Puente(425,406);
-		//Puente(715,406);
+		mapaNivel.add(new Puente(new Vector2(425,406),Constant.PUENTE_VERTICAL));
+		mapaNivel.add(new Puente(new Vector2(715,406),Constant.PUENTE_VERTICAL));
 	}
 	
 	@Override
@@ -127,7 +128,7 @@ public class Nivel2 extends Nivel {
 		corazones.add(new Corazon(new Vector2(599, 174), 0)); //no da proyectiles
 		objetos.add(new Agua(new Vector2(773, 174)));
 		
-		//objetos.add(new Caja(new Vector2(541, 116)));
+		objetos.add(new Bloque(new Vector2(541, 116)));
 		objetos.add(new Agua(new Vector2(773, 116)));
 		
 		corazones.add(new Corazon(new Vector2(193, 58), 0)); //no da proyectiles
@@ -174,12 +175,12 @@ public class Nivel2 extends Nivel {
 			corazon.draw(batch);
 		}
 		cofre.draw(batch);
-		manuel.draw(batch);
 		
 		for(MapaDelJuego mapa : mapaNivel){
 			mapa.draw(batch);
 		}
-		
+
+		manuel.draw(batch);
 		if(salida.salidaAbierta() == false){
 			for(PersonajeDelJuego personaje : personajes){
 				personaje.draw(batch);

@@ -34,6 +34,7 @@ public class Nivel1 extends Nivel {
 		
 		objetosDelNivel();
 		personajesDelNivel();
+		mapaDelNivel();
 		personajesMovibles = new ArrayList<PersonajeDelJuego>();
 		colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida);
 		
@@ -146,7 +147,6 @@ public class Nivel1 extends Nivel {
 		objetos.add(new Roca(new Vector2(367, 58)));
 		objetos.add(new Roca(new Vector2(425, 58)));
 		objetos.add(new Roca(new Vector2(483, 58)));
-		
 	}
 	
 	@Override
@@ -167,6 +167,7 @@ public class Nivel1 extends Nivel {
 		for(MapaDelJuego mapa: mapaNivel){
 			mapa.update();
 		}
+		
 		for(PersonajeDelJuego personaje : personajes){
 			personaje.update();
 		}
@@ -183,11 +184,12 @@ public class Nivel1 extends Nivel {
 			corazon.draw(batch);
 		}
 		cofre.draw(batch);
-		manuel.draw(batch);
 
 		for(MapaDelJuego mapa : mapaNivel){
 			mapa.draw(batch);
 		}
+		
+		manuel.draw(batch);
 		if(salida.salidaAbierta() == false){
 			for(PersonajeDelJuego personaje : personajes){
 				personaje.draw(batch);
