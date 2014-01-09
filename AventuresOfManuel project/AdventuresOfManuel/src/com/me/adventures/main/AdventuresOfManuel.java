@@ -1,27 +1,67 @@
 package com.me.adventures.main;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
-	private Screen nivel;
-	private Screen ganar;
+	public AbstractScreen LOADING, NIVEL1, NIVEL2;
+	private AssetManager manager;
+	private SpriteBatch batch;
+	
 	@Override
 	public void create() {
-		nivel = new Nivel1(this);
-		ganar = new Ganar(this);
-		setScreen(nivel);
+		manager = new AssetManager();
+		batch = new SpriteBatch();
+		
+		// Pantallas del juego
+		/*PRINCIPAL = new GameScreen(this);*/
+		NIVEL1 = new Nivel1(this);
+		NIVEL2 = new Nivel2(this);
+		LOADING = new LoadingScreen(this);
+		
+		// Cargamos todos los elementos externos que usará el juego, como son las texturas y los sonidos.
+		// Pantalla de cargado
+		manager.load("Manolito/TablaSpritesManolitoTransparencia.png", Texture.class);
+		manager.load("Enemigos/TablaCalaveraFinal.png", Texture.class);
+		manager.load("Enemigos/TablaMedusa.png", Texture.class);
+		manager.load("Enemigos/TablaSerpiente.png", Texture.class);
+		manager.load("Miscelanea/Arbol.png", Texture.class);
+		manager.load("Miscelanea/Bordes.png", Texture.class);
+		manager.load("Miscelanea/Cofre.png", Texture.class);
+		manager.load("Miscelanea/Corazon.png", Texture.class);
+		manager.load("Miscelanea/Ganar.png", Texture.class);
+		manager.load("Miscelanea/Huevo.png", Texture.class);
+		manager.load("Miscelanea/Murallas.png", Texture.class);
+		manager.load("Miscelanea/Nivel.png", Texture.class);
+		manager.load("Miscelanea/ProyectilManolito.png", Texture.class);
+		manager.load("Miscelanea/ProyectilMedusa.png", Texture.class);
+		manager.load("Miscelanea/Roca.png", Texture.class);
+		manager.load("Miscelanea/Suelo.png", Texture.class);
+		manager.load("Miscelanea/TablaAgua.png", Texture.class);
+		manager.load("Miscelanea/TablaPuente.png", Texture.class);
+		manager.load("Miscelanea/TablaPuerta.png", Texture.class);
+		manager.load("arial.png", Texture.class);
+		
+		//setScreen(LOADING);
+		setScreen(NIVEL1);
 	}
 	
-	public void haGanado(){
-		nivel.dispose();
-		setScreen(ganar);
+	public SpriteBatch getBatch() {
+		return batch;
+	}
+	
+	public AssetManager getManager() {
+		return manager;
 	}
 
 	@Override
 	public void dispose() {
 		super.dispose();
+		manager.dispose();
+		batch.dispose();
 	}
 
 	@Override
