@@ -28,7 +28,7 @@ public class Serpiente extends PersonajeDelJuegoEnemigo {
 		serpienteMatrizFrames[0][1] = new TextureRegion(Textura, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		serpienteMatrizFrames[1][0] = new TextureRegion(Textura, 0, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		serpienteMatrizFrames[1][1] = new TextureRegion(Textura, 58, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		frameActual = serpienteMatrizFrames[IZQUIERDA][1];
+		frameActual = serpienteMatrizFrames[IZQUIERDA][1]; // Necesario
 	}
 	
 	public void activarAtaque() {

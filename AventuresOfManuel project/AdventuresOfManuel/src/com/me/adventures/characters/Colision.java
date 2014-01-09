@@ -11,14 +11,14 @@ import com.me.adventures.main.Constant;
 
 public class Colision {
 	private Manuel manuel;
-	private List<PersonajeDelJuego> personajes;
+	private List<PersonajeDelJuegoEnemigo> personajes;
 	private List<ObjetoDelJuego> objetos;
 	private List<Corazon> corazones;
-	private List<PersonajeDelJuego> personajesMovibles;
+	private List<PersonajeDelJuegoEnemigo> personajesMovibles;
 	private Cofre cofre;
 	private Salida salida;
 	
-	public Colision(Manuel manuel, List<PersonajeDelJuego> personajes, List<ObjetoDelJuego> objetos, List<PersonajeDelJuego> personajesMovibles, List<Corazon> corazones, Cofre cofre, Salida salida) {
+	public Colision(Manuel manuel, List<PersonajeDelJuegoEnemigo> personajes, List<ObjetoDelJuego> objetos, List<PersonajeDelJuegoEnemigo> personajesMovibles, List<Corazon> corazones, Cofre cofre, Salida salida) {
 		this.manuel = manuel;
 		this.personajes = personajes;
 		this.objetos = objetos;
@@ -224,7 +224,7 @@ public class Colision {
 	
 	public void finHuevo(PersonajeDelJuego personaje) {
 		int i = personajesMovibles.indexOf(personaje);
-		personajes.add(personaje);
+		personajes.add(personajesMovibles.get(i));
 		personajesMovibles.remove(i);
 	}
 	private void ponerEnHuevo(int i) {
