@@ -128,7 +128,7 @@ public class Nivel2 extends Nivel {
 		corazones.add(new Corazon(new Vector2(599, 174), 0)); //no da proyectiles
 		objetos.add(new Agua(new Vector2(773, 174)));
 		
-		//objetos.add(new Caja(new Vector2(541, 116)));
+		objetos.add(new Bloque(new Vector2(541, 116)));
 		objetos.add(new Agua(new Vector2(773, 116)));
 		
 		corazones.add(new Corazon(new Vector2(193, 58), 0)); //no da proyectiles
