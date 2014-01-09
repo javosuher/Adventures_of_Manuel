@@ -21,23 +21,40 @@ public class Nivel2 extends Nivel {
 	private List<Corazon> corazones;
 	private List<ObjetoDelJuego> objetos;
 	private List<PersonajeDelJuego> personajes;
-	private Colision colisiones;
 	private List<PersonajeDelJuego> personajesMovibles;
+	private List<MapaDelJuego> mapaNivel;
+	private Colision colisiones;
 	private Salida salida;
 
 	public Nivel2(AdventuresOfManuel adventuras_del_manuel) {
 		this.adventurasDeManuel = adventuras_del_manuel;
 		TexturaFondo = new Texture("Miscelanea/Nivel.png");
 		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		manuel = new Manuel(new Vector2(193, 464));
+		manuel = new Manuel(new Vector2(425,116));
 		
 		objetosDelNivel();
 		personajesDelNivel();
+		mapaDelNivel();
+		personajesMovibles = new ArrayList<PersonajeDelJuego>();
 		colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida);
 		
 		manuel.setColision(colisiones);
+		for(PersonajeDelJuego p : personajes){
+			p.setColision(colisiones);
+		}
 		
 		batch = new SpriteBatch();
+	}
+	
+	@Override
+	protected void mapaDelNivel() {
+		mapaNivel = new ArrayList<MapaDelJuego>();
+
+		//Puente(715,464);
+		//Puente(425,464);
+
+		//Puente(425,406);
+		//Puente(715,406);
 	}
 	
 	@Override
@@ -49,6 +66,7 @@ public class Nivel2 extends Nivel {
 		objetos.add(new Pared(new Vector2(0, 0), 1024, 58));
 		objetos.add(new Pared(new Vector2(135, 0), 58, 754));
 		objetos.add(new Pared(new Vector2(135, 696), 580, 58));
+		objetos.add(new Pared(new Vector2(715, 725), 58, 29));
 		salida = new Salida(new Vector2(657,696), "PUERTA");
 		objetos.add(new Pared(new Vector2(773, 696), 58, 58));
 		objetos.add(new Pared(new Vector2(831, 0), 58, 754));
@@ -67,61 +85,57 @@ public class Nivel2 extends Nivel {
 		objetos.add(new Arbol(new Vector2(541, 522)));
 		objetos.add(new Arbol(new Vector2(599, 522)));
 		
-		//Agua(193,464);
-		//Agua(251,464);
-		//Agua(309,464);
-		//Agua(367,464);
-		//Puente(425,464);
-		//Agua(483,464);
-		//Agua(541,464);
-		//Agua(599,464);
-		//Agua(657,464);
-		//Puente(715,464);
-		//Agua(773,464);
+		objetos.add(new Agua(new Vector2(193,464)));
+		objetos.add(new Agua(new Vector2(251,464)));
+		objetos.add(new Agua(new Vector2(309,464)));
+		objetos.add(new Agua(new Vector2(367,464)));
+		objetos.add(new Agua(new Vector2(483,464)));
+		objetos.add(new Agua(new Vector2(541,464)));
+		objetos.add(new Agua(new Vector2(599,464)));
+		objetos.add(new Agua(new Vector2(657,464)));
+		objetos.add(new Agua(new Vector2(773,464)));
 		
-		//Agua(193,406);
-		//Agua(251,406);
-		//Agua(309,406);
-		//Agua(367,406);
-		//Puente(425,406);
-		//Agua(483,406);
-		//Agua(541,406);
-		//Agua(599,406);
-		//Agua(657,406);
-		//Puente(715,406);
-		//Agua(773,406);
+		objetos.add(new Agua(new Vector2(193,406)));
+		objetos.add(new Agua(new Vector2(251,406)));
+		objetos.add(new Agua(new Vector2(309,406)));
+		objetos.add(new Agua(new Vector2(367,406)));
+		objetos.add(new Agua(new Vector2(483,406)));
+		objetos.add(new Agua(new Vector2(541,406)));
+		objetos.add(new Agua(new Vector2(599,406)));
+		objetos.add(new Agua(new Vector2(657,406)));
+		objetos.add(new Agua(new Vector2(773,406)));
 		
-		cofre = new Cofre(new Vector2(193, 348), 3);
+		cofre = new Cofre(new Vector2(193, 348), 4);
 		objetos.add(new Arbol(new Vector2(309, 348)));
 		objetos.add(new Arbol(new Vector2(367, 348)));
-		//agua(773,348);
+		objetos.add(new Agua(new Vector2(773,348)));
 		
 		objetos.add(new Arbol(new Vector2(309, 290)));
 		objetos.add(new Arbol(new Vector2(367, 290)));
 		objetos.add(new Arbol(new Vector2(599, 290)));
 		objetos.add(new Arbol(new Vector2(657, 290)));
-		//agua(773, 290);
+		objetos.add(new Agua(new Vector2(773, 290)));
 
 		objetos.add(new Roca(new Vector2(483, 232)));
 		objetos.add(new Roca(new Vector2(541, 232)));
 		objetos.add(new Arbol(new Vector2(599, 232)));
 		objetos.add(new Arbol(new Vector2(657, 232)));
-		//agua(775,232)
+		objetos.add(new Agua(new Vector2(775,232)));
 
 		objetos.add(new Roca(new Vector2(483, 174)));
 		objetos.add(new Roca(new Vector2(541, 174)));
 		corazones.add(new Corazon(new Vector2(599, 174), 0)); //no da proyectiles
-		//agua(773, 174)
+		objetos.add(new Agua(new Vector2(773, 174)));
 		
 		//objetos.add(new Caja(new Vector2(541, 116)));
-		//agua(773, 116);
+		objetos.add(new Agua(new Vector2(773, 116)));
 		
 		corazones.add(new Corazon(new Vector2(193, 58), 0)); //no da proyectiles
-		//agua(541, 58);
-		//agua(599, 58);
-		//agua(657, 58);
-		//agua(715, 58);
-		//agua(773, 58);
+		objetos.add(new Agua(new Vector2(541, 58)));
+		objetos.add(new Agua(new Vector2(599, 58)));
+		objetos.add(new Agua(new Vector2(657, 58)));
+		objetos.add(new Agua(new Vector2(715, 58)));
+		objetos.add(new Agua(new Vector2(773, 58)));
 	}
 	
 	@Override
@@ -130,9 +144,6 @@ public class Nivel2 extends Nivel {
 
 		personajes.add(new Serpiente(new Vector2(367, 638), manuel));
 		personajes.add(new Serpiente(new Vector2(193, 174), manuel));
-		for(PersonajeDelJuego p : personajes){
-			p.setColision(colisiones);
-		}
 	}
 
 	@Override
@@ -143,6 +154,18 @@ public class Nivel2 extends Nivel {
 		// Actualizamos personajes pantalla
 		manuel.update();
 		
+		for(ObjetoDelJuego objeto: objetos){
+			objeto.update();
+		}
+		
+		for(PersonajeDelJuego personaje : personajes){
+			personaje.update();
+		}
+		for(int i = 0; i < personajesMovibles.size(); i++){
+			personajesMovibles.get(i).moverEnBola();
+			personajesMovibles.get(i).update();
+		}
+		
 		// Pintamos la pantalla
 		batch.begin();
 		batch.draw(TexturaFondo, 135, 0, TexturaFondo.getWidth(), TexturaFondo.getHeight());
@@ -152,11 +175,24 @@ public class Nivel2 extends Nivel {
 		}
 		cofre.draw(batch);
 		manuel.draw(batch);
+		
+		for(MapaDelJuego mapa : mapaNivel){
+			mapa.draw(batch);
+		}
+		
 		if(salida.salidaAbierta() == false){
 			for(PersonajeDelJuego personaje : personajes){
 				personaje.draw(batch);
 			}
 		}
+		if(salida.salidaAbierta() == false){
+			for(PersonajeDelJuego personaje : personajesMovibles){
+				personaje.draw(batch);
+			}
+		}
+		else
+			if(manuel.getPosicion().x == salida.getPosicion().x + 58 && manuel.getPosicion().y == salida.getPosicion().y - 29)
+				adventurasDeManuel.haGanado();
 		
 		for(ObjetoDelJuego objeto : objetos) {
 			objeto.draw(batch);

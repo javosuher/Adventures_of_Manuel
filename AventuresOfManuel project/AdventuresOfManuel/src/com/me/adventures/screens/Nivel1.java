@@ -22,6 +22,7 @@ public class Nivel1 extends Nivel {
 	private List<ObjetoDelJuego> objetos;
 	private List<PersonajeDelJuego> personajes;
 	private List<PersonajeDelJuego> personajesMovibles;
+	private List<MapaDelJuego> mapaNivel;
 	private Colision colisiones;
 	private Salida salida;
 
@@ -42,6 +43,11 @@ public class Nivel1 extends Nivel {
 		}
 		
 		batch = new SpriteBatch();
+	}
+	
+	@Override
+	protected void mapaDelNivel() {
+		mapaNivel = new ArrayList<MapaDelJuego>();
 	}
 	
 	@Override
@@ -157,6 +163,10 @@ public class Nivel1 extends Nivel {
 		
 		// Actualizamos personajes pantalla
 		manuel.update();
+
+		for(MapaDelJuego mapa: mapaNivel){
+			mapa.update();
+		}
 		for(PersonajeDelJuego personaje : personajes){
 			personaje.update();
 		}
@@ -174,6 +184,10 @@ public class Nivel1 extends Nivel {
 		}
 		cofre.draw(batch);
 		manuel.draw(batch);
+
+		for(MapaDelJuego mapa : mapaNivel){
+			mapa.draw(batch);
+		}
 		if(salida.salidaAbierta() == false){
 			for(PersonajeDelJuego personaje : personajes){
 				personaje.draw(batch);

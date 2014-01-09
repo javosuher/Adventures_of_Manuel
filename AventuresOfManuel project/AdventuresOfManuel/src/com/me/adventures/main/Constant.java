@@ -4,6 +4,7 @@ public final class Constant {
 	private static final Constant constantes = new Constant();
 	public static final float SPEED = 220; //58
 	public static final float BOLA_SPEED = 10;
+	public static final int TIEMPO_AGUA = 10;
 	public static final int TIEMPO_BOLA = 800;
 	public static final int TIEMPO_BOLA_CAMBIO = 400;
 	public static final int TIEMPO_PROYECTIL = 50;
