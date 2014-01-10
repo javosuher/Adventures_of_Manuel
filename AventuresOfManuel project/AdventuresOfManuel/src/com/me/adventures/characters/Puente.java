@@ -12,6 +12,7 @@ public class Puente extends MapaDelJuego {
 	private Rectangle bordes;
 	private Texture TexturaPuente;
 	private TextureRegion frameActual;
+	private Agua agua;
 	
 	public Puente(Vector2 posicion, int orientacion){
 		this.posicion = posicion;
@@ -21,19 +22,18 @@ public class Puente extends MapaDelJuego {
 			frameActual = new TextureRegion(TexturaPuente, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		else
 			frameActual = new TextureRegion(TexturaPuente, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-			
-				
+		agua = new Agua(posicion);
 	}
 
 	@Override
 	public void draw(SpriteBatch batch) {
-		// TODO Auto-generated method stub
+		agua.draw(batch);
 		batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		agua.update();
 	}
 
 	@Override
