@@ -77,7 +77,48 @@ public class Manuel extends PersonajeDelJuego {
 		boolean colisionArriba = colisiones.colisionArribaObjeto(this) || colisiones.colisionArribaEnemigo(this) || colisiones.colisionMovibleArriba(this);
 		boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this) || colisiones.colisionMovibleAbajo(this);
 		
-		if(Gdx.app.getType() == ApplicationType.Desktop) {
+		if(Gdx.app.getType() == ApplicationType.Desktop)
+			moverDesktop(soloUnaTeclaPresionada, colisionDerecha, colisionIzquierda, colisionArriba, colisionAbajo);
+		else if(Gdx.app.getType() == ApplicationType.Android)
+			moverAndroid(soloUnaTeclaPresionada, colisionDerecha, colisionIzquierda, colisionArriba, colisionAbajo);
+		
+		colisiones.colisionCorazon(this);
+		colisiones.colisionCofre(this);
+		
+		ajustarManuel(colisionDerecha, colisionIzquierda, colisionArriba, colisionAbajo);
+		
+		activarAtaque();
+		if(disparando) {
+			if(colisiones.colisionDisparoEnemigo(proyectiles.get(0)))
+				eliminandoDisparo();
+			else if(colisiones.colisionDisparoObjeto(proyectiles.get(0)))
+				eliminandoDisparo();
+			else
+				proyectiles.get(0).update();
+		}
+		if(tiempoParaSiguienteProyectil > 0) // Decrementa tiempo misil
+			tiempoParaSiguienteProyectil--;
+		
+		// Actualizar bordes
+		bordes.x = posicion.x;
+		bordes.y = posicion.y;
+	}
+	
+	@Override
+	public void activarAtaque() {
+		if(!proyectiles.isEmpty() && !disparando && Gdx.input.isKeyPressed(Keys.SPACE) && tiempoParaSiguienteProyectil == 0){
+			tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
+			//tenemos que pasarle la posicion siguiente a donde este manolito, dependiendo de la direccion
+			proyectiles.get(0).inicializaPosicion(posicion, direccion);
+			disparando = true;
+		}
+	}
+	private void eliminandoDisparo() {
+		disparando = false;
+		proyectiles.remove(0);
+	}
+	
+	private void moverDesktop(boolean soloUnaTeclaPresionada, boolean colisionDerecha, boolean colisionIzquierda, boolean colisionArriba, boolean colisionAbajo) {
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
 			if(soloUnaTeclaPresionada && !colisionDerecha) {
 				posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
@@ -111,60 +152,59 @@ public class Manuel extends PersonajeDelJuego {
 			direccion = ABAJO;
 		}
 		else
+		manuelSeQuedaQuieto = true;
+	}
+	
+	private void moverAndroid(boolean soloUnaTeclaPresionada, boolean colisionDerecha, boolean colisionIzquierda, boolean colisionArriba, boolean colisionAbajo) {
+		if(Gdx.input.isTouched() && Gdx.input.getX() > Gdx.graphics.getWidth() - 50) {
+			if(soloUnaTeclaPresionada && !colisionDerecha) {
+				posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			}
+			soloUnaTeclaPresionada = false;
+			direccion = DERECHA;
+		}
+		else if(Gdx.input.isTouched() && Gdx.input.getX() < 50) {
+			if(soloUnaTeclaPresionada && !colisionIzquierda) {
+				posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			}
+			soloUnaTeclaPresionada = false;
+			direccion = IZQUIERDA;
+		}
+		else if(Gdx.input.isTouched() && Gdx.input.getY() < 50) {
+			if(soloUnaTeclaPresionada && !colisionArriba) {
+				posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			}
+			soloUnaTeclaPresionada = false;
+			direccion = ARRIBA;
+		}
+		else if(Gdx.input.isTouched() && Gdx.input.getY() > Gdx.graphics.getHeight() - 50) {
+			if(soloUnaTeclaPresionada && !colisionAbajo) {
+				posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			}
+			soloUnaTeclaPresionada = false;
+			direccion = ABAJO;
+		}
+		else
 			manuelSeQuedaQuieto = true;
-		}
-		else if(Gdx.app.getType() == ApplicationType.Android) {
-			if(Gdx.input.isTouched() && Gdx.input.getX() > Gdx.graphics.getWidth() - 50) {
-				if(soloUnaTeclaPresionada && !colisionDerecha) {
-					posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
-					stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				}
-				soloUnaTeclaPresionada = false;
-				direccion = DERECHA;
-			}
-			else if(Gdx.input.isTouched() && Gdx.input.getX() < 50) {
-				if(soloUnaTeclaPresionada && !colisionIzquierda) {
-					posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
-					stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				}
-				soloUnaTeclaPresionada = false;
-				direccion = IZQUIERDA;
-			}
-			else if(Gdx.input.isTouched() && Gdx.input.getY() < 50) {
-				if(soloUnaTeclaPresionada && !colisionArriba) {
-					posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
-					stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				}
-				soloUnaTeclaPresionada = false;
-				direccion = ARRIBA;
-			}
-			else if(Gdx.input.isTouched() && Gdx.input.getY() > Gdx.graphics.getHeight() - 50) {
-				if(soloUnaTeclaPresionada && !colisionAbajo) {
-					posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
-					stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				}
-				soloUnaTeclaPresionada = false;
-				direccion = ABAJO;
-			}
-			else
-				manuelSeQuedaQuieto = true;
-		}
-		
-		colisiones.colisionCorazon(this);
-		colisiones.colisionCofre(this);
-		
+	}
+	
+	public void ajustarManuel(boolean colisionDerecha, boolean colisionIzquierda, boolean colisionArriba, boolean colisionAbajo) {
 		//Direccion frame Manuel
 		if(direccion == ABAJO) {
 			if(manuelSeQuedaQuieto) {
 				int nuevaPosicion = (int) posicion.y;
 				while(nuevaPosicion % 29 != 0) // Ajusta la posición
 					nuevaPosicion--;
-				posicion.y = nuevaPosicion;
-				frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
-			}
+					posicion.y = nuevaPosicion;
+					frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
+				}
 			else 
 				frameActual = manuelAnimationAbajo.getKeyFrame(stateTime, true);
-		}
+			}
 		else if(direccion == IZQUIERDA) {
 			if(manuelSeQuedaQuieto) {
 				int nuevaPosicion = (int) posicion.x;
@@ -198,26 +238,10 @@ public class Manuel extends PersonajeDelJuego {
 			else 
 				frameActual = manuelAnimationArriba.getKeyFrame(stateTime, true);
 		}
-		
+				
 		if(colisionDerecha || colisionIzquierda || colisionArriba || colisionAbajo) {
 			detectaColisionInminente();
 		}
-		
-		activarAtaque();
-		if(disparando) {
-			if(colisiones.colisionDisparoEnemigo(proyectiles.get(0)))
-				eliminandoDisparo();
-			else if(colisiones.colisionDisparoObjeto(proyectiles.get(0)))
-				eliminandoDisparo();
-			else
-				proyectiles.get(0).update();
-		}
-		if(tiempoParaSiguienteProyectil > 0) // Decrementa tiempo misil
-			tiempoParaSiguienteProyectil--;
-		
-		// Actualizar bordes
-		bordes.x = posicion.x;
-		bordes.y = posicion.y;
 	}
 	
 	private void detectaColisionInminente() {
@@ -232,29 +256,6 @@ public class Manuel extends PersonajeDelJuego {
 				posicion.y += 29;
 		}
 	}
-	
-	@Override
-	public void activarAtaque() {
-		if(!proyectiles.isEmpty() && !disparando && Gdx.input.isKeyPressed(Keys.SPACE) && tiempoParaSiguienteProyectil == 0){
-			tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
-			//tenemos que pasarle la posicion siguiente a donde este manolito, dependiendo de la direccion
-			proyectiles.get(0).inicializaPosicion(posicion, direccion);
-			disparando = true;
-		}
-	}
-	private void eliminandoDisparo() {
-		disparando = false;
-		proyectiles.remove(0);
-	}
-	
-	/*public boolean moverDerecha(boolean soloUnaTeclaPresionada, boolean ) {
-		if(soloUnaTeclaPresionada && !colisionDerecha) {
-			posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
-			stateTime = stateTime + Gdx.graphics.getDeltaTime();
-		}
-		soloUnaTeclaPresionada = false;
-		direccion = DERECHA;
-	}*/
 	
 	// Getters and Setters ------------------------------------------------------------------------
 	public int getCorazonesObtenidos() {
