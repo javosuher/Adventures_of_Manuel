@@ -39,7 +39,7 @@ public abstract class Nivel extends AbstractScreen {
 		mapaNivel = new ArrayList<MapaDelJuego>();
 		personajes = new ArrayList<PersonajeDelJuegoEnemigo>();
 		
-		manuel = new Manuel(posicionManuel);
+		manuel = new Manuel(adventures, posicionManuel);
 		objetosDelNivel();
 		personajesDelNivel();
 		mapaDelNivel();

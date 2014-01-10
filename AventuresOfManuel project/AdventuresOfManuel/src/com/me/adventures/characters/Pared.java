@@ -3,13 +3,12 @@ package com.me.adventures.characters;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.me.adventures.main.AdventuresOfManuel;
 
 public class Pared extends ObjetoDelJuego {
-	private Vector2 posicion;
-	private Rectangle bordes;
 	
-	public Pared(Vector2 posicion, int anchura, int altura) {
-		this.posicion = posicion;
+	public Pared(AdventuresOfManuel adventures, Vector2 posicion, int anchura, int altura) {
+		super(adventures, posicion);
 		bordes = new Rectangle(posicion.x, posicion.y, anchura, altura);
 	}
 
@@ -17,15 +16,5 @@ public class Pared extends ObjetoDelJuego {
 	public void draw(SpriteBatch batch) {}
 
 	@Override
-	public void update() {}
-
-	@Override
-	public Vector2 getPosicion() {
-		return posicion;
-	}
-
-	@Override
-	public Rectangle getBordes() {
-		return bordes;
-	}	
+	public void update() {}	
 }
