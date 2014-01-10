@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
-	public AbstractScreen LOADING, NIVEL1, NIVEL2, NIVEL3;
+	public AbstractScreen LOADING, NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5;
 	private AssetManager manager;
 	private SpriteBatch batch;
 	
@@ -22,6 +22,8 @@ public class AdventuresOfManuel extends Game {
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
 		NIVEL2 = new Nivel2(this, new Vector2(425,116));
 		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
+		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
+		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
 		
 		LOADING = new LoadingScreen(this);
 		
@@ -49,7 +51,7 @@ public class AdventuresOfManuel extends Game {
 		manager.load("arial.png", Texture.class);
 		
 		//setScreen(LOADING);
-		setScreen(NIVEL1);
+		setScreen(NIVEL4);
 	}
 	
 	public SpriteBatch getBatch() {
