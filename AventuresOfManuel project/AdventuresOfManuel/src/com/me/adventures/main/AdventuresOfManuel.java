@@ -17,16 +17,6 @@ public class AdventuresOfManuel extends Game {
 		manager = new AssetManager();
 		batch = new SpriteBatch();
 		
-		// Pantallas del juego
-		/*PRINCIPAL = new GameScreen(this);*/
-		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
-		NIVEL2 = new Nivel2(this, new Vector2(425,116));
-		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
-		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
-		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
-		
-		LOADING = new LoadingScreen(this);
-		
 		// Cargamos todos los elementos externos que usará el juego, como son las texturas y los sonidos.
 		manager.load("Pantallas/Loading.png", Texture.class);
 		manager.load("Manolito/TablaSpritesManolitoTransparencia.png", Texture.class);
@@ -50,7 +40,18 @@ public class AdventuresOfManuel extends Game {
 		manager.load("Miscelanea/TablaPuerta.png", Texture.class);
 		manager.load("arial.png", Texture.class);
 		
+		LOADING = new LoadingScreen(this); // Necesario
 		setScreen(LOADING);
+	}
+	
+	public void crearNiveles() {
+		// Pantallas del juego
+		/*PRINCIPAL = new GameScreen(this);*/
+		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
+		NIVEL2 = new Nivel2(this, new Vector2(425,116));
+		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
+		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
+		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
 	}
 	
 	public SpriteBatch getBatch() {

@@ -37,7 +37,7 @@ public class Manuel extends PersonajeDelJuego {
 	public Manuel(AdventuresOfManuel adventures, Vector2 posicion) {
 		super(adventures, posicion);
 		
-		Textura = new Texture("Manolito/TablaSpritesManolitoTransparencia.png");
+		Textura = adventures.getManager().get("Manolito/TablaSpritesManolitoTransparencia.png", Texture.class);
 		manuelMatrizFrames = TextureRegion.split(Textura, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		
 		// Asignamos las animaciones de las direcciones de Manuel
