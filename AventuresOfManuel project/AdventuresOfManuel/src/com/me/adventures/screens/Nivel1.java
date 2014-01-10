@@ -3,6 +3,7 @@ package com.me.adventures.screens;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.characters.*;
 import com.me.adventures.main.AdventuresOfManuel;
+import com.me.adventures.main.Constant;
 
 public class Nivel1 extends Nivel {
 	
@@ -22,7 +23,7 @@ public class Nivel1 extends Nivel {
 		objetos.add(new Pared(new Vector2(135, 0), 58, 754));
 		objetos.add(new Pared(new Vector2(135, 696), 406, 58));
 		objetos.add(new Pared(new Vector2(541, 725), 58, 29));
-		salida = new Salida(new Vector2(483,696), "PUERTA");
+		salida = new Salida(new Vector2(483,696), Constant.PUERTA);
 		objetos.add(new Pared(new Vector2(599, 696), 290, 58));
 		objetos.add(new Pared(new Vector2(831, 0), 58, 754));
 		
