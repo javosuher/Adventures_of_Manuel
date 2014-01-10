@@ -5,10 +5,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.me.adventures.main.Constant;
 
 public class Salida extends ObjetoDelJuego{
 	private int estado;
-	private String tipo;
+	private int tipo;
 	
 	private Vector2 posicion;
 	private Rectangle bordes;
@@ -16,12 +17,12 @@ public class Salida extends ObjetoDelJuego{
 
 	private TextureRegion frameActual;
 	
-	public Salida(Vector2 posicion, String tipo){
+	public Salida(Vector2 posicion, int tipo){
 		this.tipo = tipo;
 		estado = 0;
 		this.posicion = posicion;
 		bordes = new Rectangle(posicion.x, posicion.y, 58, 174);
-		if(this.tipo == "PUERTA")
+		if(this.tipo == Constant.PUERTA)
 			TexturaSalida = new Texture("Miscelanea/TablaPuerta.png");
 		else
 			TexturaSalida = new Texture("Miscelanea/TablaPuerta.png"); //--------- CAMBIAR A ESCALERA
@@ -31,11 +32,12 @@ public class Salida extends ObjetoDelJuego{
 	
 	public void abrirSalida(){
 		estado = 1;
-		frameActual = new TextureRegion(TexturaSalida, 0, 58, 174, 58);
+		if(tipo == Constant.PUERTA)
+			frameActual = new TextureRegion(TexturaSalida, 0, 58, 174, 58);
 	}
 	
 	public boolean salidaAbierta(){
-		if(estado == 0)
+		if(estado == 0) //cerrada
 			return false;
 		else
 			return true;
@@ -43,6 +45,7 @@ public class Salida extends ObjetoDelJuego{
 	
 	@Override
 	public void draw(SpriteBatch batch) {
+		if(tipo == Constant.PUERTA || (tipo == Constant.ESCALERA && estado == 1))
 		batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
 	}
 	
@@ -71,7 +74,7 @@ public class Salida extends ObjetoDelJuego{
 		this.bordes = bordes;
 	}
 
-	public String getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
 }

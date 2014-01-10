@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.Constant;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 public class Colision {
 	private Manuel manuel;
@@ -72,7 +73,7 @@ public class Colision {
 	}
 	
 	private boolean comprobarSalida(){
-		if(salida.getTipo() == "PUERTA"){
+		if(salida.getTipo() == Constant.PUERTA){
 			if((salida.getBordes().x + 58)  == manuel.getBordes().x && salida.getBordes().y == (manuel.getBordes().y + Constant.ALTURA_PERSONAJE))
 				return true;
 			else
