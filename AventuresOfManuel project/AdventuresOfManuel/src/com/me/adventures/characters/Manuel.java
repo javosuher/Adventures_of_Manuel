@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -76,6 +77,7 @@ public class Manuel extends PersonajeDelJuego {
 		boolean colisionArriba = colisiones.colisionArribaObjeto(this) || colisiones.colisionArribaEnemigo(this) || colisiones.colisionMovibleArriba(this);
 		boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this) || colisiones.colisionMovibleAbajo(this);
 		
+		if(Gdx.app.getType() == ApplicationType.Desktop) {
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
 			if(soloUnaTeclaPresionada && !colisionDerecha) {
 				posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
@@ -110,6 +112,43 @@ public class Manuel extends PersonajeDelJuego {
 		}
 		else
 			manuelSeQuedaQuieto = true;
+		}
+		else if(Gdx.app.getType() == ApplicationType.Android) {
+			if(Gdx.input.isTouched() && Gdx.input.getX() > Gdx.graphics.getWidth() - 50) {
+				if(soloUnaTeclaPresionada && !colisionDerecha) {
+					posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+					stateTime = stateTime + Gdx.graphics.getDeltaTime();
+				}
+				soloUnaTeclaPresionada = false;
+				direccion = DERECHA;
+			}
+			else if(Gdx.input.isTouched() && Gdx.input.getX() < 50) {
+				if(soloUnaTeclaPresionada && !colisionIzquierda) {
+					posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+					stateTime = stateTime + Gdx.graphics.getDeltaTime();
+				}
+				soloUnaTeclaPresionada = false;
+				direccion = IZQUIERDA;
+			}
+			else if(Gdx.input.isTouched() && Gdx.input.getY() < 50) {
+				if(soloUnaTeclaPresionada && !colisionArriba) {
+					posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+					stateTime = stateTime + Gdx.graphics.getDeltaTime();
+				}
+				soloUnaTeclaPresionada = false;
+				direccion = ARRIBA;
+			}
+			else if(Gdx.input.isTouched() && Gdx.input.getY() > Gdx.graphics.getHeight() - 50) {
+				if(soloUnaTeclaPresionada && !colisionAbajo) {
+					posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+					stateTime = stateTime + Gdx.graphics.getDeltaTime();
+				}
+				soloUnaTeclaPresionada = false;
+				direccion = ABAJO;
+			}
+			else
+				manuelSeQuedaQuieto = true;
+		}
 		
 		colisiones.colisionCorazon(this);
 		colisiones.colisionCofre(this);
