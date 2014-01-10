@@ -4,9 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
 public abstract class PersonajeDelJuego implements Entidad {
+	protected AdventuresOfManuel adventures;
 	protected Vector2 posicion;
 	protected Rectangle bordes;
 	protected float stateTime;
@@ -17,7 +19,8 @@ public abstract class PersonajeDelJuego implements Entidad {
 	protected Texture Textura;
 	protected TextureRegion frameActual;
 	
-	public PersonajeDelJuego(Vector2 posicion) {
+	public PersonajeDelJuego(AdventuresOfManuel adventures, Vector2 posicion) {
+		this.adventures = adventures;
 		this.posicion = posicion;
 		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		stateTime = 0f;

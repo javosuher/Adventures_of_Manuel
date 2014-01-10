@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
 public class Manuel extends PersonajeDelJuego {
@@ -33,8 +34,8 @@ public class Manuel extends PersonajeDelJuego {
 	private TextureRegion [][] manuelMatrizFrames;
 	private Animation manuelAnimationAbajo, manuelAnimationIzquierda, manuelAnimationDerecha, manuelAnimationArriba;
 	
-	public Manuel(Vector2 posicion) {
-		super(posicion);
+	public Manuel(AdventuresOfManuel adventures, Vector2 posicion) {
+		super(adventures, posicion);
 		
 		Textura = new Texture("Manolito/TablaSpritesManolitoTransparencia.png");
 		manuelMatrizFrames = TextureRegion.split(Textura, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
@@ -206,6 +207,15 @@ public class Manuel extends PersonajeDelJuego {
 		disparando = false;
 		proyectiles.remove(0);
 	}
+	
+	/*public boolean moverDerecha(boolean soloUnaTeclaPresionada, boolean ) {
+		if(soloUnaTeclaPresionada && !colisionDerecha) {
+			posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+			stateTime = stateTime + Gdx.graphics.getDeltaTime();
+		}
+		soloUnaTeclaPresionada = false;
+		direccion = DERECHA;
+	}*/
 	
 	// Getters and Setters ------------------------------------------------------------------------
 	public int getCorazonesObtenidos() {

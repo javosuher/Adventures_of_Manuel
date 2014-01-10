@@ -3,6 +3,7 @@ package com.me.adventures.characters;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
 public class Serpiente extends PersonajeDelJuegoEnemigo {
@@ -14,8 +15,8 @@ public class Serpiente extends PersonajeDelJuegoEnemigo {
 	//Atributos para pintar
 	private TextureRegion [][] serpienteMatrizFrames;
 	
-	public Serpiente(Vector2 posicion, Manuel manuel) {
-		super(posicion, manuel);
+	public Serpiente(AdventuresOfManuel adventures, Vector2 posicion, Manuel manuel) {
+		super(adventures, posicion, manuel);
 		
 		this.ataqueActivado = false;
 		direccion = IZQUIERDA;

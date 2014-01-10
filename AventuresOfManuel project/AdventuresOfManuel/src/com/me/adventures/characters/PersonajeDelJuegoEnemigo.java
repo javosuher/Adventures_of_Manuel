@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
 public abstract class PersonajeDelJuegoEnemigo extends PersonajeDelJuego {
@@ -21,8 +22,8 @@ public abstract class PersonajeDelJuegoEnemigo extends PersonajeDelJuego {
 	protected int tiempoEnBola;
 	protected int tiempoDesaparecido;
 	
-	public PersonajeDelJuegoEnemigo(Vector2 posicion, Manuel manuel) {
-		super(posicion);
+	public PersonajeDelJuegoEnemigo(AdventuresOfManuel adventures, Vector2 posicion, Manuel manuel) {
+		super(adventures, posicion);
 		this.manuel = manuel;
 		this.posicionInicial = new Vector2(posicion.x, posicion.y);
 		esBola = false;
