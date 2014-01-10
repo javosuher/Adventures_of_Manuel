@@ -61,8 +61,7 @@ public class Nivel3 extends Nivel {
 		objetos.add(new Arbol(new Vector2(367, 406)));
 		objetos.add(new Arbol(new Vector2(599, 406)));
 
-
-		objetos.add(new Agua(new Vector2(251, 348)));
+		//objetos.add(new Agua(new Vector2(251, 348)));
 		objetos.add(new Roca(new Vector2(367, 348)));
 		objetos.add(new Roca(new Vector2(483, 348)));
 		objetos.add(new Arbol(new Vector2(599, 348)));
@@ -88,7 +87,7 @@ public class Nivel3 extends Nivel {
 		objetos.add(new Agua(new Vector2(715, 174)));
 
 		objetos.add(new Agua(new Vector2(251, 116)));
-		objetos.add(new Agua(new Vector2(309, 116)));
+		//objetos.add(new Agua(new Vector2(309, 116)));
 		objetos.add(new Agua(new Vector2(367, 116)));
 		objetos.add(new Agua(new Vector2(425, 116)));
 		objetos.add(new Agua(new Vector2(483, 116)));

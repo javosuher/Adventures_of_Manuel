@@ -63,6 +63,9 @@ public abstract class Nivel extends AbstractScreen {
 			objeto.update();
 		}
 		
+		for(MapaDelJuego mapa : mapaNivel){
+			mapa.update();
+		}
 		for(PersonajeDelJuego personaje : personajes){
 			personaje.update();
 		}
@@ -80,7 +83,6 @@ public abstract class Nivel extends AbstractScreen {
 		}
 		cofre.draw(batch);
 		
-		manuel.draw(batch);
 		if(salida.salidaAbierta() == true){
 			personajes.clear();
 			personajesMovibles.clear();
@@ -105,6 +107,8 @@ public abstract class Nivel extends AbstractScreen {
 		for(MapaDelJuego mapa : mapaNivel){
 			mapa.draw(batch);
 		}
+
+		manuel.draw(batch);
 		batch.end();
 	}
 	
