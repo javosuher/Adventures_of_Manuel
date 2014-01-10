@@ -59,8 +59,8 @@ public abstract class Nivel extends AbstractScreen {
 		// Actualizamos personajes pantalla
 		manuel.update();
 
-		for(MapaDelJuego mapa: mapaNivel){
-			mapa.update();
+		for(ObjetoDelJuego objeto: objetos){
+			objeto.update();
 		}
 		
 		for(PersonajeDelJuego personaje : personajes){
