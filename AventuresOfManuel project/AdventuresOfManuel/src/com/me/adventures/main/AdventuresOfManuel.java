@@ -7,6 +7,7 @@ import com.me.adventures.screens.*;
 public class AdventuresOfManuel extends Game {
 	private Screen nivel;
 	private Screen ganar;
+	
 	@Override
 	public void create() {
 		nivel = new Nivel1(this);
