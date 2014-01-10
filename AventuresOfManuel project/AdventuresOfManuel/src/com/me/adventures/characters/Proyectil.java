@@ -1,28 +1,22 @@
 package com.me.adventures.characters;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
 class Proyectil extends ObjetoDelJuego{
-	private static final int ABAJO = 0;
-	private static final int IZQUIERDA = 1;
-	private static final int DERECHA = 2;
-	private static final int ARRIBA = 3;
+	protected static final int ABAJO = 0;
+	protected static final int IZQUIERDA = 1;
+	protected static final int DERECHA = 2;
+	protected static final int ARRIBA = 3;
 	
-	private TextureRegion disparoArribaAbajo, disparoDerechaIzquierda, disparoDireccion;
-	private int direccion;
+	protected TextureRegion disparoArribaAbajo, disparoDerechaIzquierda, disparoDireccion;
+	protected int direccion;
 	
 	public Proyectil(AdventuresOfManuel adventures, Vector2 posicion) {
 		super(adventures, posicion);
-		bordes = new Rectangle(0, 0, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
-		Textura = adventures.getManager().get("Miscelanea/ProyectilManolito.png", Texture.class);
-		disparoArribaAbajo = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		disparoDerechaIzquierda = new TextureRegion(Textura, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 	}
 	
 	public void inicializaPosicion(Vector2 posicion, int direccion){

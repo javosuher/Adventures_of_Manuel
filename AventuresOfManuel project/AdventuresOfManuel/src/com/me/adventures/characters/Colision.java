@@ -108,7 +108,7 @@ public class Colision {
 			salida.abrirSalida();
 		}
 	}
-	//-----------------------------
+	
 	private boolean colisionEnemigo(Rectangle auxiliar) {
 		boolean ningunaColision = true;
 		for(int i = 0; i < personajes.size() && ningunaColision; i++) {
