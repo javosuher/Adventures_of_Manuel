@@ -30,12 +30,13 @@ public class NivelTest extends Nivel {
 	private BitmapFont font;
 	private int eleccion;
 	private Roca roca;
-	private boolean primerMovimientoDerecha, primerMovimientoIzquierda, primerMovimientoArriba, primerMovimientoAbajo, colisionRoca;
+	private boolean primerMovimientoDerecha, primerMovimientoIzquierda, primerMovimientoArriba, primerMovimientoAbajo, colisionRoca,
+	corazonPrimero;
 
 	public NivelTest(MainTest adventuras_del_manuel) {
 		font = new BitmapFont(Gdx.files.internal("arial.fnt"), Gdx.files.internal("arial.png"), false);
 		primerMovimientoDerecha = true;
-		primerMovimientoIzquierda = primerMovimientoArriba = primerMovimientoAbajo = colisionRoca = false;
+		corazonPrimero = primerMovimientoIzquierda = primerMovimientoArriba = primerMovimientoAbajo = colisionRoca = false;
 		this.adventurasDeManuel = adventuras_del_manuel;
 		TexturaFondo = new Texture("Miscelanea/Nivel.png");
 		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -88,8 +89,8 @@ public class NivelTest extends Nivel {
 		objetos.add(new Arbol(new Vector2(251, 580)));
 		objetos.add(new Arbol(new Vector2(309, 580)));
 		objetos.add(new Roca(new Vector2(367, 580)));
-		corazones.add(new Corazon(new Vector2(425,580), 0)); //no da proyectiles
-		objetos.add(new Roca(new Vector2(599, 580)));
+		*/corazones.add(new Corazon(new Vector2(425,580), 0)); //no da proyectiles
+		/*objetos.add(new Roca(new Vector2(599, 580)));
 		objetos.add(new Roca(new Vector2(657, 580)));
 		objetos.add(new Arbol(new Vector2(715, 580)));
 		objetos.add(new Arbol(new Vector2(773, 580)));
@@ -184,9 +185,9 @@ public class NivelTest extends Nivel {
 		batch.draw(TexturaFondo, 135, 0, TexturaFondo.getWidth(), TexturaFondo.getHeight());
 		//salida.draw(batch);
 
-		for(Corazon corazon : corazones){
+		/*for(Corazon corazon : corazones){
 			corazon.draw(batch);
-		}
+		}*/
 		//cofre.draw(batch);
 		manuel.draw(batch);
 		
@@ -194,6 +195,8 @@ public class NivelTest extends Nivel {
 		movimientos();
 		
 		rocaColision();
+		
+		corazon();
 		
 		if(eleccion == 4){
 			font.draw(batch, "Colision!", 367, 638);
@@ -216,6 +219,18 @@ public class NivelTest extends Nivel {
 			objeto.draw(batch);
 		}*/
 		batch.end();
+	}
+
+	private void corazon() {
+		if(corazonPrimero){
+			font.draw(batch, "Colisionaste! Ahora coge el corazon", 367, 638);
+			for(Corazon corazon : corazones)
+				corazon.draw(batch);
+			if(colisiones.colisionCorazon(manuel)){
+				dibujar();
+			}
+			
+		}
 	}
 
 	private void rocaColision() {
@@ -280,12 +295,19 @@ public class NivelTest extends Nivel {
 			  font.draw(batch, "Muevete abajo", 367, 638);
 			  primerMovimientoArriba = false;
 			  primerMovimientoAbajo = true;
-			  //eleccion = 3;
 			  break;
 		  case 3:
-			  font.draw(batch, "Colisionaste!", 367, 638);
+			  font.draw(batch, "Colisionaste! Ahora coge el corazon", 367, 638);
 			  colisionRoca = false;
+			  corazonPrimero = true;
+			  for(Corazon corazon : corazones)
+					corazon.draw(batch);
 			  eleccion = 4;
+			  break;
+		  case 4:
+			  font.draw(batch, "Corazon cogido!", 367, 638);
+			  corazonPrimero = false;
+			  eleccion = 5;
 			  break;
 		}
 	}
