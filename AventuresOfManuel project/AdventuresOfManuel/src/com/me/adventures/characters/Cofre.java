@@ -19,7 +19,7 @@ public class Cofre extends ObjetoDelJuego{
 	public Cofre(AdventuresOfManuel adventures, Vector2 posicion, int corazonesNecesarios){
 		super(adventures, posicion);
 		this.corazonesNecesarios = corazonesNecesarios;
-		Textura = new Texture("Miscelanea/Cofre.png");
+		Textura = adventures.getManager().get("Miscelanea/Cofre.png", Texture.class);
 		
 		cofreVectorFrames = new TextureRegion[3];
 		cofreVectorFrames[0] = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);

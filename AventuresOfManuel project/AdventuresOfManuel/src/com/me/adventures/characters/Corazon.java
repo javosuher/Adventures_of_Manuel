@@ -14,7 +14,7 @@ public class Corazon extends ObjetoDelJuego
 	{
 		super(adventures, posicion);
 		this.proyectilesOtorga = proyectilesOtorga;
-		Textura = new Texture("Miscelanea/Corazon.png");
+		Textura = adventures.getManager().get("Miscelanea/Corazon.png", Texture.class);
 	}
 	
 	@Override

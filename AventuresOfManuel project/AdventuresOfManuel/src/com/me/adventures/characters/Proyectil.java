@@ -20,7 +20,7 @@ class Proyectil extends ObjetoDelJuego{
 	public Proyectil(AdventuresOfManuel adventures, Vector2 posicion) {
 		super(adventures, posicion);
 		bordes = new Rectangle(0, 0, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
-		Textura = new Texture("Miscelanea/ProyectilManolito.png");
+		Textura = adventures.getManager().get("Miscelanea/ProyectilManolito.png", Texture.class);
 		disparoArribaAbajo = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		disparoDerechaIzquierda = new TextureRegion(Textura, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 	}

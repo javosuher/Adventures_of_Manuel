@@ -21,7 +21,7 @@ public class Serpiente extends PersonajeDelJuegoEnemigo {
 		this.ataqueActivado = false;
 		direccion = IZQUIERDA;
 		
-		Textura = new Texture("Enemigos/TablaSerpiente.png");
+		Textura = adventures.getManager().get("Enemigos/TablaSerpiente.png", Texture.class);
 
 		serpienteMatrizFrames = new TextureRegion[2][2];
 		serpienteMatrizFrames[0][0] = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);

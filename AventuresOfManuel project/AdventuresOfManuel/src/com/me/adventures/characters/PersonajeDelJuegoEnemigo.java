@@ -32,7 +32,7 @@ public abstract class PersonajeDelJuegoEnemigo extends PersonajeDelJuego {
 		tiempoDesaparecido = Constant.TIEMPO_DESAPARECIDO;
 		
 		// Texturas bola
-		TexturaBola = new Texture("Miscelanea/Huevo.png");
+		TexturaBola = adventures.getManager().get("Miscelanea/Huevo.png", Texture.class);
 		huevoFrameActual = huevoNormal = new TextureRegion(TexturaBola, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		huevoRompiendose = new TextureRegion(TexturaBola, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 	}

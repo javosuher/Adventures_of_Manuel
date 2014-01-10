@@ -13,7 +13,7 @@ public class Puente extends MapaDelJuego {
 	
 	public Puente(AdventuresOfManuel adventures, Vector2 posicion, int orientacion){
 		super(adventures, posicion);
-		Textura = new Texture("Miscelanea/TablaPuente.png");
+		Textura = adventures.getManager().get("Miscelanea/TablaPuente.png", Texture.class);
 		if(orientacion == Constant.PUENTE_VERTICAL)
 			frameActual = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		else

@@ -20,9 +20,9 @@ public class Salida extends ObjetoDelJuego{
 		this.tipo = tipo;
 		estado = 0;
 		if(this.tipo == Constant.PUERTA)
-			Textura = new Texture("Miscelanea/TablaPuerta.png");
+			Textura = adventures.getManager().get("Miscelanea/TablaPuerta.png", Texture.class);
 		else
-			Textura = new Texture("Miscelanea/TablaPuerta.png"); //--------- CAMBIAR A ESCALERA
+			Textura = adventures.getManager().get("Miscelanea/TablaPuerta.png", Texture.class); //--------- CAMBIAR A ESCALERA
 		
 		frameActual = new TextureRegion(Textura, 0, 0, 174, 58);
 	}

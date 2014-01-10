@@ -9,7 +9,7 @@ public class Roca extends ObjetoDelJuego {
 	
 	public Roca(AdventuresOfManuel adventures, Vector2 posicion) {
 		super(adventures, posicion);
-		Textura = new Texture("Miscelanea/Roca.png");
+		Textura = adventures.getManager().get("Miscelanea/Roca.png", Texture.class);
 	}
 	
 	@Override

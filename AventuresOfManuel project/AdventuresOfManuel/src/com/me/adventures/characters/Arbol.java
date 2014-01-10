@@ -9,7 +9,7 @@ public class Arbol extends ObjetoDelJuego {
 	
 	public Arbol(AdventuresOfManuel adventures, Vector2 posicion) {
 		super(adventures, posicion);
-		Textura = new Texture("Miscelanea/Arbol.png");
+		Textura = adventures.getManager().get("Miscelanea/Arbol.png", Texture.class);
 	}
 	
 	@Override

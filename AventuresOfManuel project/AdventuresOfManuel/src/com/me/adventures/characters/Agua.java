@@ -20,7 +20,7 @@ public class Agua extends ObjetoDelJuego {
 		oleaje = 0;
 		tiempo = 0;
 		
-		Textura = new Texture("Miscelanea/TablaAgua.png");
+		Textura = adventures.getManager().get("Miscelanea/TablaAgua.png", Texture.class);
 				
 		aguaMatrizFrames = new TextureRegion[6];
 		aguaMatrizFrames[0] = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);

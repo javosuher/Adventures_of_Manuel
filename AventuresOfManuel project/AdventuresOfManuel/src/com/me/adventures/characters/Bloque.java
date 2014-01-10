@@ -9,7 +9,7 @@ public class Bloque extends ObjetoDelJuego {
 	
 	public Bloque(AdventuresOfManuel adventures, Vector2 posicion){
 		super(adventures, posicion);
-		Textura = new Texture("Miscelanea/Bloque.png");
+		Textura = adventures.getManager().get("Enemigos/bloque.png", Texture.class);
 	}
 	
 	@Override
