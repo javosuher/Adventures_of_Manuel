@@ -24,7 +24,7 @@ public class AdventuresOfManuel extends Game {
 		LOADING = new LoadingScreen(this);
 		
 		// Cargamos todos los elementos externos que usará el juego, como son las texturas y los sonidos.
-		// Pantalla de cargado
+		manager.load("Pantallas/Loading.png", Texture.class);
 		manager.load("Manolito/TablaSpritesManolitoTransparencia.png", Texture.class);
 		manager.load("Enemigos/TablaCalaveraFinal.png", Texture.class);
 		manager.load("Enemigos/TablaMedusa.png", Texture.class);
@@ -46,8 +46,7 @@ public class AdventuresOfManuel extends Game {
 		manager.load("Miscelanea/TablaPuerta.png", Texture.class);
 		manager.load("arial.png", Texture.class);
 		
-		//setScreen(LOADING);
-		setScreen(NIVEL1);
+		setScreen(LOADING);
 	}
 	
 	public SpriteBatch getBatch() {

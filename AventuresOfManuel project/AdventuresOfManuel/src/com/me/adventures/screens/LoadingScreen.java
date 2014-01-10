@@ -16,12 +16,20 @@ public class LoadingScreen extends AbstractScreen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		if(adventures.getManager().update()) { // Si han cargado todas las imagenes
-			//adventures.setScreen(adventures.PRINCIPAL);
+			adventures.setScreen(adventures.LOADING);
 		}
 		
-		if(adventures.getManager().isLoaded("data/Loading.png", Texture.class)) { // Si se ha cargado la imagen Loading.png
+		if(adventures.getManager().isLoaded("Pantallas/Loading.png", Texture.class)) { // Si se ha cargado la imagen Loading.png
+			float ancho = 0;
+			float alto = 0;
+			if(Gdx.graphics.getWidth() < adventures.getManager().get("Pantallas/Loading.png", Texture.class).getWidth()) {
+				float div = (float) ((float) Gdx.graphics.getWidth()) / ((float) adventures.getManager().get("Pantallas/Loading.png", Texture.class).getWidth());
+				ancho = adventures.getManager().get("Pantallas/Loading.png", Texture.class).getWidth() * div;
+				alto = adventures.getManager().get("Pantallas/Loading.png", Texture.class).getHeight() * div;
+			}
+			float altura = Gdx.graphics.getHeight() - alto;
 			batch.begin();
-			batch.draw(adventures.getManager().get("data/Loading.png", Texture.class), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+			batch.draw(adventures.getManager().get("Pantallas/Loading.png", Texture.class), 0, altura, ancho, alto);
 			batch.end();
 		}
 	}
