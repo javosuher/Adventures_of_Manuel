@@ -32,7 +32,7 @@ public abstract class Nivel extends AbstractScreen {
 	
 	public Nivel(AdventuresOfManuel adventures, Vector2 posicionManuel) {
 		super(adventures);
-		TexturaFondo = new Texture("Miscelanea/Nivel.png");
+		TexturaFondo = adventures.getManager().get("Miscelanea/Nivel.png", Texture.class);
 		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		objetos = new ArrayList<ObjetoDelJuego>();
 		corazones = new ArrayList<Corazon>();
