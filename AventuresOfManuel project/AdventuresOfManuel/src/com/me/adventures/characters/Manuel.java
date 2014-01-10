@@ -228,6 +228,6 @@ public class Manuel extends PersonajeDelJuego {
 	
 	public void obtenerProyectil(int proyectilesOtorgados){
 		for(int i = 0; i < proyectilesOtorgados; i++)
-			proyectiles.add(new Proyectil(adventures, new Vector2()));
+			proyectiles.add(new ProyectilManuel(adventures, new Vector2()));
 	}
 }
