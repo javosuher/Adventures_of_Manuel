@@ -187,7 +187,7 @@ public class NivelTest extends Nivel {
 
 		/*for(Corazon corazon : corazones){
 			corazon.draw(batch);
-		}*/
+		}*/ 
 		//cofre.draw(batch);
 		manuel.draw(batch);
 		
