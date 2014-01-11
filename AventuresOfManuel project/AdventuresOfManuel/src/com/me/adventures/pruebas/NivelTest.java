@@ -118,6 +118,8 @@ public class NivelTest extends Nivel {
 
 	private void terminar() {
 		if(terminar){
+			for(ObjetoDelJuego objeto : objetos) 
+				objeto.draw(batch);
 			salida.draw(batch);
 			cofre.draw(batch);
 			if(manuel.getPosicion().x == salida.getPosicion().x + 58 && manuel.getPosicion().y == salida.getPosicion().y - 29){
@@ -130,6 +132,8 @@ public class NivelTest extends Nivel {
 
 	private void gema() {
 		if(cofreAbierto){
+			for(ObjetoDelJuego objeto : objetos) 
+				objeto.draw(batch);
 			font.draw(batch, "Coge la gema", 367, 638);
 			salida.draw(batch);
 			cofre.draw(batch);
@@ -144,6 +148,8 @@ public class NivelTest extends Nivel {
 
 	private void disparar() {
 		if(disparar){
+			for(ObjetoDelJuego objeto : objetos) 
+				objeto.draw(batch);
 			salida.draw(batch);
 			cofre.draw(batch);
 			font.draw(batch, "Corazon cogido! Dispara proyectiles", 367, 638);
@@ -162,6 +168,8 @@ public class NivelTest extends Nivel {
 
 	private void corazon() {
 		if(corazonPrimero){
+			for(ObjetoDelJuego objeto : objetos) 
+				objeto.draw(batch);
 			salida.draw(batch);
 			cofre.draw(batch);
 			font.draw(batch, "Colisionaste! Ahora coge el corazon", 367, 638);
@@ -244,7 +252,7 @@ public class NivelTest extends Nivel {
 			  for(Corazon corazon : corazones)
 					corazon.draw(batch);
 
-			  objetos.remove(6);
+			  //objetos.remove(6);
               colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida);
 			  eleccion = 4;
 			  break;
