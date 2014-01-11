@@ -2,6 +2,7 @@ package com.me.adventures.pruebas;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.me.adventures.screens.Ganar;
 import com.me.adventures.screens.*;
 
 public class MainTest extends Game {
@@ -11,7 +12,13 @@ public class MainTest extends Game {
 	@Override
 	public void create() {
 		nivel = new NivelTest(this);
+		ganar = new PruebaSuperada(this);
 		setScreen(nivel);
+	}
+	
+	public void haGanado(){
+		nivel.dispose();
+		setScreen(ganar);
 	}
 	
 	@Override
