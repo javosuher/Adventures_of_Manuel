@@ -106,12 +106,19 @@ public class Manuel extends PersonajeDelJuego {
 	
 	@Override
 	public void activarAtaque() {
-		if(!proyectiles.isEmpty() && !disparando && Gdx.input.isKeyPressed(Keys.SPACE) && tiempoParaSiguienteProyectil == 0){
+		if(!proyectiles.isEmpty() && !disparando && teclaDeDisparo() && tiempoParaSiguienteProyectil == 0){
 			tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 			//tenemos que pasarle la posicion siguiente a donde este manolito, dependiendo de la direccion
 			proyectiles.get(0).inicializaPosicion(posicion, direccion);
 			disparando = true;
 		}
+	}
+	private boolean teclaDeDisparo() {
+		if(Gdx.app.getType() == ApplicationType.Desktop)
+			return Gdx.input.isKeyPressed(Keys.SPACE);
+		else if(Gdx.app.getType() == ApplicationType.Android)
+			return Gdx.input.isTouched() && Gdx.input.getX() < (Gdx.graphics.getWidth() / 2) + 100 && Gdx.input.getX() > (Gdx.graphics.getWidth() / 2) - 100 && Gdx.input.getY() < (Gdx.graphics.getHeight() / 2) + 100 && Gdx.input.getY() > (Gdx.graphics.getHeight() / 2) - 100;
+		else return false;
 	}
 	private void eliminandoDisparo() {
 		disparando = false;

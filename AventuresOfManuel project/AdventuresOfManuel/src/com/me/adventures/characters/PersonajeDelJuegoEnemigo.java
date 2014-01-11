@@ -1,5 +1,6 @@
 package com.me.adventures.characters;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
@@ -83,25 +84,25 @@ public abstract class PersonajeDelJuegoEnemigo extends PersonajeDelJuego {
 	public void moverEnBola() {
 		int direccionHuevo = -1;
 		boolean estaQuieto = true;
-		if(colisiones.colisionMovibleArriba(manuel) && Gdx.input.isKeyPressed(Keys.UP) && !colisiones.colisionArribaObjeto(this) && !colisiones.colisionArribaEnemigo(this)) {
+		if(colisiones.colisionMovibleArriba(manuel) && teclaArriba() && !colisiones.colisionArribaObjeto(this) && !colisiones.colisionArribaEnemigo(this)) {
 			posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccionHuevo = manuel.ARRIBA;
 			estaQuieto = false;
 		}
-		else if(colisiones.colisionMovibleAbajo(manuel) && Gdx.input.isKeyPressed(Keys.DOWN) && !colisiones.colisionAbajoObjeto(this) && !colisiones.colisionAbajoEnemigo(this)) {
+		else if(colisiones.colisionMovibleAbajo(manuel) && teclaAbajo() && !colisiones.colisionAbajoObjeto(this) && !colisiones.colisionAbajoEnemigo(this)) {
 			posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccionHuevo = manuel.ABAJO;
 			estaQuieto = false;
 		}
-		else if(colisiones.colisionMovibleDerecha(manuel) && Gdx.input.isKeyPressed(Keys.RIGHT) && !colisiones.colisionDerechaObjeto(this) && !colisiones.colisionDerechaEnemigo(this)) {
+		else if(colisiones.colisionMovibleDerecha(manuel) && teclaDerecha() && !colisiones.colisionDerechaObjeto(this) && !colisiones.colisionDerechaEnemigo(this)) {
 			posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccionHuevo = manuel.DERECHA;
 			estaQuieto = false;
 		}
-		else if(colisiones.colisionMovibleIzquierda(manuel) && Gdx.input.isKeyPressed(Keys.LEFT) && !colisiones.colisionIzquierdaObjeto(this) && !colisiones.colisionIzquierdaEnemigo(this)) {
+		else if(colisiones.colisionMovibleIzquierda(manuel) && teclaIzquierda() && !colisiones.colisionIzquierdaObjeto(this) && !colisiones.colisionIzquierdaEnemigo(this)) {
 			posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccionHuevo = manuel.IZQUIERDA;
@@ -138,6 +139,35 @@ public abstract class PersonajeDelJuegoEnemigo extends PersonajeDelJuego {
 		// Actualizar bordes
 		bordes.x = posicion.x;
 		bordes.y = posicion.y;	
+	}
+	
+	private boolean teclaArriba() {
+		if(Gdx.app.getType() == ApplicationType.Desktop)
+			return Gdx.input.isKeyPressed(Keys.UP);
+		else if(Gdx.app.getType() == ApplicationType.Android)
+			return Gdx.input.isTouched() && Gdx.input.getY() < 50;
+		else return false;
+	}
+	private boolean teclaAbajo() {
+		if(Gdx.app.getType() == ApplicationType.Desktop)
+			return Gdx.input.isKeyPressed(Keys.DOWN);
+		else if(Gdx.app.getType() == ApplicationType.Android)
+			return Gdx.input.isTouched() && Gdx.input.getY() > Gdx.graphics.getHeight() - 50;
+		else return false;
+	}
+	private boolean teclaDerecha() {
+		if(Gdx.app.getType() == ApplicationType.Desktop)
+			return Gdx.input.isKeyPressed(Keys.RIGHT);
+		else if(Gdx.app.getType() == ApplicationType.Android)
+			return Gdx.input.isTouched() && Gdx.input.getX() > Gdx.graphics.getWidth() - 50;
+		else return false;
+	}
+	private boolean teclaIzquierda() {
+		if(Gdx.app.getType() == ApplicationType.Desktop)
+			return Gdx.input.isKeyPressed(Keys.LEFT);
+		else if(Gdx.app.getType() == ApplicationType.Android)
+			return Gdx.input.isTouched() && Gdx.input.getX() < 50;
+		else return false;
 	}
 	
 	public void desaparecer() {
