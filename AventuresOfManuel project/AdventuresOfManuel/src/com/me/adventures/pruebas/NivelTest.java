@@ -28,15 +28,14 @@ public class NivelTest extends Nivel {
 	private Colision colisiones;
 	private Salida salida;
 	private BitmapFont font;
-	private int eleccion;
-	private Roca roca;
+	private int eleccion, disparos;
 	private boolean primerMovimientoDerecha, primerMovimientoIzquierda, primerMovimientoArriba, primerMovimientoAbajo, colisionRoca,
-	corazonPrimero;
+	corazonPrimero, disparar, cofreAbierto, terminar;
 
 	public NivelTest(MainTest adventuras_del_manuel) {
 		font = new BitmapFont(Gdx.files.internal("arial.fnt"), Gdx.files.internal("arial.png"), false);
 		primerMovimientoDerecha = true;
-		corazonPrimero = primerMovimientoIzquierda = primerMovimientoArriba = primerMovimientoAbajo = colisionRoca = false;
+		terminar = cofreAbierto = disparar = corazonPrimero = primerMovimientoIzquierda = primerMovimientoArriba = primerMovimientoAbajo = colisionRoca = false;
 		this.adventurasDeManuel = adventuras_del_manuel;
 		TexturaFondo = new Texture("Miscelanea/Nivel.png");
 		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -51,8 +50,6 @@ public class NivelTest extends Nivel {
 		for(PersonajeDelJuego p : personajes){
 			p.setColision(colisiones);
 		}
-		
-		roca = new Roca(new Vector2(483, 58));
 		
 		eleccion = 0;
 		
@@ -89,8 +86,8 @@ public class NivelTest extends Nivel {
 		objetos.add(new Arbol(new Vector2(251, 580)));
 		objetos.add(new Arbol(new Vector2(309, 580)));
 		objetos.add(new Roca(new Vector2(367, 580)));
-		*/corazones.add(new Corazon(new Vector2(425,580), 0)); //no da proyectiles
-		/*objetos.add(new Roca(new Vector2(599, 580)));
+		corazones.add(new Corazon(new Vector2(200,200), 0)); //no da proyectiles
+		objetos.add(new Roca(new Vector2(599, 580)));
 		objetos.add(new Roca(new Vector2(657, 580)));
 		objetos.add(new Arbol(new Vector2(715, 580)));
 		objetos.add(new Arbol(new Vector2(773, 580)));
@@ -119,9 +116,9 @@ public class NivelTest extends Nivel {
 		objetos.add(new Roca(new Vector2(599, 406)));
 		objetos.add(new Roca(new Vector2(657, 406)));
 		objetos.add(new Arbol(new Vector2(715, 406)));
-		corazones.add(new Corazon(new Vector2(773,406), 2)); //otorga 2 proyectiles
+		*/corazones.add(new Corazon(new Vector2(773,406), 2)); //otorga 2 proyectiles
 		
-		objetos.add(new Roca(new Vector2(657, 348)));
+		/*objetos.add(new Roca(new Vector2(657, 348)));
 		
 		objetos.add(new Arbol(new Vector2(251, 290)));
 		objetos.add(new Arbol(new Vector2(309, 290)));
@@ -185,11 +182,7 @@ public class NivelTest extends Nivel {
 		batch.draw(TexturaFondo, 135, 0, TexturaFondo.getWidth(), TexturaFondo.getHeight());
 		//salida.draw(batch);
 
-		/*for(Corazon corazon : corazones){
-			corazon.draw(batch);
-		}*/ 
-		//cofre.draw(batch);
-		manuel.draw(batch);
+		
 		
 		
 		movimientos();
@@ -198,12 +191,12 @@ public class NivelTest extends Nivel {
 		
 		corazon();
 		
-		if(eleccion == 4){
-			font.draw(batch, "Colision!", 367, 638);
-			for(ObjetoDelJuego objeto : objetos) 
-				objeto.draw(batch);
-		}
+		disparar();
 		
+		gema();
+		
+		terminar();
+		manuel.draw(batch);
 		/*if(salida.salidaAbierta() == false){
 			for(PersonajeDelJuego personaje : personajes){
 				personaje.draw(batch);
@@ -221,8 +214,54 @@ public class NivelTest extends Nivel {
 		batch.end();
 	}
 
+	private void terminar() {
+		if(terminar){
+			salida.draw(batch);
+			cofre.draw(batch);
+			if(salida.getBordes().overlaps(manuel.getBordes())){
+				terminar = false;
+				font.draw(batch, "Pruebas terminadas!", 367, 638);
+			}
+		}
+		
+	}
+
+	private void gema() {
+		if(cofreAbierto){
+			font.draw(batch, "Coge la gema", 367, 638);
+			salida.draw(batch);
+			cofre.draw(batch);
+			if(cofre.getBordes().overlaps(manuel.getBordes())){
+				cofre.cogerGema();
+				salida.abrirSalida();
+				dibujar();
+			}
+		}
+		
+	}
+
+	private void disparar() {
+		if(disparar){
+			salida.draw(batch);
+			cofre.draw(batch);
+			font.draw(batch, "Corazon cogido! Dispara proyectiles", 367, 638);
+			if(disparos != 0){
+				if(Gdx.input.isKeyPressed(Keys.SPACE)){
+					disparos--;
+				}
+			}
+			else{
+				dibujar();
+			}
+			
+		}
+		
+	}
+
 	private void corazon() {
 		if(corazonPrimero){
+			salida.draw(batch);
+			cofre.draw(batch);
 			font.draw(batch, "Colisionaste! Ahora coge el corazon", 367, 638);
 			for(Corazon corazon : corazones)
 				corazon.draw(batch);
@@ -302,12 +341,28 @@ public class NivelTest extends Nivel {
 			  corazonPrimero = true;
 			  for(Corazon corazon : corazones)
 					corazon.draw(batch);
+
+			  objetos.remove(6);
+              colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida);
 			  eleccion = 4;
 			  break;
 		  case 4:
-			  font.draw(batch, "Corazon cogido!", 367, 638);
+			  font.draw(batch, "Corazon cogido! Dispara proyectiles", 367, 638);
 			  corazonPrimero = false;
+			  cofre.abrirCofre();
+			  disparar = true;
 			  eleccion = 5;
+			  disparos = 2;
+			  break;
+		  case 5:
+			  disparar = false;
+			  cofreAbierto = true;
+			  font.draw(batch, "Coge la gema.", 367, 638);
+			  eleccion = 6;
+			  break;
+		  case 6:
+			  cofreAbierto = false;
+			  terminar = true;
 			  break;
 		}
 	}
