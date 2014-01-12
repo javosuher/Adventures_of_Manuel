@@ -3,6 +3,7 @@ package com.me.adventures.screens;
 import java.util.ArrayList;
 import java.util.List;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -33,6 +34,13 @@ public abstract class Nivel extends AbstractScreen {
 	public Nivel(AdventuresOfManuel adventures, Vector2 posicionManuel) {
 		super(adventures);
 		TexturaFondo = adventures.getManager().get("Miscelanea/Nivel.png", Texture.class);
+		if(Gdx.graphics.getHeight() < adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight() && Gdx.app.getType() == ApplicationType.Android) {
+			float div = (float) ((float) Gdx.graphics.getHeight()) / ((float) adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight());
+			adventures.getCamera().position.set(Gdx.graphics.getWidth() / 2, TexturaFondo.getHeight() / 2, 0);
+			adventures.getCamera().zoom = div + 1;
+		}
+		else
+			adventures.getCamera().position.set(Gdx.graphics.getWidth() / 2, TexturaFondo.getHeight() / 2, 0);
 		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		objetos = new ArrayList<ObjetoDelJuego>();
 		corazones = new ArrayList<Corazon>();
@@ -55,6 +63,11 @@ public abstract class Nivel extends AbstractScreen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
+		
+		adventures.getCamera().update();
+		/*if(Gdx.app.getType() == ApplicationType.Android)
+			adventures.getCamera().apply(Gdx.graphics.getGL10());*/
+		batch.setProjectionMatrix(adventures.getCamera().combined);
 		
 		// Actualizamos personajes pantalla
 		manuel.update();

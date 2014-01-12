@@ -1,7 +1,9 @@
 package com.me.adventures.main;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -11,11 +13,13 @@ public class AdventuresOfManuel extends Game {
 	public AbstractScreen LOADING, NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5;
 	private AssetManager manager;
 	private SpriteBatch batch;
+	private OrthographicCamera camera;
 	
 	@Override
 	public void create() {
 		manager = new AssetManager();
 		batch = new SpriteBatch();
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		// Cargamos todos los elementos externos que usará el juego, como son las texturas y los sonidos.
 		manager.load("Pantallas/Loading.png", Texture.class);
@@ -60,6 +64,10 @@ public class AdventuresOfManuel extends Game {
 	
 	public AssetManager getManager() {
 		return manager;
+	}
+	
+	public OrthographicCamera getCamera() {
+		return camera;
 	}
 
 	@Override
