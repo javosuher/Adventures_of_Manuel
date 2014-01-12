@@ -3,7 +3,6 @@ package com.me.adventures.screens;
 import java.util.ArrayList;
 import java.util.List;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -34,7 +33,7 @@ public abstract class Nivel extends AbstractScreen {
 	public Nivel(AdventuresOfManuel adventures, Vector2 posicionManuel) {
 		super(adventures);
 		TexturaFondo = adventures.getManager().get("Miscelanea/Nivel.png", Texture.class);
-		if(Gdx.graphics.getHeight() < adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight() && Gdx.app.getType() == ApplicationType.Android) {
+		if(Gdx.graphics.getHeight() < adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight() /*&& Gdx.app.getType() == ApplicationType.Android*/) {
 			float div = (float) ((float) Gdx.graphics.getHeight()) / ((float) adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight());
 			adventures.getCamera().position.set((135 + Gdx.graphics.getWidth()) / 2, TexturaFondo.getHeight() / 2, 0);
 			adventures.getCamera().zoom = div + 1;
