@@ -17,7 +17,7 @@ public class LoadingScreen extends AbstractScreen {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		if(adventures.getManager().update()) { // Si han cargado todas las imagenes
 			adventures.crearNiveles();
-			adventures.setScreen(adventures.NIVEL1);
+			adventures.setScreen(adventures.MAIN);
 		}
 		
 		if(adventures.getManager().isLoaded("Pantallas/Loading.png", Texture.class)) { // Si se ha cargado la imagen Loading.png

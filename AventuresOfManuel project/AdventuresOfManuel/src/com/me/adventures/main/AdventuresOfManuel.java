@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
-	public AbstractScreen LOADING, NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5;
+	public AbstractScreen LOADING, MAIN, NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5;
 	private AssetManager manager;
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
@@ -43,6 +43,21 @@ public class AdventuresOfManuel extends Game {
 		manager.load("Miscelanea/TablaAgua.png", Texture.class);
 		manager.load("Miscelanea/TablaPuente.png", Texture.class);
 		manager.load("Miscelanea/TablaPuerta.png", Texture.class);
+		manager.load("Pantallas/1.png", Texture.class);
+		manager.load("Pantallas/2.png", Texture.class);
+		manager.load("Pantallas/3.png", Texture.class);
+		manager.load("Pantallas/4.png", Texture.class);
+		manager.load("Pantallas/5.png", Texture.class);
+		manager.load("Pantallas/BotonConfiguracionEfectos.png", Texture.class);
+		manager.load("Pantallas/BotonConfiguracionMusica.png", Texture.class);
+		manager.load("Pantallas/BotonContinuar.png", Texture.class);
+		manager.load("Pantallas/BotonExit.png", Texture.class);
+		manager.load("Pantallas/BotonInstrucciones.png", Texture.class);
+		manager.load("Pantallas/BotonModoHistoria.png", Texture.class);
+		manager.load("Pantallas/BotonModoMustDie.png", Texture.class);
+		manager.load("Pantallas/BotonOpciones.png", Texture.class);
+		manager.load("Pantallas/BotonReintentar.png", Texture.class);
+		manager.load("Pantallas/SiguienteNivel.png", Texture.class);
 		
 		LOADING = new LoadingScreen(this); // Necesario
 		setScreen(LOADING);
@@ -50,7 +65,7 @@ public class AdventuresOfManuel extends Game {
 	
 	public void crearNiveles() {
 		// Pantallas del juego
-		/*PRINCIPAL = new GameScreen(this);*/
+		MAIN = new MainScreen(this);
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
 		NIVEL2 = new Nivel2(this, new Vector2(425,116));
 		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
