@@ -2,6 +2,7 @@ package com.me.adventures.main;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,16 +11,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
-	public AbstractScreen LOADING, MAIN, START, NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5;
+	public AbstractScreen LOADING, START, MAIN, NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5;
 	private AssetManager manager;
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
+	private Preferences preferencias;
 	
 	@Override
 	public void create() {
 		manager = new AssetManager();
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		preferencias = Gdx.app.getPreferences("-_PreferencesManuel-JMDCG-PINF-_");
 		
 		// Cargamos todos los elementos externos que usará el juego, como son las texturas y los sonidos.
 		manager.load("Pantallas/Loading.png", Texture.class);
@@ -58,7 +61,7 @@ public class AdventuresOfManuel extends Game {
 		manager.load("Pantallas/BotonModoMustDie.png", Texture.class);
 		manager.load("Pantallas/BotonOpciones.png", Texture.class);
 		manager.load("Pantallas/BotonReintentar.png", Texture.class);
-		manager.load("Pantallas/SiguienteNivel.png", Texture.class);
+		manager.load("Pantallas/BotonSiguienteNivel.png", Texture.class);
 		
 		LOADING = new LoadingScreen(this); // Necesario
 		setScreen(LOADING);
@@ -78,13 +81,14 @@ public class AdventuresOfManuel extends Game {
 	public SpriteBatch getBatch() {
 		return batch;
 	}
-	
 	public AssetManager getManager() {
 		return manager;
 	}
-	
 	public OrthographicCamera getCamera() {
 		return camera;
+	}
+	public Preferences getPreferencias() {
+		return preferencias;
 	}
 
 	@Override

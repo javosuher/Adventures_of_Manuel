@@ -26,11 +26,12 @@ public class MainScreen extends AbstractScreen {
 		
 		botonesPrincipales.add(new BotonModoHistoria(adventures, new Vector2(100, Gdx.graphics.getHeight() - 100)));
 		botonesPrincipales.add(new BotonModoMustDie(adventures, new Vector2(100, Gdx.graphics.getHeight() - 150)));
-		botonesPrincipales.add(new BotonOpciones(adventures, new Vector2(100, Gdx.graphics.getHeight() - 200)));
-		botonesPrincipales.add(new BotonExit(adventures, new Vector2(100, Gdx.graphics.getHeight() - 250)));
+		botonesPrincipales.add(new BotonInstrucciones(adventures, new Vector2(100, Gdx.graphics.getHeight() - 200)));
+		botonesPrincipales.add(new BotonOpciones(adventures, new Vector2(100, Gdx.graphics.getHeight() - 250)));
+		botonesPrincipales.add(new BotonExit(adventures, new Vector2(100, Gdx.graphics.getHeight() - 300)));
 		
 		botonesPrincipales.get(0).setMainScreen(this); // Asignacion de MainScreen para nuevos menus
-		botonesPrincipales.get(2).setMainScreen(this);
+		botonesPrincipales.get(3).setMainScreen(this);
 	}
 	
 	public void menuModoHistoria() {

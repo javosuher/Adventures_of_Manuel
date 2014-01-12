@@ -117,7 +117,7 @@ public class Manuel extends PersonajeDelJuego {
 		if(Gdx.app.getType() == ApplicationType.Desktop)
 			return Gdx.input.isKeyPressed(Keys.SPACE);
 		else if(Gdx.app.getType() == ApplicationType.Android)
-			return Gdx.input.isTouched() && Gdx.input.getX() < (Gdx.graphics.getWidth() / 2) + 100 && Gdx.input.getX() > (Gdx.graphics.getWidth() / 2) - 100 && Gdx.input.getY() < (Gdx.graphics.getHeight() / 2) + 100 && Gdx.input.getY() > (Gdx.graphics.getHeight() / 2) - 100;
+			return Gdx.input.isTouched() && Gdx.input.getX() < (Gdx.graphics.getWidth() / 2) + 150 && Gdx.input.getX() > (Gdx.graphics.getWidth() / 2) - 150 && Gdx.input.getY() < (Gdx.graphics.getHeight() / 2) + 150 && Gdx.input.getY() > (Gdx.graphics.getHeight() / 2) - 150;
 		else return false;
 	}
 	private void eliminandoDisparo() {
@@ -163,7 +163,7 @@ public class Manuel extends PersonajeDelJuego {
 	}
 	
 	private void moverAndroid(boolean soloUnaTeclaPresionada, boolean colisionDerecha, boolean colisionIzquierda, boolean colisionArriba, boolean colisionAbajo) {
-		if(Gdx.input.isTouched() && Gdx.input.getX() > Gdx.graphics.getWidth() - 50) {
+		if(Gdx.input.isTouched() && Gdx.input.getX() > Gdx.graphics.getWidth() - 70) {
 			if(soloUnaTeclaPresionada && !colisionDerecha) {
 				posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
@@ -171,7 +171,7 @@ public class Manuel extends PersonajeDelJuego {
 			soloUnaTeclaPresionada = false;
 			direccion = DERECHA;
 		}
-		else if(Gdx.input.isTouched() && Gdx.input.getX() < 50) {
+		else if(Gdx.input.isTouched() && Gdx.input.getX() < 70) {
 			if(soloUnaTeclaPresionada && !colisionIzquierda) {
 				posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
@@ -179,7 +179,7 @@ public class Manuel extends PersonajeDelJuego {
 			soloUnaTeclaPresionada = false;
 			direccion = IZQUIERDA;
 		}
-		else if(Gdx.input.isTouched() && Gdx.input.getY() < 50) {
+		else if(Gdx.input.isTouched() && Gdx.input.getY() < 70) {
 			if(soloUnaTeclaPresionada && !colisionArriba) {
 				posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
@@ -187,7 +187,7 @@ public class Manuel extends PersonajeDelJuego {
 			soloUnaTeclaPresionada = false;
 			direccion = ARRIBA;
 		}
-		else if(Gdx.input.isTouched() && Gdx.input.getY() > Gdx.graphics.getHeight() - 50) {
+		else if(Gdx.input.isTouched() && Gdx.input.getY() > Gdx.graphics.getHeight() - 70) {
 			if(soloUnaTeclaPresionada && !colisionAbajo) {
 				posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
