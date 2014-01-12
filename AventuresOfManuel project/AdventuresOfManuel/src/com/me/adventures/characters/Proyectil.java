@@ -6,15 +6,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
-class Proyectil extends ObjetoDelJuego{
+public abstract class Proyectil extends ObjetoDelJuego{
 	protected static final int ABAJO = 0;
 	protected static final int IZQUIERDA = 1;
 	protected static final int DERECHA = 2;
 	protected static final int ARRIBA = 3;
 	
-	protected TextureRegion disparoArribaAbajo, disparoDerechaIzquierda, disparoDireccion;
 	protected int direccion;
-	
+	protected TextureRegion disparoAbajo, disparoArriba, disparoDerecha, disparoIzquierda, disparoDireccion;
+
 	public Proyectil(AdventuresOfManuel adventures, Vector2 posicion) {
 		super(adventures, posicion);
 	}
@@ -38,10 +38,14 @@ class Proyectil extends ObjetoDelJuego{
 			this.posicion.y = posicion.y;
 		}
 		
-		if(direccion == DERECHA || direccion == IZQUIERDA) // Se verá de forma distinta dependiendo la dirección que se dispare
-			disparoDireccion = disparoDerechaIzquierda;
+		if(direccion == DERECHA) // Se verá de forma distinta dependiendo la dirección que se dispare
+			disparoDireccion = disparoDerecha;
+		else if(direccion == IZQUIERDA)
+			disparoDireccion = disparoIzquierda;
+		else if (direccion == ARRIBA)
+			disparoDireccion = disparoArriba;
 		else
-			disparoDireccion = disparoArribaAbajo;
+			disparoDireccion = disparoAbajo;
 		
 		// Actualizar bordes
 		bordes.x = posicion.x;

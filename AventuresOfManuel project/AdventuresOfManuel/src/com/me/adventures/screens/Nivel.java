@@ -26,6 +26,7 @@ public abstract class Nivel extends AbstractScreen {
 	protected Cofre cofre;
 	protected List<Corazon> corazones;
 	protected List<ObjetoDelJuego> objetos;
+	protected List<ObjetoDelJuego> objetosEnemigos;
 	protected List<PersonajeDelJuegoEnemigo> personajes;
 	protected List<PersonajeDelJuegoEnemigo> personajesMovibles;
 	protected List<MapaDelJuego> mapaNivel;
@@ -44,6 +45,7 @@ public abstract class Nivel extends AbstractScreen {
 			adventures.getCamera().position.set(Gdx.graphics.getWidth() / 2, TexturaFondo.getHeight() / 2, 0);
 		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		objetos = new ArrayList<ObjetoDelJuego>();
+		objetosEnemigos = new ArrayList<ObjetoDelJuego>();
 		corazones = new ArrayList<Corazon>();
 		mapaNivel = new ArrayList<MapaDelJuego>();
 		personajes = new ArrayList<PersonajeDelJuegoEnemigo>();
@@ -102,6 +104,14 @@ public abstract class Nivel extends AbstractScreen {
 			personajesMovibles.clear();
 		}
 		
+		for(ObjetoDelJuego objeto : objetos) {
+			objeto.draw(batch);
+		}
+
+		for(MapaDelJuego mapa : mapaNivel){
+			mapa.draw(batch);
+		}
+		
 		for(PersonajeDelJuego personaje : personajes){
 			personaje.draw(batch);
 		}
@@ -113,21 +123,13 @@ public abstract class Nivel extends AbstractScreen {
 		/*else
 			if(manuel.getPosicion().x == salida.getPosicion().x + 58 && manuel.getPosicion().y == salida.getPosicion().y - 29)
 				adventures.haGanado();*/
-		
-		for(ObjetoDelJuego objeto : objetos) {
-			objeto.draw(batch);
-		}
-
-		for(MapaDelJuego mapa : mapaNivel){
-			mapa.draw(batch);
-		}
 
 		manuel.draw(batch);
 		batch.end();
 	}
 	
 	protected void iniciarColisiones(){
-		colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida);
+		colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida, objetosEnemigos);
 		manuel.setColision(colisiones);
 		for(PersonajeDelJuego p : personajes){
 			p.setColision(colisiones);

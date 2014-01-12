@@ -9,11 +9,13 @@ import com.me.adventures.main.Constant;
 
 class ProyectilEnemigo extends Proyectil{
 	
-	public ProyectilEnemigo(AdventuresOfManuel adventures, Vector2 posicion) {
+	public ProyectilEnemigo(AdventuresOfManuel adventures, Vector2 posicion, int direccion) {
 		super(adventures, posicion);
-		bordes = new Rectangle(0, 0, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
-		Textura = new Texture("Miscelanea/ProyectilDragon.png");
-		disparoArribaAbajo = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		disparoDerechaIzquierda = new TextureRegion(Textura, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
+		Textura = new Texture("Enemigos/TablaProyectilDragon.png");
+		disparoAbajo = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		disparoDerecha = new TextureRegion(Textura, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		disparoArriba = new TextureRegion(Textura, 116, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		disparoIzquierda = new TextureRegion(Textura, 174, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 	}	
 }

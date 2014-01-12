@@ -22,11 +22,13 @@ public abstract class PersonajeDelJuegoEnemigo extends PersonajeDelJuego {
 	protected boolean estaDesaparecido;
 	protected int tiempoEnBola;
 	protected int tiempoDesaparecido;
+	protected int tiempoParaSiguienteProyectil;
 	
 	public PersonajeDelJuegoEnemigo(AdventuresOfManuel adventures, Vector2 posicion, Manuel manuel) {
 		super(adventures, posicion);
 		this.manuel = manuel;
 		this.posicionInicial = new Vector2(posicion.x, posicion.y);
+		this.tiempoParaSiguienteProyectil = 0;
 		esBola = false;
 		estaDesaparecido = false;
 		tiempoEnBola = Constant.TIEMPO_BOLA;
@@ -59,6 +61,12 @@ public abstract class PersonajeDelJuegoEnemigo extends PersonajeDelJuego {
 				posicion = posicionInicial;
 			}
 		}	
+
+		if(ataqueActivado == true)
+			activarAtaque();
+		
+		if(tiempoParaSiguienteProyectil > 0)
+			tiempoParaSiguienteProyectil--;
 		
 		// Actualizar bordes
 		bordes.x = posicion.x;
