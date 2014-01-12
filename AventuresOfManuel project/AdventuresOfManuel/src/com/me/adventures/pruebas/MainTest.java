@@ -18,7 +18,8 @@ public class MainTest extends Game {
 	
 	public void haGanado(){
 		nivel.dispose();
-		setScreen(ganar);
+		nivel = new EnemyTest(this);
+		setScreen(nivel);
 	}
 	
 	@Override
