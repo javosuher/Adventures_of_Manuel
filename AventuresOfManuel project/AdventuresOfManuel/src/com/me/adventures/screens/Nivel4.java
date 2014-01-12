@@ -60,7 +60,7 @@ public class Nivel4 extends Nivel {
 		corazones.add(new Corazon(adventures, new Vector2(599, 348), 0));
 		objetos.add(new Bloque(adventures, new Vector2(715, 348)));
 
-		corazones.add(new Corazon(adventures, new Vector2(193, 290), 0));
+		corazones.add(new Corazon(adventures, new Vector2(193, 290), 2));
 		objetos.add(new Agua(adventures, new Vector2(251, 290)));
 		objetos.add(new Agua(adventures, new Vector2(309, 290)));
 		objetos.add(new Agua(adventures, new Vector2(367, 290)));
