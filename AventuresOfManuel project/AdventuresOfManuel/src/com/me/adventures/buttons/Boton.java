@@ -12,6 +12,7 @@ public abstract class Boton {
 	protected AdventuresOfManuel adventures;
 	protected Vector2 posicion;
 	protected Rectangle bordes;
+	protected boolean sePuedeVisualizar;
 	protected float xMinima;
 	protected float yMinima;
 	protected float xMaxima;
@@ -23,6 +24,12 @@ public abstract class Boton {
 	public Boton(AdventuresOfManuel adventures, Vector2 posicion) {
 		this.adventures = adventures;
 		this.posicion = posicion;
+		this.sePuedeVisualizar = true;
+	}
+	public Boton(AdventuresOfManuel adventures, Vector2 posicion, boolean sePuedeVisualizar) {
+		this.adventures = adventures;
+		this.posicion = posicion;
+		this.sePuedeVisualizar = sePuedeVisualizar;
 	}
 	
 	protected void asignarBordes() {
@@ -44,13 +51,20 @@ public abstract class Boton {
 	}
 	
 	public void update() {
-		if(sePulsaElBoton())
+		if(sePulsaElBoton() && sePuedeVisualizar)
 			funcionamiento();
 	}
 	
 	private boolean sePulsaElBoton() {
 		return Gdx.input.isTouched() && Gdx.input.getX() >= xMinima && Gdx.input.getX() <= xMaxima 
 				&& Gdx.input.getY() >= yMinima && Gdx.input.getY() <= yMaxima;
+	}
+	
+	public void cambiarVisualizacion() {
+		if(sePuedeVisualizar)
+			sePuedeVisualizar = false;
+		else
+			sePuedeVisualizar = true;
 	}
 	
 	protected abstract void funcionamiento();

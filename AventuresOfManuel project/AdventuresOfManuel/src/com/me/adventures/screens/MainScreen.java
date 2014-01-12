@@ -20,6 +20,9 @@ public class MainScreen extends AbstractScreen {
 	public void show() {
 		botones = new ArrayList<Boton>();
 		botones.add(new BotonModoHistoria(adventures, new Vector2(100, Gdx.graphics.getHeight() - 100)));
+		botones.add(new BotonModoMustDie(adventures, new Vector2(100, Gdx.graphics.getHeight() - 150)));
+		botones.add(new BotonOpciones(adventures, new Vector2(100, Gdx.graphics.getHeight() - 200)));
+		botones.add(new BotonExit(adventures, new Vector2(100, Gdx.graphics.getHeight() - 250)));
 	}
 
 	@Override

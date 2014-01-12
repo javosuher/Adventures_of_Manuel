@@ -1,17 +1,18 @@
 package com.me.adventures.buttons;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
 
-public class BotonModoHistoria extends Boton {
+public class BotonExit extends Boton {
 
-	public BotonModoHistoria(AdventuresOfManuel adventures, Vector2 posicion) {
+	public BotonExit(AdventuresOfManuel adventures, Vector2 posicion) {
 		super(adventures, posicion);
-		Textura = adventures.getManager().get("Pantallas/BotonModoHistoria.png", Texture.class);
+		Textura = adventures.getManager().get("Pantallas/BotonExit.png", Texture.class);
 		asignarBordes();
 	}
-	public BotonModoHistoria(AdventuresOfManuel adventures, Vector2 posicion, boolean sePuedeVisualizar) {
+	public BotonExit(AdventuresOfManuel adventures, Vector2 posicion, boolean sePuedeVisualizar) {
 		super(adventures, posicion, sePuedeVisualizar);
 		Textura = adventures.getManager().get("Pantallas/BotonExit.png", Texture.class);
 		asignarBordes();
@@ -19,6 +20,6 @@ public class BotonModoHistoria extends Boton {
 	
 	@Override
 	protected void funcionamiento() {
-		adventures.setScreen(adventures.NIVEL1);
+		Gdx.app.exit();
 	}
 }
