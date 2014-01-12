@@ -11,14 +11,9 @@ public class BotonOpciones extends Boton {
 		Textura = adventures.getManager().get("Pantallas/BotonOpciones.png", Texture.class);
 		asignarBordes();
 	}
-	public BotonOpciones(AdventuresOfManuel adventures, Vector2 posicion, boolean sePuedeVisualizar) {
-		super(adventures, posicion, sePuedeVisualizar);
-		Textura = adventures.getManager().get("Pantallas/BotonExit.png", Texture.class);
-		asignarBordes();
-	}
 	
 	@Override
 	protected void funcionamiento() {
-		adventures.setScreen(adventures.NIVEL1);
+		mainScreen.menuOpciones();
 	}
 }

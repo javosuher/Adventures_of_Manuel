@@ -10,7 +10,9 @@ import com.me.adventures.buttons.*;
 import com.me.adventures.main.AdventuresOfManuel;
 
 public class MainScreen extends AbstractScreen {
-	private List<Boton> botones;
+	private List<Boton> botonesPrincipales;
+	private List<Boton> botonesModoHistoria;
+	private List<Boton> botonesOpciones;
 
 	public MainScreen(AdventuresOfManuel adventures) {
 		super(adventures);
@@ -18,11 +20,32 @@ public class MainScreen extends AbstractScreen {
 	
 	@Override
 	public void show() {
-		botones = new ArrayList<Boton>();
-		botones.add(new BotonModoHistoria(adventures, new Vector2(100, Gdx.graphics.getHeight() - 100)));
-		botones.add(new BotonModoMustDie(adventures, new Vector2(100, Gdx.graphics.getHeight() - 150)));
-		botones.add(new BotonOpciones(adventures, new Vector2(100, Gdx.graphics.getHeight() - 200)));
-		botones.add(new BotonExit(adventures, new Vector2(100, Gdx.graphics.getHeight() - 250)));
+		botonesPrincipales = new ArrayList<Boton>();
+		botonesModoHistoria = new ArrayList<Boton>();
+		botonesOpciones = new ArrayList<Boton>();
+		
+		botonesPrincipales.add(new BotonModoHistoria(adventures, new Vector2(100, Gdx.graphics.getHeight() - 100)));
+		botonesPrincipales.add(new BotonModoMustDie(adventures, new Vector2(100, Gdx.graphics.getHeight() - 150)));
+		botonesPrincipales.add(new BotonOpciones(adventures, new Vector2(100, Gdx.graphics.getHeight() - 200)));
+		botonesPrincipales.add(new BotonExit(adventures, new Vector2(100, Gdx.graphics.getHeight() - 250)));
+		
+		botonesPrincipales.get(0).setMainScreen(this); // Asignacion de MainScreen para nuevos menus
+		botonesPrincipales.get(2).setMainScreen(this);
+	}
+	
+	public void menuModoHistoria() {
+		botonesOpciones.clear();
+		botonesModoHistoria.add(new BotonNivel1(adventures, new Vector2(500, Gdx.graphics.getHeight() - 100)));
+		botonesModoHistoria.add(new BotonNivel2(adventures, new Vector2(500, Gdx.graphics.getHeight() - 150)));
+		botonesModoHistoria.add(new BotonNivel3(adventures, new Vector2(500, Gdx.graphics.getHeight() - 200)));
+		botonesModoHistoria.add(new BotonNivel4(adventures, new Vector2(500, Gdx.graphics.getHeight() - 250)));
+		botonesModoHistoria.add(new BotonNivel5(adventures, new Vector2(500, Gdx.graphics.getHeight() - 300)));
+	}
+	
+	public void menuOpciones() {
+		botonesModoHistoria.clear();
+		botonesOpciones.add(new BotonEfectos(adventures, new Vector2(500, Gdx.graphics.getHeight() - 100)));
+		botonesOpciones.add(new BotonMusica(adventures, new Vector2(500, Gdx.graphics.getHeight() - 150)));
 	}
 
 	@Override
@@ -30,13 +53,33 @@ public class MainScreen extends AbstractScreen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 		
-		for(Boton boton : botones)
+		for(Boton boton : botonesPrincipales)
+			boton.update();
+		for(Boton boton : botonesModoHistoria)
+			boton.update();
+		for(Boton boton : botonesOpciones)
 			boton.update();
 		
 		batch.begin();
-		for(Boton boton : botones)
+		for(Boton boton : botonesPrincipales)
+			boton.draw(batch);
+		for(Boton boton : botonesModoHistoria)
+			boton.draw(batch);
+		for(Boton boton : botonesOpciones)
 			boton.draw(batch);
 		batch.end();
+	}
+	
+	public List<Boton> getBotonesPrincipales() {
+		return botonesPrincipales;
+	}
+
+	public List<Boton> getBotonesModoHistoria() {
+		return botonesModoHistoria;
+	}
+
+	public List<Boton> getBotonesOpciones() {
+		return botonesOpciones;
 	}
 
 	@Override

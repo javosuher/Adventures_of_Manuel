@@ -1,5 +1,7 @@
 package com.me.adventures.buttons;
 
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Texture;
@@ -7,12 +9,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
+import com.me.adventures.screens.MainScreen;
 
 public abstract class Boton {
 	protected AdventuresOfManuel adventures;
 	protected Vector2 posicion;
+	protected MainScreen mainScreen;
 	protected Rectangle bordes;
-	protected boolean sePuedeVisualizar;
 	protected float xMinima;
 	protected float yMinima;
 	protected float xMaxima;
@@ -24,12 +27,6 @@ public abstract class Boton {
 	public Boton(AdventuresOfManuel adventures, Vector2 posicion) {
 		this.adventures = adventures;
 		this.posicion = posicion;
-		this.sePuedeVisualizar = true;
-	}
-	public Boton(AdventuresOfManuel adventures, Vector2 posicion, boolean sePuedeVisualizar) {
-		this.adventures = adventures;
-		this.posicion = posicion;
-		this.sePuedeVisualizar = sePuedeVisualizar;
 	}
 	
 	protected void asignarBordes() {
@@ -51,7 +48,7 @@ public abstract class Boton {
 	}
 	
 	public void update() {
-		if(sePulsaElBoton() && sePuedeVisualizar)
+		if(sePulsaElBoton())
 			funcionamiento();
 	}
 	
@@ -60,11 +57,8 @@ public abstract class Boton {
 				&& Gdx.input.getY() >= yMinima && Gdx.input.getY() <= yMaxima;
 	}
 	
-	public void cambiarVisualizacion() {
-		if(sePuedeVisualizar)
-			sePuedeVisualizar = false;
-		else
-			sePuedeVisualizar = true;
+	public void setMainScreen(MainScreen mainScreen) {
+		this.mainScreen = mainScreen;
 	}
 	
 	protected abstract void funcionamiento();
