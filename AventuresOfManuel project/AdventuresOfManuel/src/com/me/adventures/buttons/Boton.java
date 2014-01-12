@@ -1,17 +1,21 @@
 package com.me.adventures.buttons;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
-import com.me.adventures.screens.AbstractScreen;
 
 public abstract class Boton {
 	protected AdventuresOfManuel adventures;
 	protected Vector2 posicion;
 	protected Rectangle bordes;
+	protected float xMinima;
+	protected float yMinima;
+	protected float xMaxima;
+	protected float yMaxima;
 
 	//Atributos para pintar
 	protected Texture Textura;
@@ -23,6 +27,16 @@ public abstract class Boton {
 	
 	protected void asignarBordes() {
 		bordes = new Rectangle(posicion.x, posicion.y, Textura.getWidth(), Textura.getHeight());
+		
+		int altoPantalla = 0;
+		if(Gdx.app.getType() == ApplicationType.Desktop)
+			altoPantalla = 754;
+		else if(Gdx.app.getType() == ApplicationType.Android)
+			altoPantalla = Gdx.graphics.getHeight();
+		xMinima = posicion.x;
+		yMaxima = altoPantalla - posicion.y;
+		xMaxima = posicion.x + bordes.width;
+		yMinima = altoPantalla - (posicion.y + bordes.height);
 	}
 	
 	public void draw(SpriteBatch batch) {
@@ -30,12 +44,16 @@ public abstract class Boton {
 	}
 	
 	public void update() {
-		// Si se toca el botón.
-		if(Gdx.input.isTouched() && Gdx.input.getX() >= posicion.x && Gdx.input.getX() <= posicion.x + bordes.width && Gdx.input.getY() >= posicion.y && Gdx.input.getY() <= posicion.y + bordes.height)
-			adventures.setScreen(pantallaSiguiente());
+		if(sePulsaElBoton())
+			funcionamiento();
 	}
 	
-	protected abstract AbstractScreen pantallaSiguiente();
+	private boolean sePulsaElBoton() {
+		return Gdx.input.isTouched() && Gdx.input.getX() >= xMinima && Gdx.input.getX() <= xMaxima 
+				&& Gdx.input.getY() >= yMinima && Gdx.input.getY() <= yMaxima;
+	}
+	
+	protected abstract void funcionamiento();
 	
 	// Getters and Setters ------------------------------------------------------------------------
 

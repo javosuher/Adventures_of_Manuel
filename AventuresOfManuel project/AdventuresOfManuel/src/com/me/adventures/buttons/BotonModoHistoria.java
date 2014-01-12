@@ -3,7 +3,6 @@ package com.me.adventures.buttons;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
-import com.me.adventures.screens.AbstractScreen;
 
 public class BotonModoHistoria extends Boton {
 
@@ -14,7 +13,7 @@ public class BotonModoHistoria extends Boton {
 	}
 	
 	@Override
-	protected AbstractScreen pantallaSiguiente() {
-		return adventures.NIVEL1;
+	protected void funcionamiento() {
+		adventures.setScreen(adventures.NIVEL1);
 	}
 }

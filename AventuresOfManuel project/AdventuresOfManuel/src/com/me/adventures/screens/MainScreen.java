@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.buttons.*;
 import com.me.adventures.main.AdventuresOfManuel;
@@ -20,9 +19,7 @@ public class MainScreen extends AbstractScreen {
 	@Override
 	public void show() {
 		botones = new ArrayList<Boton>();
-		botones.add(new BotonModoHistoria(adventures, new Vector2(Gdx.graphics.getWidth() / 2 - 
-				adventures.getManager().get("Pantallas/BotonModoHistoria.png", Texture.class).getWidth() / 2, 
-				Gdx.graphics.getHeight() / 2)));
+		botones.add(new BotonModoHistoria(adventures, new Vector2(100, Gdx.graphics.getHeight() - 100)));
 	}
 
 	@Override
