@@ -5,11 +5,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
 
-public class Bloque extends ObjetoDelJuego {
+public class Bloque extends PersonajeDelJuegoEnemigo {
 	
-	public Bloque(AdventuresOfManuel adventures, Vector2 posicion){
-		super(adventures, posicion);
+	public Bloque(AdventuresOfManuel adventures, Vector2 posicion, Manuel manuel){
+		super(adventures, posicion, manuel);
 		Textura = adventures.getManager().get("Enemigos/bloque.png", Texture.class);
+		esBola = true;
 	}
 	
 	@Override
@@ -19,6 +20,11 @@ public class Bloque extends ObjetoDelJuego {
 
 	@Override
 	public void update() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void activarAtaque() {
 		// TODO Auto-generated method stub
 	}
 }

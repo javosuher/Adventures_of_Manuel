@@ -207,10 +207,10 @@ public class Manuel extends PersonajeDelJuego {
 		//Direccion frame Manuel
 		if(direccion == ABAJO) {
 			if(manuelSeQuedaQuieto) {
-				/*int nuevaPosicion = (int) posicion.y;
+				int nuevaPosicion = (int) posicion.y;
 				while(nuevaPosicion % 29 != 0) // Ajusta la posición
 					nuevaPosicion--;
-					posicion.y = nuevaPosicion;*/
+					posicion.y = nuevaPosicion;
 					frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
 				}
 			else 
@@ -218,10 +218,10 @@ public class Manuel extends PersonajeDelJuego {
 			}
 		else if(direccion == IZQUIERDA) {
 			if(manuelSeQuedaQuieto) {
-				/*int nuevaPosicion = (int) posicion.x;
+				int nuevaPosicion = (int) posicion.x;
 				while(nuevaPosicion % 29 != 19) // Ajusta la posición
 					nuevaPosicion--;
-				posicion.x = nuevaPosicion;*/
+				posicion.x = nuevaPosicion;
 				frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
 			}
 			else 
@@ -229,10 +229,10 @@ public class Manuel extends PersonajeDelJuego {
 		}
 		else if(direccion == DERECHA) {
 			if(manuelSeQuedaQuieto) {
-				/*int nuevaPosicion = (int) posicion.x;
+				int nuevaPosicion = (int) posicion.x;
 				while(nuevaPosicion % 29 != 19) // Ajusta la posición
 					nuevaPosicion++;
-				posicion.x = nuevaPosicion;*/
+				posicion.x = nuevaPosicion;
 				frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
 			}
 			else 
@@ -240,10 +240,10 @@ public class Manuel extends PersonajeDelJuego {
 		}
 		else if(direccion == ARRIBA) {
 			if(manuelSeQuedaQuieto) {
-				/*int nuevaPosicion = (int) posicion.y;
+				int nuevaPosicion = (int) posicion.y;
 				while(nuevaPosicion % 29 != 0) // Ajusta la posición
 					nuevaPosicion++;
-				posicion.y = nuevaPosicion;*/
+				posicion.y = nuevaPosicion;
 				frameActual = manuelMatrizFrames[direccion][SPRITE_QUIETO];
 			}
 			else 

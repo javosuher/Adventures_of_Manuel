@@ -54,10 +54,10 @@ public abstract class Nivel extends AbstractScreen {
 		personajes = new ArrayList<PersonajeDelJuegoEnemigo>();
 		
 		manuel = new Manuel(adventures, posicionManuel);
+		personajesMovibles = new ArrayList<PersonajeDelJuegoEnemigo>();
 		objetosDelNivel();
 		personajesDelNivel();
 		mapaDelNivel();
-		personajesMovibles = new ArrayList<PersonajeDelJuegoEnemigo>();
 		iniciarColisiones();
 	}
 	
@@ -135,6 +135,9 @@ public abstract class Nivel extends AbstractScreen {
 		colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida, objetosEnemigos);
 		manuel.setColision(colisiones);
 		for(PersonajeDelJuego p : personajes){
+			p.setColision(colisiones);
+		}
+		for(PersonajeDelJuego p : personajesMovibles){
 			p.setColision(colisiones);
 		}
 	}

@@ -29,12 +29,10 @@ public class Nivel5 extends Nivel {
 		objetos.add(new Roca(adventures, new Vector2(251, 638)));
 		objetos.add(new Roca(adventures, new Vector2(309, 638)));
 		objetos.add(new Roca(adventures, new Vector2(367, 638)));
-		objetos.add(new Bloque(adventures, new Vector2(599, 638)));
 		objetos.add(new Roca(adventures, new Vector2(773, 638)));
 
 		objetos.add(new Roca(adventures, new Vector2(193, 580)));
 		corazones.add(new Corazon(adventures, new Vector2(251, 580), 0));
-		objetos.add(new Bloque(adventures, new Vector2(367, 580)));
 		objetos.add(new Roca(adventures, new Vector2(599, 580)));
 		corazones.add(new Corazon(adventures, new Vector2(657, 580), 0));
 		objetos.add(new Roca(adventures, new Vector2(715, 580)));
@@ -55,7 +53,6 @@ public class Nivel5 extends Nivel {
 		cofre = new Cofre(adventures, new Vector2(483, 348), 4);
 
 		objetos.add(new Roca(adventures, new Vector2(193, 232)));
-		objetos.add(new Bloque(adventures, new Vector2(251, 232)));
 		objetos.add(new Roca(adventures, new Vector2(309, 232)));
 
 		objetos.add(new Roca(adventures, new Vector2(193, 174)));
@@ -63,10 +60,8 @@ public class Nivel5 extends Nivel {
 		objetos.add(new Roca(adventures, new Vector2(367, 174)));
 		objetos.add(new Roca(adventures, new Vector2(599, 174)));
 		objetos.add(new Roca(adventures, new Vector2(657, 174)));
-		objetos.add(new Bloque(adventures, new Vector2(715, 174)));
 		objetos.add(new Roca(adventures, new Vector2(773, 174)));
 
-		objetos.add(new Bloque(adventures, new Vector2(367, 116)));
 		objetos.add(new Roca(adventures, new Vector2(599, 116)));
 		corazones.add(new Corazon(adventures, new Vector2(657, 116), 0));
 		objetos.add(new Roca(adventures, new Vector2(773, 116)));
@@ -84,5 +79,11 @@ public class Nivel5 extends Nivel {
 	protected void personajesDelNivel() {
 		personajes.add(new Fantasma(adventures, new Vector2(367, 348), manuel));
 		personajes.add(new Fantasma(adventures, new Vector2(599, 348), manuel));
+		
+		personajesMovibles.add(new Bloque(adventures, new Vector2(599, 638), manuel));
+		personajesMovibles.add(new Bloque(adventures, new Vector2(367, 580), manuel));
+		personajesMovibles.add(new Bloque(adventures, new Vector2(251, 232), manuel));
+		personajesMovibles.add(new Bloque(adventures, new Vector2(715, 174), manuel));
+		personajesMovibles.add(new Bloque(adventures, new Vector2(367, 116), manuel));
 	}
 }

@@ -33,9 +33,7 @@ public class Nivel4 extends Nivel {
 		objetos.add(new Roca(adventures, new Vector2(425, 580)));
 		objetos.add(new Roca(adventures, new Vector2(483, 580)));
 		objetos.add(new Roca(adventures, new Vector2(541, 580)));
-		objetos.add(new Bloque(adventures, new Vector2(599, 580)));
 		
-		objetos.add(new Bloque(adventures, new Vector2(309, 522)));
 		objetos.add(new Roca(adventures, new Vector2(715, 522)));
 		
 		objetos.add(new Roca(adventures, new Vector2(541, 464)));
@@ -50,7 +48,6 @@ public class Nivel4 extends Nivel {
 		objetos.add(new Agua(adventures, new Vector2(425, 406)));
 		objetos.add(new Roca(adventures, new Vector2(541, 406)));
 		corazones.add(new Corazon(adventures, new Vector2(599, 406), 0));
-		objetos.add(new Bloque(adventures, new Vector2(715, 406)));
 
 		objetos.add(new Agua(adventures, new Vector2(251, 348)));
 		objetos.add(new Agua(adventures, new Vector2(309, 348)));
@@ -58,7 +55,6 @@ public class Nivel4 extends Nivel {
 		cofre = new Cofre(adventures, new Vector2(425, 348), 5);
 		objetos.add(new Roca(adventures, new Vector2(541, 348)));
 		corazones.add(new Corazon(adventures, new Vector2(599, 348), 0));
-		objetos.add(new Bloque(adventures, new Vector2(715, 348)));
 
 		corazones.add(new Corazon(adventures, new Vector2(193, 290), 2));
 		objetos.add(new Agua(adventures, new Vector2(251, 290)));
@@ -74,7 +70,6 @@ public class Nivel4 extends Nivel {
 		objetos.add(new Roca(adventures, new Vector2(657, 232)));
 		objetos.add(new Roca(adventures, new Vector2(715, 232)));
 
-		objetos.add(new Bloque(adventures, new Vector2(309, 174)));
 		objetos.add(new Roca(adventures, new Vector2(715, 174)));
 		
 		objetos.add(new Roca(adventures, new Vector2(251, 116)));
@@ -83,7 +78,6 @@ public class Nivel4 extends Nivel {
 		objetos.add(new Roca(adventures, new Vector2(425, 116)));
 		objetos.add(new Roca(adventures, new Vector2(483, 116)));
 		objetos.add(new Roca(adventures, new Vector2(541, 116)));
-		objetos.add(new Bloque(adventures, new Vector2(599, 116)));
 	}
 	
 	@Override
@@ -91,5 +85,12 @@ public class Nivel4 extends Nivel {
 		personajes.add(new Calavera(adventures, new Vector2(367, 638), manuel));
 		personajes.add(new Calavera(adventures, new Vector2(657, 348), manuel));
 		personajes.add(new Calavera(adventures, new Vector2(367, 58), manuel));
+		
+		personajesMovibles.add(new Bloque(adventures, new Vector2(599, 580), manuel));
+		personajesMovibles.add(new Bloque(adventures, new Vector2(309, 522), manuel));
+		personajesMovibles.add(new Bloque(adventures, new Vector2(715, 406), manuel));
+		personajesMovibles.add(new Bloque(adventures, new Vector2(715, 348), manuel));
+		personajesMovibles.add(new Bloque(adventures, new Vector2(309, 174), manuel));
+		personajesMovibles.add(new Bloque(adventures, new Vector2(599, 116), manuel));
 	}
 }
