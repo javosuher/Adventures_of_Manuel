@@ -67,7 +67,7 @@ public class Nivel4 extends Nivel {
 		objetos.add(new Agua(adventures, new Vector2(425, 290)));
 		objetos.add(new Roca(adventures, new Vector2(541, 290)));
 		corazones.add(new Corazon(adventures, new Vector2(599, 290), 0));
-		objetos.add(new Bloque(adventures, new Vector2(715, 290)));
+		//objetos.add(new Bloque(adventures, new Vector2(715, 290)));
 		
 		objetos.add(new Roca(adventures, new Vector2(541, 232)));
 		objetos.add(new Roca(adventures, new Vector2(599, 232)));
@@ -88,8 +88,8 @@ public class Nivel4 extends Nivel {
 	
 	@Override
 	protected void personajesDelNivel() {
-		personajes.add(new Serpiente(adventures, new Vector2(367, 638), manuel));//calavera
-		personajes.add(new Serpiente(adventures, new Vector2(657, 348), manuel));//calavera
-		personajes.add(new Serpiente(adventures, new Vector2(367, 58), manuel));//calavera
+		personajes.add(new Calavera(adventures, new Vector2(367, 638), manuel));
+		personajes.add(new Calavera(adventures, new Vector2(657, 348), manuel));
+		personajes.add(new Calavera(adventures, new Vector2(367, 58), manuel));
 	}
 }
