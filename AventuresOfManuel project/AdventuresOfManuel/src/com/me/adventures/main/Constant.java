@@ -2,7 +2,7 @@ package com.me.adventures.main;
 
 public final class Constant {
 	private static final Constant constantes = new Constant();
-	public static final float SPEED = 29; //220; //58
+	public static final double SPEED = 3.625; //29; //220; //58
 	public static final float BOLA_SPEED = 10;
 	public static final int TIEMPO_AGUA = 10;
 	public static final int TIEMPO_BOLA = 800;

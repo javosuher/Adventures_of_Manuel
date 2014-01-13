@@ -93,25 +93,25 @@ public abstract class PersonajeDelJuegoEnemigo extends PersonajeDelJuego {
 		int direccionHuevo = -1;
 		boolean estaQuieto = true;
 		if(colisiones.colisionMovibleArriba(manuel) && teclaArriba() && !colisiones.colisionArribaObjeto(this) && !colisiones.colisionArribaEnemigo(this)) {
-			posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+			posicion.y = (float) (posicion.y + Constant.SPEED);
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccionHuevo = manuel.ARRIBA;
 			estaQuieto = false;
 		}
 		else if(colisiones.colisionMovibleAbajo(manuel) && teclaAbajo() && !colisiones.colisionAbajoObjeto(this) && !colisiones.colisionAbajoEnemigo(this)) {
-			posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+			posicion.y = (float) (posicion.y - Constant.SPEED);
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccionHuevo = manuel.ABAJO;
 			estaQuieto = false;
 		}
 		else if(colisiones.colisionMovibleDerecha(manuel) && teclaDerecha() && !colisiones.colisionDerechaObjeto(this) && !colisiones.colisionDerechaEnemigo(this)) {
-			posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+			posicion.x = (float) (posicion.x + Constant.SPEED);
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccionHuevo = manuel.DERECHA;
 			estaQuieto = false;
 		}
 		else if(colisiones.colisionMovibleIzquierda(manuel) && teclaIzquierda() && !colisiones.colisionIzquierdaObjeto(this) && !colisiones.colisionIzquierdaEnemigo(this)) {
-			posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+			posicion.x = (float) (posicion.x - Constant.SPEED);
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccionHuevo = manuel.IZQUIERDA;
 			estaQuieto = false;

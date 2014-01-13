@@ -130,54 +130,54 @@ public class Manuel extends PersonajeDelJuego {
 	private void moverDesktop(boolean soloUnaTeclaPresionada, boolean colisionDerecha, boolean colisionIzquierda, boolean colisionArriba, boolean colisionAbajo) {
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
 			if(soloUnaTeclaPresionada && !colisionDerecha && tiempoMovimiento == 0) {
-				//posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
-				posicion.x = posicion.x + Constant.SPEED;
+				//posicion.x = posicion.x + Constant.SPEED;
+				posicion.x = (float) (posicion.x + Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				tiempoMovimiento = 5;
+				//tiempoMovimiento = 5;
 			}
 			soloUnaTeclaPresionada = false;
 			direccion = DERECHA;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.LEFT)) {
 			if(soloUnaTeclaPresionada && !colisionIzquierda && tiempoMovimiento == 0) {
-				//posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
-				posicion.x = posicion.x - Constant.SPEED;
+				//posicion.x = posicion.x - Constant.SPEED;
+				posicion.x = (float) (posicion.x - Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				tiempoMovimiento = 5;
+				//tiempoMovimiento = 5;
 			}
 			soloUnaTeclaPresionada = false;
 			direccion = IZQUIERDA;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.UP)) {
 			if(soloUnaTeclaPresionada && !colisionArriba && tiempoMovimiento == 0) {
-				//posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
-				posicion.y = posicion.y + Constant.SPEED;
+				//posicion.y = posicion.y + Constant.SPEED;
+				posicion.y = (float) (posicion.y + Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				tiempoMovimiento = 5;
+				//tiempoMovimiento = 5;
 			}
 			soloUnaTeclaPresionada = false;
 			direccion = ARRIBA;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.DOWN)) {
 			if(soloUnaTeclaPresionada && !colisionAbajo && tiempoMovimiento == 0) {
-				//posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
-				posicion.y = posicion.y - Constant.SPEED;
+				//posicion.y = posicion.y - Constant.SPEED;
+				posicion.y = (float) (posicion.y - Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				tiempoMovimiento = 5;
+				//tiempoMovimiento = 5;
 			}
 			soloUnaTeclaPresionada = false;
 			direccion = ABAJO;
 		}
 		else
 		manuelSeQuedaQuieto = true;
-		if(tiempoMovimiento > 0)
-			tiempoMovimiento--;
+		//if(tiempoMovimiento > 0)
+			//tiempoMovimiento--;
 	}
 	
 	private void moverAndroid(boolean soloUnaTeclaPresionada, boolean colisionDerecha, boolean colisionIzquierda, boolean colisionArriba, boolean colisionAbajo) {
 		if(Gdx.input.isTouched() && Gdx.input.getX() > Gdx.graphics.getWidth() - 70) {
 			if(soloUnaTeclaPresionada && !colisionDerecha) {
-				posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				posicion.x = (float) (posicion.x + Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			}
 			soloUnaTeclaPresionada = false;
@@ -185,7 +185,7 @@ public class Manuel extends PersonajeDelJuego {
 		}
 		else if(Gdx.input.isTouched() && Gdx.input.getX() < 70) {
 			if(soloUnaTeclaPresionada && !colisionIzquierda) {
-				posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				posicion.x = (float) (posicion.x - Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			}
 			soloUnaTeclaPresionada = false;
@@ -193,7 +193,7 @@ public class Manuel extends PersonajeDelJuego {
 		}
 		else if(Gdx.input.isTouched() && Gdx.input.getY() < 70) {
 			if(soloUnaTeclaPresionada && !colisionArriba) {
-				posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				posicion.y = (float) (posicion.y + Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			}
 			soloUnaTeclaPresionada = false;
@@ -201,7 +201,7 @@ public class Manuel extends PersonajeDelJuego {
 		}
 		else if(Gdx.input.isTouched() && Gdx.input.getY() > Gdx.graphics.getHeight() - 70) {
 			if(soloUnaTeclaPresionada && !colisionAbajo) {
-				posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
+				posicion.y = (float) (posicion.y - Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			}
 			soloUnaTeclaPresionada = false;
