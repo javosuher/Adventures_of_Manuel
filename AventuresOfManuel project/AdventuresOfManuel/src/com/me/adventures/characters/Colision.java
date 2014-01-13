@@ -213,6 +213,9 @@ public class Colision {
 	public boolean colisionDisparoEnemigoObjeto(Proyectil disparo) {
 		return colisionObjeto(disparo.getBordes(),objetosEnemigos);
 	}
+	public boolean colisionDisparoEnemigoEnemigoMovible(Proyectil disparo) {
+		return colisionMovible(disparo.getBordes());
+	}
 	//.....
 	public boolean colisionManuelConHuevo(PersonajeDelJuego personaje) {
 		return colisiona(personaje.getBordes(), manuel.getBordes());
