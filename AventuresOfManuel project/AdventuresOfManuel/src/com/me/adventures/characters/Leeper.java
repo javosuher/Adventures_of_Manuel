@@ -19,7 +19,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 	
 	//Atributos para pintar
 	private TextureRegion [][] leeperMatrizFrames;
-	private Animation leeperAnimationAbajo, leeperAnimationIzquierda, leeperAnimationDerecha, leeperAnimationArriba;
+	//private Animation leeperAnimationAbajo, leeperAnimationIzquierda, leeperAnimationDerecha, leeperAnimationArriba;
 
 	public Leeper(AdventuresOfManuel adventures, Vector2 posicion, Manuel manuel, int direccion) {
 		super(adventures, posicion, manuel);
@@ -49,10 +49,10 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 		leeperMatrizFrames[ARRIBA][2] = new TextureRegion(Textura, 348, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		leeperMatrizFrames[ARRIBA][3] = new TextureRegion(Textura, 406, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 
-		leeperAnimationAbajo = new Animation(0.05f, leeperMatrizFrames[ABAJO]);
-		leeperAnimationIzquierda = new Animation(0.05f, leeperMatrizFrames[IZQUIERDA]);
-		leeperAnimationDerecha= new Animation(0.05f, leeperMatrizFrames[DERECHA]);
-		leeperAnimationArriba = new Animation(0.05f, leeperMatrizFrames[ARRIBA]);
+		//leeperAnimationAbajo = new Animation(0.05f, leeperMatrizFrames[ABAJO]);
+		//leeperAnimationIzquierda = new Animation(0.05f, leeperMatrizFrames[IZQUIERDA]);
+		//leeperAnimationDerecha= new Animation(0.05f, leeperMatrizFrames[DERECHA]);
+		//leeperAnimationArriba = new Animation(0.05f, leeperMatrizFrames[ARRIBA]);
 		
 		frameActual = leeperMatrizFrames[direccion][actual];
 	}
@@ -66,57 +66,93 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 		boolean colisionIzquierda = colisiones.colisionIzquierdaObjeto(this) || colisiones.colisionIzquierdaEnemigo(this) || colisiones.colisionMovibleIzquierda(this);
 		boolean colisionArriba = colisiones.colisionArribaObjeto(this) || colisiones.colisionArribaEnemigo(this) || colisiones.colisionMovibleArriba(this);
 		boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this) || colisiones.colisionMovibleAbajo(this);
+		boolean colision = false;
 		
 		if(ataqueActivado == true){
-			if(tiempoParaSiguienteProyectil == 0){
-				tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL; //en este caso se usa para el movimiento
-				if(direccion == ABAJO){
-					if(!colisionArriba) {
-						posicion.y = (float) (posicion.y + Constant.SPEED);
-						stateTime = stateTime + Gdx.graphics.getDeltaTime();
-						if(actual == 0)
-							actual++;
-						else
-							actual = 0;
-						frameActual = leeperMatrizFrames[direccion][actual];
-						frameActual = leeperAnimationArriba.getKeyFrame(stateTime, true);
-					}
+			if(direccion == ARRIBA){
+				if(!colisionArriba) {
+					posicion.y = (float) (posicion.y + Constant.SPEED);
+					stateTime = stateTime + Gdx.graphics.getDeltaTime();
+					if(actual == 0)
+						actual++;
+					else
+						actual = 0;
+					frameActual = leeperMatrizFrames[direccion][actual];
+				}
+				else
+					colision = true;
+			}
+			else if(direccion == IZQUIERDA){
+				if(!colisionIzquierda) {
+					posicion.x = (float) (posicion.x - Constant.SPEED);
+					stateTime = stateTime + Gdx.graphics.getDeltaTime();
+					if(actual == 0)
+						actual++;
+					else
+						actual = 0;
+					frameActual = leeperMatrizFrames[direccion][actual];
+				}
+				else
+					colision = true;
+			}
+			else if(direccion == DERECHA){
+				if(!colisionDerecha){
+					posicion.x = (float) (posicion.x + Constant.SPEED);
+					stateTime = stateTime + Gdx.graphics.getDeltaTime();
+					if(actual == 0)
+						actual++;
+					else
+						actual = 0;
+					frameActual = leeperMatrizFrames[direccion][actual];
+				}
+				else
+					colision = true;
+			}
+			else {
+				if(!colisionAbajo) {
+					posicion.y = (float) (posicion.y - Constant.SPEED);
+					stateTime = stateTime + Gdx.graphics.getDeltaTime();
+					if(actual == 0)
+						actual++;
+					else
+						actual = 0;
+					frameActual = leeperMatrizFrames[direccion][actual];
+				}
+				else
+					colision = true;
+			}
+			if(colision == true){
+				if(direccion == DERECHA){
+					if(!colisionAbajo)
+						direccion = ABAJO;
+					else if(!colisionArriba)
+						direccion = ARRIBA;
+					else
+						direccion = IZQUIERDA;
 				}
 				else if(direccion == IZQUIERDA){
-					if(!colisionIzquierda) {
-						posicion.x = (float) (posicion.x - Constant.SPEED);
-						stateTime = stateTime + Gdx.graphics.getDeltaTime();
-						if(actual == 0)
-							actual++;
-						else
-							actual = 0;
-						frameActual = leeperMatrizFrames[direccion][actual];
-						frameActual = leeperAnimationIzquierda.getKeyFrame(stateTime, true);
-					}
+					if(!colisionAbajo)
+						direccion = ABAJO;
+					else if(!colisionArriba)
+						direccion = ARRIBA;
+					else
+						direccion = DERECHA;
 				}
-				else if(direccion == DERECHA){
-					if(!colisionDerecha){
-						posicion.x = (float) (posicion.x + Constant.SPEED);
-						stateTime = stateTime + Gdx.graphics.getDeltaTime();
-						if(actual == 0)
-							actual++;
-						else
-							actual = 0;
-						frameActual = leeperMatrizFrames[direccion][actual];
-						frameActual = leeperAnimationDerecha.getKeyFrame(stateTime, true);
-					}
+				else if(direccion == ARRIBA){
+					if(!colisionDerecha)
+						direccion = DERECHA;
+					else if(!colisionIzquierda)
+						direccion = IZQUIERDA;
+					else
+						direccion = ABAJO;
 				}
 				else {
-					if(!colisionAbajo) {
-						posicion.y = (float) (posicion.y - Constant.SPEED);
-						stateTime = stateTime + Gdx.graphics.getDeltaTime();
-						if(actual == 0)
-							actual++;
-						else
-							actual = 0;
-						frameActual = leeperMatrizFrames[direccion][actual];
-						frameActual = leeperAnimationAbajo.getKeyFrame(stateTime, true);
-					}
+					if(!colisionDerecha)
+						direccion = DERECHA;
+					else if(!colisionIzquierda)
+						direccion = IZQUIERDA;
+					else
+						direccion = ARRIBA;
 				}
 			}
 		}
