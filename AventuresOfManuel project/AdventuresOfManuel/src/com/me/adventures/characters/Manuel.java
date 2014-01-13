@@ -30,7 +30,6 @@ public class Manuel extends PersonajeDelJuego {
 	private boolean disparando;
 	boolean manuelSeQuedaQuieto;
 	private int tiempoParaSiguienteProyectil; // Para que no se disparen dos a la vez
-	private int tiempoMovimiento;
 
 	//Atributos para pintar a Manuel
 	private TextureRegion [][] manuelMatrizFrames;
@@ -54,7 +53,6 @@ public class Manuel extends PersonajeDelJuego {
 		direccion = ABAJO;
 		proyectiles = new ArrayList<Proyectil>();
 		tiempoParaSiguienteProyectil = 0;
-		tiempoMovimiento = 0;
 	}
 	
 	
@@ -129,49 +127,43 @@ public class Manuel extends PersonajeDelJuego {
 	
 	private void moverDesktop(boolean soloUnaTeclaPresionada, boolean colisionDerecha, boolean colisionIzquierda, boolean colisionArriba, boolean colisionAbajo) {
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
-			if(soloUnaTeclaPresionada && !colisionDerecha && tiempoMovimiento == 0) {
+			if(soloUnaTeclaPresionada && !colisionDerecha) {
 				//posicion.x = posicion.x + Constant.SPEED;
 				posicion.x = (float) (posicion.x + Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				//tiempoMovimiento = 5;
 			}
 			soloUnaTeclaPresionada = false;
 			direccion = DERECHA;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.LEFT)) {
-			if(soloUnaTeclaPresionada && !colisionIzquierda && tiempoMovimiento == 0) {
+			if(soloUnaTeclaPresionada && !colisionIzquierda) {
 				//posicion.x = posicion.x - Constant.SPEED;
 				posicion.x = (float) (posicion.x - Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				//tiempoMovimiento = 5;
 			}
 			soloUnaTeclaPresionada = false;
 			direccion = IZQUIERDA;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.UP)) {
-			if(soloUnaTeclaPresionada && !colisionArriba && tiempoMovimiento == 0) {
+			if(soloUnaTeclaPresionada && !colisionArriba) {
 				//posicion.y = posicion.y + Constant.SPEED;
 				posicion.y = (float) (posicion.y + Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				//tiempoMovimiento = 5;
 			}
 			soloUnaTeclaPresionada = false;
 			direccion = ARRIBA;
 		}
 		else if(Gdx.input.isKeyPressed(Keys.DOWN)) {
-			if(soloUnaTeclaPresionada && !colisionAbajo && tiempoMovimiento == 0) {
+			if(soloUnaTeclaPresionada && !colisionAbajo) {
 				//posicion.y = posicion.y - Constant.SPEED;
 				posicion.y = (float) (posicion.y - Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				//tiempoMovimiento = 5;
 			}
 			soloUnaTeclaPresionada = false;
 			direccion = ABAJO;
 		}
 		else
 		manuelSeQuedaQuieto = true;
-		//if(tiempoMovimiento > 0)
-			//tiempoMovimiento--;
 	}
 	
 	private void moverAndroid(boolean soloUnaTeclaPresionada, boolean colisionDerecha, boolean colisionIzquierda, boolean colisionArriba, boolean colisionAbajo) {
