@@ -115,10 +115,10 @@ public class Colision {
 		}
 	}
 	
-	private boolean colisionEnemigo(Rectangle auxiliar) {
+	private boolean colisionEnemigo(Rectangle auxiliar, PersonajeDelJuego personaje) {
 		boolean ningunaColision = true;
 		for(int i = 0; i < personajes.size() && ningunaColision; i++) {
-			if(colisiona(auxiliar, personajes.get(i).getBordes())){
+			if(colisiona(auxiliar, personajes.get(i).getBordes()) && personaje != personajes.get(i)){
 				if(personajes.get(i).estaEnBola()) {
 					personajesMovibles.add(personajes.get(i));
 					personajes.remove(i);
@@ -133,27 +133,27 @@ public class Colision {
 	public boolean colisionDerechaEnemigo(PersonajeDelJuego personaje) {
 		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
 		auxiliar.x = (float) (auxiliar.x + Constant.SPEED);
-		return colisionEnemigo(auxiliar);
+		return colisionEnemigo(auxiliar, personaje);
 	}
 	public boolean colisionIzquierdaEnemigo(PersonajeDelJuego personaje) {
 		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
 		auxiliar.x = (float) (auxiliar.x - Constant.SPEED);
-		return colisionEnemigo(auxiliar);
+		return colisionEnemigo(auxiliar, personaje);
 	}
 	public boolean colisionArribaEnemigo(PersonajeDelJuego personaje) {
 		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
 		auxiliar.y = (float) (auxiliar.y + Constant.SPEED);
-		return colisionEnemigo(auxiliar);
+		return colisionEnemigo(auxiliar, personaje);
 	}
 	public boolean colisionAbajoEnemigo(PersonajeDelJuego personaje) {
 		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
 		auxiliar.y = (float) (auxiliar.y - Constant.SPEED);
-		return colisionEnemigo(auxiliar);
+		return colisionEnemigo(auxiliar, personaje);
 	}
 	//----------------------------
 	
 	public boolean colisionObjetoEnemigoMovible(PersonajeDelJuego personaje) {
-		return colisionObjeto(personaje.getBordes(),objetos) || colisionEnemigo(personaje.getBordes()) || colisionEnemigoMovible(personaje.getBordes());
+		return colisionObjeto(personaje.getBordes(),objetos) || colisionEnemigo(personaje.getBordes(), personaje) || colisionEnemigoMovible(personaje.getBordes());
 	}
 	
 	private boolean colisionObjetoEnemigo(Rectangle auxiliar) {

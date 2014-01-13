@@ -120,7 +120,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 				}
 			}
 		}
-		else { //leeper está dormido
+		else { //leeper estï¿½ dormido
 			
 		}
 
