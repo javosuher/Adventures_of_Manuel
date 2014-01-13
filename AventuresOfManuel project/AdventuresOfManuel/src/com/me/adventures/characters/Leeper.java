@@ -1,6 +1,7 @@
 //Bicho verde
 package com.me.adventures.characters;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,9 +15,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 	public static final int IZQUIERDA = 1;
 	public static final int DERECHA = 2;
 	public static final int ARRIBA = 3;
-	private static final int DORMIDO = 0;
-	private static final int DESPIERTO = 1;
-	
+	private int actual;
 	
 	//Atributos para pintar
 	private TextureRegion [][] leeperMatrizFrames;
@@ -24,19 +23,108 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 
 	public Leeper(AdventuresOfManuel adventures, Vector2 posicion, Manuel manuel, int direccion) {
 		super(adventures, posicion, manuel);
-		this.ataqueActivado = false;
+		this.ataqueActivado = true;
 		this.direccion = direccion;
-		
+		actual = 0;
 		Textura = new Texture("Enemigos/TablaBichoVerde.png");
 		
 		leeperMatrizFrames = new TextureRegion[4][4];
-		leeperMatrizFrames[0][0] = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[ABAJO][0] = new TextureRegion(Textura, 0, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[ABAJO][1] = new TextureRegion(Textura, 58, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[ABAJO][2] = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[ABAJO][3] = new TextureRegion(Textura, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+
+		leeperMatrizFrames[IZQUIERDA][0] = new TextureRegion(Textura, 116, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[IZQUIERDA][1] = new TextureRegion(Textura, 174, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[IZQUIERDA][2] = new TextureRegion(Textura, 116, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[IZQUIERDA][3] = new TextureRegion(Textura, 174, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+
+		leeperMatrizFrames[DERECHA][0] = new TextureRegion(Textura, 232, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[DERECHA][1] = new TextureRegion(Textura, 290, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[DERECHA][2] = new TextureRegion(Textura, 232, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[DERECHA][3] = new TextureRegion(Textura, 290, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+
+		leeperMatrizFrames[ARRIBA][0] = new TextureRegion(Textura, 348, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[ARRIBA][1] = new TextureRegion(Textura, 406, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[ARRIBA][2] = new TextureRegion(Textura, 348, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[ARRIBA][3] = new TextureRegion(Textura, 406, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+
+		leeperAnimationAbajo = new Animation(0.05f, leeperMatrizFrames[ABAJO]);
+		leeperAnimationIzquierda = new Animation(0.05f, leeperMatrizFrames[IZQUIERDA]);
+		leeperAnimationDerecha= new Animation(0.05f, leeperMatrizFrames[DERECHA]);
+		leeperAnimationArriba = new Animation(0.05f, leeperMatrizFrames[ARRIBA]);
 		
-		frameActual = leeperMatrizFrames[direccion][DORMIDO];
+		frameActual = leeperMatrizFrames[direccion][actual];
 	}
 	
 	public void activarAtaque() {
-		ataqueActivado = true;
+	}
+	
+	@Override
+	public void update() {
+		boolean colisionDerecha = colisiones.colisionDerechaObjeto(this) || colisiones.colisionDerechaEnemigo(this) || colisiones.colisionMovibleDerecha(this);
+		boolean colisionIzquierda = colisiones.colisionIzquierdaObjeto(this) || colisiones.colisionIzquierdaEnemigo(this) || colisiones.colisionMovibleIzquierda(this);
+		boolean colisionArriba = colisiones.colisionArribaObjeto(this) || colisiones.colisionArribaEnemigo(this) || colisiones.colisionMovibleArriba(this);
+		boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this) || colisiones.colisionMovibleAbajo(this);
+		
+		if(ataqueActivado == true){
+			if(tiempoParaSiguienteProyectil == 0){
+				tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL; //en este caso se usa para el movimiento
+				if(direccion == ABAJO){
+					if(!colisionArriba) {
+						posicion.y = (float) (posicion.y + Constant.SPEED);
+						stateTime = stateTime + Gdx.graphics.getDeltaTime();
+						if(actual == 0)
+							actual++;
+						else
+							actual = 0;
+						frameActual = leeperMatrizFrames[direccion][actual];
+						frameActual = leeperAnimationArriba.getKeyFrame(stateTime, true);
+					}
+				}
+				else if(direccion == IZQUIERDA){
+					if(!colisionIzquierda) {
+						posicion.x = (float) (posicion.x - Constant.SPEED);
+						stateTime = stateTime + Gdx.graphics.getDeltaTime();
+						if(actual == 0)
+							actual++;
+						else
+							actual = 0;
+						frameActual = leeperMatrizFrames[direccion][actual];
+						frameActual = leeperAnimationIzquierda.getKeyFrame(stateTime, true);
+					}
+				}
+				else if(direccion == DERECHA){
+					if(!colisionDerecha){
+						posicion.x = (float) (posicion.x + Constant.SPEED);
+						stateTime = stateTime + Gdx.graphics.getDeltaTime();
+						if(actual == 0)
+							actual++;
+						else
+							actual = 0;
+						frameActual = leeperMatrizFrames[direccion][actual];
+						frameActual = leeperAnimationDerecha.getKeyFrame(stateTime, true);
+					}
+				}
+				else {
+					if(!colisionAbajo) {
+						posicion.y = (float) (posicion.y - Constant.SPEED);
+						stateTime = stateTime + Gdx.graphics.getDeltaTime();
+						if(actual == 0)
+							actual++;
+						else
+							actual = 0;
+						frameActual = leeperMatrizFrames[direccion][actual];
+						frameActual = leeperAnimationAbajo.getKeyFrame(stateTime, true);
+					}
+				}
+			}
+		}
+		else { //leeper está dormido
+			
+		}
+
+		super.update();
 	}
 	
 	@Override
