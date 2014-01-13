@@ -12,6 +12,7 @@ public class Fantasma extends PersonajeDelJuegoEnemigo {
 	public static final int IZQUIERDA = 1;
 	public static final int DERECHA = 2;
 	public static final int ARRIBA = 3;
+	private boolean fantasmaSeQuedaQuieto;
 	
 	//Atributos para pintar
 	private TextureRegion [][] fantasmaMatrizFrames;
