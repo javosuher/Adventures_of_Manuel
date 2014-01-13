@@ -82,7 +82,7 @@ public class Nivel5 extends Nivel {
 	
 	@Override
 	protected void personajesDelNivel() {
-		personajes.add(new Serpiente(adventures, new Vector2(367, 348), manuel));//Fantasma
-		personajes.add(new Serpiente(adventures, new Vector2(599, 348), manuel));//Fantasma
+		personajes.add(new Fantasma(adventures, new Vector2(367, 348), manuel));
+		personajes.add(new Fantasma(adventures, new Vector2(599, 348), manuel));
 	}
 }

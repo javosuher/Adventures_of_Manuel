@@ -9,8 +9,6 @@ import com.me.adventures.main.Constant;
 public class Serpiente extends PersonajeDelJuegoEnemigo {
 	private static final int IZQUIERDA = 0;
     private static final int DERECHA = 1;
-	
-	private boolean ataqueActivado;
 
 	//Atributos para pintar
 	private TextureRegion [][] serpienteMatrizFrames;

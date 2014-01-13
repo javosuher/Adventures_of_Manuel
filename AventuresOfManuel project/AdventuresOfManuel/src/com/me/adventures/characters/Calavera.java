@@ -9,7 +9,6 @@ import com.me.adventures.main.Constant;
 public class Calavera extends PersonajeDelJuegoEnemigo {
 	private static int MAX = 4;
 	private int actual;
-	private boolean ataqueActivado;
 
 	//Atributos para pintar
 	private TextureRegion [] calaveraMatrizFrames;
