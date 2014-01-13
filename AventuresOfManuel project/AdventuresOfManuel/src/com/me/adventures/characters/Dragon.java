@@ -29,7 +29,7 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 		
 		Textura = new Texture("Enemigos/TablaDragon.png");
 		
-		dragonMatrizFrames = new TextureRegion[4][4];
+		dragonMatrizFrames = new TextureRegion[4][2];
 		dragonMatrizFrames[ABAJO][DORMIDO] = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		dragonMatrizFrames[IZQUIERDA][DORMIDO] = new TextureRegion(Textura, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		dragonMatrizFrames[DERECHA][DORMIDO] = new TextureRegion(Textura, 116, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
