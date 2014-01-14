@@ -281,4 +281,7 @@ public class Colision {
 		auxiliar.x = (float) (auxiliar.x - Constant.SPEED);
 		return colisionMovible(auxiliar);
 	}
+	public boolean colisionConManuel(PersonajeDelJuego personaje){
+		return colisiona(manuel.getBordes(), personaje.getBordes());
+	}
 }
