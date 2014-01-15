@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 public class Serpiente extends PersonajeDelJuegoEnemigo {
 	private static final int IZQUIERDA = 0;
@@ -15,7 +16,7 @@ public class Serpiente extends PersonajeDelJuegoEnemigo {
 	
 	public Serpiente(AdventuresOfManuel adventures, Vector2 posicion, Manuel manuel) {
 		super(adventures, posicion, manuel);
-		
+		tiempoParaSiguienteProyectil = 0;
 		this.ataqueActivado = false;
 		direccion = IZQUIERDA;
 		
@@ -35,20 +36,36 @@ public class Serpiente extends PersonajeDelJuegoEnemigo {
 	
 	public void update() {
 		super.update();
-		
-		if(manuel.getBordes().x == posicion.x)
-			if(direccion == IZQUIERDA)
-				frameActual = serpienteMatrizFrames[direccion][0];
-			else
+		if(ataqueActivado == false){
+			if(manuel.getBordes().x == posicion.x)
+				if(direccion == IZQUIERDA)
+					frameActual = serpienteMatrizFrames[direccion][0];
+				else
+					frameActual = serpienteMatrizFrames[direccion][1];
+			else if(manuel.getBordes().x < posicion.x) {
+				direccion = IZQUIERDA;
 				frameActual = serpienteMatrizFrames[direccion][1];
-		  	else if(manuel.getBordes().x < posicion.x) {
-		  		direccion = IZQUIERDA;
-		  		frameActual = serpienteMatrizFrames[direccion][1];
-		  	}
-		  	else if(manuel.getBordes().x > posicion.x) {
-		  		direccion = DERECHA;
-		  		frameActual = serpienteMatrizFrames[direccion][0];   
-		  	}
+			}
+			else if(manuel.getBordes().x > posicion.x) {
+				direccion = DERECHA;
+				frameActual = serpienteMatrizFrames[direccion][0];   
+			}
+		}
+		else{
+			if(tiempoParaSiguienteProyectil == 0){
+				if(direccion == IZQUIERDA){
+					direccion = DERECHA;
+					frameActual = serpienteMatrizFrames[direccion][0];
+				}
+				else{
+					direccion = IZQUIERDA;
+					frameActual = serpienteMatrizFrames[direccion][1];
+				}
+				tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
+			}
+			else
+				tiempoDesaparecido--;
+		}
 	}
 	
 	// Getters and Setters ------------------------------------------------------------------------
