@@ -75,7 +75,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 		boolean colisionIzquierda = colisiones.colisionIzquierdaObjeto(this) || colisiones.colisionIzquierdaEnemigo(this) || colisiones.colisionMovibleIzquierda(this);
 		boolean colisionArriba = colisiones.colisionArribaObjeto(this) || colisiones.colisionArribaEnemigo(this) || colisiones.colisionMovibleArriba(this);
 		boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this) || colisiones.colisionMovibleAbajo(this);
-		boolean colisionManuel = colisiones.colisionConManuel(this);
+		boolean colisionManuel = colisiones.colisionAbajoConManuel(this) || colisiones.colisionArribaConManuel(this) || colisiones.colisionDerechaConManuel(this) || colisiones.colisionIzquierdaConManuel(this);
 		
 		if(dormido == false && !colisionManuel){
 			if(direccion == ARRIBA){
@@ -170,7 +170,6 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 				tiempoParaDormir--;
 		}
 		
-
 		if(tiempoParaMovimiento > 0)
 			tiempoParaMovimiento--;
 		super.update();
