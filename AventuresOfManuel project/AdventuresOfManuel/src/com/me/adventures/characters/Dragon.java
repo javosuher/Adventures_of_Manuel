@@ -27,8 +27,8 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 		this.ataqueActivado = false;
 		this.direccion = direccion;
 		
-		Textura = new Texture("Enemigos/TablaDragon.png");
-		
+		Textura = adventures.getManager().get("Enemigos/TablaDragon.png", Texture.class);
+
 		dragonMatrizFrames = new TextureRegion[4][2];
 		dragonMatrizFrames[ABAJO][DORMIDO] = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		dragonMatrizFrames[IZQUIERDA][DORMIDO] = new TextureRegion(Textura, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);

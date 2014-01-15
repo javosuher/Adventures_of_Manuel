@@ -28,7 +28,8 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 		tiempoParaMovimiento = 0;
 		this.direccion = direccion;
 		actual = 0;
-		Textura = new Texture("Enemigos/TablaBichoVerde.png");
+		
+		Textura = adventures.getManager().get("Enemigos/TablaBichoVerde.png", Texture.class);
 		
 		leeperMatrizFrames = new TextureRegion[4][4];
 		leeperMatrizFrames[ABAJO][0] = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
@@ -158,10 +159,15 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 		}
 		else { //leeper esta dormido
 			dormido = true;
-			if(actual != 2)
-				actual = 2;
-			else
-				actual = 3;
+			if(actual == 0 || actual == 1)
+				tiempoParaMovimiento = 0;
+			if(tiempoParaMovimiento == 0){
+				if(actual != 2)
+					actual = 2;
+				else
+					actual = 3;
+				tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO;
+			}
 			frameActual = leeperMatrizFrames[direccion][actual];			
 		}
 
