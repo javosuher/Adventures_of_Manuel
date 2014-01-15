@@ -3,6 +3,7 @@ package com.me.adventures.characters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -14,45 +15,55 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 	public static final int IZQUIERDA = 1;
 	public static final int DERECHA = 2;
 	public static final int ARRIBA = 3;
-	private int actual;
 	private boolean dormido;
 	private int tiempoParaMovimiento;
+	private int tiempoParaDormir;
 	
 	//Atributos para pintar
 	private TextureRegion [][] leeperMatrizFrames;
-
+	private Animation leeperAnimationAbajoDespierto, leeperAnimationArribaDespierto, leeperAnimationDerechaDespierto, leeperAnimationIzquierdaDespierto;
+	private Animation leeperAnimationAbajoDormido, leeperAnimationArribaDormido, leeperAnimationDerechaDormido, leeperAnimationIzquierdaDormido;
+	
 	public Leeper(AdventuresOfManuel adventures, Vector2 posicion, Manuel manuel, int direccion) {
 		super(adventures, posicion, manuel);
 		dormido = false;
 		ataqueActivado = true;
 		tiempoParaMovimiento = 0;
 		this.direccion = direccion;
-		actual = 0;
 		
 		Textura = adventures.getManager().get("Enemigos/TablaBichoVerde.png", Texture.class);
 		
-		leeperMatrizFrames = new TextureRegion[4][4];
+		leeperMatrizFrames = new TextureRegion[8][2];
 		leeperMatrizFrames[ABAJO][0] = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		leeperMatrizFrames[ABAJO][1] = new TextureRegion(Textura, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		leeperMatrizFrames[ABAJO][2] = new TextureRegion(Textura, 0, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		leeperMatrizFrames[ABAJO][3] = new TextureRegion(Textura, 58, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[ABAJO+4][0] = new TextureRegion(Textura, 0, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[ABAJO+4][1] = new TextureRegion(Textura, 58, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 
 		leeperMatrizFrames[IZQUIERDA][0] = new TextureRegion(Textura, 116, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		leeperMatrizFrames[IZQUIERDA][1] = new TextureRegion(Textura, 174, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		leeperMatrizFrames[IZQUIERDA][2] = new TextureRegion(Textura, 116, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		leeperMatrizFrames[IZQUIERDA][3] = new TextureRegion(Textura, 174, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[IZQUIERDA+4][0] = new TextureRegion(Textura, 116, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[IZQUIERDA+4][1] = new TextureRegion(Textura, 174, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 
 		leeperMatrizFrames[DERECHA][0] = new TextureRegion(Textura, 232, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		leeperMatrizFrames[DERECHA][1] = new TextureRegion(Textura, 290, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		leeperMatrizFrames[DERECHA][2] = new TextureRegion(Textura, 232, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		leeperMatrizFrames[DERECHA][3] = new TextureRegion(Textura, 290, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[DERECHA+4][0] = new TextureRegion(Textura, 232, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[DERECHA+4][1] = new TextureRegion(Textura, 290, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 
 		leeperMatrizFrames[ARRIBA][0] = new TextureRegion(Textura, 348, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
 		leeperMatrizFrames[ARRIBA][1] = new TextureRegion(Textura, 406, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		leeperMatrizFrames[ARRIBA][2] = new TextureRegion(Textura, 348, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		leeperMatrizFrames[ARRIBA][3] = new TextureRegion(Textura, 406, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[ARRIBA+4][0] = new TextureRegion(Textura, 348, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		leeperMatrizFrames[ARRIBA+4][1] = new TextureRegion(Textura, 406, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+
+		leeperAnimationAbajoDespierto = new Animation(0.05f, leeperMatrizFrames[ABAJO]);
+		leeperAnimationArribaDespierto = new Animation(0.05f, leeperMatrizFrames[ARRIBA]);
+		leeperAnimationIzquierdaDespierto = new Animation(0.05f, leeperMatrizFrames[IZQUIERDA]);
+		leeperAnimationDerechaDespierto = new Animation(0.05f, leeperMatrizFrames[DERECHA]);
+		leeperAnimationAbajoDormido = new Animation(0.05f, leeperMatrizFrames[ABAJO+4]);
+		leeperAnimationArribaDormido = new Animation(0.05f, leeperMatrizFrames[ARRIBA+4]);
+		leeperAnimationIzquierdaDormido = new Animation(0.05f, leeperMatrizFrames[IZQUIERDA+4]);
+		leeperAnimationDerechaDormido = new Animation(0.05f, leeperMatrizFrames[DERECHA+4]);
 		
-		frameActual = leeperMatrizFrames[direccion][actual];
+		frameActual = leeperMatrizFrames[direccion][0];
 	}
 	
 	public void activarAtaque() {
@@ -72,11 +83,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 					if(tiempoParaMovimiento == 0){
 						posicion.y = (float) (posicion.y + Constant.SPEED);
 						stateTime = stateTime + Gdx.graphics.getDeltaTime();
-						if(actual == 0)
-							actual = 1;
-						else
-							actual = 0;
-						frameActual = leeperMatrizFrames[direccion][actual];
+						frameActual = leeperAnimationArribaDespierto.getKeyFrame(stateTime, true);
 						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO;
 					}
 				}
@@ -94,11 +101,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 					if(tiempoParaMovimiento == 0){
 						posicion.x = (float) (posicion.x - Constant.SPEED);
 						stateTime = stateTime + Gdx.graphics.getDeltaTime();
-						if(actual == 0)
-							actual = 1;
-						else
-							actual = 0;
-						frameActual = leeperMatrizFrames[direccion][actual];
+						frameActual = leeperAnimationIzquierdaDespierto.getKeyFrame(stateTime, true);
 						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO;
 					}
 				}
@@ -116,11 +119,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 					if(tiempoParaMovimiento == 0){
 						posicion.x = (float) (posicion.x + Constant.SPEED);
 						stateTime = stateTime + Gdx.graphics.getDeltaTime();
-						if(actual == 0)
-							actual = 1;
-						else
-							actual = 0;
-						frameActual = leeperMatrizFrames[direccion][actual];
+						frameActual = leeperAnimationDerechaDespierto.getKeyFrame(stateTime, true);
 						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO;
 					}
 				}
@@ -138,11 +137,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 					if(tiempoParaMovimiento == 0){
 						posicion.y = (float) (posicion.y - Constant.SPEED);
 						stateTime = stateTime + Gdx.graphics.getDeltaTime();
-						if(actual == 0)
-							actual = 1;
-						else
-							actual = 0;
-						frameActual = leeperMatrizFrames[direccion][actual];
+						frameActual = leeperAnimationAbajoDespierto.getKeyFrame(stateTime, true);
 						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO;
 					}
 				}
@@ -155,21 +150,27 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 						direccion = ARRIBA;
 				}
 			}
-			ajustarLeeper(colisionDerecha, colisionIzquierda, colisionArriba, colisionAbajo);
+			//ajustarLeeper(colisionDerecha, colisionIzquierda, colisionArriba, colisionAbajo);
 		}
 		else { //leeper esta dormido
 			dormido = true;
-			if(actual == 0 || actual == 1)
-				tiempoParaMovimiento = 0;
-			if(tiempoParaMovimiento == 0){
-				if(actual != 2)
-					actual = 2;
+			
+			if(tiempoParaDormir == 0){
+				stateTime = stateTime + Gdx.graphics.getDeltaTime();
+				if(direccion == ARRIBA)
+					frameActual = leeperAnimationArribaDormido.getKeyFrame(stateTime, true);
+				else if(direccion == ABAJO)
+					frameActual = leeperAnimationAbajoDormido.getKeyFrame(stateTime, true);
+				else if(direccion == IZQUIERDA)
+					frameActual = leeperAnimationIzquierdaDormido.getKeyFrame(stateTime, true);
 				else
-					actual = 3;
-				tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO;
+					frameActual = leeperAnimationDerechaDormido.getKeyFrame(stateTime, true);
+				tiempoParaDormir = Constant.TIEMPO_DORMIDO;
 			}
-			frameActual = leeperMatrizFrames[direccion][actual];			
+			if(tiempoParaDormir > 0)
+				tiempoParaDormir--;
 		}
+		
 
 		if(tiempoParaMovimiento > 0)
 			tiempoParaMovimiento--;
@@ -180,7 +181,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
 	}
-
+/*
 	public void ajustarLeeper(boolean colisionDerecha, boolean colisionIzquierda, boolean colisionArriba, boolean colisionAbajo) {
 		if(direccion == ABAJO) {
 			int nuevaPosicion = (int) posicion.y;
@@ -215,7 +216,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 			detectaColisionInminente();
 		}
 	}
-	
+	*/
 	private void detectaColisionInminente() {
 		if(colisiones.colisionObjetoEnemigoMovible(this)) {
 			if(direccion == DERECHA)
