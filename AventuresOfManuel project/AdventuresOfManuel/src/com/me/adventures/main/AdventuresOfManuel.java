@@ -30,6 +30,8 @@ public class AdventuresOfManuel extends Game {
 		manager.load("Manolito/TablaSpritesManolitoTransparencia.png", Texture.class);
 		manager.load("Enemigos/bloque.png", Texture.class);
 		manager.load("Enemigos/TablaCalaveraFinal.png", Texture.class);
+		manager.load("Enemigos/TablaDragon.png", Texture.class);
+		manager.load("Enemigos/TablaBichoVerde.png", Texture.class);
 		manager.load("Enemigos/TablaMedusa.png", Texture.class);
 		manager.load("Enemigos/TablaSerpiente.png", Texture.class);
 		manager.load("Enemigos/TablaFantasma.png", Texture.class);
