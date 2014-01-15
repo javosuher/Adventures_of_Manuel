@@ -150,7 +150,6 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 						direccion = ARRIBA;
 				}
 			}
-			//ajustarLeeper(colisionDerecha, colisionIzquierda, colisionArriba, colisionAbajo);
 		}
 		else { //leeper esta dormido
 			dormido = true;
@@ -181,53 +180,6 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
 	}
-/*
-	public void ajustarLeeper(boolean colisionDerecha, boolean colisionIzquierda, boolean colisionArriba, boolean colisionAbajo) {
-		if(direccion == ABAJO) {
-			int nuevaPosicion = (int) posicion.y;
-			while(nuevaPosicion % 29 != 0) // Ajusta la posición
-				nuevaPosicion--;
-				posicion.y = nuevaPosicion;
-				frameActual = leeperMatrizFrames[direccion][actual];
-			}
-		else if(direccion == IZQUIERDA) {
-			int nuevaPosicion = (int) posicion.x;
-			while(nuevaPosicion % 29 != 19) // Ajusta la posición
-				nuevaPosicion--;
-			posicion.x = nuevaPosicion;
-			frameActual = leeperMatrizFrames[direccion][actual];
-		}
-		else if(direccion == DERECHA) {
-			int nuevaPosicion = (int) posicion.x;
-			while(nuevaPosicion % 29 != 19) // Ajusta la posición
-			nuevaPosicion++;
-			posicion.x = nuevaPosicion;
-			frameActual = leeperMatrizFrames[direccion][actual];
-		}
- 		else if(direccion == ARRIBA) {
-			int nuevaPosicion = (int) posicion.y;
-			while(nuevaPosicion % 29 != 0) // Ajusta la posición
-				nuevaPosicion++;
-			posicion.y = nuevaPosicion;
-			frameActual = leeperMatrizFrames[direccion][actual];
-		}
-				
-		if(colisionDerecha || colisionIzquierda || colisionArriba || colisionAbajo) {
-			detectaColisionInminente();
-		}
-	}
-	*/
-	private void detectaColisionInminente() {
-		if(colisiones.colisionObjetoEnemigoMovible(this)) {
-			if(direccion == DERECHA)
-				posicion.x -= 29;
-			if(direccion == IZQUIERDA)
-				posicion.x += 29;
-			if(direccion == ARRIBA)
-				posicion.y -= 29;
-			if(direccion == ABAJO)
-				posicion.y += 29;
-		}
-	}
+	
 	// Getters and Setters -----------------------------------------------------------------------
 }
