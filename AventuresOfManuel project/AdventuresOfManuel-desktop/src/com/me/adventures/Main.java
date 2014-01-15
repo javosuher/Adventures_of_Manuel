@@ -13,6 +13,6 @@ public class Main {
 		cfg.width = 1024;
 		cfg.height = 754;
 		
-		new LwjglApplication(new MainTest(), cfg);
+		new LwjglApplication(new AdventuresOfManuel(), cfg);
 	}
 }

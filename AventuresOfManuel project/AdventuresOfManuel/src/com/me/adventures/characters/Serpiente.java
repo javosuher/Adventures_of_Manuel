@@ -1,222 +1,73 @@
 package com.me.adventures.characters;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
-public class Serpiente extends PersonajeDelJuego {
+public class Serpiente extends PersonajeDelJuegoEnemigo {
 	private static final int IZQUIERDA = 0;
     private static final int DERECHA = 1;
-	
-	private Vector2 posicion;
-	private Vector2 posicionInicial;
-	private Rectangle bordes;
-	private float stateTime;
-	private Colision colisiones;
-	private Manuel manuel;
-	private int direccion;
-	private boolean ataqueActivado;
 
 	//Atributos para pintar
-	private Texture TexturaSerpiente, TexturaBola;
 	private TextureRegion [][] serpienteMatrizFrames;
-	private TextureRegion frameActual, huevoNormal, huevoRompiendose, huevoFrameActual;
-	private boolean esBola;
-	private boolean estaDesaparecido;
-	private int tiempoEnBola;
-	private int tiempoDesaparecido;
 	
-	public Serpiente(Vector2 posicion, Manuel manuel) {
+	public Serpiente(AdventuresOfManuel adventures, Vector2 posicion, Manuel manuel) {
+		super(adventures, posicion, manuel);
+		tiempoParaSiguienteProyectil = 0;
 		this.ataqueActivado = false;
-		this.manuel = manuel;
-		this.posicion = posicion;
-		this.posicionInicial = new Vector2(posicion.x, posicion.y);
-		bordes = new Rectangle(posicion.x, posicion.y, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		
-		TexturaSerpiente = new Texture("Enemigos/TablaSerpiente.png");
-		TexturaBola = new Texture("Miscelanea/Huevo.png");
-
-		serpienteMatrizFrames = new TextureRegion[2][2];
-		serpienteMatrizFrames[0][0] = new TextureRegion(TexturaSerpiente, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		serpienteMatrizFrames[0][1] = new TextureRegion(TexturaSerpiente, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		serpienteMatrizFrames[1][0] = new TextureRegion(TexturaSerpiente, 0, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		serpienteMatrizFrames[1][1] = new TextureRegion(TexturaSerpiente, 58, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		frameActual = serpienteMatrizFrames[IZQUIERDA][1];
 		direccion = IZQUIERDA;
 		
-		huevoFrameActual = huevoNormal = new TextureRegion(TexturaBola, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		huevoRompiendose = new TextureRegion(TexturaBola, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		
-		esBola = false;
-		estaDesaparecido = false;
-		tiempoEnBola = Constant.TIEMPO_BOLA;
-		tiempoDesaparecido = Constant.TIEMPO_DESAPARECIDO;
-		stateTime = 0f;
+		Textura = adventures.getManager().get("Enemigos/TablaSerpiente.png", Texture.class);
+
+		serpienteMatrizFrames = new TextureRegion[2][2];
+		serpienteMatrizFrames[0][0] = new TextureRegion(Textura, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		serpienteMatrizFrames[0][1] = new TextureRegion(Textura, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		serpienteMatrizFrames[1][0] = new TextureRegion(Textura, 0, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		serpienteMatrizFrames[1][1] = new TextureRegion(Textura, 58, 58, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
+		frameActual = serpienteMatrizFrames[IZQUIERDA][1]; // Necesario
 	}
 	
 	public void activarAtaque() {
 		ataqueActivado = true; // este enemigo no ataca a manuel
 	}
 	
-	@Override
-	public void draw(SpriteBatch batch) {
-		if(esBola)
-			batch.draw(huevoFrameActual, posicion.x, posicion.y, bordes.height, bordes.width);
-		else
-			batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
-	}
-	
-	@Override
 	public void update() {
-		if(esBola) {
-			tiempoEnBola--;
-			if(tiempoEnBola < Constant.TIEMPO_BOLA_CAMBIO)
-				huevoFrameActual = huevoRompiendose;
-			if(tiempoEnBola == 0) {
-				esBola = false;
-				tiempoEnBola = Constant.TIEMPO_BOLA;
-				huevoFrameActual = huevoNormal;
-				colisiones.finHuevo(this);
-			}
-		}
-		if(estaDesaparecido) {
-			tiempoDesaparecido--;
-			if(tiempoDesaparecido == 0) {
-				estaDesaparecido = false;
-				tiempoDesaparecido = Constant.TIEMPO_DESAPARECIDO;
-				posicion = posicionInicial;
-			}
-		}	
-		
-		else if(manuel.getBordes().x == posicion.x)
-			if(direccion == IZQUIERDA)
-				frameActual = serpienteMatrizFrames[direccion][0];
-			else
+		super.update();
+		if(ataqueActivado == false){
+			if(manuel.getBordes().x == posicion.x)
+				if(direccion == IZQUIERDA)
+					frameActual = serpienteMatrizFrames[direccion][0];
+				else
+					frameActual = serpienteMatrizFrames[direccion][1];
+			else if(manuel.getBordes().x < posicion.x) {
+				direccion = IZQUIERDA;
 				frameActual = serpienteMatrizFrames[direccion][1];
-		  	else if(manuel.getBordes().x < posicion.x) {
-		  		direccion = IZQUIERDA;
-		  		frameActual = serpienteMatrizFrames[direccion][1];
-		  	}
-		  	else if(manuel.getBordes().x > posicion.x) {
-		  		direccion = DERECHA;
-		  		frameActual = serpienteMatrizFrames[direccion][0];   
-		  	}
-		
-		// Actualizar bordes
-		bordes.x = posicion.x;
-		bordes.y = posicion.y;
-	}
-	
-	public void desaparecer() {
-		posicion.x = posicion.y = -1000;
-		bordes.x = bordes.y = -1000;
-		estaDesaparecido = true;
-		esBola = false;
-	}
-	
-	@Override
-	public void convertirEnBola() {
-		esBola = true;
-	}
-	
-	public void moverEnBola() {
-		int direccionHuevo = -1;
-		boolean estaQuieto = true;
-		if(colisiones.colisionMovibleArriba(manuel) && Gdx.input.isKeyPressed(Keys.UP) && !colisiones.colisionArribaObjeto(this) && !colisiones.colisionArribaEnemigo(this)) {
-			posicion.y = posicion.y + Gdx.graphics.getDeltaTime() * Constant.SPEED;
-			stateTime = stateTime + Gdx.graphics.getDeltaTime();
-			direccionHuevo = manuel.ARRIBA;
-			estaQuieto = false;
-		}
-		else if(colisiones.colisionMovibleAbajo(manuel) && Gdx.input.isKeyPressed(Keys.DOWN) && !colisiones.colisionAbajoObjeto(this) && !colisiones.colisionAbajoEnemigo(this)) {
-			posicion.y = posicion.y - Gdx.graphics.getDeltaTime() * Constant.SPEED;
-			stateTime = stateTime + Gdx.graphics.getDeltaTime();
-			direccionHuevo = manuel.ABAJO;
-			estaQuieto = false;
-		}
-		else if(colisiones.colisionMovibleDerecha(manuel) && Gdx.input.isKeyPressed(Keys.RIGHT) && !colisiones.colisionDerechaObjeto(this) && !colisiones.colisionDerechaEnemigo(this)) {
-			posicion.x = posicion.x + Gdx.graphics.getDeltaTime() * Constant.SPEED;
-			stateTime = stateTime + Gdx.graphics.getDeltaTime();
-			direccionHuevo = manuel.DERECHA;
-			estaQuieto = false;
-		}
-		else if(colisiones.colisionMovibleIzquierda(manuel) && Gdx.input.isKeyPressed(Keys.LEFT) && !colisiones.colisionIzquierdaObjeto(this) && !colisiones.colisionIzquierdaEnemigo(this)) {
-			posicion.x = posicion.x - Gdx.graphics.getDeltaTime() * Constant.SPEED;
-			stateTime = stateTime + Gdx.graphics.getDeltaTime();
-			direccionHuevo = manuel.IZQUIERDA;
-			estaQuieto = false;
-		}
-		
-		//if(estaQuieto) {
-			if(direccionHuevo == manuel.ABAJO) {
-				int nuevaPosicion = (int) posicion.y;
-				while(nuevaPosicion % 29 != 0) // Ajusta la posición
-					nuevaPosicion--;
-				posicion.y = nuevaPosicion;
 			}
-			else if(direccionHuevo == manuel.IZQUIERDA) {
-				int nuevaPosicion = (int) posicion.x;
-				while(nuevaPosicion % 29 != 19) // Ajusta la posición
-					nuevaPosicion--;
-				posicion.x = nuevaPosicion;
+			else if(manuel.getBordes().x > posicion.x) {
+				direccion = DERECHA;
+				frameActual = serpienteMatrizFrames[direccion][0];   
 			}
-			else if(direccionHuevo == manuel.DERECHA) {
-				int nuevaPosicion = (int) posicion.x;
-				while(nuevaPosicion % 29 != 19) // Ajusta la posición
-					nuevaPosicion++;
-				posicion.x = nuevaPosicion;
+		}
+		else{
+			if(tiempoParaSiguienteProyectil == 0){
+				if(direccion == IZQUIERDA){
+					direccion = DERECHA;
+					frameActual = serpienteMatrizFrames[direccion][0];
+				}
+				else{
+					direccion = IZQUIERDA;
+					frameActual = serpienteMatrizFrames[direccion][1];
+				}
+				tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 			}
-			else if(direccionHuevo == manuel.ARRIBA) {
-				int nuevaPosicion = (int) posicion.y;
-				while(nuevaPosicion % 29 != 0) // Ajusta la posición
-					nuevaPosicion++;
-				posicion.y = nuevaPosicion;
-			}
-		//}
-		
-		// Actualizar bordes
-		bordes.x = posicion.x;
-		bordes.y = posicion.y;	
+			else
+				tiempoDesaparecido--;
+		}
 	}
 	
 	// Getters and Setters ------------------------------------------------------------------------
 	
-	@Override
-	public boolean estaEnBola() {
-		return esBola;
-	}
-	
-	@Override
-	public Vector2 getPosicion() {
-		return posicion;
-	}
-
-	public void setPosicion(Vector2 posicion) {
-		this.posicion = posicion;
-	}
-
-	@Override
-	public Rectangle getBordes() {
-		return bordes;
-	}
-
-	public void setBordes(Rectangle bordes) {
-		this.bordes = bordes;
-	}
-	
-	public float getStateTime() {
-		return stateTime;
-	}
-
-	@Override
-	public void setColision(Colision colisiones) {
-		this.colisiones = colisiones;		
-	}
 }

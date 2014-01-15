@@ -5,27 +5,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
-class Proyectil extends ObjetoDelJuego{
-	private static final int ABAJO = 0;
-	private static final int IZQUIERDA = 1;
-	private static final int DERECHA = 2;
-	private static final int ARRIBA = 3;
+public abstract class Proyectil extends ObjetoDelJuego{
+	protected static final int ABAJO = 0;
+	protected static final int IZQUIERDA = 1;
+	protected static final int DERECHA = 2;
+	protected static final int ARRIBA = 3;
 	
-	private Vector2 posicion;
-	private Rectangle bordes;
-	private Texture TexturaProyectil;
-	private TextureRegion disparoArribaAbajo, disparoDerechaIzquierda, disparoDireccion;
-	private int direccion;
-	
-	public Proyectil() {
-		bordes = new Rectangle(0, 0, Constant.ANCHURA_OBJETO, Constant.ALTURA_OBJETO);
-		TexturaProyectil = new Texture("Miscelanea/ProyectilManolito.png");
-		disparoArribaAbajo = new TextureRegion(TexturaProyectil, 0, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		disparoDerechaIzquierda = new TextureRegion(TexturaProyectil, 58, 0, Constant.ANCHURA_PERSONAJE, Constant.ALTURA_PERSONAJE);
-		
-		posicion = new Vector2();
+	protected int direccion;
+	protected TextureRegion disparoAbajo, disparoArriba, disparoDerecha, disparoIzquierda, disparoDireccion;
+
+	public Proyectil(AdventuresOfManuel adventures, Vector2 posicion) {
+		super(adventures, posicion);
 	}
 	
 	public void inicializaPosicion(Vector2 posicion, int direccion){
@@ -47,10 +40,14 @@ class Proyectil extends ObjetoDelJuego{
 			this.posicion.y = posicion.y;
 		}
 		
-		if(direccion == DERECHA || direccion == IZQUIERDA) // Se verá de forma distinta dependiendo la dirección que se dispare
-			disparoDireccion = disparoDerechaIzquierda;
+		if(direccion == DERECHA) // Se verá de forma distinta dependiendo la dirección que se dispare
+			disparoDireccion = disparoDerecha;
+		else if(direccion == IZQUIERDA)
+			disparoDireccion = disparoIzquierda;
+		else if (direccion == ARRIBA)
+			disparoDireccion = disparoArriba;
 		else
-			disparoDireccion = disparoArribaAbajo;
+			disparoDireccion = disparoAbajo;
 		
 		// Actualizar bordes
 		bordes.x = posicion.x;

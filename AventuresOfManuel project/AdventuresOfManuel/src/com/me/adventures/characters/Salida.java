@@ -5,37 +5,36 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.me.adventures.main.AdventuresOfManuel;
+import com.me.adventures.main.Constant;
 
 public class Salida extends ObjetoDelJuego{
 	private int estado;
-	private String tipo;
-	
-	private Vector2 posicion;
-	private Rectangle bordes;
-	private Texture TexturaSalida;
+	private int tipo;
 
 	private TextureRegion frameActual;
 	
-	public Salida(Vector2 posicion, String tipo){
+	public Salida(AdventuresOfManuel adventures, Vector2 posicion, int tipo){
+		super(adventures, posicion);
+		bordes = new Rectangle(posicion.x, posicion.y, 58, 174);
 		this.tipo = tipo;
 		estado = 0;
-		this.posicion = posicion;
-		bordes = new Rectangle(posicion.x, posicion.y, 58, 174);
-		if(this.tipo == "PUERTA")
-			TexturaSalida = new Texture("Miscelanea/TablaPuerta.png");
+		if(this.tipo == Constant.PUERTA)
+			Textura = adventures.getManager().get("Miscelanea/TablaPuerta.png", Texture.class);
 		else
-			TexturaSalida = new Texture("Miscelanea/TablaPuerta.png"); //--------- CAMBIAR A ESCALERA
+			Textura = adventures.getManager().get("Miscelanea/TablaPuerta.png", Texture.class); //--------- CAMBIAR A ESCALERA
 		
-		frameActual = new TextureRegion(TexturaSalida, 0, 0, 174, 58);
+		frameActual = new TextureRegion(Textura, 0, 0, 174, 58);
 	}
 	
 	public void abrirSalida(){
 		estado = 1;
-		frameActual = new TextureRegion(TexturaSalida, 0, 58, 174, 58);
+		if(tipo == Constant.PUERTA)
+			frameActual = new TextureRegion(Textura, 0, 58, 174, 58);
 	}
 	
 	public boolean salidaAbierta(){
-		if(estado == 0)
+		if(estado == 0) //cerrada
 			return false;
 		else
 			return true;
@@ -43,6 +42,7 @@ public class Salida extends ObjetoDelJuego{
 	
 	@Override
 	public void draw(SpriteBatch batch) {
+		if(tipo == Constant.PUERTA || (tipo == Constant.ESCALERA && estado == 1))
 		batch.draw(frameActual, posicion.x, posicion.y, bordes.height, bordes.width);
 	}
 	
@@ -58,20 +58,7 @@ public class Salida extends ObjetoDelJuego{
 		return posicion;
 	}
 
-	public void setPosicion(Vector2 posicion) {
-		this.posicion = posicion;
-	}
-
-	@Override
-	public Rectangle getBordes() {
-		return bordes;
-	}
-
-	public void setBordes(Rectangle bordes) {
-		this.bordes = bordes;
-	}
-
-	public String getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
 }
