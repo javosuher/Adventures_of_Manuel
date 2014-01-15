@@ -49,25 +49,25 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 			disparo = new ProyectilEnemigo(adventures, new Vector2(), direccion);
 			disparo.inicializaPosicion(posicion, direccion);
 			if(direccion == IZQUIERDA){
-				if(manuel.getPosicion().x < posicion.x && (manuel.getPosicion().y == posicion.y || posicion.y == manuel.getPosicion().y+29 || posicion.y == manuel.getPosicion().y-29 )){
+				if(manuel.getPosicion().x < posicion.x && (manuel.getPosicion().y <= posicion.y+29 && manuel.getPosicion().y >= posicion.y - 29)){
 					disparando = true;
 					disparar();
 				}
 			}
 			else if(direccion == DERECHA){
-				if(manuel.getPosicion().x > posicion.x && (manuel.getPosicion().y == posicion.y || posicion.y == manuel.getPosicion().y+29 || posicion.y == manuel.getPosicion().y-29 )){
+				if(manuel.getPosicion().x > posicion.x && (manuel.getPosicion().y <= posicion.y+29 && manuel.getPosicion().y >= posicion.y - 29)){
 					disparando = true;
 					disparar();
 				}
 			}
 			else if(direccion == ARRIBA){
-				if((manuel.getPosicion().x == posicion.x || posicion.x == manuel.getPosicion().x+29 || posicion.x == manuel.getPosicion().x-29) && manuel.getPosicion().y > posicion.y){
+				if(manuel.getPosicion().y > posicion.y && (manuel.getPosicion().x <= posicion.x+29 && manuel.getPosicion().x >= posicion.x - 29)){
 					disparando = true;
 					disparar();
 				}
 			}
 			else{
-				if((manuel.getPosicion().x == posicion.x || posicion.x == manuel.getPosicion().x+29 || posicion.x == manuel.getPosicion().x-29)  && manuel.getPosicion().y < posicion.y){
+				if(manuel.getPosicion().y < posicion.y && (manuel.getPosicion().x <= posicion.x+29 && manuel.getPosicion().x >= posicion.x - 29)){
 					disparando = true;
 					disparar();
 				}
