@@ -23,6 +23,7 @@ public abstract class PersonajeDelJuegoEnemigo extends PersonajeDelJuego {
 	protected int tiempoEnBola;
 	protected int tiempoDesaparecido;
 	protected int tiempoParaSiguienteProyectil;
+	protected int tiempoParaMovimiento;
 	
 	public PersonajeDelJuegoEnemigo(AdventuresOfManuel adventures, Vector2 posicion, Manuel manuel) {
 		super(adventures, posicion);
@@ -33,6 +34,7 @@ public abstract class PersonajeDelJuegoEnemigo extends PersonajeDelJuego {
 		estaDesaparecido = false;
 		tiempoEnBola = Constant.TIEMPO_BOLA;
 		tiempoDesaparecido = Constant.TIEMPO_DESAPARECIDO;
+		tiempoParaMovimiento = 0;
 		
 		// Texturas bola
 		TexturaBola = adventures.getManager().get("Miscelanea/Huevo.png", Texture.class);

@@ -30,13 +30,14 @@ public class Fantasma extends PersonajeDelJuegoEnemigo {
 		fantasmaAnimationIzquierda = new Animation(0.05f, fantasmaMatrizFrames[IZQUIERDA]);
 		fantasmaAnimationDerecha= new Animation(0.05f, fantasmaMatrizFrames[DERECHA]);
 		fantasmaAnimationArriba = new Animation(0.05f, fantasmaMatrizFrames[ARRIBA]);
-
 	}
 	
 	public void activarAtaque() {
 	}
 	
 	public void update() {
+		
+		super.update();
 	}
 	
 	// Getters and Setters ------------------------------------------------------------------------

@@ -16,7 +16,6 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 	public static final int DERECHA = 2;
 	public static final int ARRIBA = 3;
 	private boolean dormido;
-	private int tiempoParaMovimiento;
 	private int tiempoParaDormir;
 	
 	//Atributos para pintar
@@ -28,7 +27,6 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 		super(adventures, posicion, manuel);
 		dormido = false;
 		ataqueActivado = true;
-		tiempoParaMovimiento = 0;
 		this.direccion = direccion;
 		
 		Textura = adventures.getManager().get("Enemigos/TablaBichoVerde.png", Texture.class);

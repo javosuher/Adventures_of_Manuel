@@ -35,8 +35,8 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 	public void update() {
 		if(ataqueActivado == true){
 			//moverse
-			if(tiempoParaSiguienteProyectil == 0){
-				tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
+			if(tiempoParaMovimiento == 0){
+				tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO;
 				if(actual == MAX - 1)
 					actual = 0;
 				else
@@ -44,7 +44,7 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 				frameActual = calaveraMatrizFrames[actual];
 			}
 			else
-				tiempoParaSiguienteProyectil--;
+				tiempoParaMovimiento--;
 		}
 	}
 	
