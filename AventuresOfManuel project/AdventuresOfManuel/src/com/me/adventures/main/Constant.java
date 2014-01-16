@@ -17,6 +17,7 @@ public final class Constant {
     public static final int ANCHURA_ESCENARIO = 754, ALTURA_ESCENARIO = 754;
     public static final int PUENTE_VERTICAL = 0, PUENTE_HORIZONTAL = 1;
     public static final int PUERTA = 0, ESCALERA = 1;
+    public static final int TIEMPO_BOTON = 50;
     		
 	public static Constant getConstant() {
 		return constantes;

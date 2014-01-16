@@ -54,6 +54,13 @@ public class MainScreen extends AbstractScreen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 		
+		if(adventures.isMusicaActivada()) { // Poner musica Menú
+			if(adventures.getMusicaNivel().isPlaying())
+				adventures.getMusicaNivel().stop();
+			if(!adventures.getMusicaMenu().isPlaying())
+				adventures.getMusicaMenu().play();
+		}
+		
 		for(Boton boton : botonesPrincipales)
 			boton.update();
 		for(Boton boton : botonesModoHistoria)

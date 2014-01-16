@@ -4,6 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,6 +14,7 @@ import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
 	public AbstractScreen LOADING, START, MAIN, NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5;
+	private Music musicaMenu, musicaNivel;
 	private AssetManager manager;
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
@@ -69,6 +72,13 @@ public class AdventuresOfManuel extends Game {
 		manager.load("Pantallas/BotonOpciones.png", Texture.class);
 		manager.load("Pantallas/BotonReintentar.png", Texture.class);
 		manager.load("Pantallas/BotonSiguienteNivel.png", Texture.class);
+		manager.load("Musica/Button.mp3", Sound.class);
+		manager.load("Musica/DisparoDragon.mp3", Sound.class);
+		manager.load("Musica/DisparoManolito.mp3", Sound.class);
+		manager.load("Musica/Ganar.mp3", Sound.class);
+		manager.load("Musica/Perder.mp3", Sound.class);
+		manager.load("Musica/MenuInicial.mp3", Music.class);
+		manager.load("Musica/Niveles.mp3", Music.class);
 		
 		LOADING = new LoadingScreen(this); // Necesario
 		setScreen(LOADING);
@@ -76,13 +86,17 @@ public class AdventuresOfManuel extends Game {
 	
 	public void crearNiveles() {
 		// Pantallas del juego
-		MAIN = new MainScreen(this);
 		START = new StartScreen(this);
+		MAIN = new MainScreen(this);
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
 		NIVEL2 = new Nivel2(this, new Vector2(425,116));
 		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
 		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
 		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
+		
+		//Musica
+		musicaMenu = manager.get("Musica/MenuInicial.mp3", Music.class);
+		musicaNivel = manager.get("Musica/Niveles.mp3", Music.class);
 	}
 	
 	public SpriteBatch getBatch() {
@@ -96,6 +110,12 @@ public class AdventuresOfManuel extends Game {
 	}
 	public Preferences getPreferencias() {
 		return preferencias;
+	}
+	public Music getMusicaMenu() {
+		return musicaMenu;
+	}
+	public Music getMusicaNivel() {
+		return musicaNivel;
 	}
 	public boolean isSonidoActivado() {
 		return sonidoActivado;
@@ -121,6 +141,7 @@ public class AdventuresOfManuel extends Game {
 		super.dispose();
 		preferencias.putBoolean("Sonido", sonidoActivado);
 		preferencias.putBoolean("Musica", musicaActivada);
+		preferencias.flush();
 		manager.dispose();
 		batch.dispose();
 	}

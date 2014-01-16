@@ -70,6 +70,13 @@ public abstract class Nivel extends AbstractScreen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 		
+		if(adventures.isMusicaActivada()) { // Poner musica Nivel
+			if(adventures.getMusicaMenu().isPlaying())
+				adventures.getMusicaMenu().stop();
+			if(!adventures.getMusicaNivel().isPlaying())
+				adventures.getMusicaNivel().play();
+		}
+		
 		adventures.getCamera().update();
 		/*if(Gdx.app.getType() == ApplicationType.Android)
 			adventures.getCamera().apply(Gdx.graphics.getGL10());*/
@@ -151,7 +158,6 @@ public abstract class Nivel extends AbstractScreen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

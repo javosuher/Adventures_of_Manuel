@@ -14,6 +14,9 @@ public class BotonExit extends Boton {
 	
 	@Override
 	protected void funcionamiento() {
+		adventures.getPreferencias().putBoolean("Sonido", adventures.isSonidoActivado());
+		adventures.getPreferencias().putBoolean("Musica", adventures.isMusicaActivada());
+		adventures.getPreferencias().flush();
 		System.exit(0);
 	}
 }

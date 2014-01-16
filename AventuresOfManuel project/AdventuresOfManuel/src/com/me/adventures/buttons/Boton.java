@@ -1,14 +1,14 @@
 package com.me.adventures.buttons;
 
-import java.util.List;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
+import com.me.adventures.main.Constant;
 import com.me.adventures.screens.MainScreen;
 
 public abstract class Boton {
@@ -20,6 +20,8 @@ public abstract class Boton {
 	protected float yMinima;
 	protected float xMaxima;
 	protected float yMaxima;
+	protected int tiempoPulsacion;
+	protected Sound sonidoBoton;
 
 	//Atributos para pintar
 	protected Texture Textura;
@@ -27,6 +29,8 @@ public abstract class Boton {
 	public Boton(AdventuresOfManuel adventures, Vector2 posicion) {
 		this.adventures = adventures;
 		this.posicion = posicion;
+		tiempoPulsacion = 0;
+		sonidoBoton = adventures.getManager().get("Musica/Button.mp3", Sound.class);
 	}
 	
 	protected void asignarBordes() {
@@ -48,8 +52,14 @@ public abstract class Boton {
 	}
 	
 	public void update() {
-		if(sePulsaElBoton())
+		if(sePulsaElBoton() && tiempoPulsacion == 0) {
+			if(adventures.isSonidoActivado())
+				sonidoBoton.play();
 			funcionamiento();
+			tiempoPulsacion = Constant.TIEMPO_BOTON;
+		}
+		else if(tiempoPulsacion > 0)
+			tiempoPulsacion--;
 	}
 	
 	private boolean sePulsaElBoton() {

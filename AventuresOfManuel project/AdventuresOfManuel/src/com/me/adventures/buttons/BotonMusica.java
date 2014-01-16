@@ -14,6 +14,10 @@ public class BotonMusica extends Boton {
 	
 	@Override
 	protected void funcionamiento() {
-		
+		adventures.pressMusica();
+		if(adventures.getMusicaMenu().isPlaying())
+			adventures.getMusicaMenu().stop();
+		if(adventures.getMusicaNivel().isPlaying())
+			adventures.getMusicaNivel().stop();
 	}
 }

@@ -14,6 +14,6 @@ public class BotonEfectos extends Boton {
 	
 	@Override
 	protected void funcionamiento() {
-		
+		adventures.pressSonido();
 	}
 }
