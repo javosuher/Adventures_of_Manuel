@@ -94,25 +94,29 @@ public abstract class PersonajeDelJuegoEnemigo extends PersonajeDelJuego {
 	public void moverEnBola() {
 		int direccionHuevo = -1;
 		boolean estaQuieto = true;
-		if(colisiones.colisionMovibleArriba(manuel) && teclaArriba() && !colisiones.colisionArribaObjeto(this) && !colisiones.colisionArribaEnemigo(this)) {
+		boolean colisionAbajo = colisiones.colisionAbajoConManuel(this);
+		boolean colisionArriba = colisiones.colisionArribaConManuel(this);
+		boolean colisionDerecha = colisiones.colisionDerechaConManuel(this);
+		boolean colisionIzquierda = colisiones.colisionIzquierdaConManuel(this);
+		if(colisionAbajo && teclaArriba() && !colisiones.colisionArribaObjeto(this) && !colisiones.colisionArribaEnemigo(this) && !colisiones.colisionMovibleArriba(this) && !colisiones.colisionArribaMovibleCorazon(this)) {
 			posicion.y = (float) (posicion.y + Constant.SPEED);
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccionHuevo = manuel.ARRIBA;
 			estaQuieto = false;
 		}
-		else if(colisiones.colisionMovibleAbajo(manuel) && teclaAbajo() && !colisiones.colisionAbajoObjeto(this) && !colisiones.colisionAbajoEnemigo(this)) {
+		else if(colisionArriba && teclaAbajo() && !colisiones.colisionAbajoObjeto(this) && !colisiones.colisionAbajoEnemigo(this) && !colisiones.colisionMovibleAbajo(this) && !colisiones.colisionAbajoMovibleCorazon(this)) {
 			posicion.y = (float) (posicion.y - Constant.SPEED);
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccionHuevo = manuel.ABAJO;
 			estaQuieto = false;
 		}
-		else if(colisiones.colisionMovibleDerecha(manuel) && teclaDerecha() && !colisiones.colisionDerechaObjeto(this) && !colisiones.colisionDerechaEnemigo(this)) {
+		else if(colisionIzquierda && teclaDerecha() && !colisiones.colisionDerechaObjeto(this) && !colisiones.colisionDerechaEnemigo(this) && !colisiones.colisionMovibleDerecha(this) && !colisiones.colisionDerechaMovibleCorazon(this)) {
 			posicion.x = (float) (posicion.x + Constant.SPEED);
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccionHuevo = manuel.DERECHA;
 			estaQuieto = false;
 		}
-		else if(colisiones.colisionMovibleIzquierda(manuel) && teclaIzquierda() && !colisiones.colisionIzquierdaObjeto(this) && !colisiones.colisionIzquierdaEnemigo(this)) {
+		else if(colisionDerecha && teclaIzquierda() && !colisiones.colisionIzquierdaObjeto(this) && !colisiones.colisionIzquierdaEnemigo(this) && !colisiones.colisionMovibleIzquierda(this) && !colisiones.colisionIzquierdaMovibleCorazon(this)) {
 			posicion.x = (float) (posicion.x - Constant.SPEED);
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			direccionHuevo = manuel.IZQUIERDA;
