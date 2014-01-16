@@ -295,24 +295,22 @@ public class Colision {
 		auxiliar.y = (float) (auxiliar.y - Constant.SPEED);
 		return colisiona(auxiliar, manuel.getBordes());
 	}
-	
 	public boolean colisionArribaConManuel(PersonajeDelJuego personaje){ 
 		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
 		auxiliar.y = (float) (auxiliar.y + Constant.SPEED);
 		return colisiona(auxiliar, manuel.getBordes());
 	}
-	
 	public boolean colisionDerechaConManuel(PersonajeDelJuego personaje){ 
 		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
 		auxiliar.x = (float) (auxiliar.x + Constant.SPEED);
 		return colisiona(auxiliar, manuel.getBordes());
 	}
-	
 	public boolean colisionIzquierdaConManuel(PersonajeDelJuego personaje){ 
 		Rectangle auxiliar = new Rectangle(personaje.getBordes().x, personaje.getBordes().y, personaje.getBordes().width, personaje.getBordes().height);
 		auxiliar.x = (float) (auxiliar.x - Constant.SPEED);
 		return colisiona(auxiliar, manuel.getBordes());	
 	}
+	
 	
 	public boolean colisionMovibleCorazon(Rectangle auxiliar) {
 		boolean ningunaColision = true;

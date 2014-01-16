@@ -1,6 +1,5 @@
 package com.me.adventures.buttons;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
@@ -15,6 +14,6 @@ public class BotonExit extends Boton {
 	
 	@Override
 	protected void funcionamiento() {
-		Gdx.app.exit();
+		System.exit(0);
 	}
 }

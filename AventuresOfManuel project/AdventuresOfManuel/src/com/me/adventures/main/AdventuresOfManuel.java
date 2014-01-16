@@ -16,6 +16,8 @@ public class AdventuresOfManuel extends Game {
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
 	private Preferences preferencias;
+	private boolean sonidoActivado;
+	private boolean musicaActivada;
 	
 	@Override
 	public void create() {
@@ -23,6 +25,8 @@ public class AdventuresOfManuel extends Game {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		preferencias = Gdx.app.getPreferences("-_PreferencesManuel-JMDCG-PINF-_");
+		sonidoActivado = preferencias.getBoolean("Sonido", true);
+		musicaActivada = preferencias.getBoolean("Musica", true);
 		
 		// Cargamos todos los elementos externos que usará el juego, como son las texturas y los sonidos.
 		manager.load("Pantallas/Loading.png", Texture.class);
@@ -93,10 +97,30 @@ public class AdventuresOfManuel extends Game {
 	public Preferences getPreferencias() {
 		return preferencias;
 	}
+	public boolean isSonidoActivado() {
+		return sonidoActivado;
+	}
+	public void pressSonido() {
+		if(sonidoActivado)
+			sonidoActivado = false;
+		else
+			sonidoActivado = true;
+	}
+	public boolean isMusicaActivada() {
+		return musicaActivada;
+	}
+	public void pressMusica() {
+		if(musicaActivada)
+			musicaActivada = false;
+		else
+			musicaActivada = true;
+	}
 
 	@Override
 	public void dispose() {
 		super.dispose();
+		preferencias.putBoolean("Sonido", sonidoActivado);
+		preferencias.putBoolean("Musica", musicaActivada);
 		manager.dispose();
 		batch.dispose();
 	}
