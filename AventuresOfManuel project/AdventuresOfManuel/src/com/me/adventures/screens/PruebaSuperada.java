@@ -1,24 +1,16 @@
 package com.me.adventures.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.me.adventures.pruebas.MainTest;
+import com.me.adventures.main.AdventuresOfManuel;
 
-public class PruebaSuperada implements Screen{
-	private MainTest adventurasDeManuel;
+public class PruebaSuperada extends AbstractScreen {
 	private Texture TexturaGanar;
-	private SpriteBatch batch;
 	
-	public PruebaSuperada(MainTest adventurasDeManuel){
-		this.adventurasDeManuel = adventurasDeManuel;
+	public PruebaSuperada(AdventuresOfManuel adventures){
+		super(adventures);
 		TexturaGanar = new Texture("Miscelanea/Ganar.png");
-		TexturaGanar.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		
-		batch = new SpriteBatch();
 	}
 	
 	@Override

@@ -3,12 +3,16 @@ package com.me.adventures.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
+import com.me.adventures.pruebas.NivelTest;
 
 public class StartScreen extends AbstractScreen {
+	private boolean pruebas; // Sirve para ver las pruebas
 
 	public StartScreen(AdventuresOfManuel adventures) {
 		super(adventures);
+		pruebas = true;
 	}
 	
 	@Override
@@ -16,8 +20,12 @@ public class StartScreen extends AbstractScreen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
-		if(Gdx.input.isTouched())
-			adventures.setScreen(adventures.MAIN);
+		if(Gdx.input.isTouched()) {
+			if(pruebas)
+				adventures.setScreen(new NivelTest(adventures, new Vector2(541,348)));
+			else
+				adventures.setScreen(adventures.MAIN);
+		}
 		
 		float ancho = 0;
 		float alto = 0;

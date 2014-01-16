@@ -93,6 +93,10 @@ public class AdventuresOfManuel extends Game {
 	public Preferences getPreferencias() {
 		return preferencias;
 	}
+	
+	public void haGanado(){
+		setScreen(new PruebaSuperada(this));
+	}
 
 	@Override
 	public void dispose() {
