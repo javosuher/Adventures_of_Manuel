@@ -2,8 +2,5 @@
 
 A videogame made under libGDX
 
-##Ramas
-####Master
-Contiene las diferentes versiones estables, como por ejemplo el prototipo.
-####Develop
-Rama donde se va programando el juego
+##Develop
+Aqui es donde se esta programando el juego y contiene versiones no estables del mismo.
