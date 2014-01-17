@@ -33,6 +33,7 @@ public class AdventuresOfManuel extends Game {
 		
 		// Cargamos todos los elementos externos que usará el juego, como son las texturas y los sonidos.
 		manager.load("Pantallas/Loading.png", Texture.class);
+		manager.load("Pantallas/FondoMenu.png", Texture.class);
 		manager.load("Pantallas/Start.png", Texture.class);
 		manager.load("Manolito/TablaSpritesManolitoTransparencia.png", Texture.class);
 		manager.load("Enemigos/bloque.png", Texture.class);
@@ -97,6 +98,15 @@ public class AdventuresOfManuel extends Game {
 		//Musica
 		musicaMenu = manager.get("Musica/MenuInicial.mp3", Music.class);
 		musicaNivel = manager.get("Musica/Niveles.mp3", Music.class);
+	}
+	
+	public void destruirNiveles() {
+		MAIN = new MainScreen(this);
+		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
+		NIVEL2 = new Nivel2(this, new Vector2(425,116));
+		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
+		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
+		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
 	}
 	
 	public SpriteBatch getBatch() {

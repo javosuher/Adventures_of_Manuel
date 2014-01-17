@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.buttons.*;
 import com.me.adventures.main.AdventuresOfManuel;
@@ -16,10 +18,7 @@ public class MainScreen extends AbstractScreen {
 
 	public MainScreen(AdventuresOfManuel adventures) {
 		super(adventures);
-	}
-	
-	@Override
-	public void show() {
+		
 		botonesPrincipales = new ArrayList<Boton>();
 		botonesModoHistoria = new ArrayList<Boton>();
 		botonesOpciones = new ArrayList<Boton>();
@@ -35,7 +34,7 @@ public class MainScreen extends AbstractScreen {
 	}
 	
 	public void menuModoHistoria() {
-		botonesOpciones.clear();
+		borrarMenuOpciones();
 		botonesModoHistoria.add(new BotonNivel1(adventures, new Vector2(500, Gdx.graphics.getHeight() - 100)));
 		botonesModoHistoria.add(new BotonNivel2(adventures, new Vector2(500, Gdx.graphics.getHeight() - 150)));
 		botonesModoHistoria.add(new BotonNivel3(adventures, new Vector2(500, Gdx.graphics.getHeight() - 200)));
@@ -47,6 +46,13 @@ public class MainScreen extends AbstractScreen {
 		botonesModoHistoria.clear();
 		botonesOpciones.add(new BotonEfectos(adventures, new Vector2(500, Gdx.graphics.getHeight() - 100)));
 		botonesOpciones.add(new BotonMusica(adventures, new Vector2(500, Gdx.graphics.getHeight() - 150)));
+	}
+	
+	public void borrarMenuModoHistoria() {
+		botonesModoHistoria.clear();
+	}
+	public void borrarMenuOpciones() {
+		botonesOpciones.clear();
 	}
 
 	@Override
@@ -61,6 +67,20 @@ public class MainScreen extends AbstractScreen {
 				adventures.getMusicaMenu().play();
 		}
 		
+		if(Gdx.app.getType() == ApplicationType.Android) {
+			adventures.getCamera().update();
+			batch.setProjectionMatrix(adventures.getCamera().combined);
+		}
+		
+		float ancho = 0;
+		float alto = 0;
+		if(Gdx.graphics.getWidth() < adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth()) {
+			float div = (float) ((float) Gdx.graphics.getWidth()) / ((float) adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth());
+			ancho = adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth() * div;
+			alto = adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getHeight() * div;
+		}
+		float altura = Gdx.graphics.getHeight() - alto;
+		
 		for(Boton boton : botonesPrincipales)
 			boton.update();
 		for(Boton boton : botonesModoHistoria)
@@ -69,6 +89,7 @@ public class MainScreen extends AbstractScreen {
 			boton.update();
 		
 		batch.begin();
+		batch.draw(adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class), 0, altura, ancho, alto);
 		for(Boton boton : botonesPrincipales)
 			boton.draw(batch);
 		for(Boton boton : botonesModoHistoria)
@@ -93,6 +114,14 @@ public class MainScreen extends AbstractScreen {
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	public void show() {
+		if(Gdx.app.getType() == ApplicationType.Android) {
+			adventures.getCamera().position.set((Gdx.graphics.getWidth()) / 2, Gdx.graphics.getHeight() / 2, 0); // Establecer 
+			adventures.getCamera().zoom = 1;
+		}
 	}
 
 	@Override

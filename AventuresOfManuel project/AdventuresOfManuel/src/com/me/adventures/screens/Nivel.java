@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
@@ -37,15 +38,6 @@ public abstract class Nivel extends AbstractScreen {
 		super(adventures);
 		TexturaFondo = adventures.getManager().get("Miscelanea/Nivel.png", Texture.class);
 		
-		// Para reescalar
-		if(Gdx.graphics.getHeight() < adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight() && Gdx.app.getType() == ApplicationType.Android) {
-			float div = (float) ((float) Gdx.graphics.getHeight()) / ((float) adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight());
-			adventures.getCamera().position.set((135 + Gdx.graphics.getWidth()) / 2, TexturaFondo.getHeight() / 2, 0);
-			adventures.getCamera().zoom = div + 1;
-		}
-		else
-			adventures.getCamera().position.set(Gdx.graphics.getWidth() / 2, TexturaFondo.getHeight() / 2, 0);
-		
 		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		objetos = new ArrayList<ObjetoDelJuego>();
 		objetosEnemigos = new ArrayList<ObjetoDelJuego>();
@@ -59,6 +51,18 @@ public abstract class Nivel extends AbstractScreen {
 		personajesDelNivel();
 		mapaDelNivel();
 		iniciarColisiones();
+	}
+	
+	@Override
+	public void show() {
+		// Para reescalar
+		if(Gdx.graphics.getHeight() < adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight() && Gdx.app.getType() == ApplicationType.Android) {
+			float div = (float) ((float) Gdx.graphics.getHeight()) / ((float) adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight());
+			adventures.getCamera().position.set((135 + Gdx.graphics.getWidth()) / 2, TexturaFondo.getHeight() / 2, 0);
+			adventures.getCamera().zoom = div + 1;
+		}
+		else
+			adventures.getCamera().position.set(Gdx.graphics.getWidth() / 2, TexturaFondo.getHeight() / 2, 0);
 	}
 	
 	protected abstract void objetosDelNivel();
@@ -77,10 +81,10 @@ public abstract class Nivel extends AbstractScreen {
 				adventures.getMusicaNivel().play();
 		}
 		
-		adventures.getCamera().update();
-		/*if(Gdx.app.getType() == ApplicationType.Android)
-			adventures.getCamera().apply(Gdx.graphics.getGL10());*/
-		batch.setProjectionMatrix(adventures.getCamera().combined);
+		if(Gdx.app.getType() == ApplicationType.Android) {
+			adventures.getCamera().update();
+			batch.setProjectionMatrix(adventures.getCamera().combined);
+		}
 		
 		// Actualizamos personajes pantalla
 		manuel.update();
@@ -98,6 +102,11 @@ public abstract class Nivel extends AbstractScreen {
 		for(int i = 0; i < personajesMovibles.size(); i++){
 			personajesMovibles.get(i).moverEnBola();
 			personajesMovibles.get(i).update();
+		}
+		
+		if(Gdx.input.isKeyPressed(Keys.ESCAPE) || Gdx.input.isKeyPressed(Keys.MENU)) {
+			adventures.destruirNiveles();
+			adventures.setScreen(adventures.MAIN);
 		}
 		
 		// Pintamos la pantalla
@@ -153,11 +162,6 @@ public abstract class Nivel extends AbstractScreen {
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
