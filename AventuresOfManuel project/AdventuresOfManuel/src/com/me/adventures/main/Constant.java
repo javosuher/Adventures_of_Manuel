@@ -10,6 +10,7 @@ public final class Constant {
 	public static final int TIEMPO_PROYECTIL = 50;
 	public static final int TIEMPO_DESAPARECIDO = 800;
 	public static final int TIEMPO_MOVIMIENTO_LEEPER = 2;
+	public static final int TIEMPO_MOVIMIENTO_CALAVERA = 1;
 	public static final int TIEMPO_MOVIMIENTO_FANTASMA = 4;
 	public static final int TIEMPO_DORMIDO = 20;
     public static final int ANCHURA_PERSONAJE = 58, ANCHURA_OBJETO = 58;

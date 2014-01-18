@@ -26,7 +26,10 @@ public class Nivel2 extends Nivel {
 		objetos.add(new Pared(adventures, new Vector2(135, 0), 58, 754));
 		objetos.add(new Pared(adventures, new Vector2(135, 696), 580, 58));
 		objetos.add(new Pared(adventures, new Vector2(715, 725), 58, 29));
-		salida = new Salida(adventures, new Vector2(657,696), Constant.PUERTA);
+		
+
+		objetos.add(new Pared(adventures, new Vector2(715, 696), 58, 29));//
+		salida = new Salida(adventures, new Vector2(657,696), Constant.PUERTA, objetos.size()-1);
 		objetos.add(new Pared(adventures, new Vector2(773, 696), 58, 58));
 		objetos.add(new Pared(adventures, new Vector2(831, 0), 58, 754));
 		
