@@ -212,7 +212,6 @@ public class Fantasma extends PersonajeDelJuegoEnemigo {
 		}
 	}
 	
-	
 	@Override
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);

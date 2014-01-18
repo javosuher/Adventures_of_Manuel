@@ -1,14 +1,25 @@
 package com.me.adventures.characters;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
 public class Calavera extends PersonajeDelJuegoEnemigo {
+	public static final int ABAJO = 0;
+	public static final int IZQUIERDA = 1;
+	public static final int DERECHA = 2;
+	public static final int ARRIBA = 3;
 	private static int MAX = 4;
+	private int cambio;
+	private Random rnd;
 
 	//Atributos para pintar
 	private TextureRegion [] calaveraMatrizFrames;
@@ -17,7 +28,9 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 	public Calavera(AdventuresOfManuel adventures, Vector2 posicion, Manuel manuel) {
 		super(adventures, posicion, manuel);
 		this.ataqueActivado = false;
-		
+		this.cambio = 0;
+		rnd = new Random();
+		direccion = rnd.nextInt(MAX);
 		Textura = adventures.getManager().get("Enemigos/TablaCalaveraFinal.png", Texture.class);
 
 		calaveraMatrizFrames = new TextureRegion[MAX];
@@ -36,15 +49,110 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 	
 	public void update() {
 		if(ataqueActivado == true){
-			if(tiempoParaMovimiento == 0){
-				frameActual = calaveraAnimation.getKeyFrame(stateTime, true);
-				tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_CALAVERA;
+			boolean colisionDerecha = colisiones.colisionDerechaObjeto(this) || colisiones.colisionDerechaEnemigo(this) || colisiones.colisionMovibleDerecha(this);
+			boolean colisionIzquierda = colisiones.colisionIzquierdaObjeto(this) || colisiones.colisionIzquierdaEnemigo(this) || colisiones.colisionMovibleIzquierda(this);
+			boolean colisionArriba = colisiones.colisionArribaObjeto(this) || colisiones.colisionArribaEnemigo(this) || colisiones.colisionMovibleArriba(this);
+			boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this) || colisiones.colisionMovibleAbajo(this);
+			boolean colisionManuel = colisiones.colisionAbajoConManuel(this) || colisiones.colisionArribaConManuel(this) || colisiones.colisionDerechaConManuel(this) || colisiones.colisionIzquierdaConManuel(this);
+			
+			if(colisionManuel && !colisionManuel){
+				//manuel.morir();
+				int x = 1;
 			}
-			else
+			else{
+				if(cambio == 0){
+					cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+				}
+				if(tiempoParaMovimiento == 0){
+					if(direccion == ARRIBA){
+						if(colisionArriba)
+							cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+						mover(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+					}
+					else if(direccion == ABAJO){
+						if(colisionAbajo)
+							cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+						mover(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+					}
+					else if(direccion == DERECHA){
+						if(colisionDerecha)
+							cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+						mover(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+					}
+					else{
+						if(colisionIzquierda)
+							cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+						mover(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+					}
+				}
+			}
+
+			if(cambio > 0)
+				cambio--;
+			if(tiempoParaMovimiento > 0)
 				tiempoParaMovimiento--;
 		}
+		super.update();
 	}
 	
-	// Getters and Setters ------------------------------------------------------------------------
+	private void cambio(boolean colisionAbajo, boolean colisionArriba, boolean colisionDerecha, boolean colisionIzquierda){
+		List<Integer> direccionesPosibles = new ArrayList<Integer>(); 
+		if(!colisionArriba)
+			direccionesPosibles.add(3);
+		if(!colisionAbajo)
+			direccionesPosibles.add(0);
+		if(!colisionDerecha)
+			direccionesPosibles.add(2);
+		if(!colisionIzquierda)
+			direccionesPosibles.add(1);
+		
+		int rand = rnd.nextInt(direccionesPosibles.size());
+		direccion = direccionesPosibles.get(rand);
+		cambio = 100;
+	}
+
+	private void mover(boolean colisionAbajo, boolean colisionArriba, boolean colisionDerecha, boolean colisionIzquierda){
+		if(direccion == ARRIBA)
+			moverArriba();
+		else if(direccion == ABAJO)
+			moverAbajo();
+		else if(direccion == DERECHA)
+			moverDerecha();
+		else
+			moverIzquierda();
+	}
 	
+	private void moverDerecha(){
+			posicion.x = (float) (posicion.x + Constant.SPEED);
+			stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			frameActual = calaveraAnimation.getKeyFrame(stateTime, true);
+			tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_CALAVERA;
+	}
+	
+	private void moverIzquierda(){
+			posicion.x = (float) (posicion.x - Constant.SPEED);
+			stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			frameActual = calaveraAnimation.getKeyFrame(stateTime, true);
+			tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_CALAVERA;
+	}
+	
+	private void moverArriba(){
+			posicion.y = (float) (posicion.y + Constant.SPEED);
+			stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			frameActual = calaveraAnimation.getKeyFrame(stateTime, true);
+			tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_CALAVERA;
+	}
+	
+	private void moverAbajo(){
+			posicion.y = (float) (posicion.y - Constant.SPEED);
+			stateTime = stateTime + Gdx.graphics.getDeltaTime();
+			frameActual = calaveraAnimation.getKeyFrame(stateTime, true);
+			tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_CALAVERA;
+	}
+	// Getters and Setters ------------------------------------------------------------------------
+
+	@Override
+	public void draw(SpriteBatch batch) {
+		super.draw(batch);
+	}
 }
