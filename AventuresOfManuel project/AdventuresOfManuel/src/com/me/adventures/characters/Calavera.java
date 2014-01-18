@@ -36,7 +36,7 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 		if(ataqueActivado == true){
 			//moverse
 			if(tiempoParaMovimiento == 0){
-				tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO;
+				tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
 				if(actual == MAX - 1)
 					actual = 0;
 				else

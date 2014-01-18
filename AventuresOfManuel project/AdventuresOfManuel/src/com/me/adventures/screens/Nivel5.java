@@ -77,8 +77,8 @@ public class Nivel5 extends Nivel {
 	
 	@Override
 	protected void personajesDelNivel() {
-		personajes.add(new Fantasma(adventures, new Vector2(367, 348), manuel));
-		personajes.add(new Fantasma(adventures, new Vector2(599, 348), manuel));
+		personajes.add(new Fantasma(adventures, new Vector2(367, 348), manuel, Fantasma.ABAJO));
+		personajes.add(new Fantasma(adventures, new Vector2(599, 348), manuel, Fantasma.ABAJO));
 		
 		personajesMovibles.add(new Bloque(adventures, new Vector2(599, 638), manuel));
 		personajesMovibles.add(new Bloque(adventures, new Vector2(367, 580), manuel));

@@ -82,7 +82,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 						posicion.y = (float) (posicion.y + Constant.SPEED);
 						stateTime = stateTime + Gdx.graphics.getDeltaTime();
 						frameActual = leeperAnimationArribaDespierto.getKeyFrame(stateTime, true);
-						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO;
+						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
 					}
 				}
 				else{
@@ -100,7 +100,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 						posicion.x = (float) (posicion.x - Constant.SPEED);
 						stateTime = stateTime + Gdx.graphics.getDeltaTime();
 						frameActual = leeperAnimationIzquierdaDespierto.getKeyFrame(stateTime, true);
-						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO;
+						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
 					}
 				}
 				else{
@@ -118,7 +118,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 						posicion.x = (float) (posicion.x + Constant.SPEED);
 						stateTime = stateTime + Gdx.graphics.getDeltaTime();
 						frameActual = leeperAnimationDerechaDespierto.getKeyFrame(stateTime, true);
-						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO;
+						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
 					}
 				}
 				else{
@@ -136,7 +136,7 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 						posicion.y = (float) (posicion.y - Constant.SPEED);
 						stateTime = stateTime + Gdx.graphics.getDeltaTime();
 						frameActual = leeperAnimationAbajoDespierto.getKeyFrame(stateTime, true);
-						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO;
+						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
 					}
 				}
 				else{
