@@ -67,28 +67,25 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 					if(direccion == ARRIBA){
 						if(colisionArriba)
 							cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
-						mover(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+						mover();
 					}
 					else if(direccion == ABAJO){
 						if(colisionAbajo)
 							cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
-						mover(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+						mover();
 					}
 					else if(direccion == DERECHA){
 						if(colisionDerecha)
 							cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
-						mover(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+						mover();
 					}
 					else{
 						if(colisionIzquierda)
 							cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
-						mover(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+						mover();
 					}
 				}
 			}
-
-			if(cambio > 0)
-				cambio--;
 			if(tiempoParaMovimiento > 0)
 				tiempoParaMovimiento--;
 		}
@@ -96,22 +93,63 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 	}
 	
 	private void cambio(boolean colisionAbajo, boolean colisionArriba, boolean colisionDerecha, boolean colisionIzquierda){
-		List<Integer> direccionesPosibles = new ArrayList<Integer>(); 
-		if(!colisionArriba)
-			direccionesPosibles.add(3);
-		if(!colisionAbajo)
-			direccionesPosibles.add(0);
-		if(!colisionDerecha)
-			direccionesPosibles.add(2);
-		if(!colisionIzquierda)
-			direccionesPosibles.add(1);
-		
-		int rand = rnd.nextInt(direccionesPosibles.size());
-		direccion = direccionesPosibles.get(rand);
-		cambio = 100;
+		List<Integer> direccionesPosibles = new ArrayList<Integer>();
+		if(direccion == ARRIBA){
+			if(!colisionArriba)
+				direccionesPosibles.add(3);
+			if(!colisionDerecha)
+				direccionesPosibles.add(2);
+			if(!colisionIzquierda)
+				direccionesPosibles.add(1);
+			if(direccionesPosibles.size() == 0){
+				if(!colisionAbajo)
+					direccionesPosibles.add(0);
+			}
+		}
+		else if(direccion == ABAJO){
+			if(!colisionAbajo)
+				direccionesPosibles.add(0);
+			if(!colisionDerecha)
+				direccionesPosibles.add(2);
+			if(!colisionIzquierda)
+				direccionesPosibles.add(1);
+			if(direccionesPosibles.size() == 0){
+				if(!colisionArriba)
+					direccionesPosibles.add(3);
+			}
+		}
+		else if(direccion == DERECHA){
+			if(!colisionArriba)
+				direccionesPosibles.add(3);
+			if(!colisionAbajo)
+				direccionesPosibles.add(0);
+			if(!colisionDerecha)
+				direccionesPosibles.add(2);
+			if(direccionesPosibles.size() == 0){
+				if(!colisionIzquierda)
+					direccionesPosibles.add(1);
+			}
+		}
+		else{
+			if(!colisionArriba)
+				direccionesPosibles.add(3);
+			if(!colisionAbajo)
+				direccionesPosibles.add(0);
+			if(!colisionIzquierda)
+				direccionesPosibles.add(1);
+			if(direccionesPosibles.size() == 0){
+				if(!colisionDerecha)
+					direccionesPosibles.add(2);
+			}
+		}
+		if(direccionesPosibles.size() != 0){
+			int rand = rnd.nextInt(direccionesPosibles.size());
+			direccion = direccionesPosibles.get(rand);
+		}
+		cambio = 4;
 	}
 
-	private void mover(boolean colisionAbajo, boolean colisionArriba, boolean colisionDerecha, boolean colisionIzquierda){
+	private void mover(){
 		if(direccion == ARRIBA)
 			moverArriba();
 		else if(direccion == ABAJO)
@@ -127,6 +165,7 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			frameActual = calaveraAnimation.getKeyFrame(stateTime, true);
 			tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_CALAVERA;
+			if(cambio > 0) cambio--;
 	}
 	
 	private void moverIzquierda(){
@@ -134,6 +173,7 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			frameActual = calaveraAnimation.getKeyFrame(stateTime, true);
 			tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_CALAVERA;
+			if(cambio > 0) cambio--;
 	}
 	
 	private void moverArriba(){
@@ -141,6 +181,7 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			frameActual = calaveraAnimation.getKeyFrame(stateTime, true);
 			tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_CALAVERA;
+			if(cambio > 0) cambio--;
 	}
 	
 	private void moverAbajo(){
@@ -148,6 +189,7 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 			stateTime = stateTime + Gdx.graphics.getDeltaTime();
 			frameActual = calaveraAnimation.getKeyFrame(stateTime, true);
 			tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_CALAVERA;
+			if(cambio > 0) cambio--;
 	}
 	// Getters and Setters ------------------------------------------------------------------------
 
