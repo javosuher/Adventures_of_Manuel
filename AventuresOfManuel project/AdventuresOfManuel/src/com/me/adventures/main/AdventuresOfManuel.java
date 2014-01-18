@@ -13,7 +13,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
-	public AbstractScreen LOADING, START, MAIN, NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5;
+	public AbstractScreen LOADING, START, MAIN;
+	public AbstractScreen NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5, NIVEL6, NIVEL7, NIVEL8, NIVEL9, NIVEL10;
 	private Music musicaMenu, musicaNivel;
 	private AssetManager manager;
 	private SpriteBatch batch;
@@ -94,6 +95,11 @@ public class AdventuresOfManuel extends Game {
 		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
 		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
 		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
+		NIVEL6 = new Nivel6(this, new Vector2(193, 232));
+		NIVEL7 = new Nivel7(this, new Vector2(773, 58));
+		NIVEL8 = new Nivel8(this, new Vector2(657, 522));
+		NIVEL9 = new Nivel9(this, new Vector2(715, 58));
+		NIVEL10 = new Nivel10(this, new Vector2(773, 348));
 		
 		//Musica
 		musicaMenu = manager.get("Musica/MenuInicial.mp3", Music.class);
@@ -103,10 +109,15 @@ public class AdventuresOfManuel extends Game {
 	public void destruirNiveles() {
 		MAIN = new MainScreen(this);
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
-		NIVEL2 = new Nivel2(this, new Vector2(425,116));
+		NIVEL2 = new Nivel2(this, new Vector2(425, 116));
 		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
 		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
 		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
+		NIVEL6 = new Nivel6(this, new Vector2(193, 232));
+		NIVEL7 = new Nivel7(this, new Vector2(773, 58));
+		NIVEL8 = new Nivel8(this, new Vector2(657, 522));
+		NIVEL9 = new Nivel9(this, new Vector2(715, 58));
+		NIVEL10 = new Nivel10(this, new Vector2(773, 348));		
 	}
 	
 	public SpriteBatch getBatch() {
