@@ -19,8 +19,7 @@ public class Corazon extends ObjetoDelJuego
 	
 	@Override
 	public void draw(SpriteBatch batch) {
-		if(mostrar == true)
-			batch.draw(Textura, posicion.x, posicion.y, bordes.height, bordes.width);
+		batch.draw(Textura, posicion.x, posicion.y, bordes.height, bordes.width);
 	}
 	
 	@Override
