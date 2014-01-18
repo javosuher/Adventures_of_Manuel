@@ -63,7 +63,7 @@ public class Fantasma extends PersonajeDelJuegoEnemigo {
 		
 		if(!fantasmaSeQuedaQuieto){
 			if(direccion == ARRIBA){
-				if(manuel.getPosicion().x == posicion.x && manuel.getPosicion().y > posicion.y){
+				if(!colisionArriba && manuel.getPosicion().x == posicion.x && manuel.getPosicion().y > posicion.y){
 					correr = true;
 					moverArriba();
 				}
@@ -78,7 +78,7 @@ public class Fantasma extends PersonajeDelJuegoEnemigo {
 				}
 			}
 			else if(direccion == ABAJO){
-				if(manuel.getPosicion().x == posicion.x && manuel.getPosicion().y < posicion.y){
+				if(!colisionAbajo && manuel.getPosicion().x == posicion.x && manuel.getPosicion().y < posicion.y){
 					correr = true;
 					moverAbajo();
 				}
@@ -93,7 +93,7 @@ public class Fantasma extends PersonajeDelJuegoEnemigo {
 				}
 			}
 			else if(direccion == DERECHA){
-				if(manuel.getPosicion().y == posicion.y && manuel.getPosicion().x > posicion.x){
+				if(!colisionDerecha && manuel.getPosicion().y == posicion.y && manuel.getPosicion().x > posicion.x){
 					correr = true;
 					moverDerecha();
 				}
@@ -108,7 +108,7 @@ public class Fantasma extends PersonajeDelJuegoEnemigo {
 				}
 			}
 			else{ //direccion == IZQUIERDA
-				if(manuel.getPosicion().y == posicion.y && manuel.getPosicion().x < posicion.x){
+				if(!colisionIzquierda && manuel.getPosicion().y == posicion.y && manuel.getPosicion().x < posicion.x){
 					correr = true;
 					moverIzquierda();
 				}
@@ -142,7 +142,7 @@ public class Fantasma extends PersonajeDelJuegoEnemigo {
 				posicion.x = (float) (posicion.x + Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
 				frameActual = fantasmaAnimationDerecha.getKeyFrame(stateTime, true);
-				tiempoMovimientoCorrer = Constant.TIEMPO_MOVIMIENTO_FANTASMA / 2;
+				tiempoMovimientoCorrer = Constant.TIEMPO_MOVIMIENTO_FANTASMA / 4;
 			}
 		}
 		else{
@@ -161,7 +161,7 @@ public class Fantasma extends PersonajeDelJuegoEnemigo {
 				posicion.x = (float) (posicion.x - Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
 				frameActual = fantasmaAnimationIzquierda.getKeyFrame(stateTime, true);
-				tiempoMovimientoCorrer = Constant.TIEMPO_MOVIMIENTO_FANTASMA / 2;
+				tiempoMovimientoCorrer = Constant.TIEMPO_MOVIMIENTO_FANTASMA / 4;
 			}
 		}
 		else{
@@ -180,7 +180,7 @@ public class Fantasma extends PersonajeDelJuegoEnemigo {
 				posicion.y = (float) (posicion.y + Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
 				frameActual = fantasmaAnimationArriba.getKeyFrame(stateTime, true);
-				tiempoMovimientoCorrer = Constant.TIEMPO_MOVIMIENTO_FANTASMA / 2;
+				tiempoMovimientoCorrer = Constant.TIEMPO_MOVIMIENTO_FANTASMA / 4;
 			}
 		}
 		else{
@@ -199,7 +199,7 @@ public class Fantasma extends PersonajeDelJuegoEnemigo {
 				posicion.y = (float) (posicion.y - Constant.SPEED);
 				stateTime = stateTime + Gdx.graphics.getDeltaTime();
 				frameActual = fantasmaAnimationAbajo.getKeyFrame(stateTime, true);
-				tiempoMovimientoCorrer = Constant.TIEMPO_MOVIMIENTO_FANTASMA / 2;
+				tiempoMovimientoCorrer = Constant.TIEMPO_MOVIMIENTO_FANTASMA / 4;
 			}
 		}
 		else{
