@@ -146,7 +146,7 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 			int rand = rnd.nextInt(direccionesPosibles.size());
 			direccion = direccionesPosibles.get(rand);
 		}
-		cambio = 4;
+		cambio = 10;
 	}
 
 	private void mover(){
