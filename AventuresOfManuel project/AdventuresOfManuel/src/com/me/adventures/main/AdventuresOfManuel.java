@@ -65,6 +65,11 @@ public class AdventuresOfManuel extends Game {
 		manager.load("Pantallas/3.png", Texture.class);
 		manager.load("Pantallas/4.png", Texture.class);
 		manager.load("Pantallas/5.png", Texture.class);
+		manager.load("Pantallas/6.png", Texture.class);
+		manager.load("Pantallas/7.png", Texture.class);
+		manager.load("Pantallas/8.png", Texture.class);
+		manager.load("Pantallas/9.png", Texture.class);
+		manager.load("Pantallas/10.png", Texture.class);
 		manager.load("Pantallas/BotonSFX.png", Texture.class);
 		manager.load("Pantallas/BotonNoSFX.png", Texture.class);
 		manager.load("Pantallas/BotonMusica.png", Texture.class);
