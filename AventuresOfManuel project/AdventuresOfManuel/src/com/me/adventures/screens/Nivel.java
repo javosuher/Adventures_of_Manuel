@@ -113,6 +113,14 @@ public abstract class Nivel extends AbstractScreen {
 		batch.begin();
 		batch.draw(TexturaFondo, 135, 0, TexturaFondo.getWidth(), TexturaFondo.getHeight());
 		salida.draw(batch);
+		
+		for(int i = 0; i < corazones.size(); i++){
+			if(corazones.get(i).getEstado() == false){
+				corazones.remove(i);
+				i--;
+			}
+		}
+		
 		for(Corazon corazon : corazones){
 			corazon.draw(batch);
 		}

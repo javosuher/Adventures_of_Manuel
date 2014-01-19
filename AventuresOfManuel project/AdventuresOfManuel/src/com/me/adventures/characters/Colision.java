@@ -109,9 +109,10 @@ public class Colision {
 	}
 	
 	public void colisionCofre(PersonajeDelJuego personaje){
-		if(cofre.getCorazonesNecesarios() == manuel.getCorazonesObtenidos() && comprobarCoordenada(cofre, personaje) == true){
+		if(!salida.salidaAbierta() && cofre.getCorazonesNecesarios() == manuel.getCorazonesObtenidos() && comprobarCoordenada(cofre, personaje) == true){
 			cofre.cogerGema();
 			salida.abrirSalida();
+			objetos.remove(salida.coordenadaPared());
 		}
 	}
 	

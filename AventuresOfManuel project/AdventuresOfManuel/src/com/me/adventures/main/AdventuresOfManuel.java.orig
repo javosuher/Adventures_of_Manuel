@@ -65,10 +65,20 @@ public class AdventuresOfManuel extends Game {
 		manager.load("Pantallas/3.png", Texture.class);
 		manager.load("Pantallas/4.png", Texture.class);
 		manager.load("Pantallas/5.png", Texture.class);
+<<<<<<< HEAD
 		manager.load("Pantallas/BotonSFX.png", Texture.class);
 		manager.load("Pantallas/BotonNoSFX.png", Texture.class);
 		manager.load("Pantallas/BotonMusica.png", Texture.class);
 		manager.load("Pantallas/BotonNoMusica.png", Texture.class);
+=======
+		manager.load("Pantallas/6.png", Texture.class);
+		manager.load("Pantallas/7.png", Texture.class);
+		manager.load("Pantallas/8.png", Texture.class);
+		manager.load("Pantallas/9.png", Texture.class);
+		manager.load("Pantallas/10.png", Texture.class);
+		manager.load("Pantallas/BotonConfiguracionEfectos.png", Texture.class);
+		manager.load("Pantallas/BotonConfiguracionMusica.png", Texture.class);
+>>>>>>> 5ed08a3be57c23843c14e9188112d916fc6766f7
 		manager.load("Pantallas/BotonContinuar.png", Texture.class);
 		manager.load("Pantallas/BotonMenu.png", Texture.class);
 		manager.load("Pantallas/BotonSalir.png", Texture.class);
@@ -79,7 +89,6 @@ public class AdventuresOfManuel extends Game {
 		manager.load("Pantallas/Pausa.png", Texture.class);
 		manager.load("Pantallas/Start.png", Texture.class);
 		manager.load("Pantallas/BotonReintentar.png", Texture.class);
-		manager.load("Pantallas/BotonSiguienteNivel.png", Texture.class);
 		manager.load("Musica/Button.mp3", Sound.class);
 		manager.load("Musica/DisparoDragon.mp3", Sound.class);
 		manager.load("Musica/DisparoManolito.mp3", Sound.class);
@@ -101,6 +110,11 @@ public class AdventuresOfManuel extends Game {
 		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
 		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
 		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
+		NIVEL6 = new Nivel6(this, new Vector2(193, 232));
+		NIVEL7 = new Nivel7(this, new Vector2(773, 58));
+		NIVEL8 = new Nivel8(this, new Vector2(657, 522));
+		NIVEL9 = new Nivel9(this, new Vector2(715, 58));
+		NIVEL10 = new Nivel10(this, new Vector2(773, 348));
 		
 		//Musica
 		musicaMenu = manager.get("Musica/MenuInicial.mp3", Music.class);
@@ -110,7 +124,7 @@ public class AdventuresOfManuel extends Game {
 	public void destruirNiveles() {
 		MAIN = new MainScreen(this);
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
-		NIVEL2 = new Nivel2(this, new Vector2(425,116));
+		NIVEL2 = new Nivel2(this, new Vector2(425, 116));
 		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
 		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
 		NIVEL5 = new Nivel5(this, new Vector2(483, 58));

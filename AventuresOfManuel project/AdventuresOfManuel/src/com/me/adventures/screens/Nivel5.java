@@ -20,10 +20,14 @@ public class Nivel5 extends Nivel {
 		//Se introducen las paredes del nivel
 		objetos.add(new Pared(adventures, new Vector2(0, 0), 1024, 58));
 		objetos.add(new Pared(adventures, new Vector2(135, 0), 58, 754));
-		objetos.add(new Pared(adventures, new Vector2(0, 696), 1024, 58));
-		salida = new Salida(adventures, new Vector2(483, 116), Constant.ESCALERA);
-		objetos.add(new Pared(adventures, new Vector2(831, 0), 58, 754));
+		objetos.add(new Pared(adventures, new Vector2(135, 696), 348, 58));
+		objetos.add(new Pared(adventures, new Vector2(483, 725), 58, 29));
 		
+		objetos.add(new Pared(adventures, new Vector2(483, 696), 58, 29));//
+		salida = new Salida(adventures, new Vector2(425, 696), Constant.PUERTA, objetos.size()-1);
+		objetos.add(new Pared(adventures, new Vector2(541, 696), 290, 58));
+		objetos.add(new Pared(adventures, new Vector2(831, 0), 58, 754));
+	
 		//Se introducen los demas objetos por fila
 		objetos.add(new Roca(adventures, new Vector2(193, 638)));
 		objetos.add(new Roca(adventures, new Vector2(251, 638)));
@@ -77,8 +81,8 @@ public class Nivel5 extends Nivel {
 	
 	@Override
 	protected void personajesDelNivel() {
-		personajes.add(new Fantasma(adventures, new Vector2(367, 348), manuel));
-		personajes.add(new Fantasma(adventures, new Vector2(599, 348), manuel));
+		personajes.add(new Fantasma(adventures, new Vector2(367, 348), manuel, Fantasma.ABAJO));
+		personajes.add(new Fantasma(adventures, new Vector2(599, 348), manuel, Fantasma.ABAJO));
 		
 		personajesMovibles.add(new Bloque(adventures, new Vector2(599, 638), manuel));
 		personajesMovibles.add(new Bloque(adventures, new Vector2(367, 580), manuel));
