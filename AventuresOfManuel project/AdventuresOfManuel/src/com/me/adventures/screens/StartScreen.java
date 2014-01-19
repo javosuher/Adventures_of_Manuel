@@ -1,6 +1,7 @@
 package com.me.adventures.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.me.adventures.main.AdventuresOfManuel;
@@ -19,14 +20,23 @@ public class StartScreen extends AbstractScreen {
 		if(Gdx.input.isTouched())
 			adventures.setScreen(adventures.MAIN);
 		
-		float ancho = 0;
-		float alto = 0;
-		if(Gdx.graphics.getWidth() < adventures.getManager().get("Pantallas/Start.png", Texture.class).getWidth()) {
-			float div = (float) ((float) Gdx.graphics.getWidth()) / ((float) adventures.getManager().get("Pantallas/Start.png", Texture.class).getWidth());
-			ancho = adventures.getManager().get("Pantallas/Start.png", Texture.class).getWidth() * div;
-			alto = adventures.getManager().get("Pantallas/Start.png", Texture.class).getHeight() * div;
+		float ancho = adventures.getManager().get("Pantallas/Start.png", Texture.class).getWidth();
+		float alto = adventures.getManager().get("Pantallas/Start.png", Texture.class).getHeight();
+		float altura = 0;
+		if(Gdx.app.getType() == ApplicationType.Desktop) {
+			if(Gdx.app.getType() == ApplicationType.Desktop) {
+				if(Gdx.graphics.getWidth() < adventures.getManager().get("Pantallas/Start.png", Texture.class).getWidth()) {
+					float div = (float) ((float) Gdx.graphics.getWidth()) / ((float) adventures.getManager().get("Pantallas/Start.png", Texture.class).getWidth());
+					ancho = ancho * div;
+					alto = alto * div;
+				}
+				altura = Gdx.graphics.getHeight() - alto;
+			}
 		}
-		float altura = Gdx.graphics.getHeight() - alto;
+		if(Gdx.app.getType() == ApplicationType.Android) {
+			adventures.getCamera().update();
+			batch.setProjectionMatrix(adventures.getCamera().combined);
+		}
 		batch.begin();
 		batch.draw(adventures.getManager().get("Pantallas/Start.png", Texture.class), 0, altura, ancho, alto);
 		batch.end();

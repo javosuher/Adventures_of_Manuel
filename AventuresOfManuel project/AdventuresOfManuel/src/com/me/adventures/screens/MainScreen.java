@@ -20,26 +20,44 @@ public class MainScreen extends AbstractScreen {
 	public MainScreen(AdventuresOfManuel adventures) {
 		super(adventures);
 		
-		ancho = 0;
+		ancho = adventures.getManager().get("Pantallas/Loading.png", Texture.class).getWidth();
+		alto = adventures.getManager().get("Pantallas/Loading.png", Texture.class).getHeight();
+		altura = 0;
+		if(Gdx.graphics.getWidth() < adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth()) {
+			/*if(Gdx.app.getType() == ApplicationType.Desktop) {
+				ancho = ancho * adventures.getDivMenu();
+				alto = alto * adventures.getDivMenu();
+				altura = Gdx.graphics.getHeight() - alto;
+			}*/
+			//else if(Gdx.app.getType() == ApplicationType.Android) {
+				adventures.getCamera().position.set(adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth() / 2, adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getHeight() / 2, 0);
+				adventures.getCamera().zoom = 1 / adventures.getDivMenu();
+			//}
+		}
+		//altura = Gdx.graphics.getHeight() - alto;
+		
+		/*ancho = 0;
 		alto = 0;
 		if(Gdx.graphics.getWidth() < adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth()) {
+		if(Gdx.app.getType() == ApplicationType.Desktop) {
 			ancho = adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth() * adventures.getDiv();
 			alto = adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getHeight() * adventures.getDiv();
 		}
 		altura = Gdx.graphics.getHeight() - alto;
+		}*/
 		
 		botonesPrincipales = new ArrayList<Boton>();
 		botonesModoHistoria = new ArrayList<Boton>();
 		botonesOpciones = new ArrayList<Boton>();
 		
-		botonesPrincipales.add(new BotonModoHistoria(adventures, new Vector2(280, Gdx.graphics.getHeight() - 205)));
-		botonesPrincipales.add(new BotonModoMustDie(adventures, new Vector2(280, Gdx.graphics.getHeight() - 290)));
-		botonesPrincipales.add(new BotonInstrucciones(adventures, new Vector2(280, Gdx.graphics.getHeight() - 375)));
-		botonesPrincipales.add(new BotonOpciones(adventures, new Vector2(285, Gdx.graphics.getHeight() - 460)));
-		botonesPrincipales.add(new BotonExit(adventures, new Vector2(290, Gdx.graphics.getHeight() - 540)));
+		botonesPrincipales.add(new BotonModoHistoria(adventures, new Vector2(1, 1)));
+		//botonesPrincipales.add(new BotonModoMustDie(adventures, new Vector2(280, Gdx.graphics.getHeight() - 300)));
+		//botonesPrincipales.add(new BotonInstrucciones(adventures, new Vector2(280, Gdx.graphics.getHeight() - 400)));
+		//botonesPrincipales.add(new BotonOpciones(adventures, new Vector2(285, Gdx.graphics.getHeight() - 500)));
+		//botonesPrincipales.add(new BotonExit(adventures, new Vector2(290, Gdx.graphics.getHeight() - 600)));
 		
 		botonesPrincipales.get(0).setMainScreen(this); // Asignacion de MainScreen para nuevos menus
-		botonesPrincipales.get(3).setMainScreen(this);
+		//botonesPrincipales.get(3).setMainScreen(this);
 	}
 	
 	public void menuModoHistoria() {
@@ -74,6 +92,9 @@ public class MainScreen extends AbstractScreen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 		
+		//System.out.println(Gdx.input.getX());
+		System.out.println(Gdx.input.getY());
+		
 		if(adventures.isMusicaActivada()) { // Poner musica Menú
 			if(adventures.getMusicaNivel().isPlaying())
 				adventures.getMusicaNivel().stop();
@@ -81,10 +102,10 @@ public class MainScreen extends AbstractScreen {
 				adventures.getMusicaMenu().play();
 		}
 		
-		if(Gdx.app.getType() == ApplicationType.Android) {
+		//if(Gdx.app.getType() == ApplicationType.Android) {
 			adventures.getCamera().update();
 			batch.setProjectionMatrix(adventures.getCamera().combined);
-		}
+		//}
 		
 		for(Boton boton : botonesPrincipales)
 			boton.update();
@@ -123,10 +144,7 @@ public class MainScreen extends AbstractScreen {
 	
 	@Override
 	public void show() {
-		if(Gdx.app.getType() == ApplicationType.Android) {
-			adventures.getCamera().position.set((Gdx.graphics.getWidth()) / 2, Gdx.graphics.getHeight() / 2, 0); // Establecer 
-			adventures.getCamera().zoom = 1;
-		}
+		// TODO Auto-generated method stub
 	}
 
 	@Override

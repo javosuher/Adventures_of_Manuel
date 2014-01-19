@@ -22,7 +22,8 @@ public class AdventuresOfManuel extends Game {
 	private Preferences preferencias;
 	private boolean sonidoActivado;
 	private boolean musicaActivada;
-	private float div;
+	private float divMenus;
+	private float divNivel;
 	
 	@Override
 	public void create() {
@@ -162,11 +163,17 @@ public class AdventuresOfManuel extends Game {
 		else
 			musicaActivada = true;
 	}
-	public float getDiv() {
-		return div;
+	public float getDivMenu() {
+		return divMenus;
 	}
-	public void setDiv(float div) {
-		this.div = div;
+	public void setDivMenu(float div) {
+		this.divMenus = div;
+	}
+	public float getDivNivel() {
+		return divMenus;
+	}
+	public void setDivNivel(float div) {
+		this.divMenus = div;
 	}
 
 	@Override
