@@ -14,7 +14,7 @@ import com.me.adventures.screens.Nivel;
 public class EnemyTest extends Nivel {
 	private BitmapFont font;
 	private int eleccion;
-	private boolean serpienteDerecha, serpienteIzquierda;
+	private boolean serpienteDerecha, serpienteIzquierda, finSerpiente, dragon;
 
 	public EnemyTest(AdventuresOfManuel adventures, Vector2 posicionManuel) {
 		super(adventures, posicionManuel);
@@ -37,7 +37,6 @@ public class EnemyTest extends Nivel {
 		salida = new Salida(adventures, new Vector2(483,696), 0); // 0 es puerta
 		objetos.add(new Pared(adventures, new Vector2(599, 696), 290, 58));
 		objetos.add(new Pared(adventures, new Vector2(831, 0), 58, 754));
-
 		corazones.add(new Corazon(adventures, new Vector2(773,406), 2)); //otorga 2 proyectiles
 		cofre = new Cofre(adventures, new Vector2(425,116), 2);
 	}
@@ -69,31 +68,48 @@ public class EnemyTest extends Nivel {
 		
 		serpiente();
 		
+		dragon();
+		
 		manuel.draw(batch);
 
 		batch.end();
 	}
+	
+	private void dragon(){
+		if(dragon){
+			font.draw(batch, "El dragón no atacará hasta que", 207, 638);
+			font.draw(batch, "hayas recogido el corazón.", 207, 588);
+			for(PersonajeDelJuego personaje : personajes) 
+				personaje.draw(batch);
+		}
+	}
 
 	private void serpiente() {        
 		if(serpienteIzquierda){
-			font.draw(batch, "Colï¿½cate a la izquierda de la serpiente", 207, 638);
-			font.draw(batch, "Ella te seguirï¿½ con la mirada", 207, 588);
+			font.draw(batch, "Colócate a la izquierda de la serpiente", 207, 638);
+			font.draw(batch, "Ella te seguirá con la mirada", 207, 588);
 			for(PersonajeDelJuego personaje : personajes) 
 				personaje.draw(batch);
-			if(Gdx.input.isKeyPressed(Keys.LEFT)){
+			if(Gdx.input.isKeyPressed(Keys.LEFT) && manuel.getPosicion().x <= 541.0){
 				  dibujar();
 			}
 		}
 		if(serpienteDerecha){
 			font.draw(batch, "Ahora prueba a colocarte a su derecha", 207, 638);
-			font.draw(batch, "Pulsa espacio para el siguiente enemigo", 207, 588);
+			for(PersonajeDelJuego personaje : personajes) 
+				personaje.draw(batch);
+			if(Gdx.input.isKeyPressed(Keys.RIGHT) && manuel.getPosicion().x > 541.0){
+				  dibujar();
+			}
+		}
+		if(finSerpiente){
+			font.draw(batch, "Pulsa espacio para el siguiente enemigo", 207, 638);
 			for(PersonajeDelJuego personaje : personajes) 
 				personaje.draw(batch);
 			if(Gdx.input.isKeyPressed(Keys.SPACE)){
 				  dibujar();
 			}
 		}
-		
 
 	}
 	
@@ -103,13 +119,13 @@ public class EnemyTest extends Nivel {
 			  font.draw(batch, "La serpiente mira a la izquierda", 367, 638);
 		      serpienteIzquierda = false;
 		      serpienteDerecha = true;
-		      eleccion = 1;
+		      eleccion++;
 		      break;
 		  case 1:
-			  font.draw(batch, "Medusi", 367, 638);
+			  font.draw(batch, "La serpiente mira a la derecha", 207, 588);
 			  serpienteDerecha = false;
-			  //xxx = true;
-			  //eleccion = 2;
+			  finSerpiente = true;
+			  eleccion++;
 			  break;
 		  case 2:
 			  break;
