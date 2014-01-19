@@ -57,8 +57,8 @@ public abstract class Nivel extends AbstractScreen {
 	public void show() {
 		// Para reescalar
 		if(Gdx.graphics.getHeight() < adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight() /*&& Gdx.app.getType() == ApplicationType.Android*/) {
-			adventures.setDivNivel((float) ((float) Gdx.graphics.getHeight()) / ((float) adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight()));
-			adventures.getCamera().position.set((135 + Gdx.graphics.getWidth()) / 2, TexturaFondo.getHeight() / 2, 0);
+			adventures.setDivNivel((float) Gdx.graphics.getHeight() / (float) adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight());
+			//adventures.getCamera().position.set((135 + Gdx.graphics.getWidth()) / 2, TexturaFondo.getHeight() / 2, 0);
 			adventures.getCamera().zoom = 1 / adventures.getDivNivel();
 		}
 		else

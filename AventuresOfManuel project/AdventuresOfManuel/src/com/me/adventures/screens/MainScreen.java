@@ -30,8 +30,10 @@ public class MainScreen extends AbstractScreen {
 				altura = Gdx.graphics.getHeight() - alto;
 			}*/
 			//else if(Gdx.app.getType() == ApplicationType.Android) {
-				adventures.getCamera().position.set(adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth() / 2, adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getHeight() / 2, 0);
-				adventures.getCamera().zoom = 1 / adventures.getDivMenu();
+				//adventures.getCamera().position.set(adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth() / 2, adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getHeight() / 2, 0);
+				//float sum = (float)((float)Gdx.graphics.getHeight() - (float)(adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getHeight())) / 2; 
+				//adventures.getCamera().position.set(adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth() / 2, adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getHeight() / 2, 0);
+				//adventures.getCamera().zoom = 1 / adventures.getDivMenu();
 			//}
 		}
 		//altura = Gdx.graphics.getHeight() - alto;
@@ -144,7 +146,8 @@ public class MainScreen extends AbstractScreen {
 	
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
+		adventures.getCamera().position.set(adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth() / 2, adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getHeight() / 2, 0);
+		adventures.getCamera().zoom = 1 / adventures.getDivMenu();
 	}
 
 	@Override
