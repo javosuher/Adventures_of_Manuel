@@ -34,7 +34,7 @@ public abstract class Boton {
 	}
 	
 	protected void asignarBordes() {
-		bordes = new Rectangle(posicion.x, posicion.y, Textura.getWidth(), Textura.getHeight());
+		bordes = new Rectangle(posicion.x, posicion.y, Textura.getWidth() * adventures.getDiv(), Textura.getHeight() * adventures.getDiv());
 		
 		int altoPantalla = 0;
 		if(Gdx.app.getType() == ApplicationType.Desktop)

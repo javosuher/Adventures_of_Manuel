@@ -8,7 +8,7 @@ public class BotonInstrucciones extends Boton {
 
 	public BotonInstrucciones(AdventuresOfManuel adventures, Vector2 posicion) {
 		super(adventures, posicion);
-		Textura = adventures.getManager().get("Pantallas/BotonInstrucciones.png", Texture.class);
+		Textura = adventures.getManager().get("Pantallas/BotonNoTransparente.png", Texture.class);
 		asignarBordes();
 	}
 	

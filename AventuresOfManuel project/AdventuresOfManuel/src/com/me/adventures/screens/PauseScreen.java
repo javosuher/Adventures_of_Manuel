@@ -75,14 +75,14 @@ public class PauseScreen extends AbstractScreen {
 		for(Boton boton : botonesOpciones)
 			boton.update();
 		
-		batch.begin();
+		/*batch.begin();
 		for(Boton boton : botonesPrincipales)
-			boton.draw(batch);
+			boton.draw(batch, div);
 		for(Boton boton : botonesModoHistoria)
-			boton.draw(batch);
+			boton.draw(batch, div);
 		for(Boton boton : botonesOpciones)
-			boton.draw(batch);
-		batch.end();
+			boton.draw(batch, div);
+		batch.end();*/
 	}
 	
 	public List<Boton> getBotonesPrincipales() {

@@ -21,6 +21,7 @@ public class AdventuresOfManuel extends Game {
 	private Preferences preferencias;
 	private boolean sonidoActivado;
 	private boolean musicaActivada;
+	private float div;
 	
 	@Override
 	public void create() {
@@ -63,16 +64,20 @@ public class AdventuresOfManuel extends Game {
 		manager.load("Pantallas/3.png", Texture.class);
 		manager.load("Pantallas/4.png", Texture.class);
 		manager.load("Pantallas/5.png", Texture.class);
-		manager.load("Pantallas/BotonConfiguracionEfectos.png", Texture.class);
-		manager.load("Pantallas/BotonConfiguracionMusica.png", Texture.class);
+		manager.load("Pantallas/BotonSFX.png", Texture.class);
+		manager.load("Pantallas/BotonNoSFX.png", Texture.class);
+		manager.load("Pantallas/BotonMusica.png", Texture.class);
+		manager.load("Pantallas/BotonNoMusica.png", Texture.class);
 		manager.load("Pantallas/BotonContinuar.png", Texture.class);
-		manager.load("Pantallas/BotonExit.png", Texture.class);
-		manager.load("Pantallas/BotonInstrucciones.png", Texture.class);
-		manager.load("Pantallas/BotonModoHistoria.png", Texture.class);
-		manager.load("Pantallas/BotonModoMustDie.png", Texture.class);
-		manager.load("Pantallas/BotonOpciones.png", Texture.class);
-		manager.load("Pantallas/BotonReintentar.png", Texture.class);
+		manager.load("Pantallas/BotonMenu.png", Texture.class);
+		manager.load("Pantallas/BotonSalir.png", Texture.class);
+		manager.load("Pantallas/BotonNoTransparente.png", Texture.class);
+		manager.load("Pantallas/BotonT.png", Texture.class);
 		manager.load("Pantallas/BotonSiguienteNivel.png", Texture.class);
+		manager.load("Pantallas/GameOver.png", Texture.class);
+		manager.load("Pantallas/Pausa.png", Texture.class);
+		manager.load("Pantallas/Start.png", Texture.class);
+		manager.load("Pantallas/BotonReintentar.png", Texture.class);
 		manager.load("Musica/Button.mp3", Sound.class);
 		manager.load("Musica/DisparoDragon.mp3", Sound.class);
 		manager.load("Musica/DisparoManolito.mp3", Sound.class);
@@ -144,6 +149,12 @@ public class AdventuresOfManuel extends Game {
 			musicaActivada = false;
 		else
 			musicaActivada = true;
+	}
+	public float getDiv() {
+		return div;
+	}
+	public void setDiv(float div) {
+		this.div = div;
 	}
 
 	@Override

@@ -8,7 +8,7 @@ public class BotonModoMustDie extends Boton {
 
 	public BotonModoMustDie(AdventuresOfManuel adventures, Vector2 posicion) {
 		super(adventures, posicion);
-		Textura = adventures.getManager().get("Pantallas/BotonModoMustDie.png", Texture.class);
+		Textura = adventures.getManager().get("Pantallas/BotonNoTransparente.png", Texture.class);
 		asignarBordes();
 	}
 	

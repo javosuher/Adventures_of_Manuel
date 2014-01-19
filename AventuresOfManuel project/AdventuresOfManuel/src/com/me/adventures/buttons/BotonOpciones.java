@@ -9,7 +9,7 @@ public class BotonOpciones extends Boton {
 	
 	public BotonOpciones(AdventuresOfManuel adventures, Vector2 posicion) {
 		super(adventures, posicion);
-		Textura = adventures.getManager().get("Pantallas/BotonOpciones.png", Texture.class);
+		Textura = adventures.getManager().get("Pantallas/BotonNoTransparente.png", Texture.class);
 		asignarBordes();
 		mostrar = true;
 	}

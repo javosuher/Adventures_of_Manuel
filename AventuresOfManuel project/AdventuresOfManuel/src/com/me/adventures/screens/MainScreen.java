@@ -15,19 +15,28 @@ public class MainScreen extends AbstractScreen {
 	private List<Boton> botonesPrincipales;
 	private List<Boton> botonesModoHistoria;
 	private List<Boton> botonesOpciones;
+	private float ancho, alto, altura;
 
 	public MainScreen(AdventuresOfManuel adventures) {
 		super(adventures);
+		
+		ancho = 0;
+		alto = 0;
+		if(Gdx.graphics.getWidth() < adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth()) {
+			ancho = adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth() * adventures.getDiv();
+			alto = adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getHeight() * adventures.getDiv();
+		}
+		altura = Gdx.graphics.getHeight() - alto;
 		
 		botonesPrincipales = new ArrayList<Boton>();
 		botonesModoHistoria = new ArrayList<Boton>();
 		botonesOpciones = new ArrayList<Boton>();
 		
-		botonesPrincipales.add(new BotonModoHistoria(adventures, new Vector2(100, Gdx.graphics.getHeight() - 100)));
-		botonesPrincipales.add(new BotonModoMustDie(adventures, new Vector2(100, Gdx.graphics.getHeight() - 150)));
-		botonesPrincipales.add(new BotonInstrucciones(adventures, new Vector2(100, Gdx.graphics.getHeight() - 200)));
-		botonesPrincipales.add(new BotonOpciones(adventures, new Vector2(100, Gdx.graphics.getHeight() - 250)));
-		botonesPrincipales.add(new BotonExit(adventures, new Vector2(100, Gdx.graphics.getHeight() - 300)));
+		botonesPrincipales.add(new BotonModoHistoria(adventures, new Vector2(280, Gdx.graphics.getHeight() - 205)));
+		botonesPrincipales.add(new BotonModoMustDie(adventures, new Vector2(280, Gdx.graphics.getHeight() - 290)));
+		botonesPrincipales.add(new BotonInstrucciones(adventures, new Vector2(280, Gdx.graphics.getHeight() - 375)));
+		botonesPrincipales.add(new BotonOpciones(adventures, new Vector2(285, Gdx.graphics.getHeight() - 460)));
+		botonesPrincipales.add(new BotonExit(adventures, new Vector2(290, Gdx.graphics.getHeight() - 540)));
 		
 		botonesPrincipales.get(0).setMainScreen(this); // Asignacion de MainScreen para nuevos menus
 		botonesPrincipales.get(3).setMainScreen(this);
@@ -71,15 +80,6 @@ public class MainScreen extends AbstractScreen {
 			adventures.getCamera().update();
 			batch.setProjectionMatrix(adventures.getCamera().combined);
 		}
-		
-		float ancho = 0;
-		float alto = 0;
-		if(Gdx.graphics.getWidth() < adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth()) {
-			float div = (float) ((float) Gdx.graphics.getWidth()) / ((float) adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth());
-			ancho = adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getWidth() * div;
-			alto = adventures.getManager().get("Pantallas/FondoMenu.png", Texture.class).getHeight() * div;
-		}
-		float altura = Gdx.graphics.getHeight() - alto;
 		
 		for(Boton boton : botonesPrincipales)
 			boton.update();
