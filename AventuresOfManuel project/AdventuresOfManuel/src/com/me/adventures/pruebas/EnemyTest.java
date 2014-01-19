@@ -14,7 +14,9 @@ import com.me.adventures.screens.Nivel;
 public class EnemyTest extends Nivel {
 	private BitmapFont font;
 	private int eleccion;
-	private boolean serpienteDerecha, serpienteIzquierda, finSerpiente, dragon;
+	private boolean serpienteDerecha, serpienteIzquierda, finSerpiente, dragon, matarDragon, leeper;
+	Dragon dr = new Dragon(adventures, new Vector2(541, 522), manuel, Dragon.ABAJO);
+	Leeper le = new Leeper(adventures, new Vector2(541, 522), manuel, Leeper.ARRIBA);
 
 	public EnemyTest(AdventuresOfManuel adventures, Vector2 posicionManuel) {
 		super(adventures, posicionManuel);
@@ -37,7 +39,7 @@ public class EnemyTest extends Nivel {
 		salida = new Salida(adventures, new Vector2(483,696), 0); // 0 es puerta
 		objetos.add(new Pared(adventures, new Vector2(599, 696), 290, 58));
 		objetos.add(new Pared(adventures, new Vector2(831, 0), 58, 754));
-		corazones.add(new Corazon(adventures, new Vector2(773,406), 2)); //otorga 2 proyectiles
+		corazones.add(new Corazon(adventures, new Vector2(773,406), 0)); //otorga 2 proyectiles
 		cofre = new Cofre(adventures, new Vector2(425,116), 2);
 	}
 	
@@ -70,6 +72,8 @@ public class EnemyTest extends Nivel {
 		
 		dragon();
 		
+		leeper();
+		
 		manuel.draw(batch);
 
 		batch.end();
@@ -77,10 +81,45 @@ public class EnemyTest extends Nivel {
 	
 	private void dragon(){
 		if(dragon){
-			font.draw(batch, "El dragón no atacará hasta que", 207, 638);
-			font.draw(batch, "hayas recogido el corazón.", 207, 588);
+			font.draw(batch, "El dragon no atacara hasta que", 207, 638);
+			font.draw(batch, "hayas recogido el corazon.", 207, 588);
+			personajes.clear();
+			personajes.add(dr);
 			for(PersonajeDelJuego personaje : personajes) 
 				personaje.draw(batch);
+			for(Corazon corazon : corazones)
+				corazon.draw(batch);
+			salida.draw(batch);
+			cofre.draw(batch);
+			if(colisiones.colisionCorazon(manuel)){
+				cofre.abrirCofre();
+				dibujar();
+			}
+		}
+		if(matarDragon){
+			cofre.draw(batch);
+			salida.draw(batch);
+			font.draw(batch, "Ahora el dragon ataca", 207, 588);
+		    font.draw(batch, "Coge la gema para pasar al siguiente", 207, 638);
+			for(PersonajeDelJuego personaje : personajes) 
+				personaje.draw(batch);
+			if(cofre.getBordes().overlaps(manuel.getBordes())){
+				cofre.cogerGema();
+				salida.abrirSalida();
+				dibujar();
+			}
+		}
+	}
+	
+	private void leeper(){
+		if(leeper){
+			font.draw(batch, "Colisiona con el leeper para que se duerma", 207, 638);
+			//personajes.add(le);
+			for(PersonajeDelJuego personaje : personajes) 
+				personaje.draw(batch);
+			if(Gdx.input.isKeyPressed(Keys.X)){				
+				dibujar();
+			}
 		}
 	}
 
@@ -116,19 +155,30 @@ public class EnemyTest extends Nivel {
 	private void dibujar(){
 		switch(eleccion){
 		  case 0: 
-			  font.draw(batch, "La serpiente mira a la izquierda", 367, 638);
 		      serpienteIzquierda = false;
 		      serpienteDerecha = true;
 		      eleccion++;
 		      break;
 		  case 1:
-			  font.draw(batch, "La serpiente mira a la derecha", 207, 588);
 			  serpienteDerecha = false;
 			  finSerpiente = true;
 			  eleccion++;
 			  break;
 		  case 2:
+			  finSerpiente = false;
+			  dragon = true;
+			  eleccion++;
 			  break;
+		  case 3: 
+		      dragon = false;
+		      matarDragon = true;
+		      eleccion++;
+		      break;
+		  case 4:
+			  matarDragon = false;
+		      leeper = true;
+		      eleccion++;
+		      break;
 		}
 	}
 
