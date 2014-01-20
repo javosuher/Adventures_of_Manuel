@@ -1,20 +1,25 @@
 package com.me.adventures.buttons;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
 
 public class BotonExit extends Boton {
 
-	public BotonExit(AdventuresOfManuel adventures, Vector2 posicion) {
+	public BotonExit(AdventuresOfManuel adventures, Vector2 posicion, boolean principal) {
 		super(adventures, posicion);
-		Textura = adventures.getManager().get("Pantallas/BotonExit.png", Texture.class);
+		if(principal == true)
+			Textura = adventures.getManager().get("Pantallas/BotonNoTransparente.png", Texture.class);
+		else
+			Textura = adventures.getManager().get("Pantallas/BotonSalir.png", Texture.class);
 		asignarBordes();
 	}
 	
 	@Override
 	protected void funcionamiento() {
-		Gdx.app.exit();
+		adventures.getPreferencias().putBoolean("Sonido", adventures.isSonidoActivado());
+		adventures.getPreferencias().putBoolean("Musica", adventures.isMusicaActivada());
+		adventures.getPreferencias().flush();
+		System.exit(0);
 	}
 }

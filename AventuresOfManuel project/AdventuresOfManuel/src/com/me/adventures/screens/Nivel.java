@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -32,19 +34,13 @@ public abstract class Nivel extends AbstractScreen {
 	protected List<MapaDelJuego> mapaNivel;
 	protected Colision colisiones;
 	protected Salida salida;
+	private Sound sonidoGanar;
 	
 	public Nivel(AdventuresOfManuel adventures, Vector2 posicionManuel) {
 		super(adventures);
+
+		sonidoGanar = adventures.getManager().get("Musica/Ganar.mp3", Sound.class);
 		TexturaFondo = adventures.getManager().get("Miscelanea/Nivel.png", Texture.class);
-		
-		// Para reescalar
-		if(Gdx.graphics.getHeight() < adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight() && Gdx.app.getType() == ApplicationType.Android) {
-			float div = (float) ((float) Gdx.graphics.getHeight()) / ((float) adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight());
-			adventures.getCamera().position.set((135 + Gdx.graphics.getWidth()) / 2, TexturaFondo.getHeight() / 2, 0);
-			adventures.getCamera().zoom = div + 1;
-		}
-		else
-			adventures.getCamera().position.set(Gdx.graphics.getWidth() / 2, TexturaFondo.getHeight() / 2, 0);
 		
 		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		objetos = new ArrayList<ObjetoDelJuego>();
@@ -61,6 +57,18 @@ public abstract class Nivel extends AbstractScreen {
 		iniciarColisiones();
 	}
 	
+	@Override
+	public void show() {
+		// Para reescalar
+        if(Gdx.graphics.getHeight() < adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight() && Gdx.app.getType() == ApplicationType.Android) {
+                float div = (float) ((float) Gdx.graphics.getHeight()) / ((float) adventures.getManager().get("Miscelanea/Nivel.png", Texture.class).getHeight());
+                adventures.getCamera().position.set((135 + Gdx.graphics.getWidth()) / 2, TexturaFondo.getHeight() / 2, 0);
+                adventures.getCamera().zoom = div + 1;
+        }
+        else
+                adventures.getCamera().position.set(Gdx.graphics.getWidth() / 2, TexturaFondo.getHeight() / 2, 0);
+	}
+	
 	protected abstract void objetosDelNivel();
 	protected abstract void personajesDelNivel();
 	protected abstract void mapaDelNivel();
@@ -70,10 +78,17 @@ public abstract class Nivel extends AbstractScreen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 		
-		adventures.getCamera().update();
-		/*if(Gdx.app.getType() == ApplicationType.Android)
-			adventures.getCamera().apply(Gdx.graphics.getGL10());*/
-		batch.setProjectionMatrix(adventures.getCamera().combined);
+		if(adventures.isMusicaActivada()) { // Poner musica Nivel
+			if(adventures.getMusicaMenu().isPlaying())
+				adventures.getMusicaMenu().stop();
+			if(!adventures.getMusicaNivel().isPlaying())
+				adventures.getMusicaNivel().play();
+		}
+		
+		if(Gdx.app.getType() == ApplicationType.Android) {
+			adventures.getCamera().update();
+			batch.setProjectionMatrix(adventures.getCamera().combined);
+		}
 		
 		// Actualizamos personajes pantalla
 		manuel.update();
@@ -93,10 +108,28 @@ public abstract class Nivel extends AbstractScreen {
 			personajesMovibles.get(i).update();
 		}
 		
+		if(Gdx.input.isKeyPressed(Keys.MENU)) {
+			adventures.destruirNiveles();
+			adventures.setScreen(adventures.MAIN);
+		}
+		
+		//if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
+		if(Gdx.input.isKeyPressed(Keys.BACK)){
+			adventures.setScreen(adventures.PAUSE);
+		}
+		
 		// Pintamos la pantalla
 		batch.begin();
 		batch.draw(TexturaFondo, 135, 0, TexturaFondo.getWidth(), TexturaFondo.getHeight());
 		salida.draw(batch);
+		
+		for(int i = 0; i < corazones.size(); i++){
+			if(corazones.get(i).getEstado() == false){
+				corazones.remove(i);
+				i--;
+			}
+		}
+		
 		for(Corazon corazon : corazones){
 			corazon.draw(batch);
 		}
@@ -123,16 +156,19 @@ public abstract class Nivel extends AbstractScreen {
 			personaje.draw(batch);
 		}
 	
-		/*else
-			if(manuel.getPosicion().x == salida.getPosicion().x + 58 && manuel.getPosicion().y == salida.getPosicion().y - 29)
-				adventures.haGanado();*/
-
+		if(salida.salidaAbierta() == true){
+			if(manuel.getPosicion().x == (salida.getPosicion().x + 58) && manuel.getPosicion().y == (salida.getPosicion().y - 29)){
+				if(adventures.isSonidoActivado())
+					sonidoGanar.play();
+				adventures.setScreen(adventures.WIN);
+			}
+		}
 		manuel.draw(batch);
 		batch.end();
 	}
 	
 	protected void iniciarColisiones(){
-		colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida, objetosEnemigos);
+		colisiones = new Colision(adventures, manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida, objetosEnemigos);
 		manuel.setColision(colisiones);
 		for(PersonajeDelJuego p : personajes){
 			p.setColision(colisiones);
@@ -144,12 +180,6 @@ public abstract class Nivel extends AbstractScreen {
 	
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void show() {
 		// TODO Auto-generated method stub
 		
 	}

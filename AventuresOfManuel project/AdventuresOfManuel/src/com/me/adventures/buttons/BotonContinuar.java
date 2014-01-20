@@ -14,6 +14,6 @@ public class BotonContinuar extends Boton {
 	
 	@Override
 	protected void funcionamiento() {
-		
+		adventures.continuarNivel();
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -30,6 +31,7 @@ public class Manuel extends PersonajeDelJuego {
 	private boolean disparando;
 	boolean manuelSeQuedaQuieto;
 	private int tiempoParaSiguienteProyectil; // Para que no se disparen dos a la vez
+	private Sound sonidoDisparo;
 
 	//Atributos para pintar a Manuel
 	private TextureRegion [][] manuelMatrizFrames;
@@ -53,6 +55,7 @@ public class Manuel extends PersonajeDelJuego {
 		direccion = ABAJO;
 		proyectiles = new ArrayList<Proyectil>();
 		tiempoParaSiguienteProyectil = 0;
+		sonidoDisparo = adventures.getManager().get("Musica/DisparoManolito.mp3", Sound.class);
 	}
 	
 	
@@ -111,6 +114,8 @@ public class Manuel extends PersonajeDelJuego {
 			//tenemos que pasarle la posicion siguiente a donde este manolito, dependiendo de la direccion
 			proyectiles.get(0).inicializaPosicion(posicion, direccion);
 			disparando = true;
+			if(adventures.isSonidoActivado())
+				sonidoDisparo.play();
 		}
 	}
 	private boolean teclaDeDisparo() {

@@ -1,5 +1,6 @@
 package com.me.adventures.characters;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -17,6 +18,7 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 	
 	private boolean disparando;
 	private Proyectil disparo;
+	private Sound sonidoDisparo;
 	
 	//Atributos para pintar
 	private TextureRegion [][] dragonMatrizFrames;
@@ -26,6 +28,7 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 		this.disparando = false;
 		this.ataqueActivado = false;
 		this.direccion = direccion;
+		sonidoDisparo = adventures.getManager().get("Musica/DisparoDragon.mp3", Sound.class);
 		
 		Textura = adventures.getManager().get("Enemigos/TablaDragon.png", Texture.class);
 
@@ -45,36 +48,48 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 		ataqueActivado = true;
 		frameActual = dragonMatrizFrames[direccion][DESPIERTO];
 		if(!disparando && tiempoParaSiguienteProyectil == 0){
-			tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 			disparo = new ProyectilEnemigo(adventures, new Vector2(), direccion);
 			disparo.inicializaPosicion(posicion, direccion);
 			if(direccion == IZQUIERDA){
 				if(manuel.getPosicion().x < posicion.x && (manuel.getPosicion().y <= posicion.y+29 && manuel.getPosicion().y >= posicion.y - 29)){
 					disparando = true;
+					if(adventures.isSonidoActivado())
+						sonidoDisparo.play();
 					disparar();
+					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
 			else if(direccion == DERECHA){
 				if(manuel.getPosicion().x > posicion.x && (manuel.getPosicion().y <= posicion.y+29 && manuel.getPosicion().y >= posicion.y - 29)){
 					disparando = true;
+					if(adventures.isSonidoActivado())
+						sonidoDisparo.play();
 					disparar();
+					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
 			else if(direccion == ARRIBA){
 				if(manuel.getPosicion().y > posicion.y && (manuel.getPosicion().x <= posicion.x+29 && manuel.getPosicion().x >= posicion.x - 29)){
 					disparando = true;
+					if(adventures.isSonidoActivado())
+						sonidoDisparo.play();
 					disparar();
+					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
-			else{
+			else if(direccion == ABAJO){
 				if(manuel.getPosicion().y < posicion.y && (manuel.getPosicion().x <= posicion.x+29 && manuel.getPosicion().x >= posicion.x - 29)){
 					disparando = true;
+					if(adventures.isSonidoActivado())
+						sonidoDisparo.play();
 					disparar();
+					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
 		}
-		else
+		else{
 			disparar();
+		}
 	}
 	
 	public void disparar(){

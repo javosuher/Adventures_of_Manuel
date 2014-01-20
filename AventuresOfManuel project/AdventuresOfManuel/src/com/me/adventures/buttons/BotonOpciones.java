@@ -5,15 +5,24 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
 
 public class BotonOpciones extends Boton {
-
+	private boolean mostrar;
+	
 	public BotonOpciones(AdventuresOfManuel adventures, Vector2 posicion) {
 		super(adventures, posicion);
-		Textura = adventures.getManager().get("Pantallas/BotonOpciones.png", Texture.class);
+		Textura = adventures.getManager().get("Pantallas/BotonNoTransparente.png", Texture.class);
 		asignarBordes();
+		mostrar = true;
 	}
 	
 	@Override
 	protected void funcionamiento() {
-		mainScreen.menuOpciones();
+		if(mostrar) {
+			mostrar = false;
+			mainScreen.menuOpciones();
+		}
+		else {
+			mostrar = true;
+			mainScreen.borrarMenuOpciones();
+		}
 	}
 }
