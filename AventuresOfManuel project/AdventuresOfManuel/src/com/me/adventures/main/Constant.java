@@ -8,6 +8,7 @@ public final class Constant {
 	public static final int TIEMPO_BOLA = 800;
 	public static final int TIEMPO_BOLA_CAMBIO = 400;
 	public static final int TIEMPO_PROYECTIL = 50;
+	public static final int TIEMPO_PROYECTIL_ENEMIGO = 100;
 	public static final int TIEMPO_DESAPARECIDO = 800;
 	public static final int TIEMPO_MOVIMIENTO_LEEPER = 2;
 	public static final int TIEMPO_MOVIMIENTO_CALAVERA = 1;
