@@ -12,17 +12,18 @@ import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.screens.Nivel;
 
 public class EnemyTest extends Nivel {
+	
 	private BitmapFont font;
 	private int eleccion;
 	private boolean serpienteDerecha, serpienteIzquierda, finSerpiente, dragon, matarDragon, 
-					leeper, leeperDormido, fantasma, fantasmaQuieto, calavera, finPruebas;
+					leeper, leeperDormido, fantasma, fantasmaQuieto, calavera, calaveraAtaca,
+					finPruebas;
+	
 	Dragon dr = new Dragon(adventures, new Vector2(541, 522), manuel, Dragon.ABAJO);
 	Leeper le = new Leeper(adventures, new Vector2(541, 522), manuel, Leeper.ARRIBA);
 	Fantasma fa = new Fantasma(adventures, new Vector2(541, 522), manuel, 0);
 	Calavera ca = new Calavera(adventures, new Vector2(541, 522), manuel);
-	Cofre cofre2 = new Cofre(adventures, new Vector2(425,116), 1);
 	Corazon corazon2 = new Corazon(adventures, new Vector2(773,406), 2);
-	Corazon corazon3 = new Corazon(adventures, new Vector2(773,406), 2);
 
 	public EnemyTest(AdventuresOfManuel adventures, Vector2 posicionManuel) {
 		super(adventures, posicionManuel);
@@ -81,7 +82,8 @@ public class EnemyTest extends Nivel {
 		serpiente();
 		dragon();		
 		leeper();
-		fantasma();		
+		fantasma();	
+		calavera();
 		
 		if(finPruebas) adventures.pruebasFinalizadas();
 		
@@ -94,7 +96,14 @@ public class EnemyTest extends Nivel {
 		if(calavera){
 			font.draw(batch, "La calavera no atacara hasta que", 207, 638);
 			font.draw(batch, "hayas recogido el corazon.", 207, 588);
+			
+			// Resetear personajes, corazones, cofre y salida
 			personajes.clear();
+			corazones.clear();
+			salida = new Salida(adventures, new Vector2(483,696), 0, 0);
+			corazones.add(new Corazon(adventures, new Vector2(773,406), 2));
+			cofre = new Cofre(adventures, new Vector2(425,116), 2);
+			
 			personajes.add(ca);
 			iniciarColisiones();
 			for(PersonajeDelJuego personaje : personajes) 
@@ -105,9 +114,21 @@ public class EnemyTest extends Nivel {
 			cofre.draw(batch);
 			if(colisiones.colisionCorazon(manuel))
 				manuel.obtenerCorazon(); 
-			if(manuel.getCorazonesObtenidos() > 0){
+			if(manuel.getCorazonesObtenidos() > 2){
 				cofre.abrirCofre();
 				ca.activarAtaque();
+				dibujar();
+			}
+		}
+		if(calaveraAtaca){
+			cofre.draw(batch);
+			salida.draw(batch);
+			iniciarColisiones();
+			font.draw(batch, "Coge la gema o dispara para finalizar", 207, 588);
+		    font.draw(batch, "Ahora la calavera ataca", 207, 638);
+			for(PersonajeDelJuego personaje : personajes) 
+				personaje.draw(batch);
+			if(cofre.getBordes().overlaps(manuel.getBordes()) || ca.estaEnBola()){
 				dibujar();
 			}
 		}
@@ -117,6 +138,7 @@ public class EnemyTest extends Nivel {
 		if(fantasma){
 			font.draw(batch, "Ahora el enemigo es un fantasma", 207, 638);
 			font.draw(batch, "Colsiona con el", 207, 588);
+			// Resetear personajes
 			personajes.clear();
 			personajes.add(fa);
 			iniciarColisiones();
@@ -273,7 +295,12 @@ public class EnemyTest extends Nivel {
 			  break;
 		  case 9:
 			  calavera = false;
-			  
+			  calaveraAtaca = true;
+			  eleccion++;
+			  break;
+		  case 10:
+			  calaveraAtaca = false;
+			  finPruebas = true;
 			  break;
 		}
 	}
