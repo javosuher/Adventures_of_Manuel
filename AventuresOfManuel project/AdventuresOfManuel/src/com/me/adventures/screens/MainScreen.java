@@ -54,11 +54,11 @@ public class MainScreen extends AbstractScreen {
 		botonesModoHistoria = new ArrayList<Boton>();
 		botonesOpciones = new ArrayList<Boton>();
 		
-		botonesPrincipales.add(new BotonModoHistoria(adventures, new Vector2(1, 1)));
-		botonesPrincipales.add(new BotonModoMustDie(adventures, new Vector2(280, Gdx.graphics.getHeight() - 300)));
-		botonesPrincipales.add(new BotonInstrucciones(adventures, new Vector2(280, Gdx.graphics.getHeight() - 400)));
-		botonesPrincipales.add(new BotonOpciones(adventures, new Vector2(285, Gdx.graphics.getHeight() - 500)));
-		botonesPrincipales.add(new BotonExit(adventures, new Vector2(290, Gdx.graphics.getHeight() - 600)));
+		botonesPrincipales.add(new BotonModoHistoria(adventures, new Vector2(280, Gdx.graphics.getHeight() - 200)));
+		botonesPrincipales.add(new BotonModoMustDie(adventures, new Vector2(280, Gdx.graphics.getHeight() - 290)));
+		botonesPrincipales.add(new BotonInstrucciones(adventures, new Vector2(280, Gdx.graphics.getHeight() - 370)));
+		botonesPrincipales.add(new BotonOpciones(adventures, new Vector2(285, Gdx.graphics.getHeight() - 450)));
+		botonesPrincipales.add(new BotonExit(adventures, new Vector2(290, Gdx.graphics.getHeight() - 530)));
 		
 		botonesPrincipales.get(0).setMainScreen(this); // Asignacion de MainScreen para nuevos menus
 		botonesPrincipales.get(3).setMainScreen(this);
@@ -66,22 +66,22 @@ public class MainScreen extends AbstractScreen {
 	
 	public void menuModoHistoria() {
 		borrarMenuOpciones();
-		botonesModoHistoria.add(new BotonNivel1(adventures, new Vector2(500, Gdx.graphics.getHeight() - 100)));
-		botonesModoHistoria.add(new BotonNivel2(adventures, new Vector2(500, Gdx.graphics.getHeight() - 150)));
-		botonesModoHistoria.add(new BotonNivel3(adventures, new Vector2(500, Gdx.graphics.getHeight() - 200)));
-		botonesModoHistoria.add(new BotonNivel4(adventures, new Vector2(500, Gdx.graphics.getHeight() - 250)));
-		botonesModoHistoria.add(new BotonNivel5(adventures, new Vector2(500, Gdx.graphics.getHeight() - 300)));
-		botonesModoHistoria.add(new BotonNivel6(adventures, new Vector2(500, Gdx.graphics.getHeight() - 350)));
-		botonesModoHistoria.add(new BotonNivel7(adventures, new Vector2(500, Gdx.graphics.getHeight() - 400)));
-		botonesModoHistoria.add(new BotonNivel8(adventures, new Vector2(500, Gdx.graphics.getHeight() - 450)));
-		botonesModoHistoria.add(new BotonNivel9(adventures, new Vector2(500, Gdx.graphics.getHeight() - 500)));
-		botonesModoHistoria.add(new BotonNivel10(adventures, new Vector2(500, Gdx.graphics.getHeight() - 550)));
+		botonesModoHistoria.add(new BotonNivel1(adventures, new Vector2(700, Gdx.graphics.getHeight() - 100)));
+		botonesModoHistoria.add(new BotonNivel2(adventures, new Vector2(700, Gdx.graphics.getHeight() - 200)));
+		botonesModoHistoria.add(new BotonNivel3(adventures, new Vector2(700, Gdx.graphics.getHeight() - 300)));
+		botonesModoHistoria.add(new BotonNivel4(adventures, new Vector2(700, Gdx.graphics.getHeight() - 400)));
+		botonesModoHistoria.add(new BotonNivel5(adventures, new Vector2(700, Gdx.graphics.getHeight() - 500)));
+		botonesModoHistoria.add(new BotonNivel6(adventures, new Vector2(800, Gdx.graphics.getHeight() - 100)));
+		botonesModoHistoria.add(new BotonNivel7(adventures, new Vector2(800, Gdx.graphics.getHeight() - 200)));
+		botonesModoHistoria.add(new BotonNivel8(adventures, new Vector2(800, Gdx.graphics.getHeight() - 300)));
+		botonesModoHistoria.add(new BotonNivel9(adventures, new Vector2(800, Gdx.graphics.getHeight() - 400)));
+		botonesModoHistoria.add(new BotonNivel10(adventures, new Vector2(800, Gdx.graphics.getHeight() - 500)));
 	}
 	
 	public void menuOpciones() {
 		botonesModoHistoria.clear();
-		botonesOpciones.add(new BotonEfectos(adventures, new Vector2(500, Gdx.graphics.getHeight() - 100)));
-		botonesOpciones.add(new BotonMusica(adventures, new Vector2(500, Gdx.graphics.getHeight() - 150)));
+		botonesOpciones.add(new BotonEfectos(adventures, new Vector2(700, Gdx.graphics.getHeight() - 300)));
+		botonesOpciones.add(new BotonMusica(adventures, new Vector2(850, Gdx.graphics.getHeight() - 300)));
 	}
 	
 	public void borrarMenuModoHistoria() {
