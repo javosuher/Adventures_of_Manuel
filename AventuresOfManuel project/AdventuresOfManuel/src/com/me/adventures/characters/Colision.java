@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
 public class Colision {
+	private AdventuresOfManuel adventures;
 	private Manuel manuel;
 	private List<PersonajeDelJuegoEnemigo> personajes;
 	private List<ObjetoDelJuego> objetos;
@@ -16,7 +18,8 @@ public class Colision {
 	private Cofre cofre;
 	private Salida salida;
 	
-	public Colision(Manuel manuel, List<PersonajeDelJuegoEnemigo> personajes, List<ObjetoDelJuego> objetos, List<PersonajeDelJuegoEnemigo> personajesMovibles, List<Corazon> corazones, Cofre cofre, Salida salida, List<ObjetoDelJuego> objetosEnemigos) {
+	public Colision(AdventuresOfManuel adventures, Manuel manuel, List<PersonajeDelJuegoEnemigo> personajes, List<ObjetoDelJuego> objetos, List<PersonajeDelJuegoEnemigo> personajesMovibles, List<Corazon> corazones, Cofre cofre, Salida salida, List<ObjetoDelJuego> objetosEnemigos) {
+		this.adventures = adventures;
 		this.manuel = manuel;
 		this.personajes = personajes;
 		this.objetos = objetos;
@@ -206,7 +209,7 @@ public class Colision {
 	public boolean colisionDisparoAManuel(Proyectil disparo) {
 		boolean ningunaColision = true;
 		if(colisiona(disparo.getBordes(), manuel.getBordes())) {
-			//Matar a manuel
+			adventures.gameOver();
 			ningunaColision = false;
 		}
 		return !ningunaColision;

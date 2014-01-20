@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
-	public AbstractScreen LOADING, START, MAIN;
+	public AbstractScreen LOADING, START, MAIN, WIN, GAMEOVER;
 	public AbstractScreen NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5, NIVEL6, NIVEL7, NIVEL8, NIVEL9, NIVEL10;
 	private Music musicaMenu, musicaNivel;
 	private AssetManager manager;
@@ -24,9 +24,12 @@ public class AdventuresOfManuel extends Game {
 	private boolean musicaActivada;
 	private float divMenus;
 	private float divNivel;
+	private int nivelActual;
+	private boolean tipoJuegoMustDie;
 	
 	@Override
 	public void create() {
+		nivelActual = 1;
 		manager = new AssetManager();
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -38,6 +41,7 @@ public class AdventuresOfManuel extends Game {
 		manager.load("Pantallas/Loading.png", Texture.class);
 		manager.load("Pantallas/FondoMenu.png", Texture.class);
 		manager.load("Pantallas/Start.png", Texture.class);
+		manager.load("Pantallas/NextLevel.png", Texture.class);
 		manager.load("Manolito/TablaSpritesManolitoTransparencia.png", Texture.class);
 		manager.load("Enemigos/bloque.png", Texture.class);
 		manager.load("Enemigos/TablaCalaveraFinal.png", Texture.class);
@@ -102,11 +106,18 @@ public class AdventuresOfManuel extends Game {
 		// Pantallas del juego
 		START = new StartScreen(this);
 		MAIN = new MainScreen(this);
+		WIN = new WinScreen(this);
+		GAMEOVER = new GameOverScreen(this);
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
-		NIVEL2 = new Nivel2(this, new Vector2(425,116));
+		NIVEL2 = new Nivel2(this, new Vector2(425, 116));
 		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
 		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
 		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
+		NIVEL6 = new Nivel6(this, new Vector2(193, 232));
+		NIVEL7 = new Nivel7(this, new Vector2(773, 58));
+		NIVEL8 = new Nivel8(this, new Vector2(657, 522));
+		NIVEL9 = new Nivel9(this, new Vector2(715, 58));
+		NIVEL10 = new Nivel10(this, new Vector2(773, 348));	
 		
 		//Musica
 		musicaMenu = manager.get("Musica/MenuInicial.mp3", Music.class);
@@ -116,7 +127,7 @@ public class AdventuresOfManuel extends Game {
 	public void destruirNiveles() {
 		MAIN = new MainScreen(this);
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
-		NIVEL2 = new Nivel2(this, new Vector2(425,116));
+		NIVEL2 = new Nivel2(this, new Vector2(425, 116));
 		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
 		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
 		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
@@ -204,5 +215,92 @@ public class AdventuresOfManuel extends Game {
 	@Override
 	public void resume() {
 		super.resume();
+	}
+	
+	public void setTipoJuegoMustDie(boolean tipo){
+		tipoJuegoMustDie = tipo;
+	}
+	
+	public boolean getTipoJuegoMustDie(){
+		return tipoJuegoMustDie;
+	}
+	
+	public void siguienteNivel(){
+		nivelActual++;
+	}
+	
+	public void pasarSiguienteNivel(){
+		nivelActual++;
+		if(nivelActual == 1)
+			setScreen(NIVEL1);
+		else if(nivelActual == 2)
+			setScreen(NIVEL2);
+		else if(nivelActual == 3)
+			setScreen(NIVEL3);
+		else if(nivelActual == 4)
+			setScreen(NIVEL4);
+		else if(nivelActual == 5)
+			setScreen(NIVEL5);
+		else if(nivelActual == 6)
+			setScreen(NIVEL6);
+		else if(nivelActual == 7)
+			setScreen(NIVEL7);
+		else if(nivelActual == 8)
+			setScreen(NIVEL8);
+		else if(nivelActual == 9)
+			setScreen(NIVEL9);
+		else if(nivelActual == 10)
+			setScreen(NIVEL10);
+	}	
+	
+	public int getNivelActual(){
+		return nivelActual;
+	}
+	
+	public void gameOver(){
+		setScreen(GAMEOVER);
+	}
+	
+	public void reintentarNivel(){
+		if(nivelActual == 1){
+			NIVEL1 = new Nivel1(this, new Vector2(193, 464));
+			setScreen(NIVEL1);
+		}
+		else if(nivelActual == 2){
+			NIVEL2 = new Nivel2(this, new Vector2(425, 116));
+			setScreen(NIVEL2);
+		}
+		else if(nivelActual == 3){
+			NIVEL3 = new Nivel3(this, new Vector2(541, 174));
+			setScreen(NIVEL3);
+		}
+		else if(nivelActual == 4){
+			NIVEL4 = new Nivel4(this, new Vector2(483, 58));
+			setScreen(NIVEL4);
+		}
+		else if(nivelActual == 5){
+			NIVEL5 = new Nivel5(this, new Vector2(483, 58));
+			setScreen(NIVEL5);
+		}
+		else if(nivelActual == 6){
+			NIVEL6 = new Nivel6(this, new Vector2(193, 232));
+			setScreen(NIVEL6);
+		}
+		else if(nivelActual == 7){
+			NIVEL7 = new Nivel7(this, new Vector2(773, 58));
+			setScreen(NIVEL7);
+		}
+		else if(nivelActual == 8){
+			NIVEL8 = new Nivel8(this, new Vector2(657, 522));
+			setScreen(NIVEL8);
+		}
+		else if(nivelActual == 9){
+			NIVEL9 = new Nivel9(this, new Vector2(715, 58));
+			setScreen(NIVEL9);
+		}
+		else if(nivelActual == 10){
+			NIVEL10 = new Nivel10(this, new Vector2(773, 348));	
+			setScreen(NIVEL10);
+		}
 	}
 }

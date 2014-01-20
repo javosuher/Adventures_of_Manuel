@@ -100,7 +100,7 @@ public class Nivel1 extends Nivel {
 		objetos.add(new Arbol(adventures, new Vector2(251, 116)));
 		objetos.add(new Arbol(adventures, new Vector2(309, 116)));
 		objetos.add(new Roca(adventures, new Vector2(367, 116)));
-		cofre = new Cofre(adventures, new Vector2(425,116), 2);
+		cofre = new Cofre(adventures, new Vector2(425, 116), 2);
 		objetos.add(new Arbol(adventures, new Vector2(657, 116)));
 		objetos.add(new Arbol(adventures, new Vector2(715, 116)));
 		

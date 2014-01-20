@@ -147,16 +147,19 @@ public abstract class Nivel extends AbstractScreen {
 			personaje.draw(batch);
 		}
 	
-		/*else
-			if(manuel.getPosicion().x == salida.getPosicion().x + 58 && manuel.getPosicion().y == salida.getPosicion().y - 29)
-				adventures.haGanado();*/
-
+		if(salida.salidaAbierta() == true){
+			if(manuel.getPosicion().x == (salida.getPosicion().x + 58) && manuel.getPosicion().y == (salida.getPosicion().y - 29)){
+			//if(adventures.getTipoJuegoMustDie() == true){
+			adventures.setScreen(adventures.WIN);
+				//adventures.pasarSiguienteNivel();
+			}
+		}
 		manuel.draw(batch);
 		batch.end();
 	}
 	
 	protected void iniciarColisiones(){
-		colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida, objetosEnemigos);
+		colisiones = new Colision(adventures, manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida, objetosEnemigos);
 		manuel.setColision(colisiones);
 		for(PersonajeDelJuego p : personajes){
 			p.setColision(colisiones);

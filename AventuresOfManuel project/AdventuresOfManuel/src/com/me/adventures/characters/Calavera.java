@@ -55,9 +55,8 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 			boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this) || colisiones.colisionMovibleAbajo(this);
 			boolean colisionManuel = colisiones.colisionAbajoConManuel(this) || colisiones.colisionArribaConManuel(this) || colisiones.colisionDerechaConManuel(this) || colisiones.colisionIzquierdaConManuel(this);
 			
-			if(colisionManuel && !colisionManuel){
-				//manuel.morir();
-				int x = 1;
+			if(colisionManuel){
+				adventures.gameOver();
 			}
 			else{
 				if(cambio == 0){

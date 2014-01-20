@@ -18,6 +18,7 @@ public class BotonModoHistoria extends Boton {
 	protected void funcionamiento() {
 		if(mostrar) {
 			mostrar = false;
+			adventures.setTipoJuegoMustDie(false);
 			mainScreen.menuModoHistoria();
 		}
 		else {
