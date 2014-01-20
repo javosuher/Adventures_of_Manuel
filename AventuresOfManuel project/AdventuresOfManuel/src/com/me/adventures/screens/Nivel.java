@@ -1,5 +1,6 @@
 package com.me.adventures.screens;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,7 +110,8 @@ public abstract class Nivel extends AbstractScreen {
 			adventures.setScreen(adventures.MAIN);
 		}
 		
-		if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
+		//if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
+		if(Gdx.input.isKeyPressed(Keys.BACK)){
 			adventures.setScreen(adventures.PAUSE);
 		}
 		

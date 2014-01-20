@@ -30,6 +30,7 @@ public class AdventuresOfManuel extends Game {
 	
 	@Override
 	public void create() {
+        Gdx.input.setCatchBackKey(true);
 		nivelActual = 1;
 		manager = new AssetManager();
 		batch = new SpriteBatch();
