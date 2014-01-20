@@ -14,10 +14,10 @@ import com.me.adventures.screens.Nivel;
 public class EnemyTest extends Nivel {
 	private BitmapFont font;
 	private int eleccion;
-	private boolean serpienteDerecha, serpienteIzquierda, finSerpiente, dragon, matarDragon, leeper, calavera;
+	private boolean serpienteDerecha, serpienteIzquierda, finSerpiente, dragon, matarDragon, leeper, leeperDormido, fantasma;
 	Dragon dr = new Dragon(adventures, new Vector2(541, 522), manuel, Dragon.ABAJO);
 	Leeper le = new Leeper(adventures, new Vector2(541, 522), manuel, Leeper.ARRIBA);
-	Fantasma f = new Fantasma(adventures, new Vector2(541, 522), manuel);
+	Fantasma fa = new Fantasma(adventures, new Vector2(541, 522), manuel);
 	Cofre cofre2 = new Cofre(adventures, new Vector2(425,116), 1);
 	Corazon corazon2 = new Corazon(adventures, new Vector2(773,406), 2);
 
@@ -77,27 +77,23 @@ public class EnemyTest extends Nivel {
 		serpiente();
 		dragon();		
 		leeper();
-		calavera();
-		
+		fantasma();		
 		
 		manuel.draw(batch);
 
 		batch.end();
 	}
 	
-	private void calavera(){
-		if(calavera){
-			font.draw(batch, "Ahora el enemigo es una calavera", 207, 638);
+	private void fantasma(){
+		if(fantasma){
+			font.draw(batch, "Ahora el enemigo es un fantasma, colisiona con el", 207, 638);
 			personajes.clear();
-			personajes.add(dr);
+			personajes.add(fa);
+			iniciarColisiones();
 			for(PersonajeDelJuego personaje : personajes) 
 				personaje.draw(batch);
-			corazones.add(corazon2);
-			for(Corazon corazon : corazones)
-				corazon.draw(batch);
-			cofre2.draw(batch);
-			if(colisiones.colisionCorazon(manuel)){
-				cofre2.abrirCofre(); // Se activa el ataque del dragón y peta!
+			if(colisiones.colisionAbajoEnemigo(manuel) || colisiones.colisionIzquierdaEnemigo(manuel) || colisiones.colisionArribaEnemigo(manuel) || colisiones.colisionDerechaEnemigo(manuel)){
+				font.draw(batch, "Bien, pulsa espacio para el siguiente", 207, 638);
 				dibujar();
 			}
 		}
@@ -141,11 +137,23 @@ public class EnemyTest extends Nivel {
 	private void leeper(){
 		if(leeper){
 			font.draw(batch, "Colisiona con el leeper para que se duerma", 207, 638);
-			personajes.add(le); // Da error al hacer el update de los personajes, culpa de master?
+			personajes.clear();
+			personajes.add(le);
+			iniciarColisiones();
 			for(PersonajeDelJuego personaje : personajes)
 				personaje.draw(batch);
 			if(colisiones.colisionAbajoEnemigo(manuel) || colisiones.colisionIzquierdaEnemigo(manuel) || colisiones.colisionArribaEnemigo(manuel) || colisiones.colisionDerechaEnemigo(manuel)){
+				font.draw(batch, "Bien, pulsa espacio para el siguiente", 207, 638);
+				le.draw(batch);
 				dibujar();
+			}
+		}
+		if(leeperDormido){
+			font.draw(batch, "Pulsa espacio para el siguiente enemigo", 207, 638);
+			for(PersonajeDelJuego personaje : personajes) 
+				personaje.draw(batch);
+			if(Gdx.input.isKeyPressed(Keys.SPACE)){
+				  dibujar();
 			}
 		}
 	}
@@ -209,10 +217,11 @@ public class EnemyTest extends Nivel {
 		  case 5:
 			  leeper = false;
 			  eleccion++;
-			  calavera = true;
+			  leeperDormido = true;
 			  break;
 		  case 6:
-			  calavera = false;
+			  leeperDormido = false;
+			  fantasma = true;
 			  eleccion++;
 			  break;
 		}
