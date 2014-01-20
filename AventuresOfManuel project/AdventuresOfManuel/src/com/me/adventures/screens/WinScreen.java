@@ -1,6 +1,7 @@
 package com.me.adventures.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.me.adventures.main.AdventuresOfManuel;
@@ -19,6 +20,11 @@ public class WinScreen extends AbstractScreen {
 		if(Gdx.input.isTouched())
 			adventures.pasarSiguienteNivel();
 		
+		if(Gdx.app.getType() == ApplicationType.Android) {
+			adventures.getCamera().update();
+			batch.setProjectionMatrix(adventures.getCamera().combined);
+		}
+		
 		batch.begin();
 		batch.draw(adventures.getManager().get("Pantallas/NextLevel.png", Texture.class), 0, 410, 630, 410);
 		batch.end();
@@ -26,8 +32,12 @@ public class WinScreen extends AbstractScreen {
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		
+		// Para reescalar
+        
+		if(Gdx.app.getType() == ApplicationType.Android) {
+			adventures.getCamera().position.set((135 + Gdx.graphics.getWidth()) / 2, Gdx.graphics.getHeight() / 2, 0);
+	        adventures.getCamera().zoom = 1;	
+		}
 	}
 
 	@Override
