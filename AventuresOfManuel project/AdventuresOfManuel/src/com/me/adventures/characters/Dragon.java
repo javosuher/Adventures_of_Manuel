@@ -55,8 +55,8 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 					disparando = true;
 					if(adventures.isSonidoActivado())
 						sonidoDisparo.play();
+					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL_ENEMIGO;
 					disparar();
-					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
 			else if(direccion == DERECHA){
@@ -64,8 +64,8 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 					disparando = true;
 					if(adventures.isSonidoActivado())
 						sonidoDisparo.play();
+					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL_ENEMIGO;
 					disparar();
-					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
 			else if(direccion == ARRIBA){
@@ -73,8 +73,8 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 					disparando = true;
 					if(adventures.isSonidoActivado())
 						sonidoDisparo.play();
+					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL_ENEMIGO;
 					disparar();
-					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
 			else if(direccion == ABAJO){
@@ -82,8 +82,8 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 					disparando = true;
 					if(adventures.isSonidoActivado())
 						sonidoDisparo.play();
+					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL_ENEMIGO;
 					disparar();
-					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
 		}
