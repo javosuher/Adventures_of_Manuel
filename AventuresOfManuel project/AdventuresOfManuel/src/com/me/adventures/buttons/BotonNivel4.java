@@ -14,6 +14,7 @@ public class BotonNivel4 extends Boton {
 	
 	@Override
 	protected void funcionamiento() {
+		adventures.setNivel(4);
 		adventures.setScreen(adventures.NIVEL4);
 	}
 }

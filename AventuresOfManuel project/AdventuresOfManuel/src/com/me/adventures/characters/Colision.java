@@ -3,6 +3,7 @@ package com.me.adventures.characters;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
@@ -17,6 +18,7 @@ public class Colision {
 	private List<PersonajeDelJuegoEnemigo> personajesMovibles;
 	private Cofre cofre;
 	private Salida salida;
+	private Sound sonidoGameOver;
 	
 	public Colision(AdventuresOfManuel adventures, Manuel manuel, List<PersonajeDelJuegoEnemigo> personajes, List<ObjetoDelJuego> objetos, List<PersonajeDelJuegoEnemigo> personajesMovibles, List<Corazon> corazones, Cofre cofre, Salida salida, List<ObjetoDelJuego> objetosEnemigos) {
 		this.adventures = adventures;
@@ -28,6 +30,7 @@ public class Colision {
 		this.cofre = cofre;
 		this.salida = salida;
 		this.objetosEnemigos = objetosEnemigos;
+		sonidoGameOver = adventures.getManager().get("Musica/Perder.mp3", Sound.class);
 	}
 	
 	private boolean colisiona(Rectangle a, Rectangle b) {
@@ -209,6 +212,8 @@ public class Colision {
 	public boolean colisionDisparoAManuel(Proyectil disparo) {
 		boolean ningunaColision = true;
 		if(colisiona(disparo.getBordes(), manuel.getBordes())) {
+			if(adventures.isSonidoActivado())
+				sonidoGameOver.play();
 			adventures.gameOver();
 			ningunaColision = false;
 		}

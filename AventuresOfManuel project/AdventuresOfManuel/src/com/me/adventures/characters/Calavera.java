@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,6 +21,7 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 	private static int MAX = 4;
 	private int cambio;
 	private Random rnd;
+	private Sound sonidoGameOver;
 
 	//Atributos para pintar
 	private TextureRegion [] calaveraMatrizFrames;
@@ -29,6 +31,7 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 		super(adventures, posicion, manuel);
 		this.ataqueActivado = false;
 		this.cambio = 0;
+		sonidoGameOver = adventures.getManager().get("Musica/Perder.mp3", Sound.class);
 		rnd = new Random();
 		direccion = rnd.nextInt(MAX);
 		Textura = adventures.getManager().get("Enemigos/TablaCalaveraFinal.png", Texture.class);
@@ -56,6 +59,8 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 			boolean colisionManuel = colisiones.colisionAbajoConManuel(this) || colisiones.colisionArribaConManuel(this) || colisiones.colisionDerechaConManuel(this) || colisiones.colisionIzquierdaConManuel(this);
 			
 			if(colisionManuel){
+				if(adventures.isSonidoActivado())
+					sonidoGameOver.play();
 				adventures.gameOver();
 			}
 			else{

@@ -7,6 +7,7 @@ import java.util.List;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -34,9 +35,12 @@ public abstract class Nivel extends AbstractScreen {
 	protected List<MapaDelJuego> mapaNivel;
 	protected Colision colisiones;
 	protected Salida salida;
+	private Sound sonidoGanar;
 	
 	public Nivel(AdventuresOfManuel adventures, Vector2 posicionManuel) {
 		super(adventures);
+
+		sonidoGanar = adventures.getManager().get("Musica/Ganar.mp3", Sound.class);
 		TexturaFondo = adventures.getManager().get("Miscelanea/Nivel.png", Texture.class);
 		
 		TexturaFondo.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -155,6 +159,8 @@ public abstract class Nivel extends AbstractScreen {
 	
 		if(salida.salidaAbierta() == true){
 			if(manuel.getPosicion().x == (salida.getPosicion().x + 58) && manuel.getPosicion().y == (salida.getPosicion().y - 29)){
+				if(adventures.isSonidoActivado())
+					sonidoGanar.play();
 				adventures.setScreen(adventures.WIN);
 			}
 		}

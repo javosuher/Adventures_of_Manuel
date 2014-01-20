@@ -111,6 +111,14 @@ public class AdventuresOfManuel extends Game {
 		WIN = new WinScreen(this);
 		GAMEOVER = new GameOverScreen(this);
 		PAUSE = new PauseScreen(this);
+		iniciarNiveles();
+		
+		//Musica
+		musicaMenu = manager.get("Musica/MenuInicial.mp3", Music.class);
+		musicaNivel = manager.get("Musica/Niveles.mp3", Music.class);
+	}
+	
+	public void iniciarNiveles(){
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
 		NIVEL2 = new Nivel2(this, new Vector2(425, 116));
 		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
@@ -120,11 +128,7 @@ public class AdventuresOfManuel extends Game {
 		NIVEL7 = new Nivel7(this, new Vector2(773, 58));
 		NIVEL8 = new Nivel8(this, new Vector2(657, 522));
 		NIVEL9 = new Nivel9(this, new Vector2(715, 58));
-		NIVEL10 = new Nivel10(this, new Vector2(773, 348));	
-		
-		//Musica
-		musicaMenu = manager.get("Musica/MenuInicial.mp3", Music.class);
-		musicaNivel = manager.get("Musica/Niveles.mp3", Music.class);
+		NIVEL10 = new Nivel10(this, new Vector2(773, 348));
 	}
 	
 	public void destruirNiveles() {
@@ -349,6 +353,11 @@ public class AdventuresOfManuel extends Game {
 	public void iniciarMustDie(){
 		tipoJuegoMustDie = true;
 		nivelActual = 1;
+		reintentarNivel();
+	}
+	
+	public void setNivel(int nivel){
+		nivelActual = nivel;
 		reintentarNivel();
 	}
 }
