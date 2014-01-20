@@ -365,4 +365,8 @@ public class AdventuresOfManuel extends Game {
 	public void pruebaSuperada(){
 		setScreen(new EnemyTest(this, new Vector2(541,348)));
 	}
+	
+	public void pruebasFinalizadas(){
+		setScreen(new PruebaSuperada(this));
+	}
 }
