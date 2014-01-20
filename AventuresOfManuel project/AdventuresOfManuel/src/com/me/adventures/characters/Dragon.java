@@ -77,7 +77,7 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
-			else{
+			else if(direccion == ABAJO){
 				if(manuel.getPosicion().y < posicion.y && (manuel.getPosicion().x <= posicion.x+29 && manuel.getPosicion().x >= posicion.x - 29)){
 					disparando = true;
 					if(adventures.isSonidoActivado())
