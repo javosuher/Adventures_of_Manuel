@@ -108,21 +108,24 @@ public class EnemyTest extends Nivel {
 			font.draw(batch, "hayas recogido el corazon.", 207, 588);
 			personajes.clear();
 			personajes.add(dr);
+			iniciarColisiones();
 			for(PersonajeDelJuego personaje : personajes) 
 				personaje.draw(batch);
 			for(Corazon corazon : corazones)
 				corazon.draw(batch);
 			salida.draw(batch);
 			cofre.draw(batch);
-			if(colisiones.colisionCorazon(manuel)){
+			if(colisiones.colisionCorazon(manuel))
+				manuel.obtenerCorazon(); 
+			if(manuel.getCorazonesObtenidos() > 0){
 				cofre.abrirCofre();
+				dr.activarAtaque();
 				dibujar();
 			}
 		}
 		if(matarDragon){
 			cofre.draw(batch);
 			salida.draw(batch);
-			// dr.activarAtaque(); PETA, el dragon no ataca
 			font.draw(batch, "Ahora el dragon ataca", 207, 588);
 		    font.draw(batch, "Coge la gema para pasar al siguiente", 207, 638);
 			for(PersonajeDelJuego personaje : personajes) 
@@ -136,10 +139,10 @@ public class EnemyTest extends Nivel {
 	}
 	
 	private void leeper(){
-		if(leeper){ // Se hace con un dragon mientras tanto
+		if(leeper){
 			font.draw(batch, "Colisiona con el leeper para que se duerma", 207, 638);
-			personajes.add(dr); // Da error al hacer el update de los personajes, culpa de master?
-			for(PersonajeDelJuego personaje : personajes) 
+			personajes.add(le); // Da error al hacer el update de los personajes, culpa de master?
+			for(PersonajeDelJuego personaje : personajes)
 				personaje.draw(batch);
 			if(colisiones.colisionAbajoEnemigo(manuel) || colisiones.colisionIzquierdaEnemigo(manuel) || colisiones.colisionArribaEnemigo(manuel) || colisiones.colisionDerechaEnemigo(manuel)){
 				dibujar();
