@@ -104,9 +104,13 @@ public abstract class Nivel extends AbstractScreen {
 			personajesMovibles.get(i).update();
 		}
 		
-		if(Gdx.input.isKeyPressed(Keys.ESCAPE) || Gdx.input.isKeyPressed(Keys.MENU)) {
+		if(Gdx.input.isKeyPressed(Keys.MENU)) {
 			adventures.destruirNiveles();
 			adventures.setScreen(adventures.MAIN);
+		}
+		
+		if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
+			adventures.setScreen(adventures.PAUSE);
 		}
 		
 		// Pintamos la pantalla
@@ -149,9 +153,7 @@ public abstract class Nivel extends AbstractScreen {
 	
 		if(salida.salidaAbierta() == true){
 			if(manuel.getPosicion().x == (salida.getPosicion().x + 58) && manuel.getPosicion().y == (salida.getPosicion().y - 29)){
-			//if(adventures.getTipoJuegoMustDie() == true){
-			adventures.setScreen(adventures.WIN);
-				//adventures.pasarSiguienteNivel();
+				adventures.setScreen(adventures.WIN);
 			}
 		}
 		manuel.draw(batch);

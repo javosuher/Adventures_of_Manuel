@@ -14,6 +14,6 @@ public class BotonReintentar extends Boton {
 	
 	@Override
 	protected void funcionamiento() {
-		
+		adventures.reintentarNivel();
 	}
 }

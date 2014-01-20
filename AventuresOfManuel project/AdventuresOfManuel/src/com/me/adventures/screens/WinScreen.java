@@ -8,7 +8,6 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.me.adventures.buttons.Boton;
 import com.me.adventures.buttons.*;
 import com.me.adventures.main.AdventuresOfManuel;
 
@@ -21,16 +20,15 @@ public class WinScreen extends AbstractScreen {
 		
 		botonesWin = new ArrayList<Boton>();
 		
-		botonesWin.add(new BotonSiguienteNivel(adventures, new Vector2(50, 50)));
+		botonesWin.add(new BotonSiguienteNivel(adventures, new Vector2(370, 250)));
+		botonesWin.add(new BotonMenu(adventures, new Vector2(470, 250)));
+		botonesWin.add(new BotonExit(adventures, new Vector2(570, 250), false));
 	}
 	
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
-		/*if(Gdx.input.isTouched())
-			adventures.pasarSiguienteNivel();*/
 		
 		if(Gdx.app.getType() == ApplicationType.Android) {
 			adventures.getCamera().update();
@@ -41,7 +39,7 @@ public class WinScreen extends AbstractScreen {
 			boton.update();
 		
 		batch.begin();
-		batch.draw(adventures.getManager().get("Pantallas/NextLevel.png", Texture.class), 0, 0, 630, 410);
+		batch.draw(adventures.getManager().get("Pantallas/NextLevel.png", Texture.class), 200, 100, 630, 410);
 		for(Boton boton : botonesWin)
 			boton.draw(batch);
 		batch.end();

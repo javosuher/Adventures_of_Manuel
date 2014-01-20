@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
-	public AbstractScreen LOADING, START, MAIN, WIN, GAMEOVER;
+	public AbstractScreen LOADING, START, MAIN, WIN, GAMEOVER, PAUSE;
 	public AbstractScreen NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5, NIVEL6, NIVEL7, NIVEL8, NIVEL9, NIVEL10;
 	private Music musicaMenu, musicaNivel;
 	private AssetManager manager;
@@ -109,6 +109,7 @@ public class AdventuresOfManuel extends Game {
 		MAIN = new MainScreen(this);
 		WIN = new WinScreen(this);
 		GAMEOVER = new GameOverScreen(this);
+		PAUSE = new PauseScreen(this);
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
 		NIVEL2 = new Nivel2(this, new Vector2(425, 116));
 		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
@@ -307,6 +308,39 @@ public class AdventuresOfManuel extends Game {
 		}
 		else if(nivelActual == 10){
 			NIVEL10 = new Nivel10(this, new Vector2(773, 348));	
+			setScreen(NIVEL10);
+		}
+	}
+	
+	public void continuarNivel(){
+		if(nivelActual == 1){
+			setScreen(NIVEL1);
+		}
+		else if(nivelActual == 2){
+			setScreen(NIVEL2);
+		}
+		else if(nivelActual == 3){
+			setScreen(NIVEL3);
+		}
+		else if(nivelActual == 4){
+			setScreen(NIVEL4);
+		}
+		else if(nivelActual == 5){
+			setScreen(NIVEL5);
+		}
+		else if(nivelActual == 6){
+			setScreen(NIVEL6);
+		}
+		else if(nivelActual == 7){
+			setScreen(NIVEL7);
+		}
+		else if(nivelActual == 8){
+			setScreen(NIVEL8);
+		}
+		else if(nivelActual == 9){
+			setScreen(NIVEL9);
+		}
+		else if(nivelActual == 10){
 			setScreen(NIVEL10);
 		}
 	}
