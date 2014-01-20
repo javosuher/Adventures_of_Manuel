@@ -14,18 +14,22 @@ import com.me.adventures.screens.Nivel;
 public class EnemyTest extends Nivel {
 	private BitmapFont font;
 	private int eleccion;
-	private boolean serpienteDerecha, serpienteIzquierda, finSerpiente, dragon, matarDragon, leeper, leeperDormido, fantasma;
+	private boolean serpienteDerecha, serpienteIzquierda, finSerpiente, dragon, matarDragon, 
+					leeper, leeperDormido, fantasma, fantasmaQuieto, calavera, finPruebas;
 	Dragon dr = new Dragon(adventures, new Vector2(541, 522), manuel, Dragon.ABAJO);
 	Leeper le = new Leeper(adventures, new Vector2(541, 522), manuel, Leeper.ARRIBA);
 	Fantasma fa = new Fantasma(adventures, new Vector2(541, 522), manuel, 0);
+	Calavera ca = new Calavera(adventures, new Vector2(541, 522), manuel);
 	Cofre cofre2 = new Cofre(adventures, new Vector2(425,116), 1);
 	Corazon corazon2 = new Corazon(adventures, new Vector2(773,406), 2);
+	Corazon corazon3 = new Corazon(adventures, new Vector2(773,406), 2);
 
 	public EnemyTest(AdventuresOfManuel adventures, Vector2 posicionManuel) {
 		super(adventures, posicionManuel);
 		font = new BitmapFont(Gdx.files.internal("arial.fnt"), Gdx.files.internal("arial.png"), false);
 		serpienteIzquierda = true;
 		serpienteDerecha = false;
+		finPruebas = false;
 		eleccion = 0;
 		
 	}
@@ -79,22 +83,55 @@ public class EnemyTest extends Nivel {
 		leeper();
 		fantasma();		
 		
+		if(finPruebas) adventures.pruebasFinalizadas();
+		
 		manuel.draw(batch);
 
 		batch.end();
 	}
 	
-	private void fantasma(){
-		if(fantasma){
-			font.draw(batch, "Ahora el enemigo es un fantasma, colisiona con el", 207, 638);
+	private void calavera(){
+		if(calavera){
+			font.draw(batch, "La calavera no atacara hasta que", 207, 638);
+			font.draw(batch, "hayas recogido el corazon.", 207, 588);
 			personajes.clear();
-			personajes.add(le);
+			personajes.add(ca);
 			iniciarColisiones();
 			for(PersonajeDelJuego personaje : personajes) 
 				personaje.draw(batch);
-			if(colisiones.colisionAbajoEnemigo(manuel) || colisiones.colisionIzquierdaEnemigo(manuel) || colisiones.colisionArribaEnemigo(manuel) || colisiones.colisionDerechaEnemigo(manuel)){
-				font.draw(batch, "Bien, pulsa espacio para el siguiente", 207, 638);
+			for(Corazon corazon : corazones)
+				corazon.draw(batch);
+			salida.draw(batch);
+			cofre.draw(batch);
+			if(colisiones.colisionCorazon(manuel))
+				manuel.obtenerCorazon(); 
+			if(manuel.getCorazonesObtenidos() > 0){
+				cofre.abrirCofre();
+				ca.activarAtaque();
 				dibujar();
+			}
+		}
+	}
+	
+	private void fantasma(){
+		if(fantasma){
+			font.draw(batch, "Ahora el enemigo es un fantasma", 207, 638);
+			font.draw(batch, "Colsiona con el", 207, 588);
+			personajes.clear();
+			personajes.add(fa);
+			iniciarColisiones();
+			for(PersonajeDelJuego personaje : personajes) 
+				personaje.draw(batch);
+			if(colisiones.colisionAbajoEnemigo(manuel) || colisiones.colisionIzquierdaEnemigo(manuel) || colisiones.colisionArribaEnemigo(manuel) || colisiones.colisionDerechaEnemigo(manuel))
+				dibujar();
+		}
+		if(fantasmaQuieto){
+			font.draw(batch, "El fantasma se ha quedado quieto", 207, 638);
+			font.draw(batch, "Pulsa espacio para el siguiente.", 207, 588);
+			for(PersonajeDelJuego personaje : personajes) 
+				personaje.draw(batch);
+			if(Gdx.input.isKeyPressed(Keys.SPACE)){
+				  dibujar();
 			}
 		}
 	}
@@ -160,8 +197,8 @@ public class EnemyTest extends Nivel {
 
 	private void serpiente() {        
 		if(serpienteIzquierda){
-			font.draw(batch, "Colócate a la izquierda de la serpiente", 207, 638);
-			font.draw(batch, "Ella te seguirá con la mirada", 207, 588);
+			font.draw(batch, "Colocate a la izquierda de la serpiente", 207, 638);
+			font.draw(batch, "Ella te seguira con la mirada", 207, 588);
 			for(PersonajeDelJuego personaje : personajes) 
 				personaje.draw(batch);
 			if(Gdx.input.isKeyPressed(Keys.LEFT) && manuel.getPosicion().x <= 541.0){
@@ -223,6 +260,20 @@ public class EnemyTest extends Nivel {
 			  leeperDormido = false;
 			  fantasma = true;
 			  eleccion++;
+			  break;
+		  case 7:
+			  fantasma = false;
+			  fantasmaQuieto = true;
+			  eleccion++;
+			  break;
+		  case 8:
+			  fantasmaQuieto = false;
+			  calavera = true;
+			  eleccion++;
+			  break;
+		  case 9:
+			  calavera = false;
+			  
 			  break;
 		}
 	}
