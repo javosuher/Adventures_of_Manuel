@@ -47,7 +47,7 @@ public class MainScreen extends AbstractScreen {
 			altura = Gdx.graphics.getHeight() - alto;
 			adventures.getCamera().position.set(ancho / 2, alto / 2, 0);
 			adventures.getCamera().zoom = 1;
-			
+
 		}
 		
 		botonesPrincipales = new ArrayList<Boton>();
