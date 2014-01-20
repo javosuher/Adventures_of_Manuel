@@ -1,17 +1,16 @@
 package com.me.adventures.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.me.adventures.main.AdventuresOfManuel;
 
 public class LoadingScreen extends AbstractScreen {
-	private boolean aplicaZoom;
+	//private boolean aplicaZoom;
 
 	public LoadingScreen(AdventuresOfManuel adventures) {
 		super(adventures);
-		aplicaZoom = true;
+		//aplicaZoom = true;
 	}
 	
 	@Override
@@ -24,7 +23,7 @@ public class LoadingScreen extends AbstractScreen {
 		}
 		
 		if(adventures.getManager().isLoaded("Pantallas/Loading.png", Texture.class)) { // Si se ha cargado la imagen Loading.png
-			float ancho = adventures.getManager().get("Pantallas/Loading.png", Texture.class).getWidth();
+			/*float ancho = adventures.getManager().get("Pantallas/Loading.png", Texture.class).getWidth();
 			float alto = adventures.getManager().get("Pantallas/Loading.png", Texture.class).getHeight();
 			float altura = 0;
 			if(Gdx.graphics.getWidth() < adventures.getManager().get("Pantallas/Loading.png", Texture.class).getWidth()) {
@@ -49,7 +48,19 @@ public class LoadingScreen extends AbstractScreen {
 			}
 			batch.begin();
 			batch.draw(adventures.getManager().get("Pantallas/Loading.png", Texture.class), 0, altura, ancho, alto);
-			batch.end();
+			batch.end();*/
+			 float ancho = 0;
+             float alto = 0;
+             if(Gdx.graphics.getWidth() < adventures.getManager().get("Pantallas/Loading.png", Texture.class).getWidth()) {
+                     float div = (float) ((float) Gdx.graphics.getWidth()) / ((float) adventures.getManager().get("Pantallas/Loading.png", Texture.class).getWidth());
+                     ancho = adventures.getManager().get("Pantallas/Loading.png", Texture.class).getWidth() * div;
+                     alto = adventures.getManager().get("Pantallas/Loading.png", Texture.class).getHeight() * div;
+                     adventures.setDiv(div);
+             }
+             float altura = Gdx.graphics.getHeight() - alto;
+             batch.begin();
+             batch.draw(adventures.getManager().get("Pantallas/Loading.png", Texture.class), 0, altura, ancho, alto);
+             batch.end();
 		}
 	}
 

@@ -22,8 +22,9 @@ public class AdventuresOfManuel extends Game {
 	private Preferences preferencias;
 	private boolean sonidoActivado;
 	private boolean musicaActivada;
-	private float divMenus;
-	private float divNivel;
+	private float div;
+	//private float divMenus;
+	//private float divNivel;
 	private int nivelActual;
 	private boolean tipoJuegoMustDie;
 	
@@ -174,7 +175,13 @@ public class AdventuresOfManuel extends Game {
 		else
 			musicaActivada = true;
 	}
-	public float getDivMenu() {
+	public float getDiv() {
+		return div;
+	}
+	public void setDiv(float div) {
+		this.div = div;
+	}
+	/*public float getDivMenu() {
 		return divMenus;
 	}
 	public void setDivMenu(float div) {
@@ -185,7 +192,7 @@ public class AdventuresOfManuel extends Game {
 	}
 	public void setDivNivel(float div) {
 		this.divMenus = div;
-	}
+	}*/
 
 	@Override
 	public void dispose() {
