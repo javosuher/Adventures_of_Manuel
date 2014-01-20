@@ -73,9 +73,9 @@ public class MainScreen extends AbstractScreen {
 		botonesModoHistoria.add(new BotonNivel5(adventures, new Vector2(600, Gdx.graphics.getHeight() - 500)));
 		botonesModoHistoria.add(new BotonNivel6(adventures, new Vector2(700, Gdx.graphics.getHeight() - 100)));
 		botonesModoHistoria.add(new BotonNivel7(adventures, new Vector2(700, Gdx.graphics.getHeight() - 200)));
-		botonesModoHistoria.add(new BotonNivel8(adventures, new Vector2(700, Gdx.graphics.getHeight() - 300)));
-		botonesModoHistoria.add(new BotonNivel9(adventures, new Vector2(700, Gdx.graphics.getHeight() - 400)));
-		botonesModoHistoria.add(new BotonNivel10(adventures, new Vector2(700, Gdx.graphics.getHeight() - 500)));
+		//botonesModoHistoria.add(new BotonNivel8(adventures, new Vector2(700, Gdx.graphics.getHeight() - 300)));
+		//botonesModoHistoria.add(new BotonNivel9(adventures, new Vector2(700, Gdx.graphics.getHeight() - 400)));
+		//botonesModoHistoria.add(new BotonNivel10(adventures, new Vector2(700, Gdx.graphics.getHeight() - 500)));
 	}
 	
 	public void menuOpciones() {

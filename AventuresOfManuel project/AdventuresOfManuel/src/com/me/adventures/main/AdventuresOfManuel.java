@@ -14,7 +14,7 @@ import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
 	public AbstractScreen LOADING, START, MAIN, WIN, GAMEOVER, PAUSE;
-	public AbstractScreen NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5, NIVEL6, NIVEL7, NIVEL8, NIVEL9, NIVEL10;
+	public AbstractScreen NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5, NIVEL6, NIVEL7;
 	private Music musicaMenu, musicaNivel;
 	private AssetManager manager;
 	private SpriteBatch batch;
@@ -120,29 +120,29 @@ public class AdventuresOfManuel extends Game {
 	
 	public void iniciarNiveles(){
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
-		NIVEL2 = new Nivel2(this, new Vector2(425, 116));
-		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
-		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
-		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
-		NIVEL6 = new Nivel6(this, new Vector2(193, 232));
-		NIVEL7 = new Nivel7(this, new Vector2(773, 58));
-		NIVEL8 = new Nivel8(this, new Vector2(657, 522));
-		NIVEL9 = new Nivel9(this, new Vector2(715, 58));
-		NIVEL10 = new Nivel10(this, new Vector2(773, 348));
+		NIVEL2 = new Nivel3(this, new Vector2(425, 116));
+		NIVEL3 = new Nivel4(this, new Vector2(541, 174));
+		NIVEL4 = new Nivel5(this, new Vector2(483, 58));
+		NIVEL5 = new Nivel6(this, new Vector2(483, 58));
+		NIVEL6 = new Nivel7(this, new Vector2(193, 232));
+		NIVEL7 = new Nivel8(this, new Vector2(773, 58));
+		//NIVEL8 = new Nivel8(this, new Vector2(657, 522));
+		//NIVEL9 = new Nivel9(this, new Vector2(715, 58));
+		//NIVEL10 = new Nivel10(this, new Vector2(773, 348));
 	}
 	
 	public void destruirNiveles() {
 		MAIN = new MainScreen(this);
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
-		NIVEL2 = new Nivel2(this, new Vector2(425, 116));
-		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
-		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
-		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
-		NIVEL6 = new Nivel6(this, new Vector2(193, 232));
-		NIVEL7 = new Nivel7(this, new Vector2(773, 58));
-		NIVEL8 = new Nivel8(this, new Vector2(657, 522));
-		NIVEL9 = new Nivel9(this, new Vector2(715, 58));
-		NIVEL10 = new Nivel10(this, new Vector2(773, 348));		
+		NIVEL2 = new Nivel3(this, new Vector2(425, 116));
+		NIVEL3 = new Nivel4(this, new Vector2(541, 174));
+		NIVEL4 = new Nivel5(this, new Vector2(483, 58));
+		NIVEL5 = new Nivel6(this, new Vector2(483, 58));
+		NIVEL6 = new Nivel7(this, new Vector2(193, 232));
+		NIVEL7 = new Nivel8(this, new Vector2(773, 58));
+		//NIVEL8 = new Nivel8(this, new Vector2(657, 522));
+		//NIVEL9 = new Nivel9(this, new Vector2(715, 58));
+		//NIVEL10 = new Nivel10(this, new Vector2(773, 348));	
 	}
 	
 	public SpriteBatch getBatch() {
@@ -244,9 +244,7 @@ public class AdventuresOfManuel extends Game {
 	
 	public void pasarSiguienteNivel(){
 		nivelActual++;
-		if(nivelActual == 1)
-			setScreen(NIVEL1);
-		else if(nivelActual == 2)
+		if(nivelActual == 2)
 			setScreen(NIVEL2);
 		else if(nivelActual == 3)
 			setScreen(NIVEL3);
@@ -258,12 +256,15 @@ public class AdventuresOfManuel extends Game {
 			setScreen(NIVEL6);
 		else if(nivelActual == 7)
 			setScreen(NIVEL7);
-		else if(nivelActual == 8)
-			setScreen(NIVEL8);
-		else if(nivelActual == 9)
-			setScreen(NIVEL9);
-		else if(nivelActual == 10)
-			setScreen(NIVEL10);
+		else{ //if(nivelActual == 1){
+			setScreen(NIVEL1);
+		}
+		//else if(nivelActual == 8)
+			//setScreen(NIVEL8);
+		//else if(nivelActual == 9)
+			//setScreen(NIVEL9);
+		//else if(nivelActual == 10)
+			//setScreen(NIVEL10);
 	}	
 	
 	public int getNivelActual(){
@@ -275,35 +276,35 @@ public class AdventuresOfManuel extends Game {
 	}
 	
 	public void reintentarNivel(){
-		if(nivelActual == 1){
-			NIVEL1 = new Nivel1(this, new Vector2(193, 464));
-			setScreen(NIVEL1);
-		}
-		else if(nivelActual == 2){
-			NIVEL2 = new Nivel2(this, new Vector2(425, 116));
+		if(nivelActual == 2){
+			NIVEL2 = new Nivel3(this, new Vector2(425, 116));
 			setScreen(NIVEL2);
 		}
 		else if(nivelActual == 3){
-			NIVEL3 = new Nivel3(this, new Vector2(541, 174));
+			NIVEL3 = new Nivel4(this, new Vector2(541, 174));
 			setScreen(NIVEL3);
 		}
 		else if(nivelActual == 4){
-			NIVEL4 = new Nivel4(this, new Vector2(483, 58));
+			NIVEL4 = new Nivel5(this, new Vector2(483, 58));
 			setScreen(NIVEL4);
 		}
 		else if(nivelActual == 5){
-			NIVEL5 = new Nivel5(this, new Vector2(483, 58));
+			NIVEL5 = new Nivel6(this, new Vector2(483, 58));
 			setScreen(NIVEL5);
 		}
 		else if(nivelActual == 6){
-			NIVEL6 = new Nivel6(this, new Vector2(193, 232));
+			NIVEL6 = new Nivel7(this, new Vector2(193, 232));
 			setScreen(NIVEL6);
 		}
 		else if(nivelActual == 7){
-			NIVEL7 = new Nivel7(this, new Vector2(773, 58));
+			NIVEL7 = new Nivel8(this, new Vector2(773, 58));
 			setScreen(NIVEL7);
 		}
-		else if(nivelActual == 8){
+		else{ //if(nivelActual == 1){
+			NIVEL1 = new Nivel1(this, new Vector2(193, 464));
+			setScreen(NIVEL1);
+		}
+		/*else if(nivelActual == 8){
 			NIVEL8 = new Nivel8(this, new Vector2(657, 522));
 			setScreen(NIVEL8);
 		}
@@ -314,14 +315,11 @@ public class AdventuresOfManuel extends Game {
 		else if(nivelActual == 10){
 			NIVEL10 = new Nivel10(this, new Vector2(773, 348));	
 			setScreen(NIVEL10);
-		}
+		}*/
 	}
 	
 	public void continuarNivel(){
-		if(nivelActual == 1){
-			setScreen(NIVEL1);
-		}
-		else if(nivelActual == 2){
+		if(nivelActual == 2){
 			setScreen(NIVEL2);
 		}
 		else if(nivelActual == 3){
@@ -339,7 +337,10 @@ public class AdventuresOfManuel extends Game {
 		else if(nivelActual == 7){
 			setScreen(NIVEL7);
 		}
-		else if(nivelActual == 8){
+		else{ //if(nivelActual == 1){
+			setScreen(NIVEL1);
+		}
+		/*else if(nivelActual == 8){
 			setScreen(NIVEL8);
 		}
 		else if(nivelActual == 9){
@@ -347,7 +348,7 @@ public class AdventuresOfManuel extends Game {
 		}
 		else if(nivelActual == 10){
 			setScreen(NIVEL10);
-		}
+		}*/
 	}
 	
 	public void iniciarMustDie(){
