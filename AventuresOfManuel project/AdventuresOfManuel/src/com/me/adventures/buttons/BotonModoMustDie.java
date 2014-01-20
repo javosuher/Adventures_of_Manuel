@@ -14,7 +14,6 @@ public class BotonModoMustDie extends Boton {
 	
 	@Override
 	protected void funcionamiento() {
-		adventures.setTipoJuegoMustDie(true);
-		adventures.setScreen(adventures.NIVEL1);
+		adventures.iniciarMustDie();
 	}
 }

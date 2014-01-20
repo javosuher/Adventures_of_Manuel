@@ -345,4 +345,10 @@ public class AdventuresOfManuel extends Game {
 			setScreen(NIVEL10);
 		}
 	}
+	
+	public void iniciarMustDie(){
+		tipoJuegoMustDie = true;
+		nivelActual = 1;
+		reintentarNivel();
+	}
 }
