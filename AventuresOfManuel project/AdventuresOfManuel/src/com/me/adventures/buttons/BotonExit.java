@@ -1,5 +1,6 @@
 package com.me.adventures.buttons;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
@@ -20,6 +21,7 @@ public class BotonExit extends Boton {
 		adventures.getPreferencias().putBoolean("Sonido", adventures.isSonidoActivado());
 		adventures.getPreferencias().putBoolean("Musica", adventures.isMusicaActivada());
 		adventures.getPreferencias().flush();
-		System.exit(0);
+		Gdx.app.exit();
+		//System.exit(0);
 	}
 }

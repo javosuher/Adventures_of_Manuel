@@ -30,11 +30,11 @@ public class BotonSiguienteNivel extends Boton {
 			adventures.setScreen(adventures.NIVEL6);
 		else if(nivelActual == 7)
 			adventures.setScreen(adventures.NIVEL7);
-		else if(nivelActual == 8)
+		/*else if(nivelActual == 8)
 			adventures.setScreen(adventures.NIVEL8);
 		else if(nivelActual == 9)
 			adventures.setScreen(adventures.NIVEL9);
 		else if(nivelActual == 10)
-			adventures.setScreen(adventures.NIVEL10);
+			adventures.setScreen(adventures.NIVEL10);*/
 	}
 }
