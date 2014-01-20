@@ -69,7 +69,7 @@ public class Nivel6 extends Nivel{
 		corazones.add(new Corazon(adventures, new Vector2(541, 348), 0));
 		objetos.add(new Arbol(adventures, new Vector2(599, 348)));
 		
-		objetos.add(new Arbol(adventures, new Vector2(290, 290)));
+		objetos.add(new Arbol(adventures, new Vector2(309, 290)));
 		objetos.add(new Roca(adventures, new Vector2(599, 290)));
 		objetos.add(new Arbol(adventures, new Vector2(657, 290)));
 		objetos.add(new Arbol(adventures, new Vector2(773, 290)));
