@@ -1,11 +1,12 @@
 package com.me.adventures.screens;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
-import com.me.adventures.pruebas.NivelTest;
+import com.me.adventures.pruebas.*;
 
 public class StartScreen extends AbstractScreen {
 	private boolean pruebas; // Sirve para ver las pruebas
@@ -17,7 +18,7 @@ public class StartScreen extends AbstractScreen {
 	
 	@Override
 	public void render(float delta) {
-		/*Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		if(Gdx.input.isTouched()) {
@@ -46,7 +47,7 @@ public class StartScreen extends AbstractScreen {
 		}
 		batch.begin();
 		batch.draw(adventures.getManager().get("Pantallas/Start.png", Texture.class), 0, altura, ancho, alto);
-		batch.end();*/
+		batch.end();/*
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -65,7 +66,7 @@ public class StartScreen extends AbstractScreen {
         float altura = Gdx.graphics.getHeight() - alto;
         batch.begin();
         batch.draw(adventures.getManager().get("Pantallas/Start.png", Texture.class), 0, altura, ancho, alto);
-        batch.end();
+        batch.end();*/
 	}
 
 	@Override

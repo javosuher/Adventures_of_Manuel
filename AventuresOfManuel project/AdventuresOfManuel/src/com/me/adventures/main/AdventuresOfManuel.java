@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.me.adventures.pruebas.EnemyTest;
 import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
@@ -359,5 +360,9 @@ public class AdventuresOfManuel extends Game {
 	public void setNivel(int nivel){
 		nivelActual = nivel;
 		reintentarNivel();
+	}
+	
+	public void pruebaSuperada(){
+		setScreen(new EnemyTest(this, new Vector2(541,348)));
 	}
 }

@@ -35,7 +35,7 @@ public class NivelTest extends Nivel {
 		objetos.add(new Pared(adventures, new Vector2(135, 0), 58, 754));
 		objetos.add(new Pared(adventures, new Vector2(135, 696), 406, 58));
 		objetos.add(new Pared(adventures, new Vector2(541, 725), 58, 29));
-		salida = new Salida(adventures, new Vector2(483,696), 0); // El 0 es Puerta
+		salida = new Salida(adventures, new Vector2(483,696), 0, 0); // El 0 es Puerta
 		objetos.add(new Pared(adventures, new Vector2(599, 696), 290, 58));
 		objetos.add(new Pared(adventures, new Vector2(831, 0), 58, 754));
 		objetos.add(new Roca(adventures, new Vector2(657, 522)));
@@ -93,7 +93,7 @@ public class NivelTest extends Nivel {
 			cofre.draw(batch);
 			if(manuel.getPosicion().x == salida.getPosicion().x + 58 && manuel.getPosicion().y == salida.getPosicion().y - 29){
 				terminar = false;
-				adventures.haGanado();
+				adventures.pruebaSuperada();
 			}
 		}
 		
@@ -221,8 +221,7 @@ public class NivelTest extends Nivel {
 			  for(Corazon corazon : corazones)
 					corazon.draw(batch);
 
-			  //objetos.remove(6);
-              colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida, objetosEnemigos);
+              colisiones = new Colision(adventures, manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida, objetosEnemigos);
 			  eleccion = 4;
 			  break;
 		  case 4:

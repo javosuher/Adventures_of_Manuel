@@ -17,7 +17,7 @@ public class EnemyTest extends Nivel {
 	private boolean serpienteDerecha, serpienteIzquierda, finSerpiente, dragon, matarDragon, leeper, leeperDormido, fantasma;
 	Dragon dr = new Dragon(adventures, new Vector2(541, 522), manuel, Dragon.ABAJO);
 	Leeper le = new Leeper(adventures, new Vector2(541, 522), manuel, Leeper.ARRIBA);
-	Fantasma fa = new Fantasma(adventures, new Vector2(541, 522), manuel);
+	Fantasma fa = new Fantasma(adventures, new Vector2(541, 522), manuel, 0);
 	Cofre cofre2 = new Cofre(adventures, new Vector2(425,116), 1);
 	Corazon corazon2 = new Corazon(adventures, new Vector2(773,406), 2);
 
@@ -40,7 +40,7 @@ public class EnemyTest extends Nivel {
 		objetos.add(new Pared(adventures, new Vector2(135, 0), 58, 754));
 		objetos.add(new Pared(adventures, new Vector2(135, 696), 406, 58));
 		objetos.add(new Pared(adventures, new Vector2(541, 725), 58, 29));
-		salida = new Salida(adventures, new Vector2(483,696), 0); // 0 es puerta
+		salida = new Salida(adventures, new Vector2(483,696), 0, 0);
 		objetos.add(new Pared(adventures, new Vector2(599, 696), 290, 58));
 		objetos.add(new Pared(adventures, new Vector2(831, 0), 58, 754));
 		corazones.add(new Corazon(adventures, new Vector2(773,406), 0));
@@ -88,7 +88,7 @@ public class EnemyTest extends Nivel {
 		if(fantasma){
 			font.draw(batch, "Ahora el enemigo es un fantasma, colisiona con el", 207, 638);
 			personajes.clear();
-			personajes.add(fa);
+			personajes.add(le);
 			iniciarColisiones();
 			for(PersonajeDelJuego personaje : personajes) 
 				personaje.draw(batch);
