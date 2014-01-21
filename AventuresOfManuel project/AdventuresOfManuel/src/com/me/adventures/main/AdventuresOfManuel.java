@@ -21,6 +21,7 @@ public class AdventuresOfManuel extends Game {
 	private Preferences preferencias;
 	private boolean sonidoActivado;
 	private boolean musicaActivada;
+	private int nivelActual;
 	
 	@Override
 	public void create() {
@@ -86,6 +87,7 @@ public class AdventuresOfManuel extends Game {
 	
 	public void crearNiveles() {
 		// Pantallas del juego
+		nivelActual = 1;
 		START = new StartScreen(this);
 		MAIN = new MainScreen(this);
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
@@ -164,5 +166,19 @@ public class AdventuresOfManuel extends Game {
 	@Override
 	public void resume() {
 		super.resume();
+	}
+	
+	public void siguienteNivel(){
+		nivelActual++;
+		if(nivelActual == 2)
+			setScreen(NIVEL2);
+		else if(nivelActual == 3)
+			setScreen(NIVEL3);
+		else if(nivelActual == 4)
+			setScreen(NIVEL4);
+		else if(nivelActual == 5)
+			setScreen(NIVEL5);
+		else
+			setScreen(NIVEL1);
 	}
 }

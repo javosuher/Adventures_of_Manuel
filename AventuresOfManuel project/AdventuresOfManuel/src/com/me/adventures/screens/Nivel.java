@@ -130,9 +130,11 @@ public abstract class Nivel extends AbstractScreen {
 			personaje.draw(batch);
 		}
 	
-		/*else
-			if(manuel.getPosicion().x == salida.getPosicion().x + 58 && manuel.getPosicion().y == salida.getPosicion().y - 29)
-				adventures.haGanado();*/
+		if(salida.salidaAbierta() == true){
+			if(manuel.getPosicion().x == (salida.getPosicion().x + 58) && manuel.getPosicion().y == (salida.getPosicion().y - 29)){
+				adventures.siguienteNivel();
+			}
+		}
 
 		manuel.draw(batch);
 		batch.end();
