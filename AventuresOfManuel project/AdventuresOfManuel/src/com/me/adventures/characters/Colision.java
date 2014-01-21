@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.me.adventures.main.AdventuresOfManuel;
 import com.me.adventures.main.Constant;
 
 public class Colision {
@@ -206,7 +207,6 @@ public class Colision {
 	public boolean colisionDisparoAManuel(Proyectil disparo) {
 		boolean ningunaColision = true;
 		if(colisiona(disparo.getBordes(), manuel.getBordes())) {
-			//Matar a manuel
 			ningunaColision = false;
 		}
 		return !ningunaColision;

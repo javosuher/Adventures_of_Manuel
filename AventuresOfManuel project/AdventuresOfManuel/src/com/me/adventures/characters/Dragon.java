@@ -92,7 +92,11 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 	}
 	
 	public void disparar(){
-		if(colisiones.colisionDisparoAManuel(disparo) || colisiones.colisionDisparoEnemigoObjeto(disparo) || colisiones.colisionDisparoEnemigoEnemigoMovible(disparo))
+		if(colisiones.colisionDisparoAManuel(disparo)){
+			disparando = false;
+			adventures.gameOver();
+		}
+		else if(colisiones.colisionDisparoEnemigoObjeto(disparo) || colisiones.colisionDisparoEnemigoEnemigoMovible(disparo))
 			disparando = false;
 		else
 			disparo.update();

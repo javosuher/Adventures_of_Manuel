@@ -62,7 +62,7 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 				if(colisionManuel){
 					if(adventures.isSonidoActivado())
 						sonidoGameOver.play();
-					//adventures.gameOver();
+					adventures.gameOver();
 				}
 				else{
 					if(cambio == 0){

@@ -91,7 +91,7 @@ public class AdventuresOfManuel extends Game {
 		START = new StartScreen(this);
 		MAIN = new MainScreen(this);
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
-		NIVEL2 = new Nivel2(this, new Vector2(425,116));
+		NIVEL2 = new Nivel2(this, new Vector2(425, 116));
 		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
 		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
 		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
@@ -170,15 +170,31 @@ public class AdventuresOfManuel extends Game {
 	
 	public void siguienteNivel(){
 		nivelActual++;
-		if(nivelActual == 2)
+		if(nivelActual == 2){
+			NIVEL2 = new Nivel2(this, new Vector2(425,116));
 			setScreen(NIVEL2);
-		else if(nivelActual == 3)
+		}
+		else if(nivelActual == 3){
+			NIVEL3 = new Nivel3(this, new Vector2(541, 174));
 			setScreen(NIVEL3);
-		else if(nivelActual == 4)
+		}
+		else if(nivelActual == 4){
+			NIVEL4 = new Nivel4(this, new Vector2(483, 58));
 			setScreen(NIVEL4);
-		else if(nivelActual == 5)
+		}
+		else if(nivelActual == 5){
+			NIVEL5 = new Nivel5(this, new Vector2(483, 58));
 			setScreen(NIVEL5);
-		else
+		}
+		else{
+			nivelActual = 1;
+			NIVEL1 = new Nivel1(this, new Vector2(193, 464));
 			setScreen(NIVEL1);
+		}
+	}
+	
+	public void gameOver(){
+		nivelActual--;
+		siguienteNivel();
 	}
 }
