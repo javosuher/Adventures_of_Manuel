@@ -58,41 +58,44 @@ public class Calavera extends PersonajeDelJuegoEnemigo {
 			boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this) || colisiones.colisionMovibleAbajo(this);
 			boolean colisionManuel = colisiones.colisionAbajoConManuel(this) || colisiones.colisionArribaConManuel(this) || colisiones.colisionDerechaConManuel(this) || colisiones.colisionIzquierdaConManuel(this);
 			
-			if(colisionManuel){
-				if(adventures.isSonidoActivado())
-					sonidoGameOver.play();
-				adventures.gameOver();
-			}
-			else{
-				if(cambio == 0){
-					cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+			if(!esBola){
+				if(colisionManuel){
+					if(adventures.isSonidoActivado())
+						sonidoGameOver.play();
+					adventures.gameOver();
 				}
-				if(tiempoParaMovimiento == 0){
-					if(direccion == ARRIBA){
-						if(colisionArriba)
-							cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
-						mover();
+				else{
+					if(cambio == 0){
+						cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
 					}
-					else if(direccion == ABAJO){
-						if(colisionAbajo)
-							cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
-						mover();
-					}
-					else if(direccion == DERECHA){
-						if(colisionDerecha)
-							cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
-						mover();
-					}
-					else{
-						if(colisionIzquierda)
-							cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
-						mover();
+					if(tiempoParaMovimiento == 0){
+						if(direccion == ARRIBA){
+							if(colisionArriba)
+								cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+							mover();
+						}
+						else if(direccion == ABAJO){
+							if(colisionAbajo)
+								cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+							mover();
+						}
+						else if(direccion == DERECHA){
+							if(colisionDerecha)
+								cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+							mover();
+						}
+						else{
+							if(colisionIzquierda)
+								cambio(colisionAbajo, colisionArriba, colisionDerecha, colisionIzquierda);
+							mover();
+						}
 					}
 				}
 			}
-			if(tiempoParaMovimiento > 0)
-				tiempoParaMovimiento--;
 		}
+
+		if(tiempoParaMovimiento > 0)
+			tiempoParaMovimiento--;
 		super.update();
 	}
 	

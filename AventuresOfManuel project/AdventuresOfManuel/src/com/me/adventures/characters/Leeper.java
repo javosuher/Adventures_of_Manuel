@@ -75,99 +75,101 @@ public class Leeper extends PersonajeDelJuegoEnemigo {
 		boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this) || colisiones.colisionMovibleAbajo(this);
 		boolean colisionManuel = colisiones.colisionAbajoConManuel(this) || colisiones.colisionArribaConManuel(this) || colisiones.colisionDerechaConManuel(this) || colisiones.colisionIzquierdaConManuel(this);
 		
-		if(dormido == false && !colisionManuel){
-			if(direccion == ARRIBA){
-				if(!colisionArriba) {
-					if(tiempoParaMovimiento == 0){
-						posicion.y = (float) (posicion.y + Constant.SPEED);
-						stateTime = stateTime + Gdx.graphics.getDeltaTime();
-						frameActual = leeperAnimationArribaDespierto.getKeyFrame(stateTime, true);
-						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
+		if(!esBola)
+		{
+			if(dormido == false && !colisionManuel){
+				if(direccion == ARRIBA){
+					if(!colisionArriba) {
+						if(tiempoParaMovimiento == 0){
+							posicion.y = (float) (posicion.y + Constant.SPEED);
+							stateTime = stateTime + Gdx.graphics.getDeltaTime();
+							frameActual = leeperAnimationArribaDespierto.getKeyFrame(stateTime, true);
+							tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
+						}
+					}
+					else{
+						if(!colisionDerecha)
+							direccion = DERECHA;
+						else if(!colisionIzquierda)
+							direccion = IZQUIERDA;
+						else
+							direccion = ABAJO;
 					}
 				}
-				else{
-					if(!colisionDerecha)
-						direccion = DERECHA;
-					else if(!colisionIzquierda)
-						direccion = IZQUIERDA;
-					else
-						direccion = ABAJO;
+				else if(direccion == IZQUIERDA){
+					if(!colisionIzquierda){
+						if(tiempoParaMovimiento == 0){
+							posicion.x = (float) (posicion.x - Constant.SPEED);
+							stateTime = stateTime + Gdx.graphics.getDeltaTime();
+							frameActual = leeperAnimationIzquierdaDespierto.getKeyFrame(stateTime, true);
+							tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
+						}
+					}
+					else{
+						if(!colisionAbajo)
+							direccion = ABAJO;
+						else if(!colisionArriba)
+							direccion = ARRIBA;
+						else
+							direccion = DERECHA;
+					}
+				}
+				else if(direccion == DERECHA){
+					if(!colisionDerecha) {
+						if(tiempoParaMovimiento == 0){
+							posicion.x = (float) (posicion.x + Constant.SPEED);
+							stateTime = stateTime + Gdx.graphics.getDeltaTime();
+							frameActual = leeperAnimationDerechaDespierto.getKeyFrame(stateTime, true);
+							tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
+						}
+					}
+					else{
+						if(!colisionAbajo)
+							direccion = ABAJO;
+						else if(!colisionArriba)
+							direccion = ARRIBA;
+						else
+							direccion = IZQUIERDA;
+					}
+				}
+				else {
+					if(!colisionAbajo) {
+						if(tiempoParaMovimiento == 0){
+							posicion.y = (float) (posicion.y - Constant.SPEED);
+							stateTime = stateTime + Gdx.graphics.getDeltaTime();
+							frameActual = leeperAnimationAbajoDespierto.getKeyFrame(stateTime, true);
+							tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
+						}
+					}
+					else{
+						if(!colisionDerecha)
+							direccion = DERECHA;
+						else if(!colisionIzquierda)
+							direccion = IZQUIERDA;
+						else
+							direccion = ARRIBA;
+					}
 				}
 			}
-			else if(direccion == IZQUIERDA){
-				if(!colisionIzquierda){
-					if(tiempoParaMovimiento == 0){
-						posicion.x = (float) (posicion.x - Constant.SPEED);
-						stateTime = stateTime + Gdx.graphics.getDeltaTime();
-						frameActual = leeperAnimationIzquierdaDespierto.getKeyFrame(stateTime, true);
-						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
-					}
-				}
-				else{
-					if(!colisionAbajo)
-						direccion = ABAJO;
-					else if(!colisionArriba)
-						direccion = ARRIBA;
+			else { //leeper esta dormido
+				dormido = true;
+				
+				if(tiempoParaDormir == 0){
+					stateTime = stateTime + Gdx.graphics.getDeltaTime();
+					if(direccion == ARRIBA)
+						frameActual = leeperAnimationArribaDormido.getKeyFrame(stateTime, true);
+					else if(direccion == ABAJO)
+						frameActual = leeperAnimationAbajoDormido.getKeyFrame(stateTime, true);
+					else if(direccion == IZQUIERDA)
+						frameActual = leeperAnimationIzquierdaDormido.getKeyFrame(stateTime, true);
 					else
-						direccion = DERECHA;
+						frameActual = leeperAnimationDerechaDormido.getKeyFrame(stateTime, true);
+					tiempoParaDormir = Constant.TIEMPO_DORMIDO;
 				}
-			}
-			else if(direccion == DERECHA){
-				if(!colisionDerecha) {
-					if(tiempoParaMovimiento == 0){
-						posicion.x = (float) (posicion.x + Constant.SPEED);
-						stateTime = stateTime + Gdx.graphics.getDeltaTime();
-						frameActual = leeperAnimationDerechaDespierto.getKeyFrame(stateTime, true);
-						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
-					}
-				}
-				else{
-					if(!colisionAbajo)
-						direccion = ABAJO;
-					else if(!colisionArriba)
-						direccion = ARRIBA;
-					else
-						direccion = IZQUIERDA;
-				}
-			}
-			else {
-				if(!colisionAbajo) {
-					if(tiempoParaMovimiento == 0){
-						posicion.y = (float) (posicion.y - Constant.SPEED);
-						stateTime = stateTime + Gdx.graphics.getDeltaTime();
-						frameActual = leeperAnimationAbajoDespierto.getKeyFrame(stateTime, true);
-						tiempoParaMovimiento = Constant.TIEMPO_MOVIMIENTO_LEEPER;
-					}
-				}
-				else{
-					if(!colisionDerecha)
-						direccion = DERECHA;
-					else if(!colisionIzquierda)
-						direccion = IZQUIERDA;
-					else
-						direccion = ARRIBA;
-				}
+				if(tiempoParaDormir > 0)
+					tiempoParaDormir--;
 			}
 		}
-		else { //leeper esta dormido
-			dormido = true;
-			
-			if(tiempoParaDormir == 0){
-				stateTime = stateTime + Gdx.graphics.getDeltaTime();
-				if(direccion == ARRIBA)
-					frameActual = leeperAnimationArribaDormido.getKeyFrame(stateTime, true);
-				else if(direccion == ABAJO)
-					frameActual = leeperAnimationAbajoDormido.getKeyFrame(stateTime, true);
-				else if(direccion == IZQUIERDA)
-					frameActual = leeperAnimationIzquierdaDormido.getKeyFrame(stateTime, true);
-				else
-					frameActual = leeperAnimationDerechaDormido.getKeyFrame(stateTime, true);
-				tiempoParaDormir = Constant.TIEMPO_DORMIDO;
-			}
-			if(tiempoParaDormir > 0)
-				tiempoParaDormir--;
-		}
-		
 		if(tiempoParaMovimiento > 0)
 			tiempoParaMovimiento--;
 		super.update();
