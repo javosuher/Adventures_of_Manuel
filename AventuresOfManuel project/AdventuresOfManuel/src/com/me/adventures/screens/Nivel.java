@@ -141,7 +141,7 @@ public abstract class Nivel extends AbstractScreen {
 	}
 	
 	protected void iniciarColisiones(){
-		colisiones = new Colision(manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida, objetosEnemigos);
+		colisiones = new Colision(adventures, manuel, personajes, objetos, personajesMovibles, corazones, cofre, salida, objetosEnemigos);
 		manuel.setColision(colisiones);
 		for(PersonajeDelJuego p : personajes){
 			p.setColision(colisiones);

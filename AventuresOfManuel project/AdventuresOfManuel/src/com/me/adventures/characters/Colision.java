@@ -16,8 +16,10 @@ public class Colision {
 	private List<PersonajeDelJuegoEnemigo> personajesMovibles;
 	private Cofre cofre;
 	private Salida salida;
+	private AdventuresOfManuel adventures;
 	
-	public Colision(Manuel manuel, List<PersonajeDelJuegoEnemigo> personajes, List<ObjetoDelJuego> objetos, List<PersonajeDelJuegoEnemigo> personajesMovibles, List<Corazon> corazones, Cofre cofre, Salida salida, List<ObjetoDelJuego> objetosEnemigos) {
+	public Colision(AdventuresOfManuel adventures, Manuel manuel, List<PersonajeDelJuegoEnemigo> personajes, List<ObjetoDelJuego> objetos, List<PersonajeDelJuegoEnemigo> personajesMovibles, List<Corazon> corazones, Cofre cofre, Salida salida, List<ObjetoDelJuego> objetosEnemigos) {
+		this.adventures = adventures;
 		this.manuel = manuel;
 		this.personajes = personajes;
 		this.objetos = objetos;
@@ -208,6 +210,7 @@ public class Colision {
 		boolean ningunaColision = true;
 		if(colisiona(disparo.getBordes(), manuel.getBordes())) {
 			ningunaColision = false;
+			adventures.gameOver();
 		}
 		return !ningunaColision;
 	}
