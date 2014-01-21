@@ -206,21 +206,11 @@ public abstract class Nivel extends AbstractScreen {
 
 	@Override
 	public void dispose() {
-		for(int i = 0; i < objetos.size(); i++){
-				objetos.remove(i);
-		}
-		for(int i = 0; i < objetosEnemigos.size(); i++){
-			objetosEnemigos.remove(i);
-	    }
-		for(int i = 0; i < personajes.size(); i++){
-			personajes.remove(i);
-	    }
-		for(int i = 0; i < personajesMovibles.size(); i++){
-			personajesMovibles.remove(i);
-	    }
-		for(int i = 0; i < mapaNivel.size(); i++){
-			mapaNivel.remove(i);
-	    }
+		objetos.clear();
+		objetosEnemigos.clear();
+		personajes.clear();
+		personajesMovibles.clear();
+		mapaNivel.clear();
 		colisiones.eliminar();
 	}
 }
