@@ -47,7 +47,7 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 	public void activarAtaque() {
 		ataqueActivado = true;
 		frameActual = dragonMatrizFrames[direccion][DESPIERTO];
-		if(!esBola && !disparando && tiempoParaSiguienteProyectil == 0){
+		if(!disparando && tiempoParaSiguienteProyectil == 0){
 			disparo = new ProyectilEnemigo(adventures, new Vector2(), direccion);
 			disparo.inicializaPosicion(posicion, direccion);
 			if(direccion == IZQUIERDA){
@@ -55,8 +55,8 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 					disparando = true;
 					if(adventures.isSonidoActivado())
 						sonidoDisparo.play();
-					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL_ENEMIGO;
 					disparar();
+					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
 			else if(direccion == DERECHA){
@@ -64,8 +64,8 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 					disparando = true;
 					if(adventures.isSonidoActivado())
 						sonidoDisparo.play();
-					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL_ENEMIGO;
 					disparar();
+					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
 			else if(direccion == ARRIBA){
@@ -73,22 +73,23 @@ public class Dragon extends PersonajeDelJuegoEnemigo {
 					disparando = true;
 					if(adventures.isSonidoActivado())
 						sonidoDisparo.play();
-					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL_ENEMIGO;
 					disparar();
+					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
-			else{
+			else if(direccion == ABAJO){
 				if(manuel.getPosicion().y < posicion.y && (manuel.getPosicion().x <= posicion.x+29 && manuel.getPosicion().x >= posicion.x - 29)){
 					disparando = true;
 					if(adventures.isSonidoActivado())
 						sonidoDisparo.play();
-					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL_ENEMIGO;
 					disparar();
+					tiempoParaSiguienteProyectil = Constant.TIEMPO_PROYECTIL;
 				}
 			}
 		}
-		else
+		else{
 			disparar();
+		}
 	}
 	
 	public void disparar(){

@@ -209,8 +209,8 @@ public class Colision {
 	public boolean colisionDisparoAManuel(Proyectil disparo) {
 		boolean ningunaColision = true;
 		if(colisiona(disparo.getBordes(), manuel.getBordes())) {
-			ningunaColision = false;
 			adventures.gameOver();
+			ningunaColision = false;
 		}
 		return !ningunaColision;
 	}
