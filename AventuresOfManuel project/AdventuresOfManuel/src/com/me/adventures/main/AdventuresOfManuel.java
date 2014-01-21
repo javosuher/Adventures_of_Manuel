@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.screens.*;
 
 public class AdventuresOfManuel extends Game {
-	public AbstractScreen LOADING, START, MAIN, NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5;
+	public AbstractScreen LOADING, START, NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5;
 	private Music musicaMenu, musicaNivel;
 	private AssetManager manager;
 	private SpriteBatch batch;
@@ -25,6 +25,7 @@ public class AdventuresOfManuel extends Game {
 	
 	@Override
 	public void create() {
+		nivelActual = 0;
 		manager = new AssetManager();
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -87,14 +88,8 @@ public class AdventuresOfManuel extends Game {
 	
 	public void crearNiveles() {
 		// Pantallas del juego
-		nivelActual = 1;
 		START = new StartScreen(this);
-		MAIN = new MainScreen(this);
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
-		NIVEL2 = new Nivel2(this, new Vector2(425, 116));
-		NIVEL3 = new Nivel3(this, new Vector2(541, 174));
-		NIVEL4 = new Nivel4(this, new Vector2(483, 58));
-		NIVEL5 = new Nivel5(this, new Vector2(483, 58));
 		
 		//Musica
 		musicaMenu = manager.get("Musica/MenuInicial.mp3", Music.class);

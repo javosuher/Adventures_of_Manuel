@@ -17,7 +17,7 @@ public class StartScreen extends AbstractScreen {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		if(Gdx.input.isTouched())
-			adventures.setScreen(adventures.MAIN);
+			adventures.siguienteNivel();
 		
 		float ancho = 0;
 		float alto = 0;
