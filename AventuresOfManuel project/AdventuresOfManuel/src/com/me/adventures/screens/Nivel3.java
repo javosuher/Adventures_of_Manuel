@@ -23,7 +23,9 @@ public class Nivel3 extends Nivel {
 		objetos.add(new Pared(adventures, new Vector2(135, 0), 58, 754));
 		objetos.add(new Pared(adventures, new Vector2(135, 696), 348, 58));
 		objetos.add(new Pared(adventures, new Vector2(483, 725), 58, 29));
-		salida = new Salida(adventures, new Vector2(425, 696), Constant.PUERTA);
+
+		objetos.add(new Pared(adventures, new Vector2(483, 696), 58, 29));//
+		salida = new Salida(adventures, new Vector2(425, 696), Constant.PUERTA, objetos.size()-1);
 		objetos.add(new Pared(adventures, new Vector2(541, 696), 290, 58));
 		objetos.add(new Pared(adventures, new Vector2(831, 0), 58, 754));
 		
