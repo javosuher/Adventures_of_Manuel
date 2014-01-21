@@ -48,7 +48,7 @@ public class Manuel extends PersonajeDelJuego {
 		manuelAnimationIzquierda = new Animation(0.05f, manuelMatrizFrames[IZQUIERDA]);
 		manuelAnimationDerecha= new Animation(0.05f, manuelMatrizFrames[DERECHA]);
 		manuelAnimationArriba = new Animation(0.05f, manuelMatrizFrames[ARRIBA]);
-		
+
 		disparando = false;
 		this.font = new BitmapFont(Gdx.files.internal("arial.fnt"), Gdx.files.internal("arial.png"), false);
 		this.corazonesObtenidos = 0;

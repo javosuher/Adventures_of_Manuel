@@ -3,6 +3,7 @@ package com.me.adventures.buttons;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.me.adventures.main.AdventuresOfManuel;
+import com.me.adventures.screens.Nivel1;
 
 public class BotonNivel1 extends Boton {
 
@@ -14,6 +15,7 @@ public class BotonNivel1 extends Boton {
 	
 	@Override
 	protected void funcionamiento() {
+		adventures.NIVEL1 = new Nivel1(adventures, new Vector2(193, 464));
 		adventures.setNivel(1);
 		adventures.setScreen(adventures.NIVEL1);
 	}

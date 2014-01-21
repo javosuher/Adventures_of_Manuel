@@ -350,4 +350,19 @@ public class Colision {
 		auxiliar.x = (float) (auxiliar.x - Constant.SPEED);
 		return colisionMovibleCorazon(auxiliar);	
 	}
+
+	public void eliminar() {
+	  for(int i = 0; i < objetos.size(); i++){
+			objetos.remove(i);
+	  }
+	  for(int i = 0; i < objetosEnemigos.size(); i++){
+		objetosEnemigos.remove(i);
+      }
+	  for(int i = 0; i < personajes.size(); i++){
+		personajes.remove(i);
+      }
+	  for(int i = 0; i < personajesMovibles.size(); i++){
+		personajesMovibles.remove(i);
+      }
+	}
 }

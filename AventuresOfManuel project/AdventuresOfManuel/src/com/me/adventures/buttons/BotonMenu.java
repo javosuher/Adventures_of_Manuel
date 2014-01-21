@@ -14,7 +14,7 @@ public class BotonMenu extends Boton {
 	
 	@Override
 	protected void funcionamiento() {
-		adventures.iniciarNiveles();
+		//adventures.iniciarNiveles();
 		adventures.setScreen(adventures.MAIN);
 	}
 }

@@ -55,6 +55,8 @@ public abstract class Nivel extends AbstractScreen {
 		personajesDelNivel();
 		mapaDelNivel();
 		iniciarColisiones();
+		
+		
 	}
 	
 	@Override
@@ -109,7 +111,7 @@ public abstract class Nivel extends AbstractScreen {
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.MENU)) {
-			adventures.destruirNiveles();
+			//adventures.destruirNiveles();
 			adventures.setScreen(adventures.MAIN);
 		}
 		
@@ -204,7 +206,21 @@ public abstract class Nivel extends AbstractScreen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		for(int i = 0; i < objetos.size(); i++){
+				objetos.remove(i);
+		}
+		for(int i = 0; i < objetosEnemigos.size(); i++){
+			objetosEnemigos.remove(i);
+	    }
+		for(int i = 0; i < personajes.size(); i++){
+			personajes.remove(i);
+	    }
+		for(int i = 0; i < personajesMovibles.size(); i++){
+			personajesMovibles.remove(i);
+	    }
+		for(int i = 0; i < mapaNivel.size(); i++){
+			mapaNivel.remove(i);
+	    }
+		colisiones.eliminar();
 	}
 }

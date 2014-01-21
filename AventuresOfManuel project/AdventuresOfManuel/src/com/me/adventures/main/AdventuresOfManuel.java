@@ -111,14 +111,14 @@ public class AdventuresOfManuel extends Game {
 		WIN = new WinScreen(this);
 		GAMEOVER = new GameOverScreen(this);
 		PAUSE = new PauseScreen(this);
-		iniciarNiveles();
+		//iniciarNiveles();
 		
 		//Musica
 		musicaMenu = manager.get("Musica/MenuInicial.mp3", Music.class);
 		musicaNivel = manager.get("Musica/Niveles.mp3", Music.class);
 	}
 	
-	public void iniciarNiveles(){
+	/*public void iniciarNiveles(){
 		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
 		NIVEL2 = new Nivel3(this, new Vector2(425, 116));
 		NIVEL3 = new Nivel4(this, new Vector2(541, 174));
@@ -129,21 +129,20 @@ public class AdventuresOfManuel extends Game {
 		//NIVEL8 = new Nivel8(this, new Vector2(657, 522));
 		//NIVEL9 = new Nivel9(this, new Vector2(715, 58));
 		//NIVEL10 = new Nivel10(this, new Vector2(773, 348));
-	}
+	}*/
 	
-	public void destruirNiveles() {
-		MAIN = new MainScreen(this);
-		NIVEL1 = new Nivel1(this, new Vector2(193, 464));
-		NIVEL2 = new Nivel3(this, new Vector2(425, 116));
-		NIVEL3 = new Nivel4(this, new Vector2(541, 174));
-		NIVEL4 = new Nivel5(this, new Vector2(483, 58));
-		NIVEL5 = new Nivel6(this, new Vector2(483, 58));
-		NIVEL6 = new Nivel7(this, new Vector2(193, 232));
-		NIVEL7 = new Nivel8(this, new Vector2(773, 58));
+	/*public void destruirNiveles() {
+		NIVEL1.dispose();
+		NIVEL2.dispose();
+		NIVEL3.dispose();
+		NIVEL4.dispose();
+		NIVEL5.dispose();
+		NIVEL6.dispose();
+		NIVEL7.dispose();
 		//NIVEL8 = new Nivel8(this, new Vector2(657, 522));
 		//NIVEL9 = new Nivel9(this, new Vector2(715, 58));
 		//NIVEL10 = new Nivel10(this, new Vector2(773, 348));	
-	}
+	}*/
 	
 	public SpriteBatch getBatch() {
 		return batch;
@@ -277,30 +276,37 @@ public class AdventuresOfManuel extends Game {
 	
 	public void reintentarNivel(){
 		if(nivelActual == 2){
+			NIVEL2.dispose();
 			NIVEL2 = new Nivel3(this, new Vector2(425, 116));
 			setScreen(NIVEL2);
 		}
 		else if(nivelActual == 3){
+			NIVEL3.dispose();
 			NIVEL3 = new Nivel4(this, new Vector2(541, 174));
 			setScreen(NIVEL3);
 		}
 		else if(nivelActual == 4){
+			NIVEL4.dispose();
 			NIVEL4 = new Nivel5(this, new Vector2(483, 58));
 			setScreen(NIVEL4);
 		}
 		else if(nivelActual == 5){
+			NIVEL5.dispose();
 			NIVEL5 = new Nivel6(this, new Vector2(483, 58));
 			setScreen(NIVEL5);
 		}
 		else if(nivelActual == 6){
+			NIVEL6.dispose();
 			NIVEL6 = new Nivel7(this, new Vector2(193, 232));
 			setScreen(NIVEL6);
 		}
 		else if(nivelActual == 7){
+			NIVEL7.dispose();
 			NIVEL7 = new Nivel8(this, new Vector2(773, 58));
 			setScreen(NIVEL7);
 		}
 		else{ //if(nivelActual == 1){
+			NIVEL1.dispose();
 			NIVEL1 = new Nivel1(this, new Vector2(193, 464));
 			setScreen(NIVEL1);
 		}
