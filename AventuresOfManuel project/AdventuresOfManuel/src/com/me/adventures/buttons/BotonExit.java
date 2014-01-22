@@ -10,7 +10,7 @@ public class BotonExit extends Boton {
 	public BotonExit(AdventuresOfManuel adventures, Vector2 posicion, boolean principal) {
 		super(adventures, posicion);
 		if(principal == true)
-			Textura = adventures.getManager().get("Pantallas/BotonNoTransparente.png", Texture.class);
+			Textura = adventures.getManager().get("Pantallas/BotonT.png", Texture.class);
 		else
 			Textura = adventures.getManager().get("Pantallas/BotonSalir.png", Texture.class);
 		asignarBordes();
