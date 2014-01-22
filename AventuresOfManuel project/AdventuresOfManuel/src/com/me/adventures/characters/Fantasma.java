@@ -54,7 +54,7 @@ public class Fantasma extends PersonajeDelJuegoEnemigo {
 		boolean colisionAbajo = colisiones.colisionAbajoObjeto(this) || colisiones.colisionAbajoEnemigo(this) || colisiones.colisionMovibleAbajo(this);
 		boolean colisionManuel = colisiones.colisionAbajoConManuel(this) || colisiones.colisionArribaConManuel(this) || colisiones.colisionDerechaConManuel(this) || colisiones.colisionIzquierdaConManuel(this);
 		
-		if(colisionManuel){
+		if(esBola || colisionManuel){
 			fantasmaSeQuedaQuieto = true;
 		}
 		else{
