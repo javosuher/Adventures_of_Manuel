@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -77,6 +78,8 @@ public abstract class Nivel extends AbstractScreen {
 				adventures.getMusicaNivel().play();
 		}
 		
+		
+		
 		adventures.getCamera().update();
 		/*if(Gdx.app.getType() == ApplicationType.Android)
 			adventures.getCamera().apply(Gdx.graphics.getGL10());*/
@@ -101,6 +104,11 @@ public abstract class Nivel extends AbstractScreen {
 		}
 		
 		// Pintamos la pantalla
+
+		if(Gdx.input.isKeyPressed(Keys.MENU)){
+			adventures.gameOver();
+		}
+		
 		batch.begin();
 		batch.draw(TexturaFondo, 135, 0, TexturaFondo.getWidth(), TexturaFondo.getHeight());
 		salida.draw(batch);

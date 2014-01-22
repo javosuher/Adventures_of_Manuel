@@ -166,7 +166,7 @@ public class AdventuresOfManuel extends Game {
 	public void siguienteNivel(){
 		nivelActual++;
 		if(nivelActual == 2){
-			NIVEL2 = new Nivel2(this, new Vector2(425,116));
+			NIVEL2 = new Nivel6(this, new Vector2(193, 232));
 			setScreen(NIVEL2);
 		}
 		else if(nivelActual == 3){
